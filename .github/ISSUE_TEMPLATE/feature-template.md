@@ -9,6 +9,9 @@ assignees: ''
 
 📣 Assignees와 Labels를 우측에서 추가해 주세요!
 
-TODO
-- [ ] 뷰만들기
+#  Description
+개발하려는 기능은 이런 거예요
+
+# TODO
+- [ ] 뷰 만들기
 - [ ] 어쩌구 기능 개발하기
