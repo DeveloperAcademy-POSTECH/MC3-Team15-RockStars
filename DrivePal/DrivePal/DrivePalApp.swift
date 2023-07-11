@@ -11,7 +11,8 @@ import SwiftUI
 struct DrivePalApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            DrivingPalView()
         }
     }
 }
