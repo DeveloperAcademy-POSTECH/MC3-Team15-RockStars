@@ -21,6 +21,7 @@
 		AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AD742F812A5CFF1800AD6226 /* DrivePalWidgetExtension.intentdefinition */; };
 		AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AD742F812A5CFF1800AD6226 /* DrivePalWidgetExtension.intentdefinition */; };
 		AD742F892A5CFF1A00AD6226 /* DrivePalWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BE3BC2022A5D3E2F00CF60ED /* UserDefaults+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BC2012A5D3E2F00CF60ED /* UserDefaults+extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,9 @@
 		AD742F812A5CFF1800AD6226 /* DrivePalWidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = DrivePalWidgetExtension.intentdefinition; sourceTree = "<group>"; };
 		AD742F822A5CFF1A00AD6226 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD742F842A5CFF1A00AD6226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE3BC1FF2A5D2DB200CF60ED /* DrivePalWidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrivePalWidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
+		BE3BC2002A5D3A1A00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
+		BE3BC2012A5D3E2F00CF60ED /* UserDefaults+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 		AD742F532A5CF61F00AD6226 = {
 			isa = PBXGroup;
 			children = (
+				BE3BC1FF2A5D2DB200CF60ED /* DrivePalWidgetExtensionExtension.entitlements */,
 				AD742F6E2A5CF7EE00AD6226 /* .swiftlint.yml */,
 				AD742F5E2A5CF61F00AD6226 /* DrivePal */,
 				AD742F7A2A5CFF1800AD6226 /* DrivePalWidgetExtension */,
@@ -108,8 +113,10 @@
 		AD742F5E2A5CF61F00AD6226 /* DrivePal */ = {
 			isa = PBXGroup;
 			children = (
+				BE3BC2002A5D3A1A00CF60ED /* DrivePal.entitlements */,
 				AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */,
 				AD742F612A5CF61F00AD6226 /* ContentView.swift */,
+				BE3BC2012A5D3E2F00CF60ED /* UserDefaults+extensions.swift */,
 				AD742F632A5CF62100AD6226 /* Assets.xcassets */,
 				AD742F652A5CF62100AD6226 /* Preview Content */,
 			);
@@ -273,6 +280,7 @@
 			files = (
 				AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */,
 				AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */,
+				BE3BC2022A5D3E2F00CF60ED /* UserDefaults+extensions.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,10 +427,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -437,6 +447,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -449,10 +460,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -467,6 +480,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,9 +492,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtensionExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = D7F6ZDDCV9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePalWidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DrivePalWidgetExtension;
@@ -493,6 +509,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal.DrivePalWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -505,9 +522,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtensionExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = D7F6ZDDCV9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePalWidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DrivePalWidgetExtension;
@@ -520,6 +539,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal.DrivePalWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
