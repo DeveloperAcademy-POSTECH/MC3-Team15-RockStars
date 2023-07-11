@@ -9,7 +9,10 @@ import SwiftUI
 import SpriteKit
 
 struct DrivingPalView: View {
+<<<<<<< HEAD
     private let planeImage = "planeWithShadow"
+=======
+>>>>>>> 739828d ([feat][#6] 좌에서 우로 움직이는 배경씬 생성)
     var scene: SKScene {
         let scene = BackgroundScene()
         scene.scaleMode = .fill
@@ -19,6 +22,7 @@ struct DrivingPalView: View {
     var body: some View {
         ZStack {
             SpriteView(scene: scene)
+<<<<<<< HEAD
             
             VStack {
                 Spacer()
@@ -30,6 +34,10 @@ struct DrivingPalView: View {
             }
         }
         .ignoresSafeArea()
+=======
+        }
+            .ignoresSafeArea()
+>>>>>>> 739828d ([feat][#6] 좌에서 우로 움직이는 배경씬 생성)
     }
 }
 

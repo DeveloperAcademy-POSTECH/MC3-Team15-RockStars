@@ -308,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADF027D92A5D922E005B7B89 /* DrivingPalView.swift in Sources */,
 				AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */,
 				AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */,
 				7D3435CD2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */,
