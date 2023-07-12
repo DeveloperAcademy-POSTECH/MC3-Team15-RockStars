@@ -35,9 +35,15 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                     // more content
                 }
             } compactLeading: {
-                Text("L")
+                Image(systemName: context.state.imageName)
             } compactTrailing: {
-                Text("T")
+                HStack {
+                    Image(systemName: "circle")
+                        .foregroundColor(.blue)
+                    Text("\(context.state.count) Times")
+                        .foregroundColor(.blue)
+                }
+                
             } minimal: {
                 Text("Min")
             }
