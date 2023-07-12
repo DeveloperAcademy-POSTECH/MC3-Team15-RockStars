@@ -1,7 +1,7 @@
 ---
 name: Bug template
 about: 어떤 버그를 수정합니다
-title: "[FIX] 버그 기능의 제목"
+title: "[fix] 버그 기능의 제목"
 labels: ''
 assignees: ''
 

@@ -1,7 +1,7 @@
 ---
 name: Feature template
 about: 이런 기능을 개발합니다
-title: "[FEAT] 단위 기능 제목"
+title: "[feat] 단위 기능 제목"
 labels: ''
 assignees: ''
 

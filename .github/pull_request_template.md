@@ -1,7 +1,7 @@
 ---
 name: PR template
 about: 풀리퀘스트 보냅니다
-title: "[FEAT] 개발한 단위 기능의 이름"
+title: "[feat][#0] 개발한 단위 기능의 이름"
 labels: ''
 assignees: ''
 
