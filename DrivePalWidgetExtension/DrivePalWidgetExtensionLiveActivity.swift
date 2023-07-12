@@ -9,17 +9,8 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct DrivePalWidgetExtensionAttributes: ActivityAttributes {
-    public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var value: Int
-    }
-
-    // Fixed non-changing properties about your activity go here!
-    var name: String
-}
-
 struct DrivePalWidgetExtensionLiveActivity: Widget {
+    
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: DrivePalWidgetExtensionAttributes.self) { context in
             // Lock screen/banner UI goes here
@@ -58,7 +49,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
 
 struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
     static let attributes = DrivePalWidgetExtensionAttributes(name: "Me")
-    static let contentState = DrivePalWidgetExtensionAttributes.ContentState(value: 3)
+    static let contentState = DrivePalWidgetExtensionAttributes.ContentState(count: 3, imageName:"airplane.circle.fill")
 
     static var previews: some View {
         attributes
