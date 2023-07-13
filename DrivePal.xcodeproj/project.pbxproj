@@ -20,7 +20,7 @@
 		AD742F832A5CFF1A00AD6226 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD742F822A5CFF1A00AD6226 /* Assets.xcassets */; };
 		AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AD742F812A5CFF1800AD6226 /* DrivePalWidgetExtension.intentdefinition */; };
 		AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AD742F812A5CFF1800AD6226 /* DrivePalWidgetExtension.intentdefinition */; };
-		AD742F892A5CFF1A00AD6226 /* DrivePalWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AD742F892A5CFF1A00AD6226 /* DrivePalWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */; };
 		ADF027D92A5D922E005B7B89 /* DrivingPalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF027D82A5D922E005B7B89 /* DrivingPalView.swift */; };
 		BE3BC2212A5E347D00CF60ED /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */; };
@@ -43,7 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AD742F892A5CFF1A00AD6226 /* DrivePalWidgetExtensionExtension.appex in Embed Foundation Extensions */,
+				AD742F892A5CFF1A00AD6226 /* DrivePalWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,7 +57,7 @@
 		AD742F632A5CF62100AD6226 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD742F662A5CF62100AD6226 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD742F6E2A5CF7EE00AD6226 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DrivePalWidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DrivePalWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD742F762A5CFF1800AD6226 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AD742F782A5CFF1800AD6226 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		AD742F7B2A5CFF1800AD6226 /* DrivePalWidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivePalWidgetExtensionBundle.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				AD742F5C2A5CF61F00AD6226 /* DrivePal.app */,
-				AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtensionExtension.appex */,
+				AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,9 +196,9 @@
 			productReference = AD742F5C2A5CF61F00AD6226 /* DrivePal.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AD742F732A5CFF1800AD6226 /* DrivePalWidgetExtensionExtension */ = {
+		AD742F732A5CFF1800AD6226 /* DrivePalWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AD742F8D2A5CFF1A00AD6226 /* Build configuration list for PBXNativeTarget "DrivePalWidgetExtensionExtension" */;
+			buildConfigurationList = AD742F8D2A5CFF1A00AD6226 /* Build configuration list for PBXNativeTarget "DrivePalWidgetExtension" */;
 			buildPhases = (
 				AD742F702A5CFF1800AD6226 /* Sources */,
 				AD742F712A5CFF1800AD6226 /* Frameworks */,
@@ -208,9 +208,9 @@
 			);
 			dependencies = (
 			);
-			name = DrivePalWidgetExtensionExtension;
+			name = DrivePalWidgetExtension;
 			productName = DrivePalWidgetExtensionExtension;
-			productReference = AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtensionExtension.appex */;
+			productReference = AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -245,7 +245,7 @@
 			projectRoot = "";
 			targets = (
 				AD742F5B2A5CF61F00AD6226 /* DrivePal */,
-				AD742F732A5CFF1800AD6226 /* DrivePalWidgetExtensionExtension */,
+				AD742F732A5CFF1800AD6226 /* DrivePalWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -323,7 +323,7 @@
 /* Begin PBXTargetDependency section */
 		AD742F882A5CFF1A00AD6226 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AD742F732A5CFF1800AD6226 /* DrivePalWidgetExtensionExtension */;
+			target = AD742F732A5CFF1800AD6226 /* DrivePalWidgetExtension */;
 			targetProxy = AD742F872A5CFF1A00AD6226 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -449,10 +449,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -467,6 +470,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DevDrivePalProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -479,10 +484,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -497,6 +505,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DistributionDrivePalProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -508,9 +518,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePalWidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DrivePalWidgetExtension;
@@ -523,6 +535,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal.DrivePalWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Dev_DrivePal_Extension_Profile;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -535,9 +549,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7D5PZJWQ9T;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePalWidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DrivePalWidgetExtension;
@@ -550,6 +566,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal.DrivePalWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Distribution_DrivePal_Extension_Profile;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -578,7 +596,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AD742F8D2A5CFF1A00AD6226 /* Build configuration list for PBXNativeTarget "DrivePalWidgetExtensionExtension" */ = {
+		AD742F8D2A5CFF1A00AD6226 /* Build configuration list for PBXNativeTarget "DrivePalWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AD742F8B2A5CFF1A00AD6226 /* Debug */,
