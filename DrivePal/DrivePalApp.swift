@@ -12,7 +12,7 @@ struct DrivePalApp: App {
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-            DrivingPalView()
+            DrivingPalView(model: DriveModel())
         }
     }
 }

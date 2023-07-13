@@ -9,6 +9,8 @@ import SwiftUI
 import SpriteKit
 
 struct DrivingPalView: View {
+    @StateObject var model: DriveModel
+    
     private let planeImage = "planeWithShadow"
     var scene: SKScene {
         let scene = BackgroundScene()
@@ -35,6 +37,6 @@ struct DrivingPalView: View {
 
 struct DrivingPalView_Previews: PreviewProvider {
     static var previews: some View {
-        DrivingPalView()
+        DrivingPalView(model: DriveModel())
     }
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D3435CD2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift */; };
+		7D3435CE2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift */; };
+		7D3435D22A5F15D800D11708 /* DriveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435D12A5F15D800D11708 /* DriveModel.swift */; };
 		AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */; };
 		AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD742F612A5CF61F00AD6226 /* ContentView.swift */; };
 		AD742F642A5CF62100AD6226 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD742F632A5CF62100AD6226 /* Assets.xcassets */; };
@@ -51,6 +54,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7D3435CC2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivePalWidgetExtensionAttributes.swift; sourceTree = "<group>"; };
+		7D3435D12A5F15D800D11708 /* DriveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveModel.swift; sourceTree = "<group>"; };
 		AD742F5C2A5CF61F00AD6226 /* DrivePal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrivePal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivePalApp.swift; sourceTree = "<group>"; };
 		AD742F612A5CF61F00AD6226 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +127,8 @@
 				AD742F612A5CF61F00AD6226 /* ContentView.swift */,
 				AD742F632A5CF62100AD6226 /* Assets.xcassets */,
 				AD742F652A5CF62100AD6226 /* Preview Content */,
+				7D3435CC2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift */,
+				7D3435D12A5F15D800D11708 /* DriveModel.swift */,
 			);
 			path = DrivePal;
 			sourceTree = "<group>";
@@ -301,8 +308,10 @@
 				ADF027D92A5D922E005B7B89 /* DrivingPalView.swift in Sources */,
 				AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */,
 				AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */,
+				7D3435CD2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */,
 				ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */,
 				BE3BC2212A5E347D00CF60ED /* UserDefaults+Extensions.swift in Sources */,
+				7D3435D22A5F15D800D11708 /* DriveModel.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D3435CE2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */,
 				AD742F802A5CFF1800AD6226 /* DrivePalWidgetExtension.swift in Sources */,
 				AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
 				AD742F7C2A5CFF1800AD6226 /* DrivePalWidgetExtensionBundle.swift in Sources */,
@@ -458,6 +468,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -493,6 +504,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
