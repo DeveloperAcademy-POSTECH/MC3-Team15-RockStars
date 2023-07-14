@@ -28,6 +28,9 @@
 		ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */; };
 		ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */; };
 		BE3BC2212A5E347D00CF60ED /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */; };
+		BE9294442A60E1B400368B78 /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9294432A60E1B400368B78 /* LocationsHandler.swift */; };
+		BE9294452A60E1BF00368B78 /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9294432A60E1B400368B78 /* LocationsHandler.swift */; };
+		BE9294462A60E54600368B78 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,7 @@
 		ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundScene.swift; sourceTree = "<group>"; };
 		BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
+		BE9294432A60E1B400368B78 /* LocationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 				AD742F652A5CF62100AD6226 /* Preview Content */,
 				7D3435CC2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift */,
 				7D3435D12A5F15D800D11708 /* DriveModel.swift */,
+				BE9294432A60E1B400368B78 /* LocationsHandler.swift */,
 			);
 			path = DrivePal;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				7D3435CD2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */,
 				ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */,
 				BE3BC2212A5E347D00CF60ED /* UserDefaults+Extensions.swift in Sources */,
+				BE9294442A60E1B400368B78 /* LocationsHandler.swift in Sources */,
 				7D3435D22A5F15D800D11708 /* DriveModel.swift in Sources */,
 				ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
@@ -327,6 +333,8 @@
 				7D3435CE2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */,
 				AD742F802A5CFF1800AD6226 /* DrivePalWidgetExtension.swift in Sources */,
 				AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
+				BE9294452A60E1BF00368B78 /* LocationsHandler.swift in Sources */,
+				BE9294462A60E54600368B78 /* UserDefaults+Extensions.swift in Sources */,
 				AD742F7C2A5CFF1800AD6226 /* DrivePalWidgetExtensionBundle.swift in Sources */,
 				AD742F7E2A5CFF1800AD6226 /* DrivePalWidgetExtensionLiveActivity.swift in Sources */,
 			);
