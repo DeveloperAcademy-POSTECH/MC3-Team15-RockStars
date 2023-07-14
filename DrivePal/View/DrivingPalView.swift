@@ -15,7 +15,7 @@ enum MotionStatus {
 
 struct DrivingPalView: View {
     @StateObject var model: DriveModel
-    
+    @StateObject var locationHandler = LocationsHandler()
     let planeImage = "planeWithShadow"
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
