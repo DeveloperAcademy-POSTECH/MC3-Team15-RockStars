@@ -18,7 +18,7 @@ final class DriveModel: ObservableObject {
         let currentDriveState = ActivityContent(state: DrivePalWidgetExtensionAttributes.ContentState(count: 0, imageName: "airplane.circle.fill"), staleDate: nil)
         
         do {
-            let liveActivity = try Activity.request(attributes: attributes, content: currentDriveState)
+            _ = try Activity.request(attributes: attributes, content: currentDriveState)
         } catch {
             print(error.localizedDescription)
         }
@@ -30,7 +30,7 @@ final class DriveModel: ObservableObject {
         Task {
             let updatedDriveStatus = DrivePalWidgetExtensionAttributes.ContentState(count: 0, imageName: "airplane.circle")
             
-            for activity in Activity<DrivePalWidgetExtensionAttributes>.activities{
+            for activity in Activity<DrivePalWidgetExtensionAttributes>.activities {
                 await activity.update(using: updatedDriveStatus)
             }
 
@@ -40,7 +40,7 @@ final class DriveModel: ObservableObject {
     
     func stopLiveActivity() {
         Task {
-            for activity in Activity<DrivePalWidgetExtensionAttributes>.activities{
+            for activity in Activity<DrivePalWidgetExtensionAttributes>.activities {
                 await activity.end(dismissalPolicy: .immediate)
             }
 

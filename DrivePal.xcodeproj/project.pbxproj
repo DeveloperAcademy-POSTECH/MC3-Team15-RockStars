@@ -24,8 +24,9 @@
 		AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AD742F812A5CFF1800AD6226 /* DrivePalWidgetExtension.intentdefinition */; };
 		AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AD742F812A5CFF1800AD6226 /* DrivePalWidgetExtension.intentdefinition */; };
 		AD742F892A5CFF1A00AD6226 /* DrivePalWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ADCBEBAD2A5F266900DDC27D /* DrivingPalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */; };
+		ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */; };
 		ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */; };
-		ADF027D92A5D922E005B7B89 /* DrivingPalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF027D82A5D922E005B7B89 /* DrivingPalView.swift */; };
 		BE3BC2212A5E347D00CF60ED /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,10 +72,11 @@
 		AD742F812A5CFF1800AD6226 /* DrivePalWidgetExtension.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = DrivePalWidgetExtension.intentdefinition; sourceTree = "<group>"; };
 		AD742F822A5CFF1A00AD6226 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD742F842A5CFF1A00AD6226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPalView.swift; sourceTree = "<group>"; };
+		ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 		ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundScene.swift; sourceTree = "<group>"; };
-		ADF027D82A5D922E005B7B89 /* DrivingPalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPalView.swift; sourceTree = "<group>"; };
-		BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Extensions.swift"; path = "DrivePal/UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
-		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = DrivePal.entitlements; path = DrivePal/DrivePal.entitlements; sourceTree = "<group>"; };
+		BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				ADF027D32A5D9179005B7B89 /* Scene */,
-				ADF027D82A5D922E005B7B89 /* DrivingPalView.swift */,
+				ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */,
+				ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -305,14 +308,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADF027D92A5D922E005B7B89 /* DrivingPalView.swift in Sources */,
 				AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */,
 				AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */,
 				7D3435CD2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */,
 				ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */,
 				BE3BC2212A5E347D00CF60ED /* UserDefaults+Extensions.swift in Sources */,
 				7D3435D22A5F15D800D11708 /* DriveModel.swift in Sources */,
+				ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
+				ADCBEBAD2A5F266900DDC27D /* DrivingPalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +500,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
@@ -518,7 +522,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DistributionDrivePalProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DevDrivePalProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
