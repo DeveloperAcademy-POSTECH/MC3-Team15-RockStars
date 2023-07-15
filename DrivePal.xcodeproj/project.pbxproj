@@ -74,6 +74,7 @@
 		AD742F842A5CFF1A00AD6226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPalView.swift; sourceTree = "<group>"; };
 		ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
+		ADCE09B52A60E9D700787BD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundScene.swift; sourceTree = "<group>"; };
 		BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
@@ -99,6 +100,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD03717B2A628C2D00D3E051 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AD03717C2A628C3400D3E051 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AD03717C2A628C3400D3E051 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AD742F532A5CF61F00AD6226 = {
 			isa = PBXGroup;
 			children = (
@@ -122,10 +139,11 @@
 		AD742F5E2A5CF61F00AD6226 /* DrivePal */ = {
 			isa = PBXGroup;
 			children = (
+				AD03717B2A628C2D00D3E051 /* Utils */,
+				ADCE09B52A60E9D700787BD0 /* Info.plist */,
 				ADF027D22A5D9171005B7B89 /* View */,
 				AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */,
 				BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */,
-				BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */,
 				AD742F612A5CF61F00AD6226 /* ContentView.swift */,
 				AD742F632A5CF62100AD6226 /* Assets.xcassets */,
 				AD742F652A5CF62100AD6226 /* Preview Content */,
@@ -472,6 +490,8 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DrivePal/Info.plist;
+				INFOPLIST_KEY_NSMotionUsageDescription = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -508,6 +528,8 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DrivePal/Info.plist;
+				INFOPLIST_KEY_NSMotionUsageDescription = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
