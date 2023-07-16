@@ -28,6 +28,9 @@
 		ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */; };
 		ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */; };
 		BE3BC2212A5E347D00CF60ED /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */; };
+		BE9294442A60E1B400368B78 /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9294432A60E1B400368B78 /* LocationsHandler.swift */; };
+		BE9294452A60E1BF00368B78 /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9294432A60E1B400368B78 /* LocationsHandler.swift */; };
+		BE9294462A60E54600368B78 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,10 +77,12 @@
 		AD742F842A5CFF1A00AD6226 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPalView.swift; sourceTree = "<group>"; };
 		ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
-		ADCE09B52A60E9D700787BD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundScene.swift; sourceTree = "<group>"; };
 		BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
+		BE9294432A60E1B400368B78 /* LocationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsHandler.swift; sourceTree = "<group>"; };
+		BE9294472A6172A100368B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BE9294482A61731400368B78 /* DrivePalWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrivePalWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				AD03717B2A628C2D00D3E051 /* Utils */,
-				ADCE09B52A60E9D700787BD0 /* Info.plist */,
+				BE9294472A6172A100368B78 /* Info.plist */,
 				ADF027D22A5D9171005B7B89 /* View */,
 				AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */,
 				BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */,
@@ -149,6 +154,7 @@
 				AD742F652A5CF62100AD6226 /* Preview Content */,
 				7D3435CC2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift */,
 				7D3435D12A5F15D800D11708 /* DriveModel.swift */,
+				BE9294432A60E1B400368B78 /* LocationsHandler.swift */,
 			);
 			path = DrivePal;
 			sourceTree = "<group>";
@@ -173,6 +179,7 @@
 		AD742F7A2A5CFF1800AD6226 /* DrivePalWidgetExtension */ = {
 			isa = PBXGroup;
 			children = (
+				BE9294482A61731400368B78 /* DrivePalWidgetExtension.entitlements */,
 				AD742F7B2A5CFF1800AD6226 /* DrivePalWidgetExtensionBundle.swift */,
 				AD742F7D2A5CFF1800AD6226 /* DrivePalWidgetExtensionLiveActivity.swift */,
 				AD742F7F2A5CFF1800AD6226 /* DrivePalWidgetExtension.swift */,
@@ -331,6 +338,7 @@
 				7D3435CD2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */,
 				ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */,
 				BE3BC2212A5E347D00CF60ED /* UserDefaults+Extensions.swift in Sources */,
+				BE9294442A60E1B400368B78 /* LocationsHandler.swift in Sources */,
 				7D3435D22A5F15D800D11708 /* DriveModel.swift in Sources */,
 				ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
@@ -345,6 +353,8 @@
 				7D3435CE2A5F0C6B00D11708 /* DrivePalWidgetExtensionAttributes.swift in Sources */,
 				AD742F802A5CFF1800AD6226 /* DrivePalWidgetExtension.swift in Sources */,
 				AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
+				BE9294452A60E1BF00368B78 /* LocationsHandler.swift in Sources */,
+				BE9294462A60E54600368B78 /* UserDefaults+Extensions.swift in Sources */,
 				AD742F7C2A5CFF1800AD6226 /* DrivePalWidgetExtensionBundle.swift in Sources */,
 				AD742F7E2A5CFF1800AD6226 /* DrivePalWidgetExtensionLiveActivity.swift in Sources */,
 			);
@@ -481,6 +491,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -491,6 +502,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePal/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please, let me know your location when using this app";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -519,6 +532,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -529,6 +543,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePal/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please, let me know your location when using this app";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -556,6 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtension/DrivePalWidgetExtension.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -587,6 +604,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtension/DrivePalWidgetExtension.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;

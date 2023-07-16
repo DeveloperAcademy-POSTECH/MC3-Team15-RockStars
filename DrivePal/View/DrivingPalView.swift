@@ -15,7 +15,7 @@ enum MotionStatus {
 
 struct DrivingPalView: View {
     @StateObject var model: DriveModel
-    
+    @StateObject var locationHandler = LocationsHandler()
     let planeImage = "planeWithShadow"
     private let motionManager = CMMotionManager()
     private let activityManager = CMMotionActivityManager()
@@ -98,7 +98,7 @@ struct DrivingPalView: View {
                         }
                     })
             }
-            
+            // MARK: - Speed Console
             VStack {
                 Spacer()
                 ScrollView {
@@ -107,7 +107,20 @@ struct DrivingPalView: View {
                 }
                 .frame(height: 200)
                 .padding()
+                
+                switch locationHandler.authorizationStatus {
+                case .authorizedWhenInUse, .authorizedAlways:
+                    Text("km/h: \(locationHandler.kilometerPerHour)")
+                case .restricted, .denied:
+                    Text("현재 지역에서 데이터를 읽어오는데 실패했습니다..")
+                case .notDetermined:
+                    Text("데이터를 읽어오고 있습니다..")
+                    ProgressView()
+                default:
+                    ProgressView()
+                }
             }
+            .padding(.bottom, 30)
         }
         .onAppear {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
