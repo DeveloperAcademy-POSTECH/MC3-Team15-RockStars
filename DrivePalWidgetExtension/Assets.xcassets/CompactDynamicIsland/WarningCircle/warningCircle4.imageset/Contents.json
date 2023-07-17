@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "warningCircle4.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
