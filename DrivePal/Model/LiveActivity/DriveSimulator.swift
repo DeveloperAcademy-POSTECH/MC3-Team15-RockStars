@@ -46,7 +46,6 @@ final class DriveSimulator {
     }
 
     @objc private func runDriveSimulator() {
-        count += 1
         timestamp += 1
         // Tell the delegate to update its state
         delegate?.updateLiveActivity(driveState: DriveState(count: count, imageName: "warning\(timestamp % 6 + 1)", timestamp: timestamp))

@@ -16,10 +16,10 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
             // Lock screen/banner UI goes here
             HStack {
                 Image("\(context.state.driveState.imageName)")
-//                HStack {
-//                    Text(context.state.driveState.count.description)
-//                    Text(" Times")
-//                }
+                HStack {
+                    Text(context.state.driveState.count.description)
+                    Text(" Times")
+                }
             }
 
         } dynamicIsland: { context in
@@ -42,10 +42,10 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
             } compactLeading: {
                 Image("\(context.state.driveState.imageName)")
             } compactTrailing: {
-//                HStack {
-//                    Text(context.state.driveState.count.description)
-//                    Text(" Times")
-//                }
+                HStack {
+                    Text(context.state.driveState.count.description)
+                    Text(" Times")
+                }
             } minimal: {
                 Image("\(context.state.driveState.imageName)")
             }

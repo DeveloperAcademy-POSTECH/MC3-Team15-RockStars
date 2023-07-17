@@ -151,9 +151,11 @@ struct DrivingPalView: View {
             valueZ = data.acceleration.z
             
             if valueZ > stopThreshold {
+                model.simulator.count += 1
                 motionStatus = .suddenStop
                 sleepThreadBriefly()
             } else if valueZ < startThreshold {
+                model.simulator.count += 1
                 motionStatus = .suddenAcceleration
                 sleepThreadBriefly()
             } else {
