@@ -8,45 +8,50 @@
 import SwiftUI
 import ActivityKit
 
-final class DriveModel: ObservableObject {
+final class DriveModel: ObservableObject, DriveSimulatorDelegate {
+    @Published var currentState = DriveState(count: 0, imageName: "warning1", timestamp: 0)
+    var liveActivity: Activity<DrivePalWidgetExtensionAttributes>?
+    var timer: Timer?
+    var driveAlreadyStarted = false
+    let simulator = DriveSimulator()
+    
     init() {
-        startLiveActivity()
+        simulator.delegate = self
     }
     
-    func startLiveActivity() {
-        let attributes = DrivePalWidgetExtensionAttributes(name: "me")
-        let currentDriveState = ActivityContent(state: DrivePalWidgetExtensionAttributes.ContentState(count: 0, imageName: "airplane.circle.fill"), staleDate: nil)
+    @objc func startLiveActivity() {
+        if driveAlreadyStarted { return }
+        
+        let attributes = DrivePalWidgetExtensionAttributes()
+        let currentDriveState = ActivityContent(state: DrivePalWidgetExtensionAttributes.ContentState(driveState: currentState), staleDate: nil)
         
         do {
-            _ = try Activity.request(attributes: attributes, content: currentDriveState)
+            liveActivity = try Activity.request(attributes: attributes, content: currentDriveState)
         } catch {
             print(error.localizedDescription)
         }
+        
+        driveAlreadyStarted = true
+        simulator.start()
     }
     
-    func updateLiveActivity() {
-        
+    func updateLiveActivity(driveState: DriveState) {
         print("**")
+        self.currentState = driveState
+        let updatedDriveStatus = DrivePalWidgetExtensionAttributes.ContentState(driveState: driveState)
         Task {
-            let updatedDriveStatus = DrivePalWidgetExtensionAttributes.ContentState(count: 0, imageName: "airplane.circle")
-            
-            for activity in Activity<DrivePalWidgetExtensionAttributes>.activities {
-                await activity.update(using: updatedDriveStatus)
-            }
-
-            print("Updated Drive Live Activity")
+            print(updatedDriveStatus)
+            await liveActivity?.update(using: updatedDriveStatus)
         }
+
+        print("Updated Drive Live Activity")
     }
     
     func stopLiveActivity() {
         Task {
-            for activity in Activity<DrivePalWidgetExtensionAttributes>.activities {
-                await activity.end(dismissalPolicy: .immediate)
-            }
-
+            await liveActivity?.end(dismissalPolicy: .immediate)
             print("Cancelled Drive Live Activity")
-
         }
+        driveAlreadyStarted = false
     }
-
 }

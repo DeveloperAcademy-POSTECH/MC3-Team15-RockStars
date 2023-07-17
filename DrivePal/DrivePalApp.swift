@@ -22,6 +22,7 @@ struct DrivePalApp: App {
             DrivingPalView(model: model)
                 .onAppear {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+                    model.startLiveActivity()
                 }
         }
         .onChange(of: phase) { currentPhase in

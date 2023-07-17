@@ -12,40 +12,42 @@ import SwiftUI
 struct DrivePalWidgetExtensionLiveActivity: Widget {
     
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: DrivePalWidgetExtensionAttributes.self) { _ in
+        ActivityConfiguration(for: DrivePalWidgetExtensionAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello")
+            HStack {
+                Image("\(context.state.driveState.imageName)")
+//                HStack {
+//                    Text(context.state.driveState.count.description)
+//                    Text(" Times")
+//                }
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Image("\(context.state.driveState.imageName)")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    HStack {
+                        Text(context.state.driveState.count.description)
+                        Text(" Times")
+                    }
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom")
+                    Text(context.state.driveState.description)
                     // more content
                 }
             } compactLeading: {
-                Image(systemName: context.state.imageName)
+                Image("\(context.state.driveState.imageName)")
             } compactTrailing: {
-                HStack {
-                    Image(systemName: "circle")
-                        .foregroundColor(.blue)
-                    Text("\(context.state.count) Times")
-                        .foregroundColor(.blue)
-                }
-                
+//                HStack {
+//                    Text(context.state.driveState.count.description)
+//                    Text(" Times")
+//                }
             } minimal: {
-                Text("Min")
+                Image("\(context.state.driveState.imageName)")
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -54,8 +56,8 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
 }
 
 struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
-    static let attributes = DrivePalWidgetExtensionAttributes(name: "Me")
-    static let contentState = DrivePalWidgetExtensionAttributes.ContentState(count: 3, imageName: "airplane.circle.fill")
+    static let attributes = DrivePalWidgetExtensionAttributes()
+    static let contentState = DrivePalWidgetExtensionAttributes.ContentState(driveState: DriveState(count: 0, imageName: "warning", timestamp: 0))
 
     static var previews: some View {
         attributes

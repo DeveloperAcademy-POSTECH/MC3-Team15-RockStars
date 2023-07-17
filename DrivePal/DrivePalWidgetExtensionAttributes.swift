@@ -9,12 +9,19 @@ import SwiftUI
 import ActivityKit
 
 struct DrivePalWidgetExtensionAttributes: ActivityAttributes {
+    public typealias DriveStatus = ContentState
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
-        var count: Int
-        var imageName: String
+        var driveState: DriveState
     }
+}
 
-    // Fixed non-changing properties about your activity go here!
-    var name: String
+struct DriveState: Codable, Hashable {
+    var count: Int
+    var imageName: String
+    var timestamp: Int
+    
+    var description: String {
+        return String("count: \(count)\nimage name: \(imageName)\ntimestamp: \(timestamp)")
+    }
 }

@@ -101,6 +101,7 @@ struct DrivingPalView: View {
             // MARK: - Speed Console
             VStack {
                 Spacer()
+                Text("\(model.currentState.description)")
                 ScrollView {
                     Text(currentAcitivity)
                         .fontDesign(.monospaced)
