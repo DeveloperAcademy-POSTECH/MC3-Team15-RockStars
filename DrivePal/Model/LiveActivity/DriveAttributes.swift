@@ -8,7 +8,7 @@
 import SwiftUI
 import ActivityKit
 
-struct DrivePalWidgetExtensionAttributes: ActivityAttributes {
+struct DriveAttributes: ActivityAttributes {
     public typealias DriveStatus = ContentState
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!

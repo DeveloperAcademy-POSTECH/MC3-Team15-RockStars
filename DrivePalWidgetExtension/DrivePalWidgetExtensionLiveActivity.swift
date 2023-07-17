@@ -12,7 +12,7 @@ import SwiftUI
 struct DrivePalWidgetExtensionLiveActivity: Widget {
     
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: DrivePalWidgetExtensionAttributes.self) { context in
+        ActivityConfiguration(for: DriveAttributes.self) { context in
             // Lock screen/banner UI goes here
             HStack {
                 Image("\(context.state.driveState.imageName)")
@@ -56,8 +56,8 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
 }
 
 struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
-    static let attributes = DrivePalWidgetExtensionAttributes()
-    static let contentState = DrivePalWidgetExtensionAttributes.ContentState(driveState: DriveState(count: 0, imageName: "warning", timestamp: 0))
+    static let attributes = DriveAttributes()
+    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, imageName: "warning", timestamp: 0))
 
     static var previews: some View {
         attributes

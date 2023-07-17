@@ -10,7 +10,7 @@ import ActivityKit
 
 final class DriveModel: ObservableObject, DriveSimulatorDelegate {
     @Published var currentState = DriveState(count: 0, imageName: "warning1", timestamp: 0)
-    var liveActivity: Activity<DrivePalWidgetExtensionAttributes>?
+    var liveActivity: Activity<DriveAttributes>?
     var timer: Timer?
     var driveAlreadyStarted = false
     let simulator = DriveSimulator()
@@ -22,8 +22,8 @@ final class DriveModel: ObservableObject, DriveSimulatorDelegate {
     @objc func startLiveActivity() {
         if driveAlreadyStarted { return }
         
-        let attributes = DrivePalWidgetExtensionAttributes()
-        let currentDriveState = ActivityContent(state: DrivePalWidgetExtensionAttributes.ContentState(driveState: currentState), staleDate: nil)
+        let attributes = DriveAttributes()
+        let currentDriveState = ActivityContent(state: DriveAttributes.ContentState(driveState: currentState), staleDate: nil)
         
         do {
             liveActivity = try Activity.request(attributes: attributes, content: currentDriveState)
@@ -38,7 +38,7 @@ final class DriveModel: ObservableObject, DriveSimulatorDelegate {
     func updateLiveActivity(driveState: DriveState) {
         print("**")
         self.currentState = driveState
-        let updatedDriveStatus = DrivePalWidgetExtensionAttributes.ContentState(driveState: driveState)
+        let updatedDriveStatus = DriveAttributes.ContentState(driveState: driveState)
         Task {
             print(updatedDriveStatus)
             await liveActivity?.update(using: updatedDriveStatus)
