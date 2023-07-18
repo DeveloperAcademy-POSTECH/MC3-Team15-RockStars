@@ -15,7 +15,6 @@ struct DrivingPalView: View {
         case normal, suddenAcceleration, suddenStop
     }
     
-    private let planeImage = "planeWithShadow"
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
     private let motionUpdateInterval = 1.0 / 3.0
