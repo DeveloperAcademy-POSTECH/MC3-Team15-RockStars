@@ -28,8 +28,8 @@ struct DrivingPalView: View {
     
     var palImage = "planeWithShadow"
     @State private var viewOpacity = 0.0
-    @State private var movePalX = CGFloat(0)
-    @State private var movePalY = CGFloat(0)
+    @State private var movePalX = CGFloat.zero
+    @State private var movePalY = CGFloat.zero
     
     // background scenes
     private var normalScene: SKScene {
