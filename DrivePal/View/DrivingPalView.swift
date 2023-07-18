@@ -126,12 +126,12 @@ struct DrivingPalView: View {
         motionManager.accelerometerUpdateInterval = motionUpdateInterval
         motionManager.startAccelerometerUpdates(to: operationQueue) { data, _ in
             guard let data else { return }
-            valueZ = data.acceleration.z
+            zAcceleration = data.acceleration.z
             
-            if valueZ > stopThreshold {
+            if zAcceleration > stopThreshold {
                 motionStatus = .suddenStop
                 sleepThreadBriefly()
-            } else if valueZ < startThreshold {
+            } else if zAcceleration < startThreshold {
                 motionStatus = .suddenAcceleration
                 sleepThreadBriefly()
             } else {
