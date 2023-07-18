@@ -9,10 +9,6 @@ import SwiftUI
 import CoreMotion
 import SpriteKit
 
-enum MotionStatus {
-    case normal, suddenAcceleration, suddenStop
-}
-
 struct DrivingPalView: View {
     @StateObject var model: DriveModel
     @StateObject var locationHandler = LocationsHandler()
@@ -23,6 +19,9 @@ struct DrivingPalView: View {
     @State private var motionStatus = MotionStatus.normal
     var motionUpdateInterval = 1.0 / 3.0
     @State private var valueZ = Double.zero
+    private enum MotionStatus {
+        case normal, suddenAcceleration, suddenStop
+    }
     
     // MARK: - 가속도 역치 기준
     /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.1
