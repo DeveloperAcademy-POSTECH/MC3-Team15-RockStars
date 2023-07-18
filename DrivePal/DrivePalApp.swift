@@ -11,10 +11,11 @@ import SwiftUI
 struct DrivePalApp: App {
     
     @StateObject private var model = DriveModel()
+    
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            DrivingPalView(model: model)
+            DrivingPalView()
+                .environmentObject(model)
         }
     }
 }
