@@ -152,16 +152,24 @@ struct DrivingPalView: View {
             
             if valueZ > stopThreshold {
                 model.simulator.count += 1
-                model.simulator.imageName = "warning"
+                model.simulator.leadingImageName = "warning"
+                model.simulator.trailingImageName = "warningCircle"
+                model.simulator.isWarning = true
                 motionStatus = .suddenStop
                 sleepThreadBriefly()
             } else if valueZ < startThreshold {
                 model.simulator.count += 1
-                model.simulator.imageName = "warning"
+                model.simulator.leadingImageName = "warning"
+                model.simulator.trailingImageName = "warningCircle"
+                model.simulator.isWarning = true
                 motionStatus = .suddenAcceleration
                 sleepThreadBriefly()
             } else {
-                model.simulator.imageName = "normal"
+                if model.simulator.count < 4 {
+                    model.simulator.leadingImageName = "normal"
+                    model.simulator.trailingImageName = ""
+                    model.simulator.isWarning = false
+                }
                 motionStatus = .normal
             }
         }

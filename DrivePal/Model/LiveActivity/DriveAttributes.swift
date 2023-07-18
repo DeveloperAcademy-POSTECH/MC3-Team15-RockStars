@@ -18,10 +18,12 @@ struct DriveAttributes: ActivityAttributes {
 
 struct DriveState: Codable, Hashable {
     var count: Int
-    var imageName: String
+    var leadingImageName: String
+    var trailingImageName: String
     var timestamp: Int
+    var isWarning: Bool
     
     var description: String {
-        return String("count: \(count)\nimage name: \(imageName)\ntimestamp: \(timestamp)")
+        return String("count: \(count)\nleadingImageName: \(leadingImageName)\ntrailingImageName: \(trailingImageName)\ntimestamp: \(timestamp)\nisWarning: \(isWarning)")
     }
 }

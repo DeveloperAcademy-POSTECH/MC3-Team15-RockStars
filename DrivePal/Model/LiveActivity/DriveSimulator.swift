@@ -13,7 +13,9 @@ final class DriveSimulator {
     var timer: Timer?
     var timestamp = 0
     var simulatorStarted = false
-    var imageName = ""
+    var leadingImageName = ""
+    var trailingImageName = ""
+    var isWarning = false
     weak var delegate: DriveSimulatorDelegate?
 
     // Init test data
@@ -35,7 +37,7 @@ final class DriveSimulator {
     // End the game by setting the winning team and resetting the vars
     func endDrive() -> DriveState {
         reset()
-        return DriveState(count: 0, imageName: "warning0", timestamp: 0)
+        return DriveState(count: 0, leadingImageName: "warning0", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false)
     }
 
     // Reset the game to a fresh start
@@ -49,6 +51,7 @@ final class DriveSimulator {
     @objc private func runDriveSimulator() {
         timestamp += 1
         // Tell the delegate to update its state
-        delegate?.updateLiveActivity(driveState: DriveState(count: count, imageName: "\(imageName)\(timestamp % 6 + 1)", timestamp: timestamp))
+        
+        delegate?.updateLiveActivity(driveState: DriveState(count: count, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", timestamp: timestamp, isWarning: isWarning))
     }
 }

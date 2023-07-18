@@ -15,7 +15,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
         ActivityConfiguration(for: DriveAttributes.self) { context in
             // Lock screen/banner UI goes here
             HStack {
-                Image("\(context.state.driveState.imageName)")
+                Image("\(context.state.driveState.leadingImageName)")
                 HStack {
                     Text(context.state.driveState.count.description)
                     Text(" Times")
@@ -27,12 +27,12 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Image("\(context.state.driveState.imageName)")
+                    Image("\(context.state.driveState.leadingImageName)")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
                     HStack {
-                        Text(context.state.driveState.count.description)
-                        Text(" Times")
+                        Text("부주의 : \(context.state.driveState.count.description)번")
+                            .foregroundColor(.blue)
                     }
                 }
                 DynamicIslandExpandedRegion(.bottom) {
@@ -40,14 +40,26 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                     // more content
                 }
             } compactLeading: {
-                Image("\(context.state.driveState.imageName)")
+                Image("\(context.state.driveState.leadingImageName)")
+                    .resizable()
+                    .scaledToFit()
             } compactTrailing: {
-                HStack {
-                    Text(context.state.driveState.count.description)
-                    Text(" Times")
+                ZStack {
+                    if !context.state.driveState.isWarning {
+                        HStack {
+                            Text("부주의 : \(context.state.driveState.count.description)번")
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    
+                    Image("\(context.state.driveState.trailingImageName)")
+                        .resizable()
+                        .scaledToFit()
                 }
+                
+                
             } minimal: {
-                Image("\(context.state.driveState.imageName)")
+                Image("\(context.state.driveState.leadingImageName)")
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -57,7 +69,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
 
 struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
     static let attributes = DriveAttributes()
-    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, imageName: "warning", timestamp: 0))
+    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false))
 
     static var previews: some View {
         attributes
