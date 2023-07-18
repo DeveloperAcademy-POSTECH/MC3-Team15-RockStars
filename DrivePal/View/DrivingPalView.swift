@@ -93,22 +93,8 @@ struct DrivingPalView: View {
                     })
             }
             
-            // MARK: - Speed Console
-            VStack {
-                Spacer()
-                switch locationHandler.authorizationStatus {
-                case .authorizedWhenInUse, .authorizedAlways:
-                    Text("km/h: \(locationHandler.kilometerPerHour)")
-                case .restricted, .denied:
-                    Text("현재 지역에서 데이터를 읽어오는데 실패했습니다..")
-                case .notDetermined:
-                    Text("데이터를 읽어오고 있습니다..")
-                    ProgressView()
-                default:
-                    ProgressView()
-                }
-            }
-            .padding(.bottom, 30)
+            VelocityView()
+                .environmentObject(locationHandler)
         }
         .onAppear(perform: startAccelerometers)
         .ignoresSafeArea()
