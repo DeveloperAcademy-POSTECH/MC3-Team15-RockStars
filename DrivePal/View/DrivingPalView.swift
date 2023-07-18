@@ -105,10 +105,36 @@ struct DrivingPalView: View {
             }
         }
     }
+    
+    private func showAbnormalBackground() {
+        let blinkSecond = 4.0
+        // 초기화
+        viewOpacity = 0.0
+        // 비정상 배경 뷰 보이게 함
+        withAnimation(.easeIn(duration: 0.5)) {
+            viewOpacity = 1.0
+        }
+        // 비정상 배경 뷰 숨김
+        withAnimation(.easeOut(duration: 0.5).delay(blinkSecond)) {
+            viewOpacity = 0.0
+        }
+    }
+    
+    private func moveVerticallyPal() {
+        withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
+            movePalY = 20
+        }
+    }
+    
+    private func moveHorizontallyPal(_ currentStatus: MotionStatus) {
+        withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
+            movePalX = currentStatus == .normal ? 0 : -10
+        }
+    }
 }
 
 struct DrivingPalView_Previews: PreviewProvider {
     static var previews: some View {
-        DrivingPalView(model: DriveModel())
+        DrivingPalView()
     }
 }
