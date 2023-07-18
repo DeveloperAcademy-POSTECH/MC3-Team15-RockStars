@@ -13,7 +13,7 @@ import CoreMotion
 struct DrivePalApp: App {
     @Environment(\.scenePhase) private var phase
     @StateObject private var model = DriveModel()
-    private let backgroundTaskIdentifier = "pos.academy.DrivePal.detectAutomotive"
+    private let backgroundTaskIdentifier = Bundle.main.backgroundTaskIdentifier
     private let activityManager = CMMotionActivityManager()
     
     var body: some Scene {
