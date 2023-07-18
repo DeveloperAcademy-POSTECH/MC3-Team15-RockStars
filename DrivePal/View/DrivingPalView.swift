@@ -31,7 +31,7 @@ struct DrivingPalView: View {
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
     
-    // background scenes
+    // TODO: - 뷰 생성 로직이 여기 담겨도 좋을까요?
     private var normalScene: SKScene {
         let scene = BackgroundScene()
         scene.scaleMode = .fill
