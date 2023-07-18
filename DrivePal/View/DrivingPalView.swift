@@ -65,24 +65,12 @@ struct DrivingPalView: View {
                 Image(palImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width - 100)
+                    .frame(width: UIScreen.width - 100)
                     .padding(.vertical)
-                    .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 3 * 2 + movePalY)
-                    .modifier(Shake(animatableData: CGFloat(movePalX)))
-                    .onAppear {
-                        withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
-                            movePalY = 20
-                        }
-                    }
-                    .onChange(of: motionStatus, perform: { currentStatus in
-                        if currentStatus != .normal {
-                            withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
-                                movePalX = currentStatus == .normal ? 0 : -10
-                            }
-                        } else {
-                            movePalX = 0
-                        }
-                    })
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
+                    .shake(movePalX)
+                    .onAppear(perform: moveVerticallyPal)
+                    .onChange(of: motionStatus, perform: moveHorizontallyPal)
             }
             
             VelocityView()
