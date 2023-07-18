@@ -10,23 +10,25 @@ import CoreMotion
 import SpriteKit
 
 struct DrivingPalView: View {
-    @StateObject var model: DriveModel
-    @StateObject var locationHandler = LocationsHandler()
-    let planeImage = "planeWithShadow"
-    private let motionManager = CMMotionManager()
-    private let operationQueue = OperationQueue()
     
-    @State private var motionStatus = MotionStatus.normal
-    var motionUpdateInterval = 1.0 / 3.0
-    @State private var valueZ = Double.zero
     private enum MotionStatus {
         case normal, suddenAcceleration, suddenStop
     }
     
+    private let planeImage = "planeWithShadow"
+    private let motionManager = CMMotionManager()
+    private let operationQueue = OperationQueue()
+    private let motionUpdateInterval = 1.0 / 3.0
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
     
-    var palImage = "planeWithShadow"
+    @State private var motionStatus = MotionStatus.normal
+    @State private var zAcceleration = Double.zero
+    @StateObject var locationHandler = LocationsHandler()
+    // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
+    @EnvironmentObject var model: DriveModel
+    
+    private let palImage = "planeWithShadow"
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
