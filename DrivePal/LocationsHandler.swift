@@ -44,7 +44,7 @@ extension LocationsHandler: CLLocationManagerDelegate {
 // MARK: - 속도 계산을 위한 메서드와 백그라운드 동작 메서드
 private extension LocationsHandler {
     func startBackgroundLocationUpdates() {
-        self.locationManager = CLLocationManager()
+        locationManager = CLLocationManager()
         guard let locationManager else { return }
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
