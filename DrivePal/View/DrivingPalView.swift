@@ -23,9 +23,6 @@ struct DrivingPalView: View {
         case normal, suddenAcceleration, suddenStop
     }
     
-    // MARK: - 가속도 역치 기준
-    /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.1
-    /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.75
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
     
