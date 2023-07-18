@@ -127,8 +127,12 @@ struct DrivingPalView: View {
     }
     
     private func moveHorizontallyPal(_ currentStatus: MotionStatus) {
+        guard currentStatus != .normal else {
+            movePalX = 0
+            return
+        }
         withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
-            movePalX = currentStatus == .normal ? 0 : -10
+            movePalX = -10
         }
     }
 }
