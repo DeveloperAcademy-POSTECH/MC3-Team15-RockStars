@@ -18,8 +18,10 @@ struct DrivingPalView: View {
     @StateObject var locationHandler = LocationsHandler()
     let planeImage = "planeWithShadow"
     private let motionManager = CMMotionManager()
-    private let operationQueue = OperationQueue()
-    
+    private let activityManager = CMMotionActivityManager()
+    private let accelerationQueue = OperationQueue()
+    private let activityQueue = OperationQueue()
+    @Environment(\.scenePhase) private var scenePhase
     @State private var motionStatus = MotionStatus.normal
     var motionUpdateInterval = 1.0 / 3.0
     @State private var valueZ = Double.zero
@@ -34,6 +36,8 @@ struct DrivingPalView: View {
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat(0)
     @State private var movePalY = CGFloat(0)
+    
+    @State private var currentAcitivity = ""
     
     // background scenes
     private var normalScene: SKScene {
@@ -94,10 +98,16 @@ struct DrivingPalView: View {
                         }
                     })
             }
-            
             // MARK: - Speed Console
             VStack {
                 Spacer()
+                ScrollView {
+                    Text(currentAcitivity)
+                        .fontDesign(.monospaced)
+                }
+                .frame(height: 200)
+                .padding()
+                
                 switch locationHandler.authorizationStatus {
                 case .authorizedWhenInUse, .authorizedAlways:
                     Text("km/h: \(locationHandler.kilometerPerHour)")
@@ -112,8 +122,18 @@ struct DrivingPalView: View {
             }
             .padding(.bottom, 30)
         }
-        .onAppear(perform: startAccelerometers)
+        .onAppear(perform: startCoreMotions)
+        .onChange(of: scenePhase) { currentPhase in
+            if currentPhase == .inactive || currentPhase == .background {
+                stopUpdates()
+            }
+        }
         .ignoresSafeArea()
+    }
+    
+    private func startCoreMotions() {
+        startAccelerometers()
+        startActivityUpdates()
     }
     
     private func sleepThreadBriefly() {
@@ -126,7 +146,7 @@ struct DrivingPalView: View {
         guard motionManager.isAccelerometerAvailable else { return }
         
         motionManager.accelerometerUpdateInterval = motionUpdateInterval
-        motionManager.startAccelerometerUpdates(to: operationQueue) { data, _ in
+        motionManager.startAccelerometerUpdates(to: accelerationQueue) { data, _ in
             guard let data else { return }
             valueZ = data.acceleration.z
             
@@ -140,6 +160,37 @@ struct DrivingPalView: View {
                 motionStatus = .normal
             }
         }
+    }
+    
+    private func startActivityUpdates() {
+        activityManager.startActivityUpdates(to: activityQueue) { activity in
+            if let activity = activity {
+                if activity.walking {
+                    currentAcitivity.append("walking ")
+                }
+                if activity.running {
+                    currentAcitivity.append("running ")
+                }
+                if activity.cycling {
+                    currentAcitivity.append("cycling ")
+                }
+                if activity.automotive {
+                    currentAcitivity.append("automotive ")
+                }
+                if activity.stationary {
+                    currentAcitivity.append("stationary ")
+                }
+            }
+            currentAcitivity.append("\n")
+        }
+    }
+    
+    private func stopUpdates() {
+        if motionManager.isAccelerometerActive {
+            motionManager.stopAccelerometerUpdates()
+        }
+        
+        activityManager.stopActivityUpdates()
     }
 }
 
