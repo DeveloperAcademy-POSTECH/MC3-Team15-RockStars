@@ -19,6 +19,12 @@ struct DrivingPalView: View {
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
     private let motionUpdateInterval = 1.0 / 3.0
+    private let activityManager = CMMotionActivityManager()
+    private let accelerationQueue = OperationQueue()
+    
+    // MARK: - 가속도 역치 기준
+    /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.1
+    /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.75
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
     
@@ -34,6 +40,9 @@ struct DrivingPalView: View {
     @State private var movePalY = CGFloat.zero
     
     // TODO: - 뷰 생성 로직이 여기 담겨도 좋을까요?
+    @State private var currentAcitivity = ""
+    
+    // background scenes
     private var normalScene: SKScene {
         let scene = BackgroundScene()
         scene.scaleMode = .fill
@@ -79,7 +88,6 @@ struct DrivingPalView: View {
         .onAppear(perform: startAccelerometers)
         .ignoresSafeArea()
     }
-    
     private func sleepThreadBriefly() {
         motionManager.stopAccelerometerUpdates()
         Thread.sleep(forTimeInterval: 5)
@@ -90,7 +98,7 @@ struct DrivingPalView: View {
         guard motionManager.isAccelerometerAvailable else { return }
         
         motionManager.accelerometerUpdateInterval = motionUpdateInterval
-        motionManager.startAccelerometerUpdates(to: operationQueue) { data, _ in
+        motionManager.startAccelerometerUpdates(to: accelerationQueue) { data, _ in
             guard let data else { return }
             zAcceleration = data.acceleration.z
             
