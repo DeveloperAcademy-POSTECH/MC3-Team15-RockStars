@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VelocityView: View {
     @EnvironmentObject var locationHandler: LocationsHandler
-    @State private var message: String = ""
+    @State private var message = ""
     
     var body: some View {
         VStack {
