@@ -56,8 +56,6 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                         .resizable()
                         .scaledToFit()
                 }
-                
-                
             } minimal: {
                 Image("\(context.state.driveState.leadingImageName)")
             }

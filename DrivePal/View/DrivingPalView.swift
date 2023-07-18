@@ -167,9 +167,9 @@ struct DrivingPalView: View {
             } else {
                 if model.simulator.count < 4 {
                     model.simulator.leadingImageName = "normal"
-                    model.simulator.trailingImageName = ""
-                    model.simulator.isWarning = false
                 }
+                model.simulator.trailingImageName = ""
+                model.simulator.isWarning = false
                 motionStatus = .normal
             }
         }
