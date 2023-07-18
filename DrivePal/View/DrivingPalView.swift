@@ -56,15 +56,7 @@ struct DrivingPalView: View {
             if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
                 SpriteView(scene: abnormalScene)
                     .opacity(viewOpacity)
-                    .onAppear {
-                        viewOpacity = 0.0
-                        withAnimation(.easeIn(duration: 0.5)) {
-                            viewOpacity = 1.0
-                        }
-                        withAnimation(.easeOut(duration: 0.5).delay(4.0)) {
-                            viewOpacity = 0.0
-                        }
-                    }
+                    .onAppear(perform: showAbnormalBackground)
             }
             
             // driving pal
