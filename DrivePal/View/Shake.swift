@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Shake: GeometryEffect {
-    var amount: CGFloat = 10
-    var shakesPerUnit = 3
+    private let amount: CGFloat = 10
+    private let shakesPerUnit = 3
     var animatableData: CGFloat
     
     func effectValue(size: CGSize) -> ProjectionTransform {
