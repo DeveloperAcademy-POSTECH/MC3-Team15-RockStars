@@ -50,7 +50,7 @@ struct DrivingPalView: View {
     
     var body: some View {
         ZStack {
-            // background scene
+            // MARK: - Background scene
             SpriteView(scene: normalScene)
             
             if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
