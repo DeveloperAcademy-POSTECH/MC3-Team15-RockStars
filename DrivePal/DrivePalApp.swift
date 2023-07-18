@@ -19,6 +19,9 @@ struct DrivePalApp: App {
     var body: some Scene {
         WindowGroup {
             DrivingPalView(model: model)
+                .onAppear {
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+                }
         }
         .onChange(of: phase) { currentPhase in
             switch currentPhase {
