@@ -152,13 +152,16 @@ struct DrivingPalView: View {
             
             if valueZ > stopThreshold {
                 model.simulator.count += 1
+                model.simulator.imageName = "warning"
                 motionStatus = .suddenStop
                 sleepThreadBriefly()
             } else if valueZ < startThreshold {
                 model.simulator.count += 1
+                model.simulator.imageName = "warning"
                 motionStatus = .suddenAcceleration
                 sleepThreadBriefly()
             } else {
+                model.simulator.imageName = "normal"
                 motionStatus = .normal
             }
         }

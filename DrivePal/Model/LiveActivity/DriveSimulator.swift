@@ -13,6 +13,7 @@ final class DriveSimulator {
     var timer: Timer?
     var timestamp = 0
     var simulatorStarted = false
+    var imageName = ""
     weak var delegate: DriveSimulatorDelegate?
 
     // Init test data
@@ -48,6 +49,6 @@ final class DriveSimulator {
     @objc private func runDriveSimulator() {
         timestamp += 1
         // Tell the delegate to update its state
-        delegate?.updateLiveActivity(driveState: DriveState(count: count, imageName: "warning\(timestamp % 6 + 1)", timestamp: timestamp))
+        delegate?.updateLiveActivity(driveState: DriveState(count: count, imageName: "\(imageName)\(timestamp % 6 + 1)", timestamp: timestamp))
     }
 }
