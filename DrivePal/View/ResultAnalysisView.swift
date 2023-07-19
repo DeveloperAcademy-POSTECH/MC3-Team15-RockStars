@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ResultAnalysisView: View {
-    
     @State private var palPositionX = CGFloat.zero
     @State private var palPositionY = CGFloat.zero
     var body: some View {
@@ -35,7 +34,7 @@ struct ResultAnalysisView: View {
                         
                         Spacer()
                         
-                        Text("부주의  : 3회")
+                        Text("부주의  : \(LiveActivityModel.shared.simulator.count)회")
                             .resultContentsText()
                     }
                     .padding(.vertical, 80)
@@ -62,11 +61,5 @@ struct ResultAnalysisView: View {
         withAnimation(.linear(duration: 4.0)) {
             palPositionX = UIScreen.width / 2
         }
-    }
-}
-
-struct ResultAnalysisView_Previews: PreviewProvider {
-    static var previews: some View {
-        ResultAnalysisView()
     }
 }

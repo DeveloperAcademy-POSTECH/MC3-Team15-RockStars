@@ -19,6 +19,7 @@ struct DrivePalApp: App {
     var body: some Scene {
         WindowGroup {
             ResultAnalysisView()
+                .environmentObject(model)
 //            DrivingPalView()
 //                .environmentObject(model)
 //                .onAppear {
