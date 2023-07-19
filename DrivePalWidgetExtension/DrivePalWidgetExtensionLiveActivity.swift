@@ -40,15 +40,21 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                     // more content
                 }
             } compactLeading: {
-                Image("\(context.state.driveState.leadingImageName)")
-                    .resizable()
-                    .scaledToFit()
+                HStack {
+                    Image("\(context.state.driveState.leadingImageName)")
+                        .resizable()
+                        .scaledToFit()
+                }
+                .padding(.leading, 1)
             } compactTrailing: {
                 ZStack {
                     if !context.state.driveState.isWarning {
                         HStack {
-                            Text("부주의 : \(context.state.driveState.count.description)번")
-                                .foregroundColor(.blue)
+                            CircularProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0)
+                                .frame(width: 12, height: 12)
+                            Text("경고 \(context.state.driveState.count.description)번")
+                                .foregroundColor(context.state.driveState.count < 4 ? Color(hex: "#4DBBDB") : Color(hex: "#FF5050"))
+                                .font(.system(size: 12))
                         }
                     }
                     
@@ -56,6 +62,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                         .resizable()
                         .scaledToFit()
                 }
+                .padding(.trailing, 1)
             } minimal: {
                 Image("\(context.state.driveState.leadingImageName)")
             }
@@ -67,7 +74,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
 
 struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
     static let attributes = DriveAttributes()
-    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false))
+    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false))
 
     static var previews: some View {
         attributes
@@ -82,5 +89,17 @@ struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
         attributes
             .previewContext(contentState, viewKind: .content)
             .previewDisplayName("Notification")
+    }
+}
+                    
+struct CircularProgressView: View {
+    @State var progress: Double = 0.0
+
+    var body: some View {
+        VStack {
+            ProgressView(value: progress)
+                .progressViewStyle(CircularProgressViewStyle(tint: progress < 1 ? Color(hex: "#4DBBDB") : Color(hex: "#FF5050")))
+                
+        }
     }
 }

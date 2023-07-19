@@ -152,6 +152,7 @@ struct DrivingPalView: View {
             
             if valueZ > stopThreshold {
                 model.simulator.count += 1
+                model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
@@ -159,6 +160,7 @@ struct DrivingPalView: View {
                 sleepThreadBriefly()
             } else if valueZ < startThreshold {
                 model.simulator.count += 1
+                model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
