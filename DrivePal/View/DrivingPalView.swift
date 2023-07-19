@@ -54,16 +54,34 @@ struct DrivingPalView: View {
         return scene
     }
     
+    private var takeOffScene: SKScene {
+        let scene = BackgroundScene()
+        scene.scaleMode = .fill
+        scene.backgroundImageNamed = .startRunway
+        return scene
+    }
+    
+    private var landingScene: SKScene {
+        let scene = BackgroundScene()
+        scene.scaleMode = .fill
+        scene.backgroundImageNamed = .finishAirport
+        return scene
+    }
+    
     var body: some View {
         ZStack {
             // MARK: - Background scene
-            SpriteView(scene: normalScene)
+            SpriteView(scene: takeOffScene)
+                .opacity(motionStatus == .takingOff ? 1 : 0)
             
-            if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
-                SpriteView(scene: abnormalScene)
-                    .opacity(viewOpacity)
-                    .onAppear(perform: showAbnormalBackground)
-            }
+            SpriteView(scene: normalScene)
+                .opacity(motionStatus == .normal ? 1 : 0)
+            
+            SpriteView(scene: abnormalScene)
+                .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
+            
+            SpriteView(scene: landingScene)
+                .opacity(motionStatus == .landing ? 1 : 0)
             
             // driving pal
             VStack {
