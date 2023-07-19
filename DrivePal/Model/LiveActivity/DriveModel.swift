@@ -8,7 +8,7 @@
 import SwiftUI
 import ActivityKit
 
-final class DriveModel: ObservableObject, DriveSimulatorDelegate {
+final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
     @Published var currentState = DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false)
     var liveActivity: Activity<DriveAttributes>?
     var timer: Timer?

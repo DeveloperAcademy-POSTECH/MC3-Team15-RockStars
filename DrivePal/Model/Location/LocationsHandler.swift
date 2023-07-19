@@ -9,13 +9,19 @@ import SwiftUI
 import CoreLocation
 import OSLog
 
+enum AuthorizationStatus {
+    case success
+    case inProgress
+    case failure
+}
+
 @MainActor final class LocationsHandler: NSObject, ObservableObject {
     private lazy var locationManager: CLLocationManager? = nil
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "",
                                 category: String(describing: LocationsHandler.self))
 
     private var lastLocation: CLLocation?
-    @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
+    @Published var authorizationStatus: AuthorizationStatus = .inProgress
     @Published var kilometerPerHour = 0
     
     override init() {
@@ -27,7 +33,14 @@ import OSLog
 // MARK: - CLLocationManagerDelegate 시그니처 메서드
 extension LocationsHandler: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        self.authorizationStatus = manager.authorizationStatus
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            authorizationStatus = .success
+        case .notDetermined:
+            authorizationStatus = .inProgress
+        default:
+            authorizationStatus = .failure
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -44,7 +57,7 @@ extension LocationsHandler: CLLocationManagerDelegate {
 // MARK: - 속도 계산을 위한 메서드와 백그라운드 동작 메서드
 private extension LocationsHandler {
     func startBackgroundLocationUpdates() {
-        self.locationManager = CLLocationManager()
+        locationManager = CLLocationManager()
         guard let locationManager else { return }
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()

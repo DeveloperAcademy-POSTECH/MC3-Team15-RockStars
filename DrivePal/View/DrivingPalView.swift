@@ -9,22 +9,17 @@ import SwiftUI
 import CoreMotion
 import SpriteKit
 
-enum MotionStatus {
-    case normal, suddenAcceleration, suddenStop
-}
-
 struct DrivingPalView: View {
-    @StateObject var model: DriveModel
-    @StateObject var locationHandler = LocationsHandler()
-    let planeImage = "planeWithShadow"
+    
+    private enum MotionStatus {
+        case normal, suddenAcceleration, suddenStop
+    }
+    
     private let motionManager = CMMotionManager()
+    private let operationQueue = OperationQueue()
+    private let motionUpdateInterval = 1.0 / 3.0
     private let activityManager = CMMotionActivityManager()
     private let accelerationQueue = OperationQueue()
-    private let activityQueue = OperationQueue()
-    @Environment(\.scenePhase) private var scenePhase
-    @State private var motionStatus = MotionStatus.normal
-    var motionUpdateInterval = 1.0 / 3.0
-    @State private var valueZ = Double.zero
     
     // MARK: - 가속도 역치 기준
     /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.1
@@ -32,11 +27,18 @@ struct DrivingPalView: View {
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
     
-    var palImage = "planeWithShadow"
-    @State private var viewOpacity = 0.0
-    @State private var movePalX = CGFloat(0)
-    @State private var movePalY = CGFloat(0)
+    @State private var motionStatus = MotionStatus.normal
+    @State private var zAcceleration = Double.zero
+    @StateObject var locationHandler = LocationsHandler()
+    // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
+    @EnvironmentObject var model: LiveActivityModel
     
+    private let palImage = "planeWithShadow"
+    @State private var viewOpacity = 0.0
+    @State private var movePalX = CGFloat.zero
+    @State private var movePalY = CGFloat.zero
+    
+    // TODO: - 뷰 생성 로직이 여기 담겨도 좋을까요?
     @State private var currentAcitivity = ""
     
     // background scenes
@@ -56,21 +58,13 @@ struct DrivingPalView: View {
     
     var body: some View {
         ZStack {
-            // background scene
+            // MARK: - Background scene
             SpriteView(scene: normalScene)
             
             if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
                 SpriteView(scene: abnormalScene)
                     .opacity(viewOpacity)
-                    .onAppear {
-                        viewOpacity = 0.0
-                        withAnimation(.easeIn(duration: 0.5)) {
-                            viewOpacity = 1.0
-                        }
-                        withAnimation(.easeOut(duration: 0.5).delay(4.0)) {
-                            viewOpacity = 0.0
-                        }
-                    }
+                    .onAppear(perform: showAbnormalBackground)
             }
             
             // driving pal
@@ -79,64 +73,20 @@ struct DrivingPalView: View {
                 Image(palImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width - 100)
+                    .frame(width: UIScreen.width - 100)
                     .padding(.vertical)
-                    .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 3 * 2 + movePalY)
-                    .modifier(Shake(animatableData: CGFloat(movePalX)))
-                    .onAppear {
-                        withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
-                            movePalY = 20
-                        }
-                    }
-                    .onChange(of: motionStatus, perform: { currentStatus in
-                        if currentStatus != .normal {
-                            withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
-                                movePalX = currentStatus == .normal ? 0 : -10
-                            }
-                        } else {
-                            movePalX = 0
-                        }
-                    })
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
+                    .shake(movePalX)
+                    .onAppear(perform: moveVerticallyPal)
+                    .onChange(of: motionStatus, perform: moveHorizontallyPal)
             }
-            // MARK: - Speed Console
-            VStack {
-                Spacer()
-                Text("\(model.currentState.description)")
-                ScrollView {
-                    Text(currentAcitivity)
-                        .fontDesign(.monospaced)
-                }
-                .frame(height: 200)
-                .padding()
-                
-                switch locationHandler.authorizationStatus {
-                case .authorizedWhenInUse, .authorizedAlways:
-                    Text("km/h: \(locationHandler.kilometerPerHour)")
-                case .restricted, .denied:
-                    Text("현재 지역에서 데이터를 읽어오는데 실패했습니다..")
-                case .notDetermined:
-                    Text("데이터를 읽어오고 있습니다..")
-                    ProgressView()
-                default:
-                    ProgressView()
-                }
-            }
-            .padding(.bottom, 30)
+            
+            VelocityView()
+                .environmentObject(locationHandler)
         }
-        .onAppear(perform: startCoreMotions)
-        .onChange(of: scenePhase) { currentPhase in
-            if currentPhase == .inactive || currentPhase == .background {
-                stopUpdates()
-            }
-        }
+        .onAppear(perform: startAccelerometers)
         .ignoresSafeArea()
     }
-    
-    private func startCoreMotions() {
-        startAccelerometers()
-        startActivityUpdates()
-    }
-    
     private func sleepThreadBriefly() {
         motionManager.stopAccelerometerUpdates()
         Thread.sleep(forTimeInterval: 5)
@@ -149,9 +99,9 @@ struct DrivingPalView: View {
         motionManager.accelerometerUpdateInterval = motionUpdateInterval
         motionManager.startAccelerometerUpdates(to: accelerationQueue) { data, _ in
             guard let data else { return }
-            valueZ = data.acceleration.z
+            zAcceleration = data.acceleration.z
             
-            if valueZ > stopThreshold {
+            if zAcceleration > stopThreshold {
                 model.simulator.count += 1
                 model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
@@ -159,7 +109,7 @@ struct DrivingPalView: View {
                 model.simulator.isWarning = true
                 motionStatus = .suddenStop
                 sleepThreadBriefly()
-            } else if valueZ < startThreshold {
+            } else if zAcceleration < startThreshold {
                 model.simulator.count += 1
                 model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
@@ -178,40 +128,39 @@ struct DrivingPalView: View {
         }
     }
     
-    private func startActivityUpdates() {
-        activityManager.startActivityUpdates(to: activityQueue) { activity in
-            if let activity = activity {
-                if activity.walking {
-                    currentAcitivity.append("walking ")
-                }
-                if activity.running {
-                    currentAcitivity.append("running ")
-                }
-                if activity.cycling {
-                    currentAcitivity.append("cycling ")
-                }
-                if activity.automotive {
-                    currentAcitivity.append("automotive ")
-                }
-                if activity.stationary {
-                    currentAcitivity.append("stationary ")
-                }
-            }
-            currentAcitivity.append("\n")
+    private func showAbnormalBackground() {
+        let blinkSecond = 4.0
+        // 초기화
+        viewOpacity = 0.0
+        // 비정상 배경 뷰 보이게 함
+        withAnimation(.easeIn(duration: 0.5)) {
+            viewOpacity = 1.0
+        }
+        // 비정상 배경 뷰 숨김
+        withAnimation(.easeOut(duration: 0.5).delay(blinkSecond)) {
+            viewOpacity = 0.0
         }
     }
     
-    private func stopUpdates() {
-        if motionManager.isAccelerometerActive {
-            motionManager.stopAccelerometerUpdates()
+    private func moveVerticallyPal() {
+        withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
+            movePalY = 20
         }
-        
-        activityManager.stopActivityUpdates()
+    }
+    
+    private func moveHorizontallyPal(_ currentStatus: MotionStatus) {
+        guard currentStatus != .normal else {
+            movePalX = 0
+            return
+        }
+        withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
+            movePalX = -10
+        }
     }
 }
 
 struct DrivingPalView_Previews: PreviewProvider {
     static var previews: some View {
-        DrivingPalView(model: DriveModel())
+        DrivingPalView()
     }
 }
