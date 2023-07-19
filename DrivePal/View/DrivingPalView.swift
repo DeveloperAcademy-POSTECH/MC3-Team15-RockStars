@@ -12,7 +12,7 @@ import SpriteKit
 struct DrivingPalView: View {
     
     private enum MotionStatus {
-        case normal, suddenAcceleration, suddenStop
+        case normal, suddenAcceleration, suddenStop, takingOff, landing
     }
     
     private let motionManager = CMMotionManager()
@@ -27,7 +27,7 @@ struct DrivingPalView: View {
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
     
-    @State private var motionStatus = MotionStatus.normal
+    @State private var motionStatus = MotionStatus.takingOff
     @State private var zAcceleration = Double.zero
     @StateObject var locationHandler = LocationsHandler()
     // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
