@@ -176,7 +176,7 @@ struct DrivingPalView: View {
     }
     
     private func moveHorizontallyPal(_ currentStatus: MotionStatus) {
-        guard currentStatus != .normal else {
+        guard [MotionStatus.suddenAcceleration, .suddenStop].contains(currentStatus) else {
             movePalX = 0
             return
         }
