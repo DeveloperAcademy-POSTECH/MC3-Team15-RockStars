@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D3435CE2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
-		7D3435D22A5F15D800D11708 /* DriveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435D12A5F15D800D11708 /* DriveModel.swift */; };
+		7D3435D22A5F15D800D11708 /* LiveActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435D12A5F15D800D11708 /* LiveActivityModel.swift */; };
 		7DB9AE8E2A6768260099F54A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE8C2A6768260099F54A /* Color+Extension.swift */; };
 		AD1D49972A66F02500C485FA /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49962A66F02500C485FA /* UserDefaults+Extensions.swift */; };
 		AD1D49D62A67CC1600C485FA /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */; };
@@ -64,7 +64,7 @@
 
 /* Begin PBXFileReference section */
 		7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveAttributes.swift; sourceTree = "<group>"; };
-		7D3435D12A5F15D800D11708 /* DriveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveModel.swift; sourceTree = "<group>"; };
+		7D3435D12A5F15D800D11708 /* LiveActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityModel.swift; sourceTree = "<group>"; };
 		7DB9AE8C2A6768260099F54A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		AD1D49962A66F02500C485FA /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsHandler.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */,
-				7D3435D12A5F15D800D11708 /* DriveModel.swift */,
+				7D3435D12A5F15D800D11708 /* LiveActivityModel.swift */,
 				ADC991282A65093B00422D32 /* DriveSimulator.swift */,
 				ADC9912B2A65096D00422D32 /* DriveSimulatorDelegate.swift */,
 			);
@@ -383,7 +383,7 @@
 				AD1D49972A66F02500C485FA /* UserDefaults+Extensions.swift in Sources */,
 				AD448A8C2A66AB1900585590 /* Bundle+Extension.swift in Sources */,
 				ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */,
-				7D3435D22A5F15D800D11708 /* DriveModel.swift in Sources */,
+				7D3435D22A5F15D800D11708 /* LiveActivityModel.swift in Sources */,
 				ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */,
 				ADC9912C2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
