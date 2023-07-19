@@ -17,6 +17,7 @@
 		AD1D49DB2A67D89000C485FA /* ResultAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49DA2A67D89000C485FA /* ResultAnalysisView.swift */; };
 		AD1D49DC2A67D93100C485FA /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE8C2A6768260099F54A /* Color+Extension.swift */; };
 		AD1D49DE2A67E2D000C485FA /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49DD2A67E2D000C485FA /* Text+Extension.swift */; };
+		AD1D49E02A684EF900C485FA /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49DF2A684EF900C485FA /* NavigationUtil.swift */; };
 		AD448A8C2A66AB1900585590 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD448A8B2A66AB1900585590 /* Bundle+Extension.swift */; };
 		AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */; };
 		AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD742F612A5CF61F00AD6226 /* ContentView.swift */; };
@@ -75,6 +76,7 @@
 		AD1D49D82A67D22F00C485FA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		AD1D49DA2A67D89000C485FA /* ResultAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAnalysisView.swift; sourceTree = "<group>"; };
 		AD1D49DD2A67E2D000C485FA /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
+		AD1D49DF2A684EF900C485FA /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		AD448A8B2A66AB1900585590 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		AD742F5C2A5CF61F00AD6226 /* DrivePal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrivePal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivePalApp.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				AD03717C2A628C3400D3E051 /* Extensions */,
+				AD1D49DF2A684EF900C485FA /* NavigationUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */,
 				ADC9912C2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
+				AD1D49E02A684EF900C485FA /* NavigationUtil.swift in Sources */,
 				ADCBEBAD2A5F266900DDC27D /* DrivingPalView.swift in Sources */,
 				ADC991292A65093B00422D32 /* DriveSimulator.swift in Sources */,
 			);

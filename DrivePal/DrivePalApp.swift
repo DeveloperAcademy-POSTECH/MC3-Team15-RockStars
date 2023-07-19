@@ -18,14 +18,12 @@ struct DrivePalApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ResultAnalysisView()
+            DrivingPalView()
                 .environmentObject(model)
-//            DrivingPalView()
-//                .environmentObject(model)
-//                .onAppear {
-//                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
-//                    model.startLiveActivity()
-//                }
+                .onAppear {
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+                    model.startLiveActivity()
+                }
         }
         .onChange(of: phase) { currentPhase in
             switch currentPhase {

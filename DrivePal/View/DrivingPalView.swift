@@ -38,8 +38,7 @@ struct DrivingPalView: View {
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
     
-    // TODO: - 뷰 생성 로직이 여기 담겨도 좋을까요?
-    @State private var currentAcitivity = ""
+    @State private var showResultAnalysisView = false
     
     // background scenes
     private var normalScene: SKScene {
@@ -68,23 +67,29 @@ struct DrivingPalView: View {
             }
             
             // driving pal
-            VStack {
-                Spacer()
-                Image(palImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.width - 100)
-                    .padding(.vertical)
-                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
-                    .shake(movePalX)
-                    .onAppear(perform: moveVerticallyPal)
-                    .onChange(of: motionStatus, perform: moveHorizontallyPal)
-            }
+            Image(palImage)
+                .resizable()
+                .scaledToFit()
+                .frame(width: UIScreen.width - 100)
+                .padding(.vertical)
+                .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
+                .shake(movePalX)
+                .onAppear(perform: moveVerticallyPal)
+                .onChange(of: motionStatus, perform: moveHorizontallyPal)
             
-            VelocityView()
-                .environmentObject(locationHandler)
+            VStack {
+                VelocityView()
+                    .environmentObject(locationHandler)
+                Button("주행 종료") {
+                    showResultAnalysisView.toggle()
+                }
+                .padding()
+            }
         }
         .onAppear(perform: startAccelerometers)
+        .fullScreenCover(isPresented: $showResultAnalysisView) {
+            ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
+        }
         .ignoresSafeArea()
     }
     private func sleepThreadBriefly() {

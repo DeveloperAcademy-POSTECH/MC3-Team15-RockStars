@@ -10,6 +10,7 @@ import SwiftUI
 struct ResultAnalysisView: View {
     @State private var palPositionX = CGFloat.zero
     @State private var palPositionY = CGFloat.zero
+    @Binding var showResultAnalysisView: Bool
     var body: some View {
         ZStack {
             Color.backgroundColor
@@ -51,7 +52,15 @@ struct ResultAnalysisView: View {
                 }
                 .frame(width: 264, height: 220)
                 
-                ChartView()
+                ZStack {
+                    ChartView()
+                    
+                    Button("메인으로 돌아가기") {
+//                        NavigationUtil.popToRootView()
+                        // TODO: - 일단 이전뷰로 돌아가도록 함. 추후 수정 필요.
+                        showResultAnalysisView = false
+                    }
+                }
             }
         }
         .ignoresSafeArea()
