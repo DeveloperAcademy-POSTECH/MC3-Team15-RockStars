@@ -98,6 +98,14 @@ struct DrivingPalView: View {
                     .shake(movePalX)
                     .onAppear(perform: moveVerticallyPal)
                     .onChange(of: motionStatus, perform: moveHorizontallyPal)
+                
+                // TODO: - 추후 삭제 혹은 변경 예정
+                HStack(spacing: 15) {
+                    Button("takingOff") { motionStatus = .takingOff }
+                    Button("normal") { motionStatus = .normal }
+                    Button("landing") { motionStatus = .landing }
+                }
+                .padding(.bottom, 100)
             }
             
             VelocityView()
