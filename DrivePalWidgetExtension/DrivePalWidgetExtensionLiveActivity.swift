@@ -12,40 +12,59 @@ import SwiftUI
 struct DrivePalWidgetExtensionLiveActivity: Widget {
     
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: DrivePalWidgetExtensionAttributes.self) { _ in
+        ActivityConfiguration(for: DriveAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello")
+            HStack {
+                Image("\(context.state.driveState.leadingImageName)")
+                HStack {
+                    Text(context.state.driveState.count.description)
+                    Text(" Times")
+                }
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Image("\(context.state.driveState.leadingImageName)")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    HStack {
+                        Text("부주의 : \(context.state.driveState.count.description)번")
+                            .foregroundColor(.blue)
+                    }
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom")
+                    Text(context.state.driveState.description)
                     // more content
                 }
             } compactLeading: {
-                Image(systemName: context.state.imageName)
-            } compactTrailing: {
                 HStack {
-                    Image(systemName: "circle")
-                        .foregroundColor(.blue)
-                    Text("\(context.state.count) Times")
-                        .foregroundColor(.blue)
+                    Image("\(context.state.driveState.leadingImageName)")
+                        .resizable()
+                        .scaledToFit()
                 }
-                
+                .padding(.leading, 1)
+            } compactTrailing: {
+                ZStack {
+                    if !context.state.driveState.isWarning {
+                        HStack {
+                            CircularProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0)
+                                .frame(width: 12, height: 12)
+                            Text("경고 \(context.state.driveState.count.description)번")
+                                .foregroundColor(context.state.driveState.count < 4 ? Color(hex: "#4DBBDB") : Color(hex: "#FF5050"))
+                                .font(.system(size: 12))
+                        }
+                    }
+                    
+                    Image("\(context.state.driveState.trailingImageName)")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+                .padding(.trailing, 1)
             } minimal: {
-                Text("Min")
+                Image("\(context.state.driveState.leadingImageName)")
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -54,8 +73,8 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
 }
 
 struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
-    static let attributes = DrivePalWidgetExtensionAttributes(name: "Me")
-    static let contentState = DrivePalWidgetExtensionAttributes.ContentState(count: 3, imageName: "airplane.circle.fill")
+    static let attributes = DriveAttributes()
+    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false))
 
     static var previews: some View {
         attributes
@@ -70,5 +89,17 @@ struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
         attributes
             .previewContext(contentState, viewKind: .content)
             .previewDisplayName("Notification")
+    }
+}
+                    
+struct CircularProgressView: View {
+    @State var progress: Double = 0.0
+
+    var body: some View {
+        VStack {
+            ProgressView(value: progress)
+                .progressViewStyle(CircularProgressViewStyle(tint: progress < 1 ? Color(hex: "#4DBBDB") : Color(hex: "#FF5050")))
+                
+        }
     }
 }
