@@ -12,7 +12,7 @@ import CoreMotion
 @main
 struct DrivePalApp: App {
     @Environment(\.scenePhase) private var phase
-    @StateObject private var model = LiveActivityModel()
+    @StateObject private var model = LiveActivityModel.shared
     private let backgroundTaskIdentifier = Bundle.main.backgroundTaskIdentifier
     private let activityManager = CMMotionActivityManager()
     

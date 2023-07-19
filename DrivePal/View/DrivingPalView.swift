@@ -81,7 +81,10 @@ struct DrivingPalView: View {
                 VelocityView()
                     .environmentObject(locationHandler)
                 Button("주행 종료") {
+                    print("=== DEBUG: 주행 종료 전 \(model.simulator.accelerationData)")
                     showResultAnalysisView.toggle()
+                    model.simulator.end()
+                    print("=== DEBUG: 주행 종료 후 \(model.simulator.accelerationData)")
                 }
                 .padding()
             }
@@ -106,21 +109,16 @@ struct DrivingPalView: View {
             guard let data else { return }
             zAcceleration = data.acceleration.z
             
-            if zAcceleration > stopThreshold {
+            if zAcceleration > stopThreshold || zAcceleration < startThreshold {
                 model.simulator.count += 1
                 model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
-                motionStatus = .suddenStop
-                sleepThreadBriefly()
-            } else if zAcceleration < startThreshold {
-                model.simulator.count += 1
-                model.simulator.progress += 0.25
-                model.simulator.leadingImageName = "warning"
-                model.simulator.trailingImageName = "warningCircle"
-                model.simulator.isWarning = true
-                motionStatus = .suddenAcceleration
+                motionStatus =  zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
+                model.simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
+                print("=== DEBUG: appended \(zAcceleration)")
+                print("=== DEBUG: \(model.simulator.accelerationData)")
                 sleepThreadBriefly()
             } else {
                 if model.simulator.count < 4 {

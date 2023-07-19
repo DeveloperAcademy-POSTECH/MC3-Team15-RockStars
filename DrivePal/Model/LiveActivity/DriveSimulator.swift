@@ -18,6 +18,8 @@ final class DriveSimulator {
     var trailingImageName = ""
     var isWarning = false
     weak var delegate: DriveSimulatorDelegate?
+    
+    var accelerationData = [ChartData]()
 
     // Init test data
     init() {
@@ -26,6 +28,7 @@ final class DriveSimulator {
     // Start a drive by setting a time interval which fires of runDriveSimulator every 1sec
     func start() {
         if simulatorStarted { return }
+        reset()
         simulatorStarted = true
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runDriveSimulator), userInfo: nil, repeats: true)
     }
@@ -37,7 +40,6 @@ final class DriveSimulator {
 
     // End the drive by resetting the vars
     func endDrive() -> DriveState {
-        reset()
         return DriveState(count: 0, progress: 0.0, leadingImageName: "warning0", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false)
     }
 
@@ -47,6 +49,7 @@ final class DriveSimulator {
         count = 0
         timestamp = 0
         simulatorStarted = false
+        accelerationData.removeAll()
     }
 
     @objc private func runDriveSimulator() {

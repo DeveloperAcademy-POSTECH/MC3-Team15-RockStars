@@ -38,21 +38,16 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
     }
     
     func updateLiveActivity(driveState: DriveState) {
-        print("**")
         self.currentState = driveState
         let updatedDriveStatus = DriveAttributes.ContentState(driveState: driveState)
         Task {
-            print(updatedDriveStatus)
             await liveActivity?.update(using: updatedDriveStatus)
         }
-
-        print("Updated Drive Live Activity")
     }
     
     func stopLiveActivity() {
         Task {
             await liveActivity?.end(dismissalPolicy: .immediate)
-            print("Cancelled Drive Live Activity")
         }
         driveAlreadyStarted = false
     }

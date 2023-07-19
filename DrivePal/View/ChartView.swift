@@ -21,13 +21,7 @@ struct ChartData: Identifiable {
 
 struct ChartView: View {
     
-    @State private var data = [ChartData(timestamp: .now, accelerationValue: 0.7),
-                               ChartData(timestamp: .now.addingTimeInterval(60), accelerationValue: -0.3),
-                               ChartData(timestamp: .now.addingTimeInterval(60 * 2), accelerationValue: 1.0),
-                               ChartData(timestamp: .now.addingTimeInterval(60 * 3), accelerationValue: 0.3),
-                               ChartData(timestamp: .now.addingTimeInterval(60 * 4), accelerationValue: 0.5),
-                               ChartData(timestamp: .now.addingTimeInterval(60 * 5), accelerationValue: 0.2)
-                               ]
+    var data: [ChartData]
     
     var body: some View {
         VStack {
@@ -65,6 +59,9 @@ struct ChartView: View {
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .foregroundColor(.white)
+            .onAppear {
+                print("=== DEBUG: chart data on ChartView \(LiveActivityModel.shared.simulator.accelerationData)")
+            }
         }
     }
 }

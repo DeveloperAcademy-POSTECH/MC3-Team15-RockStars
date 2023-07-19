@@ -45,6 +45,7 @@ struct ResultAnalysisView: View {
                             Text("RESULT")
                                 .font(.system(size: 32, weight: .bold))
                                 .padding(.leading, 30)
+                                .foregroundColor(.black)
                             Spacer()
                         }
                         Spacer()
@@ -53,7 +54,7 @@ struct ResultAnalysisView: View {
                 .frame(width: 264, height: 220)
                 
                 ZStack {
-                    ChartView()
+                    ChartView(data: LiveActivityModel.shared.simulator.accelerationData)
                     
                     Button("메인으로 돌아가기") {
 //                        NavigationUtil.popToRootView()
@@ -62,6 +63,9 @@ struct ResultAnalysisView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            print("=== DEBUG: chart data \(LiveActivityModel.shared.simulator.accelerationData)")
         }
         .ignoresSafeArea()
     }
