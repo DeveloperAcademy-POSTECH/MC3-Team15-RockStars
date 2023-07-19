@@ -10,6 +10,8 @@
 		7D3435CD2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
 		7D3435CE2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
 		7D3435D22A5F15D800D11708 /* DriveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435D12A5F15D800D11708 /* DriveModel.swift */; };
+		7DB9AE8D2A6768260099F54A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE8C2A6768260099F54A /* Color+Extension.swift */; };
+		7DB9AE8E2A6768260099F54A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE8C2A6768260099F54A /* Color+Extension.swift */; };
 		AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */; };
 		AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD742F612A5CF61F00AD6226 /* ContentView.swift */; };
 		AD742F642A5CF62100AD6226 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD742F632A5CF62100AD6226 /* Assets.xcassets */; };
@@ -63,6 +65,7 @@
 /* Begin PBXFileReference section */
 		7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveAttributes.swift; sourceTree = "<group>"; };
 		7D3435D12A5F15D800D11708 /* DriveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveModel.swift; sourceTree = "<group>"; };
+		7DB9AE8C2A6768260099F54A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		AD742F5C2A5CF61F00AD6226 /* DrivePal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrivePal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivePalApp.swift; sourceTree = "<group>"; };
 		AD742F612A5CF61F00AD6226 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3BC21F2A5E347D00CF60ED /* UserDefaults+Extensions.swift */,
+				7DB9AE8C2A6768260099F54A /* Color+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -376,6 +380,7 @@
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
 				ADCBEBAD2A5F266900DDC27D /* DrivingPalView.swift in Sources */,
 				ADC991292A65093B00422D32 /* DriveSimulator.swift in Sources */,
+				7DB9AE8D2A6768260099F54A /* Color+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D3435CE2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */,
+				7DB9AE8E2A6768260099F54A /* Color+Extension.swift in Sources */,
 				AD742F802A5CFF1800AD6226 /* DrivePalWidgetExtension.swift in Sources */,
 				AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
 				BE9294452A60E1BF00368B78 /* LocationsHandler.swift in Sources */,
@@ -568,7 +574,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
@@ -594,7 +600,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DevDrivePalProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DistributionDrivePalProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
