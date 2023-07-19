@@ -40,6 +40,7 @@ struct DrivingPalView: View {
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
     @State private var currentAcitivity = ""
+    @EnvironmentObject var automotiveDetector: CMMotionActivityManager
     
     // background scenes
     private var normalScene: SKScene {
