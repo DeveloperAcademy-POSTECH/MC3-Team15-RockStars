@@ -23,25 +23,25 @@ final class DriveSimulator {
     init() {
     }
 
-    // Start a game by setting a time interval which fires of runGameSimulator every 2sec
+    // Start a drive by setting a time interval which fires of runDriveSimulator every 1sec
     func start() {
         if simulatorStarted { return }
         simulatorStarted = true
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(runDriveSimulator), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runDriveSimulator), userInfo: nil, repeats: true)
     }
 
-    // Reports to the delegate (GameModel in our case)
+    // Reports to the delegate (LiveActivityModel)
     func end() {
         delegate?.updateLiveActivity(driveState: endDrive())
     }
 
-    // End the game by setting the winning team and resetting the vars
+    // End the drive by resetting the vars
     func endDrive() -> DriveState {
         reset()
         return DriveState(count: 0, progress: 0.0, leadingImageName: "warning0", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false)
     }
 
-    // Reset the game to a fresh start
+    // Reset the drive status to a fresh start
     private func reset() {
         timer?.invalidate()
         count = 0
