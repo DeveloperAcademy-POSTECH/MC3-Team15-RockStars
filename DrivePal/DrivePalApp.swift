@@ -14,12 +14,13 @@ struct DrivePalApp: App {
     @Environment(\.scenePhase) private var phase
     @StateObject private var model = LiveActivityModel()
     private let backgroundTaskIdentifier = Bundle.main.backgroundTaskIdentifier
-    private let activityManager = CMMotionActivityManager()
+    @StateObject private var activityManager = CMMotionActivityManager()
     
     var body: some Scene {
         WindowGroup {
             DrivingPalView()
                 .environmentObject(model)
+                .environmentObject(activityManager)
                 .onAppear {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
                     model.startLiveActivity()

@@ -9,6 +9,8 @@ import SwiftUI
 import CoreMotion
 import SpriteKit
 
+extension CMMotionActivityManager: ObservableObject { }
+
 struct DrivingPalView: View {
     
     private enum MotionStatus {
