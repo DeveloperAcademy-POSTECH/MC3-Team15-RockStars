@@ -35,7 +35,7 @@ struct DrivePalApp: App {
             }
         }
         .backgroundTask(.appRefresh(backgroundTaskIdentifier)) {
-            activityManager.startActivityUpdates(to: .main) { activity in
+            await activityManager.startActivityUpdates(to: .main) { activity in
                 if let activity = activity {
                     if activity.automotive || activity.cycling {
                         let content = UNMutableNotificationContent()
