@@ -37,8 +37,6 @@ struct DrivingPalView: View {
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
-    
-    // TODO: - 뷰 생성 로직이 여기 담겨도 좋을까요?
     @State private var currentAcitivity = ""
     
     // background scenes
