@@ -111,7 +111,23 @@ struct DrivingPalView: View {
             VelocityView()
                 .environmentObject(locationHandler)
         }
-        .onAppear(perform: startAccelerometers)
+        .onChange(of: motionStatus) { newStatus in // TODO: - 모션 상태 변화에 따른 행동 변화, 추후 Refactering 필요
+            switch newStatus {
+            case .normal:
+                startAccelerometers()
+            case .suddenAcceleration, .suddenStop:
+                print("이상 기후 감지")
+            case .takingOff:
+                // 출격 모션 + 4초간 잠수 후 상태 변경
+                print("taking off")
+                motionManager.stopAccelerometerUpdates()
+            case .landing:
+                // 하강 모습 + 4초간 하강 후 스탑...
+                print("landing")
+                motionManager.stopAccelerometerUpdates()
+                automotiveDetector.stopActivityUpdates()
+            }
+        }
         .ignoresSafeArea()
     }
     private func sleepThreadBriefly() {
