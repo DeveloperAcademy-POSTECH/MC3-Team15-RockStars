@@ -60,7 +60,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                     
                     Image("\(context.state.driveState.trailingImageName)")
                         .resizable()
-                        .scaledToFit()
+                        .frame(width: 20, height: 20)
                 }
                 .padding(.trailing, 1)
             } minimal: {
