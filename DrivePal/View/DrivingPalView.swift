@@ -123,17 +123,18 @@ struct DrivingPalView: View {
             }
             .padding(.bottom, 30)
         }
-        .onAppear {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
-            startAccelerometers()
-            startActivityUpdates()
-        }
+        .onAppear(perform: startCoreMotions)
         .onChange(of: scenePhase) { currentPhase in
             if currentPhase == .inactive || currentPhase == .background {
                 stopUpdates()
             }
         }
         .ignoresSafeArea()
+    }
+    
+    private func startCoreMotions() {
+        startAccelerometers()
+        startActivityUpdates()
     }
     
     private func sleepThreadBriefly() {
