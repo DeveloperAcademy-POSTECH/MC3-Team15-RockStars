@@ -8,7 +8,7 @@
 import SwiftUI
 import ActivityKit
 
-final class DriveModel: ObservableObject {
+final class LiveActivityModel: ObservableObject {
     init() {
         startLiveActivity()
     }
