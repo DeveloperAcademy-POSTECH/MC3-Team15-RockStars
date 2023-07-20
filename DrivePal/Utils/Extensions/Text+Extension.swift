@@ -15,3 +15,12 @@ extension Text {
             .foregroundColor(Color(hex: "#0C205A"))
     }
 }
+
+struct ResultTextModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 16, weight: .bold, design: .monospaced))
+            .foregroundColor(Color(hex: "#0C205A"))
+            
+    }
+}

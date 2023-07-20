@@ -38,6 +38,7 @@ final class DriveSimulator {
         delegate?.updateLiveActivity(driveState: endDrive())
         delegate?.stopLiveActivity()
         simulatorStarted = false
+        timer?.invalidate()
     }
 
     // End the drive by resetting the vars
@@ -47,16 +48,17 @@ final class DriveSimulator {
 
     // Reset the drive status to a fresh start
     private func reset() {
-        timer?.invalidate()
         count = 0
         timestamp = 0
+        progress = 0.0
+        leadingImageName = ""
+        trailingImageName = ""
         accelerationData.removeAll()
     }
 
     @objc private func runDriveSimulator() {
         timestamp += 1
         // Tell the delegate to update its state
-        
         delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", timestamp: timestamp, isWarning: isWarning))
     }
 }
