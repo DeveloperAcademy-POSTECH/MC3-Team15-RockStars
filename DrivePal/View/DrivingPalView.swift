@@ -106,7 +106,9 @@ struct DrivingPalView: View {
                 HStack(spacing: 15) {
                     Button("takingOff") { motionStatus = .takingOff }
                     Button("normal") { motionStatus = .normal }
-                    Button("landing") { motionStatus = .landing }
+                    Button("landing") {
+                        motionStatus = .landing
+                    }
                 }
                 .padding(.bottom, 100)
             }
@@ -128,6 +130,7 @@ struct DrivingPalView: View {
                 // 하강 모습 + 4초간 하강 후 스탑...
                 print("landing")
                 timeStampWhenLanding = timeStamp
+                motionManager.stopAccelerometerUpdates()
             }
         }
         .onChange(of: timeStamp) { newValue in
@@ -171,6 +174,12 @@ struct DrivingPalView: View {
             guard let data else { return }
             zAcceleration = data.acceleration.z
             
+            if [.landing, .takingOff].contains(motionStatus) {
+                motionManager.stopAccelerometerUpdates()
+                model.simulator.end()
+                return
+            }
+            
             if zAcceleration > stopThreshold {
                 model.simulator.count += 1
                 model.simulator.progress += 0.25
@@ -195,6 +204,8 @@ struct DrivingPalView: View {
                 model.simulator.isWarning = false
                 motionStatus = .normal
             }
+            
+            
         }
     }
     
