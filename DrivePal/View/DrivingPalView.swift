@@ -107,6 +107,7 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
+                model.simulator.motionStatus = "suddenStop"
                 motionStatus = .suddenStop
                 sleepThreadBriefly()
             } else if zAcceleration < startThreshold {
@@ -115,6 +116,7 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
+                model.simulator.motionStatus = "suddenAcceleration"
                 motionStatus = .suddenAcceleration
                 sleepThreadBriefly()
             } else {
@@ -123,6 +125,7 @@ struct DrivingPalView: View {
                 }
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
+                model.simulator.motionStatus = "normal"
                 motionStatus = .normal
             }
         }
