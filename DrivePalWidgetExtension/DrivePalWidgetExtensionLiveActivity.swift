@@ -27,17 +27,23 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Image("\(context.state.driveState.leadingImageName)")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    HStack {
-                        Text("부주의 : \(context.state.driveState.count.description)번")
-                            .foregroundColor(.blue)
-                    }
                 }
-                DynamicIslandExpandedRegion(.bottom) {
-                    Text(context.state.driveState.description)
-                    // more content
+                DynamicIslandExpandedRegion(.center) {
+                }
+                DynamicIslandExpandedRegion(.bottom, priority: 1.0) {
+                    if context.state.driveState.motionStatus == "normal" {
+                        if context.state.driveState.count < 4 {
+                            NormalDrivingView(leadingImageName: context.state.driveState.leadingImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
+                        } else {
+                            AfterFourWarningsView(leadingImageName: context.state.driveState.leadingImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
+                        }
+                    } else if context.state.driveState.motionStatus == "suddenStop" {
+                        SuddenStopView(leadingImageName: context.state.driveState.leadingImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
+                    } else if context.state.driveState.motionStatus == "suddenAcceleration" {
+                        SuddenAccelerationView(leadingImageName: context.state.driveState.leadingImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
+                    }
                 }
             } compactLeading: {
                 HStack {
@@ -74,7 +80,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
 
 struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
     static let attributes = DriveAttributes()
-    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false))
+    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false, motionStatus: "normal"))
 
     static var previews: some View {
         attributes
@@ -89,17 +95,5 @@ struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
         attributes
             .previewContext(contentState, viewKind: .content)
             .previewDisplayName("Notification")
-    }
-}
-                    
-struct CircularProgressView: View {
-    @State var progress: Double = 0.0
-
-    var body: some View {
-        VStack {
-            ProgressView(value: progress)
-                .progressViewStyle(CircularProgressViewStyle(tint: progress < 1 ? Color(hex: "#4DBBDB") : Color(hex: "#FF5050")))
-                
-        }
     }
 }
