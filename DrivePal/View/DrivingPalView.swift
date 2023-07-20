@@ -170,6 +170,8 @@ struct DrivingPalView: View {
         guard motionManager.isAccelerometerAvailable else { return }
         
         motionManager.accelerometerUpdateInterval = motionUpdateInterval
+        // TODO: - accelerameter data를 block에서 처리하면 오버헤드 발생
+        // https://developer.apple.com/documentation/coremotion/cmmotionmanager/1616171-startaccelerometerupdates
         motionManager.startAccelerometerUpdates(to: accelerationQueue) { data, _ in
             guard let data else { return }
             zAcceleration = data.acceleration.z
@@ -203,9 +205,7 @@ struct DrivingPalView: View {
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
                 motionStatus = .normal
-            }
-            
-            
+            }  
         }
     }
     
