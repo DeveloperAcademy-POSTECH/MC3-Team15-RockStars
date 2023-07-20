@@ -168,6 +168,7 @@ struct DrivingPalView: View {
     }
     
     private func landing() {
+        model.simulator.end()
         withAnimation(.linear(duration: 1.0)) {
             planeHeight = initHeight
             planeDegree = 10
@@ -228,7 +229,6 @@ struct DrivingPalView: View {
             
             if [.landing, .takingOff].contains(motionStatus) {
                 motionManager.stopAccelerometerUpdates()
-                model.simulator.end()
                 return
             }
             
