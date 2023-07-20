@@ -40,6 +40,10 @@ struct DrivingPalView: View {
     @State private var movePalY = CGFloat.zero
     @State private var currentAcitivity = ""
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
+    private var timeStamp: Int {
+        model.simulator.timestamp
+    }
+    @State private var timeStampWhenLanding = 999999
     
     // background scenes
     private var normalScene: SKScene {
