@@ -138,6 +138,7 @@ struct DrivingPalView: View {
                 print("이상 기후 감지")
             case .takingOff:
                 print("taking off")
+                reset()
             case .landing:
                 print("landing")
                 timeStampWhenLanding = timeStamp
@@ -145,19 +146,74 @@ struct DrivingPalView: View {
         }
         .onChange(of: timeStamp) { newValue in
             if newValue == 5 {
-                print("앱시작해서 5초가 지났습니다.")
+                takeoff()
             }
-            
             if newValue == timeStampWhenLanding + 5 {
-                print("5초경과 landing 눌렀을 떄 !!!====")
+                landing()
             }
         }
         .ignoresSafeArea()
     }
+    private func reset() {
+        model.startLiveActivity()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            takeoff()
+        }
+    }
+    
     private func sleepThreadBriefly() {
         motionManager.stopAccelerometerUpdates()
         Thread.sleep(forTimeInterval: 5)
         startAccelerometers()
+    }
+    
+    private func landing() {
+        withAnimation(.linear(duration: 1.0)) {
+            planeHeight = initHeight
+            planeDegree = 10
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation {
+                planeDegree = 8
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            withAnimation {
+                planeDegree = 5
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+            withAnimation {
+                planeDegree = 0
+            }
+        }
+    }
+    
+    private func takeoff() {
+        withAnimation(.linear(duration: 1.0)) {
+            planeHeight = UIScreen.height / 3 * 2 + movePalY
+            planeDegree = -10
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            motionStatus = .normal
+            withAnimation {
+                planeDegree = -8
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            withAnimation {
+                planeDegree = -5
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+            withAnimation {
+                planeDegree = 0
+            }
+        }
     }
     
     private func startAccelerometers() {
