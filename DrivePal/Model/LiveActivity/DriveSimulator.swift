@@ -33,6 +33,7 @@ final class DriveSimulator {
     // Reports to the delegate (GameModel in our case)
     func end() {
         delegate?.updateLiveActivity(driveState: endDrive())
+        delegate?.stopLiveActivity()
     }
 
     // End the game by setting the winning team and resetting the vars
