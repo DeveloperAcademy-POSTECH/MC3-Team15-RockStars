@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NormalDrivingView: View {
-    @State var leadingImageName: String
+    @State var expandedImageName: String
     @State var progress: Double
     @State var count: Int
     @State var timestamp: Int
@@ -16,7 +16,7 @@ struct NormalDrivingView: View {
     var body: some View {
         VStack {
             HStack {
-                Image("\(leadingImageName)")
+                Image("\(expandedImageName)")
                     .resizable()
                     .frame(width: 54, height: 53)
                     .padding(.trailing, 17)

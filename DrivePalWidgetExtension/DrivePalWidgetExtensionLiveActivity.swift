@@ -35,14 +35,14 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.bottom, priority: 1.0) {
                     if context.state.driveState.motionStatus == "normal" {
                         if context.state.driveState.count < 4 {
-                            NormalDrivingView(leadingImageName: context.state.driveState.leadingImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
+                            NormalDrivingView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                         } else {
-                            AfterFourWarningsView(leadingImageName: context.state.driveState.leadingImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
+                            AfterFourWarningsView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                         }
                     } else if context.state.driveState.motionStatus == "suddenStop" {
-                        SuddenStopView(leadingImageName: context.state.driveState.leadingImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
+                        SuddenStopView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                     } else if context.state.driveState.motionStatus == "suddenAcceleration" {
-                        SuddenAccelerationView(leadingImageName: context.state.driveState.leadingImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
+                        SuddenAccelerationView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                     }
                 }
             } compactLeading: {
@@ -80,7 +80,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
 
 struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
     static let attributes = DriveAttributes()
-    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false, motionStatus: "normal"))
+    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", expandedImageName: "normal1", timestamp: 0, isWarning: false, motionStatus: "normal"))
 
     static var previews: some View {
         attributes
