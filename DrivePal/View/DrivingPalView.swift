@@ -156,6 +156,7 @@ struct DrivingPalView: View {
     }
     private func reset() {
         model.startLiveActivity()
+        timeStampWhenLanding = 99999
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             takeoff()
         }
