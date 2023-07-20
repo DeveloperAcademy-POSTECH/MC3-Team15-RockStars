@@ -19,7 +19,7 @@ struct DrivingPalView: View {
     
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
-    private let motionUpdateInterval = 1.0 / 3.0
+    private let motionUpdateInterval = 1.0 / 2.0
     private let accelerationQueue = OperationQueue()
     
     // MARK: - 가속도 역치 기준
