@@ -41,6 +41,7 @@ struct DrivingPalView: View {
     @State private var movePalY = CGFloat.zero
     @State private var planeHeight = UIScreen.height + 60
     @State private var currentAcitivity = ""
+    @State private var planeDegree = Double.zero
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
     private var timeStamp: Int {
         model.simulator.timestamp
@@ -99,9 +100,10 @@ struct DrivingPalView: View {
                     .scaledToFit()
                     .frame(width: UIScreen.width - 100)
                     .padding(.vertical)
-                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
+                    .position(x: UIScreen.width / 2, y: planeHeight)
                     .shake(movePalX)
                     .onAppear(perform: moveVerticallyPal)
+                    .rotationEffect(.init(degrees: planeDegree), anchor: .trailing)
                     .onChange(of: motionStatus, perform: moveHorizontallyPal)
                 
                 // TODO: - 추후 삭제 혹은 변경 예정
