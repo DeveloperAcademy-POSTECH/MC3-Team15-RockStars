@@ -14,7 +14,7 @@ struct LinearProgressView: View {
     var body: some View {
         VStack {
             ProgressView(value: progress)
-                .progressViewStyle(LinearProgressViewStyle(tint: progress < 1 ? Color(hex: "4DBBDB") : Color(hex: linearColor)))
+                .progressViewStyle(LinearProgressViewStyle(tint: Color(hex: linearColor)))
         }
     }
 }
