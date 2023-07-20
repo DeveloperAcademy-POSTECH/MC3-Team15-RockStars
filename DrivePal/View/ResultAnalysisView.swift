@@ -30,7 +30,7 @@ struct ResultAnalysisView: View {
                         .cornerRadius(15)
                     
                     VStack {
-                        Text("운전 시간  : 20분")
+                        Text("운전 시간  : \(LiveActivityModel.shared.simulator.timestamp / 60)분 \(LiveActivityModel.shared.simulator.timestamp % 60)초")
                             .resultContentsText()
                         
                         Spacer()
