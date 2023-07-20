@@ -49,6 +49,5 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
             await liveActivity?.end(dismissalPolicy: .immediate)
         }
         driveAlreadyStarted = false
-        print("=== DEBUG: stopLiveActivity successfully execute")
     }
 }

@@ -110,7 +110,6 @@ struct DrivingPalView: View {
     }
     
     private func actionsOnAppear() {
-        print("=== DEBUG: onappear")
         model.startLiveActivity()
         startAccelerometers()
     }
@@ -135,7 +134,7 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
-                motionStatus =  zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
+                motionStatus = zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
                 model.simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
                 sleepThreadBriefly()
             } else {
