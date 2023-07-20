@@ -27,6 +27,7 @@ struct DrivingPalView: View {
     /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.75
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
+    private let initHeight = UIScreen.height + 60
     
     @State private var motionStatus = MotionStatus.takingOff
     @State private var zAcceleration = Double.zero
@@ -38,6 +39,7 @@ struct DrivingPalView: View {
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
+    @State private var planeHeight = UIScreen.height + 60
     @State private var currentAcitivity = ""
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
     private var timeStamp: Int {
