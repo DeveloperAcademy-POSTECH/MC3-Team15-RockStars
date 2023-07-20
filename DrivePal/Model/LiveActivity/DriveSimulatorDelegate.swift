@@ -8,4 +8,5 @@
 import Foundation
 protocol DriveSimulatorDelegate: AnyObject {
     func updateLiveActivity(driveState: DriveState)
+    func stopLiveActivity()
 }
