@@ -104,10 +104,20 @@ struct DrivingPalView: View {
                 
                 // TODO: - 추후 삭제 혹은 변경 예정
                 HStack(spacing: 15) {
-                    Button("takingOff") { motionStatus = .takingOff }
-                    Button("normal") { motionStatus = .normal }
+                    Button("takingOff") {
+                        withAnimation {
+                            motionStatus = .takingOff
+                        }
+                    }
+                    Button("normal") {
+                        withAnimation {
+                            motionStatus = .normal
+                        }
+                    }
                     Button("landing") {
-                        motionStatus = .landing
+                        withAnimation {
+                            motionStatus = .landing
+                        }
                     }
                 }
                 .padding(.bottom, 100)
@@ -168,7 +178,10 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
-                motionStatus = .suddenStop
+                withAnimation {
+                    motionStatus = .suddenStop
+                }
+                
                 sleepThreadBriefly()
             } else if zAcceleration < startThreshold {
                 model.simulator.count += 1
@@ -176,7 +189,9 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
-                motionStatus = .suddenAcceleration
+                withAnimation {
+                    motionStatus = .suddenAcceleration
+                }
                 sleepThreadBriefly()
             } else {
                 if model.simulator.count < 4 {
@@ -184,7 +199,9 @@ struct DrivingPalView: View {
                 }
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
-                motionStatus = .normal
+                withAnimation {
+                    motionStatus = .normal
+                }
             }  
         }
     }
