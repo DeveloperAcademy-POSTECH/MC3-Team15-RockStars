@@ -59,9 +59,6 @@ struct ChartView: View {
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .foregroundColor(.white)
-            .onAppear {
-                print("=== DEBUG: chart data on ChartView \(LiveActivityModel.shared.simulator.accelerationData)")
-            }
         }
     }
 }

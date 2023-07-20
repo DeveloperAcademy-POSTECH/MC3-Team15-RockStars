@@ -64,9 +64,6 @@ struct ResultAnalysisView: View {
                 }
             }
         }
-        .onAppear {
-            print("=== DEBUG: chart data \(LiveActivityModel.shared.simulator.accelerationData)")
-        }
         .ignoresSafeArea()
     }
     
