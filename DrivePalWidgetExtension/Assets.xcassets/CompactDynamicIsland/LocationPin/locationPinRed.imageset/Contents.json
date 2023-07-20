@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "locationPinRed.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
