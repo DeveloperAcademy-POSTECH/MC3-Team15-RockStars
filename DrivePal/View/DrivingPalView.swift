@@ -106,6 +106,7 @@ struct DrivingPalView: View {
                 model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
+                model.simulator.expandedImageName = "warnSignThunder"
                 model.simulator.isWarning = true
                 model.simulator.motionStatus = "suddenStop"
                 motionStatus = .suddenStop
@@ -115,6 +116,7 @@ struct DrivingPalView: View {
                 model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
+                model.simulator.expandedImageName = "warnSignMeteor"
                 model.simulator.isWarning = true
                 model.simulator.motionStatus = "suddenAcceleration"
                 motionStatus = .suddenAcceleration
@@ -122,6 +124,10 @@ struct DrivingPalView: View {
             } else {
                 if model.simulator.count < 4 {
                     model.simulator.leadingImageName = "normal"
+                    model.simulator.expandedImageName = "normal"
+                } else {
+                    model.simulator.leadingImageName = "warning"
+                    model.simulator.expandedImageName = "warning"
                 }
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
