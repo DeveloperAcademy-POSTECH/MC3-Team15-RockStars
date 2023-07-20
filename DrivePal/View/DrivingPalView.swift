@@ -9,16 +9,17 @@ import SwiftUI
 import CoreMotion
 import SpriteKit
 
+extension CMMotionActivityManager: ObservableObject { }
+
 struct DrivingPalView: View {
     
     private enum MotionStatus {
-        case normal, suddenAcceleration, suddenStop
+        case normal, suddenAcceleration, suddenStop, takingOff, landing
     }
     
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
     private let motionUpdateInterval = 1.0 / 3.0
-    private let activityManager = CMMotionActivityManager()
     private let accelerationQueue = OperationQueue()
     
     // MARK: - 가속도 역치 기준
@@ -27,7 +28,7 @@ struct DrivingPalView: View {
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
     
-    @State private var motionStatus = MotionStatus.normal
+    @State private var motionStatus = MotionStatus.takingOff
     @State private var zAcceleration = Double.zero
     @StateObject var locationHandler = LocationsHandler()
     // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
@@ -37,9 +38,12 @@ struct DrivingPalView: View {
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
-    
-    // TODO: - 뷰 생성 로직이 여기 담겨도 좋을까요?
     @State private var currentAcitivity = ""
+    @EnvironmentObject var automotiveDetector: CMMotionActivityManager
+    private var timeStamp: Int {
+        model.simulator.timestamp
+    }
+    @State private var timeStampWhenLanding = 999999
     
     // background scenes
     private var normalScene: SKScene {
@@ -56,16 +60,34 @@ struct DrivingPalView: View {
         return scene
     }
     
+    private var takeOffScene: SKScene {
+        let scene = BackgroundScene()
+        scene.scaleMode = .fill
+        scene.backgroundImageNamed = .startRunway
+        return scene
+    }
+    
+    private var landingScene: SKScene {
+        let scene = BackgroundScene()
+        scene.scaleMode = .fill
+        scene.backgroundImageNamed = .finishAirport
+        return scene
+    }
+    
     var body: some View {
         ZStack {
             // MARK: - Background scene
-            SpriteView(scene: normalScene)
+            SpriteView(scene: takeOffScene)
+                .opacity(motionStatus == .takingOff ? 1 : 0)
             
-            if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
-                SpriteView(scene: abnormalScene)
-                    .opacity(viewOpacity)
-                    .onAppear(perform: showAbnormalBackground)
-            }
+            SpriteView(scene: normalScene)
+                .opacity(motionStatus == .normal ? 1 : 0)
+            
+            SpriteView(scene: abnormalScene)
+                .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
+            
+            SpriteView(scene: landingScene)
+                .opacity(motionStatus == .landing ? 1 : 0)
             
             // driving pal
             VStack {
@@ -79,12 +101,53 @@ struct DrivingPalView: View {
                     .shake(movePalX)
                     .onAppear(perform: moveVerticallyPal)
                     .onChange(of: motionStatus, perform: moveHorizontallyPal)
+                
+                // TODO: - 추후 삭제 혹은 변경 예정
+                HStack(spacing: 15) {
+                    Button("takingOff") {
+                        withAnimation {
+                            motionStatus = .takingOff
+                        }
+                    }
+                    Button("normal") {
+                        withAnimation {
+                            motionStatus = .normal
+                        }
+                    }
+                    Button("landing") {
+                        withAnimation {
+                            motionStatus = .landing
+                        }
+                    }
+                }
+                .padding(.bottom, 100)
             }
             
             VelocityView()
                 .environmentObject(locationHandler)
         }
-        .onAppear(perform: startAccelerometers)
+        .onChange(of: motionStatus) { newStatus in // TODO: - 모션 상태 변화에 따른 행동 변화, 추후 Refactering 필요
+            switch newStatus {
+            case .normal:
+                startAccelerometers()
+            case .suddenAcceleration, .suddenStop:
+                print("이상 기후 감지")
+            case .takingOff:
+                print("taking off")
+            case .landing:
+                print("landing")
+                timeStampWhenLanding = timeStamp
+            }
+        }
+        .onChange(of: timeStamp) { newValue in
+            if newValue == 5 {
+                print("앱시작해서 5초가 지났습니다.")
+            }
+            
+            if newValue == timeStampWhenLanding + 5 {
+                print("5초경과 landing 눌렀을 떄 !!!====")
+            }
+        }
         .ignoresSafeArea()
     }
     private func sleepThreadBriefly() {
@@ -97,9 +160,17 @@ struct DrivingPalView: View {
         guard motionManager.isAccelerometerAvailable else { return }
         
         motionManager.accelerometerUpdateInterval = motionUpdateInterval
+        // TODO: - accelerameter data를 block에서 처리하면 오버헤드 발생
+        // https://developer.apple.com/documentation/coremotion/cmmotionmanager/1616171-startaccelerometerupdates
         motionManager.startAccelerometerUpdates(to: accelerationQueue) { data, _ in
             guard let data else { return }
             zAcceleration = data.acceleration.z
+            
+            if [.landing, .takingOff].contains(motionStatus) {
+                motionManager.stopAccelerometerUpdates()
+                model.simulator.end()
+                return
+            }
             
             if zAcceleration > stopThreshold {
                 model.simulator.count += 1
@@ -107,7 +178,10 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
-                motionStatus = .suddenStop
+                withAnimation {
+                    motionStatus = .suddenStop
+                }
+                
                 sleepThreadBriefly()
             } else if zAcceleration < startThreshold {
                 model.simulator.count += 1
@@ -115,7 +189,9 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
-                motionStatus = .suddenAcceleration
+                withAnimation {
+                    motionStatus = .suddenAcceleration
+                }
                 sleepThreadBriefly()
             } else {
                 if model.simulator.count < 4 {
@@ -123,8 +199,10 @@ struct DrivingPalView: View {
                 }
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
-                motionStatus = .normal
-            }
+                withAnimation {
+                    motionStatus = .normal
+                }
+            }  
         }
     }
     
@@ -149,7 +227,7 @@ struct DrivingPalView: View {
     }
     
     private func moveHorizontallyPal(_ currentStatus: MotionStatus) {
-        guard currentStatus != .normal else {
+        guard [MotionStatus.suddenAcceleration, .suddenStop].contains(currentStatus) else {
             movePalX = 0
             return
         }
