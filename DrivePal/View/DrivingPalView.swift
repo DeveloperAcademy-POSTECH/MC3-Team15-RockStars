@@ -123,39 +123,19 @@ struct DrivingPalView: View {
             case .suddenAcceleration, .suddenStop:
                 print("이상 기후 감지")
             case .takingOff:
-                // 출격 모션 + 4초간 잠수 후 상태 변경
                 print("taking off")
-                motionManager.stopAccelerometerUpdates()
             case .landing:
-                // 하강 모습 + 4초간 하강 후 스탑...
                 print("landing")
                 timeStampWhenLanding = timeStamp
-                motionManager.stopAccelerometerUpdates()
             }
         }
         .onChange(of: timeStamp) { newValue in
             if newValue == 5 {
-                print("*****************************")
-                print("*****************************")
-                print("*****************************")
-                print("*****************************")
-                print("55555555555555555555555555555")
-                print("*****************************")
-                print("*****************************")
-                print("*****************************")
-                print("*****************************")
+                print("앱시작해서 5초가 지났습니다.")
             }
             
             if newValue == timeStampWhenLanding + 5 {
-                print("*****************************")
-                print("*****************************")
-                print("*****************************")
-                print("*****************************")
                 print("5초경과 landing 눌렀을 떄 !!!====")
-                print("*****************************")
-                print("*****************************")
-                print("*****************************")
-                print("*****************************")
             }
         }
         .ignoresSafeArea()
