@@ -45,7 +45,7 @@ struct SuddenStopView: View {
                         .opacity(0.4)
                     Text("+ 1번")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(Color(hex: "0EF1FF"))
+                        .foregroundColor(Color(hex: "DFFF1C"))
                 }
                 .padding(.leading, 96)
                 Spacer()

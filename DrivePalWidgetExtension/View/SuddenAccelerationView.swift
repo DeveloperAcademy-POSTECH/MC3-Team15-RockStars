@@ -23,6 +23,7 @@ struct SuddenAccelerationView: View {
                 VStack(alignment: .leading) {
                     Text("급가속 주의 속도 🎢 낮춰~")
                         .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(Color(hex: "FF26A8"))
                     HStack {
                         Image("locationPinPink")
                             .resizable()
@@ -40,21 +41,22 @@ struct SuddenAccelerationView: View {
                 VStack {
                     Text("경고")
                         .font(.system(size: 8))
-                        .opacity(0.8)
+                        .opacity(0.4)
                     Text("+ 1번")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(Color(hex: "0EF1FF"))
+                        .foregroundColor(Color(hex: "FF26A8"))
                 }
                 .padding(.leading, 96)
                 Spacer()
                 VStack(alignment: .leading) {
                     Text("운전시간")
                         .font(.system(size: 8))
-                        .opacity(0.8)
+                        .opacity(0.4)
                     HStack {
                         Text("\(timestamp / 60) min")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(.white)
+                            .opacity(0.4)
                     }
                 }
                 .padding(.leading, 55)
