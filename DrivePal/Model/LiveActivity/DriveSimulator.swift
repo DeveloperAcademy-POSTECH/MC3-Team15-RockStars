@@ -36,6 +36,7 @@ final class DriveSimulator {
     // Reports to the delegate (LiveActivityModel)
     func end() {
         delegate?.updateLiveActivity(driveState: endDrive())
+        delegate?.stopLiveActivity()
     }
 
     // End the drive by resetting the vars
