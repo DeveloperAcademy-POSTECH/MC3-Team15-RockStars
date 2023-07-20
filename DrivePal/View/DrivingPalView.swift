@@ -127,8 +127,32 @@ struct DrivingPalView: View {
             case .landing:
                 // 하강 모습 + 4초간 하강 후 스탑...
                 print("landing")
-                motionManager.stopAccelerometerUpdates()
-                automotiveDetector.stopActivityUpdates()
+                timeStampWhenLanding = timeStamp
+            }
+        }
+        .onChange(of: timeStamp) { newValue in
+            if newValue == 5 {
+                print("*****************************")
+                print("*****************************")
+                print("*****************************")
+                print("*****************************")
+                print("55555555555555555555555555555")
+                print("*****************************")
+                print("*****************************")
+                print("*****************************")
+                print("*****************************")
+            }
+            
+            if newValue == timeStampWhenLanding + 5 {
+                print("*****************************")
+                print("*****************************")
+                print("*****************************")
+                print("*****************************")
+                print("5초경과 landing 눌렀을 떄 !!!====")
+                print("*****************************")
+                print("*****************************")
+                print("*****************************")
+                print("*****************************")
             }
         }
         .ignoresSafeArea()
