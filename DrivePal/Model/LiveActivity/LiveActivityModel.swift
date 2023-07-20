@@ -23,14 +23,13 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
     
     @objc func startLiveActivity() {
         if driveAlreadyStarted { return }
-        
         let attributes = DriveAttributes()
         let currentDriveState = ActivityContent(state: DriveAttributes.ContentState(driveState: currentState), staleDate: nil)
         
         do {
             liveActivity = try Activity.request(attributes: attributes, content: currentDriveState)
         } catch {
-            print(error.localizedDescription)
+            print("=== DEBUG: \(error.localizedDescription)")
         }
         
         driveAlreadyStarted = true
@@ -50,5 +49,6 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
             await liveActivity?.end(dismissalPolicy: .immediate)
         }
         driveAlreadyStarted = false
+        print("=== DEBUG: stopLiveActivity successfully execute")
     }
 }

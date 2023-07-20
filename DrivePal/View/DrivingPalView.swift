@@ -12,7 +12,7 @@ import SpriteKit
 struct DrivingPalView: View {
     
     private enum MotionStatus {
-        case normal, suddenAcceleration, suddenStop
+        case none, normal, suddenAcceleration, suddenStop
     }
     
     private let motionManager = CMMotionManager()
@@ -27,7 +27,7 @@ struct DrivingPalView: View {
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
     
-    @State private var motionStatus = MotionStatus.normal
+    @State private var motionStatus = MotionStatus.none
     @State private var zAcceleration = Double.zero
     @StateObject var locationHandler = LocationsHandler()
     // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
@@ -57,42 +57,64 @@ struct DrivingPalView: View {
     
     var body: some View {
         ZStack {
-            // MARK: - Background scene
-            SpriteView(scene: normalScene)
-            
-            if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
-                SpriteView(scene: abnormalScene)
-                    .opacity(viewOpacity)
-                    .onAppear(perform: showAbnormalBackground)
-            }
-            
-            // driving pal
-            Image(palImage)
-                .resizable()
-                .scaledToFit()
-                .frame(width: UIScreen.width - 100)
-                .padding(.vertical)
-                .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
-                .shake(movePalX)
-                .onAppear(perform: moveVerticallyPal)
-                .onChange(of: motionStatus, perform: moveHorizontallyPal)
-            
-            VStack {
-                VelocityView()
-                    .environmentObject(locationHandler)
-                Button("주행 종료") {
-                    showResultAnalysisView.toggle()
-                    model.simulator.end()
+            if motionStatus == .none {
+                Image("blueSky")
+                    .resizable()
+                    .scaledToFill()
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
+                    .onTapGesture {
+                        motionStatus = .normal
+                    }
+                Text("PRESS TO START")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
+            } else {
+                // MARK: - Background scene
+                SpriteView(scene: normalScene)
+                    .onAppear(perform: actionsOnAppear)
+                
+                if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
+                    SpriteView(scene: abnormalScene)
+                        .opacity(viewOpacity)
+                        .onAppear(perform: showAbnormalBackground)
                 }
-                .padding()
+                
+                // driving pal
+                Image(palImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: UIScreen.width - 100)
+                    .padding(.vertical)
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
+                    .shake(movePalX)
+                    .onAppear(perform: moveVerticallyPal)
+                    .onChange(of: motionStatus, perform: moveHorizontallyPal)
+                
+                VStack {
+                    VelocityView()
+                        .environmentObject(locationHandler)
+                    Button("주행 종료") {
+                        motionStatus = .none
+                        showResultAnalysisView.toggle()
+                        model.simulator.end()
+                    }
+                    .padding()
+                }
             }
         }
-        .onAppear(perform: startAccelerometers)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
             ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
         }
         .ignoresSafeArea()
     }
+    
+    private func actionsOnAppear() {
+        print("=== DEBUG: onappear")
+        model.startLiveActivity()
+        startAccelerometers()
+    }
+    
     private func sleepThreadBriefly() {
         motionManager.stopAccelerometerUpdates()
         Thread.sleep(forTimeInterval: 5)

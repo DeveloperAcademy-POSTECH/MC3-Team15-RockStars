@@ -27,7 +27,9 @@ final class DriveSimulator {
 
     // Start a drive by setting a time interval which fires of runDriveSimulator every 1sec
     func start() {
+        print("=== DEBUG: live activity started yet")
         if simulatorStarted { return }
+        print("=== DEBUG: live activity started")
         reset()
         simulatorStarted = true
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runDriveSimulator), userInfo: nil, repeats: true)
@@ -37,6 +39,8 @@ final class DriveSimulator {
     func end() {
         delegate?.updateLiveActivity(driveState: endDrive())
         delegate?.stopLiveActivity()
+        simulatorStarted = false
+        print("=== DEBUG: live activity ended\n\(timestamp)")
     }
 
     // End the drive by resetting the vars
@@ -49,7 +53,6 @@ final class DriveSimulator {
         timer?.invalidate()
         count = 0
         timestamp = 0
-        simulatorStarted = false
         accelerationData.removeAll()
     }
 
