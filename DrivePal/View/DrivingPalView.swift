@@ -14,7 +14,7 @@ extension CMMotionActivityManager: ObservableObject { }
 struct DrivingPalView: View {
     
     private enum MotionStatus {
-        case normal, suddenAcceleration, suddenStop, takingOff, landing
+        case none, normal, suddenAcceleration, suddenStop, takingOff, landing
     }
     
     private let motionManager = CMMotionManager()
@@ -28,7 +28,7 @@ struct DrivingPalView: View {
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
     
-    @State private var motionStatus = MotionStatus.takingOff
+    @State private var motionStatus = MotionStatus.none
     @State private var zAcceleration = Double.zero
     @StateObject var locationHandler = LocationsHandler()
     // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
@@ -38,12 +38,13 @@ struct DrivingPalView: View {
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
-    @State private var currentAcitivity = ""
+    
+    @State private var showResultAnalysisView = false
+    
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
     private var timeStamp: Int {
         model.simulator.timestamp
     }
-    @State private var timeStampWhenLanding = 999999
     
     // background scenes
     private var normalScene: SKScene {
@@ -76,80 +77,106 @@ struct DrivingPalView: View {
     
     var body: some View {
         ZStack {
-            // MARK: - Background scene
-            SpriteView(scene: takeOffScene)
-                .opacity(motionStatus == .takingOff ? 1 : 0)
-            
-            SpriteView(scene: normalScene)
-                .opacity(motionStatus == .normal ? 1 : 0)
-            
-            SpriteView(scene: abnormalScene)
-                .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
-            
-            SpriteView(scene: landingScene)
-                .opacity(motionStatus == .landing ? 1 : 0)
-            
-            // driving pal
-            VStack {
-                Spacer()
-                Image(palImage)
+            if motionStatus == .none {
+                Image("blueSky")
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.width - 100)
-                    .padding(.vertical)
-                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
-                    .shake(movePalX)
-                    .onAppear(perform: moveVerticallyPal)
-                    .onChange(of: motionStatus, perform: moveHorizontallyPal)
+                    .scaledToFill()
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
+                    .onTapGesture {
+                        motionStatus = .takingOff
+                    }
+                Text("PRESS TO START")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
+            } else {
+                // MARK: - Background scene
+                SpriteView(scene: normalScene)
                 
-                // TODO: - 추후 삭제 혹은 변경 예정
-                HStack(spacing: 15) {
-                    Button("takingOff") {
-                        withAnimation {
-                            motionStatus = .takingOff
-                        }
-                    }
-                    Button("normal") {
-                        withAnimation {
-                            motionStatus = .normal
-                        }
-                    }
-                    Button("landing") {
-                        withAnimation {
-                            motionStatus = .landing
-                        }
-                    }
+                if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
+                    SpriteView(scene: abnormalScene)
+                        .opacity(viewOpacity)
+                        .onAppear(perform: showAbnormalBackground)
                 }
-                .padding(.bottom, 100)
+                
+                // driving pal
+                // MARK: - Background scene
+                SpriteView(scene: takeOffScene)
+                    .opacity(motionStatus == .takingOff ? 1 : 0)
+                
+                SpriteView(scene: normalScene)
+                    .opacity(motionStatus == .normal ? 1 : 0)
+                
+                SpriteView(scene: abnormalScene)
+                    .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
+                
+                SpriteView(scene: landingScene)
+                    .opacity(motionStatus == .landing ? 1 : 0)
+                
+                // driving pal
+                VStack {
+                    Spacer()
+                    Image(palImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.width - 100)
+                        .padding(.vertical)
+                        .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
+                        .shake(movePalX)
+                        .onChange(of: motionStatus, perform: moveHorizontallyPal)
+                    
+                    VelocityView()
+                        .environmentObject(locationHandler)
+                    
+                    // TODO: - 추후 삭제 혹은 변경 예정
+                    HStack {
+                        Button("주행 종료") {
+                            withAnimation {
+                                motionStatus = .landing
+                            }
+                        }
+                    }
+                    .padding(.bottom, 100)
+                }
             }
-            
-            VelocityView()
-                .environmentObject(locationHandler)
+        }
+        .fullScreenCover(isPresented: $showResultAnalysisView) {
+            ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
         }
         .onChange(of: motionStatus) { newStatus in // TODO: - 모션 상태 변화에 따른 행동 변화, 추후 Refactering 필요
             switch newStatus {
+            case .none:
+                break
             case .normal:
                 startAccelerometers()
             case .suddenAcceleration, .suddenStop:
                 print("이상 기후 감지")
             case .takingOff:
                 print("taking off")
+                actionsOnStartDriving()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    withAnimation {
+                        motionStatus = .normal
+                    }
+                }
             case .landing:
                 print("landing")
-                timeStampWhenLanding = timeStamp
-            }
-        }
-        .onChange(of: timeStamp) { newValue in
-            if newValue == 5 {
-                print("앱시작해서 5초가 지났습니다.")
-            }
-            
-            if newValue == timeStampWhenLanding + 5 {
-                print("5초경과 landing 눌렀을 떄 !!!====")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    motionStatus = .none
+                    showResultAnalysisView.toggle()
+                    model.simulator.end()
+                }
             }
         }
         .ignoresSafeArea()
     }
+    
+    private func actionsOnStartDriving() {
+        moveVerticallyPal()
+        model.startLiveActivity()
+        startAccelerometers()
+    }
+    
     private func sleepThreadBriefly() {
         motionManager.stopAccelerometerUpdates()
         Thread.sleep(forTimeInterval: 5)
@@ -166,34 +193,24 @@ struct DrivingPalView: View {
             guard let data else { return }
             zAcceleration = data.acceleration.z
             
-            if [.landing, .takingOff].contains(motionStatus) {
+            if motionStatus == .landing {
                 motionManager.stopAccelerometerUpdates()
-                model.simulator.end()
                 return
             }
             
-            if zAcceleration > stopThreshold {
+            // 급감속 또는 급가속 감지시
+            if zAcceleration > stopThreshold || zAcceleration < startThreshold {
                 model.simulator.count += 1
                 model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.isWarning = true
                 withAnimation {
-                    motionStatus = .suddenStop
+                    motionStatus = zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
                 }
-                
+                model.simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
                 sleepThreadBriefly()
-            } else if zAcceleration < startThreshold {
-                model.simulator.count += 1
-                model.simulator.progress += 0.25
-                model.simulator.leadingImageName = "warning"
-                model.simulator.trailingImageName = "warningCircle"
-                model.simulator.isWarning = true
-                withAnimation {
-                    motionStatus = .suddenAcceleration
-                }
-                sleepThreadBriefly()
-            } else {
+            } else { // 정상 주행시
                 if model.simulator.count < 4 {
                     model.simulator.leadingImageName = "normal"
                 }
@@ -202,7 +219,7 @@ struct DrivingPalView: View {
                 withAnimation {
                     motionStatus = .normal
                 }
-            }  
+            }
         }
     }
     
@@ -233,6 +250,7 @@ struct DrivingPalView: View {
         }
         withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
             movePalX = -10
+            
         }
     }
 }
