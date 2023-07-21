@@ -19,7 +19,7 @@ struct DrivingPalView: View {
     
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
-    private let motionUpdateInterval = 1.0 / 3.0
+    private let motionUpdateInterval = 1.0 / 2.0
     private let accelerationQueue = OperationQueue()
     
     // MARK: - 가속도 역치 기준
@@ -27,6 +27,7 @@ struct DrivingPalView: View {
     /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.75
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
+    private let initHeight = UIScreen.height - 50
     
     @State private var motionStatus = MotionStatus.none
     @State private var zAcceleration = Double.zero
@@ -38,10 +39,11 @@ struct DrivingPalView: View {
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
-    
+    @State private var planeHeight = UIScreen.height - 50
+    @State private var planeDegree = Double.zero
     @State private var showResultAnalysisView = false
-    
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
+    
     private var timeStamp: Int {
         model.simulator.timestamp
     }
@@ -77,7 +79,10 @@ struct DrivingPalView: View {
     
     var body: some View {
         ZStack {
-            if motionStatus == .none {
+            // MARK: - Background scene
+            SpriteView(scene: normalScene)
+            
+            ZStack {
                 Image("blueSky")
                     .resizable()
                     .scaledToFill()
@@ -89,31 +94,20 @@ struct DrivingPalView: View {
                     .foregroundColor(.white)
                     .font(.headline)
                     .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
-            } else {
-                // MARK: - Background scene
-                SpriteView(scene: normalScene)
-                
-                if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
-                    SpriteView(scene: abnormalScene)
-                        .opacity(viewOpacity)
-                        .onAppear(perform: showAbnormalBackground)
-                }
-                
-                // driving pal
-                // MARK: - Background scene
-                SpriteView(scene: takeOffScene)
-                    .opacity(motionStatus == .takingOff ? 1 : 0)
-                
-                SpriteView(scene: normalScene)
-                    .opacity(motionStatus == .normal ? 1 : 0)
-                
-                SpriteView(scene: abnormalScene)
-                    .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
-                
-                SpriteView(scene: landingScene)
-                    .opacity(motionStatus == .landing ? 1 : 0)
-                
-                // driving pal
+            }
+            .opacity(motionStatus == .none ? 1 : 0)
+            
+            SpriteView(scene: takeOffScene)
+                .opacity(motionStatus == .takingOff ? 1 : 0)
+            
+            SpriteView(scene: abnormalScene)
+                .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
+            
+            SpriteView(scene: landingScene)
+                .opacity(motionStatus == .landing ? 1 : 0)
+            
+            // driving pal
+            if [MotionStatus.normal, .takingOff, .landing, .suddenAcceleration, .suddenStop].contains(motionStatus) {
                 VStack {
                     Spacer()
                     Image(palImage)
@@ -121,46 +115,54 @@ struct DrivingPalView: View {
                         .scaledToFit()
                         .frame(width: UIScreen.width - 100)
                         .padding(.vertical)
-                        .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
+                        .position(x: UIScreen.width / 2, y: planeHeight)
+                        .rotationEffect(.degrees(planeDegree))
                         .shake(movePalX)
                         .onChange(of: motionStatus, perform: moveHorizontallyPal)
                     
                     VelocityView()
                         .environmentObject(locationHandler)
+                        .padding(.bottom, 50)
                     
-                    // TODO: - 추후 삭제 혹은 변경 예정
-                    HStack {
-                        Button("주행 종료") {
+                    if motionStatus == .normal {
+                        Button {
                             withAnimation {
                                 motionStatus = .landing
                             }
+                        } label: {
+                            Image("exit")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50)
                         }
+                        .padding(.bottom, 100)
                     }
-                    .padding(.bottom, 100)
                 }
             }
+            //            }
         }
+        .ignoresSafeArea()
         .fullScreenCover(isPresented: $showResultAnalysisView) {
             ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
         }
         .onChange(of: motionStatus) { newStatus in // TODO: - 모션 상태 변화에 따른 행동 변화, 추후 Refactering 필요
             switch newStatus {
             case .none:
-                break
+                print("none")
             case .normal:
                 startAccelerometers()
             case .suddenAcceleration, .suddenStop:
-                print("이상 기후 감지")
+                print("abnormal")
             case .takingOff:
-                print("taking off")
-                actionsOnStartDriving()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                takeoff()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                     withAnimation {
                         motionStatus = .normal
                     }
                 }
+                actionsOnStartDriving()
             case .landing:
-                print("landing")
+                landing()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                     motionStatus = .none
                     showResultAnalysisView.toggle()
@@ -168,19 +170,66 @@ struct DrivingPalView: View {
                 }
             }
         }
-        .ignoresSafeArea()
     }
     
     private func actionsOnStartDriving() {
         moveVerticallyPal()
         model.startLiveActivity()
-        startAccelerometers()
     }
     
     private func sleepThreadBriefly() {
         motionManager.stopAccelerometerUpdates()
         Thread.sleep(forTimeInterval: 5)
         startAccelerometers()
+    }
+    
+    private func landing() {
+        model.simulator.end()
+        withAnimation(.linear(duration: 1.0)) {
+            planeHeight = initHeight
+            planeDegree = 10
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation {
+                planeDegree = 8
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            withAnimation {
+                planeDegree = 5
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+            withAnimation {
+                planeDegree = 0
+            }
+        }
+    }
+    
+    private func takeoff() {
+        withAnimation(.linear(duration: 1.0)) {
+            planeHeight = UIScreen.height / 3 * 2 + movePalY
+            planeDegree = -10
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation {
+                planeDegree = -7
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            withAnimation {
+                planeDegree = -3
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            withAnimation {
+                planeDegree = 0
+            }
+        }
     }
     
     private func startAccelerometers() {
@@ -223,20 +272,6 @@ struct DrivingPalView: View {
         }
     }
     
-    private func showAbnormalBackground() {
-        let blinkSecond = 4.0
-        // 초기화
-        viewOpacity = 0.0
-        // 비정상 배경 뷰 보이게 함
-        withAnimation(.easeIn(duration: 0.5)) {
-            viewOpacity = 1.0
-        }
-        // 비정상 배경 뷰 숨김
-        withAnimation(.easeOut(duration: 0.5).delay(blinkSecond)) {
-            viewOpacity = 0.0
-        }
-    }
-    
     private func moveVerticallyPal() {
         withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
             movePalY = 20
@@ -254,6 +289,7 @@ struct DrivingPalView: View {
         }
     }
 }
+
 
 struct DrivingPalView_Previews: PreviewProvider {
     static var previews: some View {
