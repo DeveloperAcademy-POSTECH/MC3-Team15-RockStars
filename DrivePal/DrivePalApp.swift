@@ -12,7 +12,7 @@ import CoreMotion
 @main
 struct DrivePalApp: App {
     @Environment(\.scenePhase) private var phase
-    @StateObject private var model = LiveActivityModel()
+    @StateObject private var model = LiveActivityModel.shared
     private let backgroundTaskIdentifier = Bundle.main.backgroundTaskIdentifier
     @StateObject private var activityManager = CMMotionActivityManager()
     
@@ -23,7 +23,6 @@ struct DrivePalApp: App {
                 .environmentObject(activityManager)
                 .onAppear {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
-                    model.startLiveActivity()
                 }
         }
         .onChange(of: phase) { currentPhase in

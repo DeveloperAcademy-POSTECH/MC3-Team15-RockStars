@@ -21,4 +21,6 @@ extension Color {
         let blue = Double((rgb >>  0) & 0xFF) / 255.0
         self.init(red: red, green: green, blue: blue)
     }
+    
+    static let backgroundColor = Color(hex: "#B2E3FF")
 }
