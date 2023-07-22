@@ -16,14 +16,10 @@ struct SuddenAccelerationView: View {
     var body: some View {
         ZStack {
             HStack(alignment: VerticalAlignment.top) {
-                ZStack {
-                    Image("warnSignBackground")
-                        .resizable()
-                    Image("\(expandedImageName)")
-                        .resizable()
-                }
-                .frame(width: 54, height: 53)
-                .padding(.trailing, 5)
+                Image("\(expandedImageName)")
+                    .resizable()
+                    .frame(width: 54, height: 53)
+                    .padding(.trailing, 5)
                 VStack(alignment: .leading) {
                     Text("급가속 주의 속도 🎢 낮춰~")
                         .font(.system(size: 20, weight: .semibold))
