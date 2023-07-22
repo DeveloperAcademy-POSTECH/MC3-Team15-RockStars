@@ -254,6 +254,7 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.expandedImageName = zAcceleration > stopThreshold ? "warnSignThunder" : "warnSignMeteor"
+                model.simulator.motionStatus = zAcceleration > stopThreshold ? "suddenStop" : "suddenAcceleration"
                 model.simulator.isWarning = true
                 withAnimation {
                     motionStatus = zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
