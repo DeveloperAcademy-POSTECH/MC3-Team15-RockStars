@@ -54,7 +54,6 @@ struct SuddenAccelerationView: View {
                 Spacer()
             }
             .padding(.leading, 40)
-            .border(.yellow)
             LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: "#FF26A8")
                 .frame(width: 256)
                 .offset(y: 17)

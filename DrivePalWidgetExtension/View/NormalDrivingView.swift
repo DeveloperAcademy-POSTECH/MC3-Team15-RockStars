@@ -52,7 +52,6 @@ struct NormalDrivingView: View {
                 Spacer()
             }
             .padding(.leading, 40)
-            .border(.yellow)
             LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: "#01F0FF")
                 .frame(width: 256)
                 .offset(y: 17)
