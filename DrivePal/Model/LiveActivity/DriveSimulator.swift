@@ -16,9 +16,7 @@ final class DriveSimulator {
     var simulatorStarted = false
     var leadingImageName = ""
     var trailingImageName = ""
-    var expandedImageName = ""
     var isWarning = false
-    var motionStatus = ""
     weak var delegate: DriveSimulatorDelegate?
     
     var accelerationData = [ChartData]()
@@ -45,8 +43,9 @@ final class DriveSimulator {
 
     // End the drive by resetting the vars
     func endDrive() -> DriveState {
-        return DriveState(count: 0, progress: 0.0, leadingImageName: "warning0", trailingImageName: "warningCircle1", expandedImageName: "normal1", timestamp: 0, isWarning: false, motionStatus: "normal")
-        
+        return DriveState(count: 0, progress: 0.0, leadingImageName: "warning0", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false)
+    }
+
     // Reset the drive status to a fresh start
     private func reset() {
         count = 0
@@ -60,6 +59,6 @@ final class DriveSimulator {
     @objc private func runDriveSimulator() {
         timestamp += 1
         // Tell the delegate to update its state
-        
-        delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)", timestamp: timestamp, isWarning: isWarning, motionStatus: motionStatus))
+        delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", timestamp: timestamp, isWarning: isWarning))
+    }
 }

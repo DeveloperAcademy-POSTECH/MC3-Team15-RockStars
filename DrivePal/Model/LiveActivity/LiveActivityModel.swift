@@ -11,7 +11,7 @@ import ActivityKit
 final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
     static let shared = LiveActivityModel()
     
-    @Published var currentState = DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", expandedImageName: "normal1", timestamp: 0, isWarning: false, motionStatus: "normal")
+    @Published var currentState = DriveState(count: 0, progress: 0.0, leadingImageName: "warning1", trailingImageName: "warningCircle1", timestamp: 0, isWarning: false)
     var liveActivity: Activity<DriveAttributes>?
     var driveAlreadyStarted = false
     let simulator = DriveSimulator()

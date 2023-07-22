@@ -10,13 +10,8 @@
 		7D3435CE2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
 		7D3435D22A5F15D800D11708 /* LiveActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435D12A5F15D800D11708 /* LiveActivityModel.swift */; };
 		7DB9AE8E2A6768260099F54A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE8C2A6768260099F54A /* Color+Extension.swift */; };
-		7DB9AE912A6918B40099F54A /* AfterFourWarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE902A6918B40099F54A /* AfterFourWarningsView.swift */; };
-		7DB9AE932A6919110099F54A /* SuddenAccelerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE922A6919110099F54A /* SuddenAccelerationView.swift */; };
-		7DB9AE952A69194D0099F54A /* SuddenStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE942A69194D0099F54A /* SuddenStopView.swift */; };
-		7DB9AE972A6919770099F54A /* NormalDrivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE962A6919770099F54A /* NormalDrivingView.swift */; };
-		7DB9AE992A691A3B0099F54A /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE982A691A3B0099F54A /* CircularProgressView.swift */; };
-		7DB9AE9B2A691A570099F54A /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE9A2A691A570099F54A /* LinearProgressView.swift */; };
 		AD1D49972A66F02500C485FA /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */; };
+		AD1D49D62A67CC1600C485FA /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */; };
 		AD1D49D72A67CC9100C485FA /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
 		AD1D49D92A67D22F00C485FA /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D82A67D22F00C485FA /* ChartView.swift */; };
 		AD1D49DB2A67D89000C485FA /* ResultAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49DA2A67D89000C485FA /* ResultAnalysisView.swift */; };
@@ -76,15 +71,8 @@
 		7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveAttributes.swift; sourceTree = "<group>"; };
 		7D3435D12A5F15D800D11708 /* LiveActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityModel.swift; sourceTree = "<group>"; };
 		7DB9AE8C2A6768260099F54A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		7DB9AE902A6918B40099F54A /* AfterFourWarningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterFourWarningsView.swift; sourceTree = "<group>"; };
-		7DB9AE902A6918B40099F54A /* AfterFourWarningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterFourWarningsView.swift; sourceTree = "<group>"; };
-		7DB9AE922A6919110099F54A /* SuddenAccelerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuddenAccelerationView.swift; sourceTree = "<group>"; };
-		7DB9AE942A69194D0099F54A /* SuddenStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuddenStopView.swift; sourceTree = "<group>"; };
-		7DB9AE962A6919770099F54A /* NormalDrivingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalDrivingView.swift; sourceTree = "<group>"; };
-		7DB9AE982A691A3B0099F54A /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
-		7DB9AE9A2A691A570099F54A /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
-        AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsHandler.swift; sourceTree = "<group>"; };
 		AD1D49D82A67D22F00C485FA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		AD1D49DA2A67D89000C485FA /* ResultAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAnalysisView.swift; sourceTree = "<group>"; };
 		AD1D49DD2A67E2D000C485FA /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
@@ -137,19 +125,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7DB9AE8F2A6918A70099F54A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7DB9AE902A6918B40099F54A /* AfterFourWarningsView.swift */,
-				7DB9AE922A6919110099F54A /* SuddenAccelerationView.swift */,
-				7DB9AE942A69194D0099F54A /* SuddenStopView.swift */,
-				7DB9AE962A6919770099F54A /* NormalDrivingView.swift */,
-				7DB9AE982A691A3B0099F54A /* CircularProgressView.swift */,
-				7DB9AE9A2A691A570099F54A /* LinearProgressView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		AD03717B2A628C2D00D3E051 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +230,6 @@
 		AD742F7A2A5CFF1800AD6226 /* DrivePalWidgetExtension */ = {
 			isa = PBXGroup;
 			children = (
-				7DB9AE8F2A6918A70099F54A /* View */,
 				BE9294482A61731400368B78 /* DrivePalWidgetExtension.entitlements */,
 				AD742F7B2A5CFF1800AD6226 /* DrivePalWidgetExtensionBundle.swift */,
 				AD742F7D2A5CFF1800AD6226 /* DrivePalWidgetExtensionLiveActivity.swift */,
@@ -440,18 +414,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DB9AE912A6918B40099F54A /* AfterFourWarningsView.swift in Sources */,
-				7DB9AE9B2A691A570099F54A /* LinearProgressView.swift in Sources */,
 				7D3435CE2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */,
 				7DB9AE8E2A6768260099F54A /* Color+Extension.swift in Sources */,
 				AD742F802A5CFF1800AD6226 /* DrivePalWidgetExtension.swift in Sources */,
 				AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
-				7DB9AE972A6919770099F54A /* NormalDrivingView.swift in Sources */,
-				7DB9AE952A69194D0099F54A /* SuddenStopView.swift in Sources */,
-				7DB9AE932A6919110099F54A /* SuddenAccelerationView.swift in Sources */,
 				ADC9912D2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */,
 				AD742F7C2A5CFF1800AD6226 /* DrivePalWidgetExtensionBundle.swift in Sources */,
-				7DB9AE992A691A3B0099F54A /* CircularProgressView.swift in Sources */,
 				AD742F7E2A5CFF1800AD6226 /* DrivePalWidgetExtensionLiveActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -247,46 +247,24 @@ struct DrivingPalView: View {
                 return
             }
             
-            if zAcceleration > stopThreshold {
+            // 급감속 또는 급가속 감지시
+            if zAcceleration > stopThreshold || zAcceleration < startThreshold {
                 model.simulator.count += 1
                 model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
-                model.simulator.expandedImageName = "warnSignThunder"
                 model.simulator.isWarning = true
-                model.simulator.motionStatus = "suddenStop"
                 withAnimation {
-                    motionStatus = .suddenStop
+                    motionStatus = zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
                 }
                 model.simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
                 sleepThreadBriefly()
-            } else if zAcceleration < startThreshold {
-                model.simulator.count += 1
-                model.simulator.progress += 0.25
-                model.simulator.leadingImageName = "warning"
-                model.simulator.trailingImageName = "warningCircle"
-                model.simulator.expandedImageName = "warnSignMeteor"
-                model.simulator.isWarning = true
-                model.simulator.motionStatus = "suddenAcceleration"
-                withAnimation {
-                    motionStatus = .suddenAcceleration
-                }
-                model.simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
-                model.simulator.isWarning = true
-                model.simulator.motionStatus = "suddenAcceleration"
-                motionStatus = .suddenAcceleration
-                sleepThreadBriefly()
-            } else {
+            } else { // 정상 주행시
                 if model.simulator.count < 4 {
                     model.simulator.leadingImageName = "normal"
-                    model.simulator.expandedImageName = "normal"
-                } else {
-                    model.simulator.leadingImageName = "warning"
-                    model.simulator.expandedImageName = "warning"
                 }
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
-                model.simulator.motionStatus = "normal"
                 withAnimation {
                     motionStatus = .normal
                 }
