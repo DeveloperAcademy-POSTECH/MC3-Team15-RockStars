@@ -14,12 +14,12 @@ struct AfterFourWarningsView: View {
     @State var timestamp: Int
     
     var body: some View {
-        VStack {
-            HStack {
+        ZStack {
+            HStack(alignment: VerticalAlignment.top) {
                 Image("\(expandedImageName)")
                     .resizable()
                     .frame(width: 54, height: 53)
-                    .padding(.trailing, 17)
+                    .padding(.trailing, 5)
                 VStack(alignment: .leading) {
                     Text("나쁜 운전중 🤬 #$% ")
                         .font(.system(size: 20, weight: .semibold))
@@ -31,35 +31,31 @@ struct AfterFourWarningsView: View {
                         Text("포항시 효성로 13번길 2")
                             .font(.system(size: 10))
                     }
+                    .padding(.bottom, 17)
+                    HStack {
+                        Text("경고")
+                            .font(.system(size: 8))
+                            .opacity(0.8)
+                        Text("\(count.description)번")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(Color(hex: "FF5050"))
+                        
+                        Spacer()
+                        
+                        Text("운전시간")
+                            .font(.system(size: 8))
+                            .opacity(0.8)
+                        Text("\(timestamp / 60) min")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(.white)
+                    }.frame(width: UIScreen.main.bounds.width / 2.7)
                 }
                 Spacer()
             }
-            .padding(.leading, 24)
+            .padding(.leading, 40)
             LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: "#FF5050")
                 .frame(width: 256)
-            HStack {
-                VStack {
-                    Text("경고")
-                        .font(.system(size: 8))
-                        .opacity(0.8)
-                    Text("\(count.description)번")
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(Color(hex: "FF5050"))
-                }
-                .padding(.leading, 96)
-                Spacer()
-                VStack(alignment: .leading) {
-                    Text("운전시간")
-                        .font(.system(size: 8))
-                        .opacity(0.8)
-                    HStack {
-                        Text("\(timestamp / 60) min")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white)
-                    }
-                }
-                .padding(.leading, 55)
-            }
+                .offset(y: 17)
         }
     }
 }
