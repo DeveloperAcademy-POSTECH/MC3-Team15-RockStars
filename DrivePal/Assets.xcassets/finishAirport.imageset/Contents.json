@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "warning5.png",
+      "filename" : "finishAirport.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "warning5@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "warning5@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -12,17 +12,17 @@ import CoreMotion
 @main
 struct DrivePalApp: App {
     @Environment(\.scenePhase) private var phase
-    @StateObject private var model = LiveActivityModel()
+    @StateObject private var model = LiveActivityModel.shared
     private let backgroundTaskIdentifier = Bundle.main.backgroundTaskIdentifier
-    private let activityManager = CMMotionActivityManager()
+    @StateObject private var activityManager = CMMotionActivityManager()
     
     var body: some Scene {
         WindowGroup {
             DrivingPalView()
                 .environmentObject(model)
+                .environmentObject(activityManager)
                 .onAppear {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
-                    model.startLiveActivity()
                 }
         }
         .onChange(of: phase) { currentPhase in
@@ -34,7 +34,7 @@ struct DrivePalApp: App {
             }
         }
         .backgroundTask(.appRefresh(backgroundTaskIdentifier)) {
-            activityManager.startActivityUpdates(to: .main) { activity in
+            await activityManager.startActivityUpdates(to: .main) { activity in
                 if let activity = activity {
                     if activity.automotive || activity.cycling {
                         let content = UNMutableNotificationContent()

@@ -9,16 +9,17 @@ import SwiftUI
 import CoreMotion
 import SpriteKit
 
+extension CMMotionActivityManager: ObservableObject { }
+
 struct DrivingPalView: View {
     
     private enum MotionStatus {
-        case normal, suddenAcceleration, suddenStop
+        case none, normal, suddenAcceleration, suddenStop, takingOff, landing
     }
     
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
-    private let motionUpdateInterval = 1.0 / 3.0
-    private let activityManager = CMMotionActivityManager()
+    private let motionUpdateInterval = 1.0 / 2.0
     private let accelerationQueue = OperationQueue()
     
     // MARK: - 가속도 역치 기준
@@ -26,8 +27,9 @@ struct DrivingPalView: View {
     /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.75
     private let startThreshold = -1.1
     private let stopThreshold = 0.75
+    private let initHeight = UIScreen.height - 50
     
-    @State private var motionStatus = MotionStatus.normal
+    @State private var motionStatus = MotionStatus.none
     @State private var zAcceleration = Double.zero
     @StateObject var locationHandler = LocationsHandler()
     // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
@@ -37,9 +39,14 @@ struct DrivingPalView: View {
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
+    @State private var planeHeight = UIScreen.height - 50
+    @State private var planeDegree = Double.zero
+    @State private var showResultAnalysisView = false
+    @EnvironmentObject var automotiveDetector: CMMotionActivityManager
     
-    // TODO: - 뷰 생성 로직이 여기 담겨도 좋을까요?
-    @State private var currentAcitivity = ""
+    private var timeStamp: Int {
+        model.simulator.timestamp
+    }
     
     // background scenes
     private var normalScene: SKScene {
@@ -56,50 +63,189 @@ struct DrivingPalView: View {
         return scene
     }
     
+    private var takeOffScene: SKScene {
+        let scene = BackgroundScene()
+        scene.scaleMode = .fill
+        scene.backgroundImageNamed = .startRunway
+        return scene
+    }
+    
+    private var landingScene: SKScene {
+        let scene = BackgroundScene()
+        scene.scaleMode = .fill
+        scene.backgroundImageNamed = .finishAirport
+        return scene
+    }
+    
     var body: some View {
         ZStack {
             // MARK: - Background scene
             SpriteView(scene: normalScene)
             
-            if [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus) {
-                SpriteView(scene: abnormalScene)
-                    .opacity(viewOpacity)
-                    .onAppear(perform: showAbnormalBackground)
+            ZStack {
+                Image("blueSky")
+                    .resizable()
+                    .scaledToFill()
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
+                    .onTapGesture {
+                        motionStatus = .takingOff
+                    }
+                Text("PRESS TO START")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
             }
+            .opacity(motionStatus == .none ? 1 : 0)
+            
+            SpriteView(scene: takeOffScene)
+                .opacity(motionStatus == .takingOff ? 1 : 0)
+            
+            SpriteView(scene: abnormalScene)
+                .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
+            
+            SpriteView(scene: landingScene)
+                .opacity(motionStatus == .landing ? 1 : 0)
             
             // driving pal
-            VStack {
-                Spacer()
-                Image(palImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.width - 100)
-                    .padding(.vertical)
-                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3 * 2 + movePalY)
-                    .shake(movePalX)
-                    .onAppear(perform: moveVerticallyPal)
-                    .onChange(of: motionStatus, perform: moveHorizontallyPal)
+            if [MotionStatus.normal, .takingOff, .landing, .suddenAcceleration, .suddenStop].contains(motionStatus) {
+                VStack {
+                    Spacer()
+                    Image(palImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.width - 100)
+                        .padding(.vertical)
+                        .position(x: UIScreen.width / 2, y: planeHeight)
+                        .rotationEffect(.degrees(planeDegree))
+                        .shake(movePalX)
+                        .onChange(of: motionStatus, perform: moveHorizontallyPal)
+                    
+                    VelocityView()
+                        .environmentObject(locationHandler)
+                        .padding(.bottom, 50)
+                    
+                    if motionStatus == .normal {
+                        Button {
+                            withAnimation {
+                                motionStatus = .landing
+                            }
+                        } label: {
+                            Image("exit")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50)
+                        }
+                        .padding(.bottom, 100)
+                    }
+                }
             }
-            
-            VelocityView()
-                .environmentObject(locationHandler)
+            //            }
         }
-        .onAppear(perform: startAccelerometers)
         .ignoresSafeArea()
+        .fullScreenCover(isPresented: $showResultAnalysisView) {
+            ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
+        }
+        .onChange(of: motionStatus) { newStatus in // TODO: - 모션 상태 변화에 따른 행동 변화, 추후 Refactering 필요
+            switch newStatus {
+            case .none:
+                print("none")
+            case .normal:
+                startAccelerometers()
+            case .suddenAcceleration, .suddenStop:
+                print("abnormal")
+            case .takingOff:
+                takeoff()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                    withAnimation {
+                        motionStatus = .normal
+                    }
+                }
+                actionsOnStartDriving()
+            case .landing:
+                landing()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    motionStatus = .none
+                    showResultAnalysisView.toggle()
+                    model.simulator.end()
+                }
+            }
+        }
     }
+    
+    private func actionsOnStartDriving() {
+        moveVerticallyPal()
+        model.startLiveActivity()
+    }
+    
     private func sleepThreadBriefly() {
         motionManager.stopAccelerometerUpdates()
         Thread.sleep(forTimeInterval: 5)
         startAccelerometers()
     }
     
+    private func landing() {
+        model.simulator.end()
+        withAnimation(.linear(duration: 1.0)) {
+            planeHeight = initHeight
+            planeDegree = 10
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation {
+                planeDegree = 8
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            withAnimation {
+                planeDegree = 5
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+            withAnimation {
+                planeDegree = 0
+            }
+        }
+    }
+    
+    private func takeoff() {
+        withAnimation(.linear(duration: 1.0)) {
+            planeHeight = UIScreen.height / 3 * 2 + movePalY
+            planeDegree = -10
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation {
+                planeDegree = -7
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            withAnimation {
+                planeDegree = -3
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            withAnimation {
+                planeDegree = 0
+            }
+        }
+    }
+    
     private func startAccelerometers() {
         guard motionManager.isAccelerometerAvailable else { return }
         
         motionManager.accelerometerUpdateInterval = motionUpdateInterval
+        // TODO: - accelerameter data를 block에서 처리하면 오버헤드 발생
+        // https://developer.apple.com/documentation/coremotion/cmmotionmanager/1616171-startaccelerometerupdates
         motionManager.startAccelerometerUpdates(to: accelerationQueue) { data, _ in
             guard let data else { return }
             zAcceleration = data.acceleration.z
+            
+            if motionStatus == .landing {
+                motionManager.stopAccelerometerUpdates()
+                return
+            }
             
             if zAcceleration > stopThreshold {
                 model.simulator.count += 1
@@ -109,7 +255,10 @@ struct DrivingPalView: View {
                 model.simulator.expandedImageName = "warnSignThunder"
                 model.simulator.isWarning = true
                 model.simulator.motionStatus = "suddenStop"
-                motionStatus = .suddenStop
+                withAnimation {
+                    motionStatus = .suddenStop
+                }
+                model.simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
                 sleepThreadBriefly()
             } else if zAcceleration < startThreshold {
                 model.simulator.count += 1
@@ -117,6 +266,12 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
                 model.simulator.expandedImageName = "warnSignMeteor"
+                model.simulator.isWarning = true
+                model.simulator.motionStatus = "suddenAcceleration"
+                withAnimation {
+                    motionStatus = .suddenAcceleration
+                }
+                model.simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
                 model.simulator.isWarning = true
                 model.simulator.motionStatus = "suddenAcceleration"
                 motionStatus = .suddenAcceleration
@@ -132,22 +287,10 @@ struct DrivingPalView: View {
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
                 model.simulator.motionStatus = "normal"
-                motionStatus = .normal
+                withAnimation {
+                    motionStatus = .normal
+                }
             }
-        }
-    }
-    
-    private func showAbnormalBackground() {
-        let blinkSecond = 4.0
-        // 초기화
-        viewOpacity = 0.0
-        // 비정상 배경 뷰 보이게 함
-        withAnimation(.easeIn(duration: 0.5)) {
-            viewOpacity = 1.0
-        }
-        // 비정상 배경 뷰 숨김
-        withAnimation(.easeOut(duration: 0.5).delay(blinkSecond)) {
-            viewOpacity = 0.0
         }
     }
     
@@ -158,15 +301,17 @@ struct DrivingPalView: View {
     }
     
     private func moveHorizontallyPal(_ currentStatus: MotionStatus) {
-        guard currentStatus != .normal else {
+        guard [MotionStatus.suddenAcceleration, .suddenStop].contains(currentStatus) else {
             movePalX = 0
             return
         }
         withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
             movePalX = -10
+            
         }
     }
 }
+
 
 struct DrivingPalView_Previews: PreviewProvider {
     static var previews: some View {
