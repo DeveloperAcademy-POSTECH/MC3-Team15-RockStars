@@ -16,10 +16,14 @@ struct SuddenStopView: View {
     var body: some View {
         ZStack {
             HStack(alignment: VerticalAlignment.top) {
-                Image("\(expandedImageName)")
-                    .resizable()
-                    .frame(width: 54, height: 53)
-                    .padding(.trailing, 5)
+                ZStack {
+                    Image("warnSignBackground")
+                        .resizable()
+                    Image("\(expandedImageName)")
+                        .resizable()
+                }
+                .frame(width: 54, height: 53)
+                .padding(.trailing, 5)
                 VStack(alignment: .leading) {
                     Text("급감속 주의 📉  위험!")
                         .font(.system(size: 20, weight: .semibold))
