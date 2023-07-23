@@ -253,6 +253,8 @@ struct DrivingPalView: View {
                 model.simulator.progress += 0.25
                 model.simulator.leadingImageName = "warning"
                 model.simulator.trailingImageName = "warningCircle"
+                model.simulator.expandedImageName = zAcceleration > stopThreshold ? "warnSignThunder" : "warnSignMeteor"
+                model.simulator.motionStatus = zAcceleration > stopThreshold ? "suddenStop" : "suddenAcceleration"
                 model.simulator.isWarning = true
                 withAnimation {
                     motionStatus = zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
@@ -262,9 +264,14 @@ struct DrivingPalView: View {
             } else { // 정상 주행시
                 if model.simulator.count < 4 {
                     model.simulator.leadingImageName = "normal"
+                    model.simulator.expandedImageName = "normal"
+                } else {
+                    model.simulator.leadingImageName = "warning"
+                    model.simulator.expandedImageName = "warning"
                 }
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
+                model.simulator.motionStatus = "normal"
                 withAnimation {
                     motionStatus = .normal
                 }
@@ -289,7 +296,6 @@ struct DrivingPalView: View {
         }
     }
 }
-
 
 struct DrivingPalView_Previews: PreviewProvider {
     static var previews: some View {
