@@ -53,7 +53,8 @@ struct SuddenAccelerationView: View {
                             .font(.system(size: 15, weight: .bold))
                             .foregroundColor(.white)
                             .opacity(0.4)
-                    }.frame(width: UIScreen.main.bounds.width / 2.7)
+                    }
+                    .frame(width: UIScreen.width / 2.7)
                 }
                 Spacer()
             }

@@ -48,7 +48,8 @@ struct AfterFourWarningsView: View {
                         Text("\(timestamp / 60) min")
                             .font(.system(size: 15, weight: .bold))
                             .foregroundColor(.white)
-                    }.frame(width: UIScreen.main.bounds.width / 2.7)
+                    }
+                    .frame(width: UIScreen.width / 2.7)
                 }
                 Spacer()
             }
