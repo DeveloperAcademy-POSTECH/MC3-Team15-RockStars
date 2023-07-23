@@ -16,6 +16,7 @@
 		7DB9AEAC2A6C2B620099F54A /* NormalDrivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEAB2A6C2B620099F54A /* NormalDrivingView.swift */; };
 		7DB9AEAE2A6C2B7D0099F54A /* SuddenAccelerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEAD2A6C2B7D0099F54A /* SuddenAccelerationView.swift */; };
 		7DB9AEB02A6C2B920099F54A /* SuddenStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEAF2A6C2B920099F54A /* SuddenStopView.swift */; };
+		7DB9AEB12A6D13E90099F54A /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBD2A663AD600B7C3FB /* UIScreen+Extensions.swift */; };
 		AD1D49972A66F02500C485FA /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */; };
 		AD1D49D62A67CC1600C485FA /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */; };
 		AD1D49D72A67CC9100C485FA /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
@@ -443,6 +444,7 @@
 				7DB9AEAA2A6C2B4B0099F54A /* LinearProgressView.swift in Sources */,
 				7DB9AEA62A6C2B150099F54A /* AfterFourWarningsView.swift in Sources */,
 				7DB9AEA82A6C2B320099F54A /* CircularProgressView.swift in Sources */,
+				7DB9AEB12A6D13E90099F54A /* UIScreen+Extensions.swift in Sources */,
 				7D3435CE2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */,
 				7DB9AE8E2A6768260099F54A /* Color+Extension.swift in Sources */,
 				7DB9AEB02A6C2B920099F54A /* SuddenStopView.swift in Sources */,
