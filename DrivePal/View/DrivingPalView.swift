@@ -139,7 +139,6 @@ struct DrivingPalView: View {
                     }
                 }
             }
-            //            }
         }
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $showResultAnalysisView) {
@@ -150,7 +149,7 @@ struct DrivingPalView: View {
             case .none:
                 print("none")
             case .normal:
-                startAccelerometers()
+                print("normal")
             case .suddenAcceleration, .suddenStop:
                 print("abnormal")
             case .takingOff:
@@ -159,8 +158,8 @@ struct DrivingPalView: View {
                     withAnimation {
                         motionStatus = .normal
                     }
+                    actionsOnStartDriving()
                 }
-                actionsOnStartDriving()
             case .landing:
                 landing()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -175,6 +174,7 @@ struct DrivingPalView: View {
     private func actionsOnStartDriving() {
         moveVerticallyPal()
         model.startLiveActivity()
+        startAccelerometers()
     }
     
     private func sleepThreadBriefly() {
