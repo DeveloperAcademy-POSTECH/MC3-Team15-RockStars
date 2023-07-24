@@ -115,7 +115,8 @@ struct DrivingPalView: View {
                         .scaledToFit()
                         .frame(width: UIScreen.width - 100)
                         .padding(.vertical)
-                        .position(x: UIScreen.width / 2, y: planeHeight)
+                        .position(x: UIScreen.width / 2,
+                                  y: planeHeight + movePalY)
                         .rotationEffect(.degrees(planeDegree))
                         .shake(movePalX)
                         .onChange(of: motionStatus, perform: moveHorizontallyPal)
@@ -210,7 +211,7 @@ struct DrivingPalView: View {
     
     private func takeoff() {
         withAnimation(.linear(duration: 1.0)) {
-            planeHeight = UIScreen.height / 3 * 2 + movePalY
+            planeHeight = UIScreen.height / 3 * 2
             planeDegree = -10
         }
         
