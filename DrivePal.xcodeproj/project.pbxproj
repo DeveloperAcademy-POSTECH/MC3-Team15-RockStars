@@ -26,10 +26,10 @@
 		AD1D49DE2A67E2D000C485FA /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49DD2A67E2D000C485FA /* Text+Extension.swift */; };
 		AD1D49E02A684EF900C485FA /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49DF2A684EF900C485FA /* NavigationUtil.swift */; };
 		AD448A8C2A66AB1900585590 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD448A8B2A66AB1900585590 /* Bundle+Extension.swift */; };
+		AD4EC2652A6E6DD3008A711B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4EC2672A6E6DD3008A711B /* Localizable.strings */; };
+		AD4EC26B2A6E71EF008A711B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4EC26A2A6E71EF008A711B /* Colors.xcassets */; };
 		AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */; };
-		AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD742F612A5CF61F00AD6226 /* ContentView.swift */; };
 		AD742F642A5CF62100AD6226 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD742F632A5CF62100AD6226 /* Assets.xcassets */; };
-		AD742F672A5CF62100AD6226 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD742F662A5CF62100AD6226 /* Preview Assets.xcassets */; };
 		AD742F6F2A5CF7EE00AD6226 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = AD742F6E2A5CF7EE00AD6226 /* .swiftlint.yml */; };
 		AD742F772A5CFF1800AD6226 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD742F762A5CFF1800AD6226 /* WidgetKit.framework */; };
 		AD742F792A5CFF1800AD6226 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD742F782A5CFF1800AD6226 /* SwiftUI.framework */; };
@@ -91,11 +91,12 @@
 		AD1D49DD2A67E2D000C485FA /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		AD1D49DF2A684EF900C485FA /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		AD448A8B2A66AB1900585590 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		AD4EC2662A6E6DD3008A711B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AD4EC2682A6E6DF6008A711B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AD4EC26A2A6E71EF008A711B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		AD742F5C2A5CF61F00AD6226 /* DrivePal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrivePal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivePalApp.swift; sourceTree = "<group>"; };
-		AD742F612A5CF61F00AD6226 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AD742F632A5CF62100AD6226 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AD742F662A5CF62100AD6226 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD742F6E2A5CF7EE00AD6226 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		AD742F742A5CFF1800AD6226 /* DrivePalWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DrivePalWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD742F762A5CFF1800AD6226 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -114,7 +115,7 @@
 		BE125CBB2A662AE900B7C3FB /* VelocityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelocityView.swift; sourceTree = "<group>"; };
 		BE125CBD2A663AD600B7C3FB /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
 		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
-		BE9294472A6172A100368B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BE9294472A6172A100368B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE9294482A61731400368B78 /* DrivePalWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrivePalWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,12 +164,43 @@
 		AD03717C2A628C3400D3E051 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BE125CBD2A663AD600B7C3FB /* UIScreen+Extensions.swift */,
 				7DB9AE8C2A6768260099F54A /* Color+Extension.swift */,
 				AD448A8B2A66AB1900585590 /* Bundle+Extension.swift */,
 				AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */,
 				AD1D49DD2A67E2D000C485FA /* Text+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AD4EC25F2A6E6D50008A711B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AD4EC26A2A6E71EF008A711B /* Colors.xcassets */,
+				AD742F632A5CF62100AD6226 /* Assets.xcassets */,
+				BE9294472A6172A100368B78 /* Info.plist */,
+				AD4EC2602A6E6D73008A711B /* Localization */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AD4EC2602A6E6D73008A711B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				AD4EC2672A6E6DD3008A711B /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		AD4EC2692A6E6F34008A711B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */,
+				ADF027D22A5D9171005B7B89 /* View */,
+				AD03717B2A628C2D00D3E051 /* Utils */,
+				AD718E4B2A651DF500BEF5C0 /* Model */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		AD718E4B2A651DF500BEF5C0 /* Model */ = {
@@ -222,26 +254,11 @@
 		AD742F5E2A5CF61F00AD6226 /* DrivePal */ = {
 			isa = PBXGroup;
 			children = (
-				AD718E4B2A651DF500BEF5C0 /* Model */,
-				AD03717B2A628C2D00D3E051 /* Utils */,
-				BE9294472A6172A100368B78 /* Info.plist */,
-				ADF027D22A5D9171005B7B89 /* View */,
-				AD742F5F2A5CF61F00AD6226 /* DrivePalApp.swift */,
 				BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */,
-				BE125CBD2A663AD600B7C3FB /* UIScreen+Extensions.swift */,
-				AD742F612A5CF61F00AD6226 /* ContentView.swift */,
-				AD742F632A5CF62100AD6226 /* Assets.xcassets */,
-				AD742F652A5CF62100AD6226 /* Preview Content */,
+				AD4EC2692A6E6F34008A711B /* Sources */,
+				AD4EC25F2A6E6D50008A711B /* Resources */,
 			);
 			path = DrivePal;
-			sourceTree = "<group>";
-		};
-		AD742F652A5CF62100AD6226 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				AD742F662A5CF62100AD6226 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		AD742F752A5CFF1800AD6226 /* Frameworks */ = {
@@ -354,6 +371,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = AD742F532A5CF61F00AD6226;
 			productRefGroup = AD742F5D2A5CF61F00AD6226 /* Products */;
@@ -372,7 +390,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD742F6F2A5CF7EE00AD6226 /* .swiftlint.yml in Resources */,
-				AD742F672A5CF62100AD6226 /* Preview Assets.xcassets in Resources */,
+				AD4EC26B2A6E71EF008A711B /* Colors.xcassets in Resources */,
+				AD4EC2652A6E6DD3008A711B /* Localizable.strings in Resources */,
 				AD742F642A5CF62100AD6226 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,7 +436,6 @@
 				AD1D49D62A67CC1600C485FA /* LocationsHandler.swift in Sources */,
 				AD1D49DC2A67D93100C485FA /* Color+Extension.swift in Sources */,
 				AD1D49D72A67CC9100C485FA /* DriveAttributes.swift in Sources */,
-				AD742F622A5CF61F00AD6226 /* ContentView.swift in Sources */,
 				BE125CBE2A663AD600B7C3FB /* UIScreen+Extensions.swift in Sources */,
 				AD1D49DB2A67D89000C485FA /* ResultAnalysisView.swift in Sources */,
 				AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */,
@@ -468,11 +486,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		AD4EC2672A6E6DD3008A711B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD4EC2662A6E6DD3008A711B /* en */,
+				AD4EC2682A6E6DF6008A711B /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		AD742F682A5CF62100AD6226 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -533,6 +564,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -600,7 +632,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DrivePal/Info.plist;
+				INFOPLIST_FILE = DrivePal/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DrivePal;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
@@ -647,7 +679,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DrivePal/Info.plist;
+				INFOPLIST_FILE = DrivePal/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DrivePal;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
