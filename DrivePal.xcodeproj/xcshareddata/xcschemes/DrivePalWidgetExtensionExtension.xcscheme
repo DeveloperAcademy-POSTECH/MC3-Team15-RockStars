@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AD742F732A5CFF1800AD6226"
-               BuildableName = "DrivePalWidgetExtensionExtension.appex"
-               BlueprintName = "DrivePalWidgetExtensionExtension"
+               BuildableName = "DrivePalWidgetExtension.appex"
+               BlueprintName = "DrivePalWidgetExtension"
                ReferencedContainer = "container:DrivePal.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AD742F732A5CFF1800AD6226"
-            BuildableName = "DrivePalWidgetExtensionExtension.appex"
-            BlueprintName = "DrivePalWidgetExtensionExtension"
+            BuildableName = "DrivePalWidgetExtension.appex"
+            BlueprintName = "DrivePalWidgetExtension"
             ReferencedContainer = "container:DrivePal.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>

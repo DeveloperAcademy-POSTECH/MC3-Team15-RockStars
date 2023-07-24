@@ -9,11 +9,15 @@ import SpriteKit
 import GameplayKit
 
 class BackgroundScene: SKScene {
-    
     enum BackgroundImageNamed: String {
-        case blueSky, redSky
+        case blueSky, redSky, startRunway, finishAirport
     }
-    var backgroundImageNamed = BackgroundImageNamed.blueSky
+    var backgroundImageNamed: BackgroundImageNamed = .blueSky
+    
+    // update()
+    private var lastTime: TimeInterval = 0
+    private var deltaTime: TimeInterval = 0 /// The time in seconds it took to complete the last frame
+    private let movePerSecond: CGFloat = 0.7 /// 배경 움직이는 속도 조절
     
     override func didMove(to view: SKView) {
         // game scene
@@ -34,10 +38,6 @@ class BackgroundScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.backgroundImageNamed = backgroundImageNamed == .blueSky ? .redSky : .blueSky
     }
-    
-    private var lastTime: TimeInterval = 0
-    private var deltaTime: TimeInterval = 0 /// The time in seconds it took to complete the last frame
-    private let movePerSecond: CGFloat = 0.7 /// 배경 움직이는 속도 조절
     
     override func update(_ currentTime: TimeInterval) {
         
