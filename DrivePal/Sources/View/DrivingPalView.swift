@@ -32,7 +32,6 @@ struct DrivingPalView: View {
     @State private var motionStatus = MotionStatus.none
     @State private var zAcceleration = Double.zero
     @StateObject var locationHandler = LocationsHandler()
-    // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
     @EnvironmentObject var model: LiveActivityModel
     
     private let palImage = "planeWithShadow"
