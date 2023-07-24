@@ -163,12 +163,17 @@ struct DrivingPalView: View {
                 }
             case .landing:
                 landing()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    motionStatus = .none
-                    showResultAnalysisView.toggle()
-                    model.simulator.end()
-                }
+                reset()
             }
+        }
+    }
+    
+    private func reset() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            motionStatus = .none
+            showResultAnalysisView.toggle()
+            model.simulator.end()
+            movePalY = 0
         }
     }
     
