@@ -270,6 +270,7 @@ struct DrivingPalView: View {
                     model.simulator.expandedImageName = "warning"
                 }
                 model.simulator.trailingImageName = ""
+                model.simulator.lockScreenImageName = "lockScreen"
                 model.simulator.isWarning = false
                 model.simulator.motionStatus = "normal"
                 withAnimation {
