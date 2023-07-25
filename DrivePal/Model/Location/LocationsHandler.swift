@@ -68,7 +68,7 @@ extension LocationsHandler {
         locationManager.startUpdatingLocation()
     }
     
-    func caculateCurrentSpeed(_ current: CLLocation) {
+    private func calculateCurrentSpeed(_ current: CLLocation) {
         guard let lastLocation else {
             lastLocation = current
             return
