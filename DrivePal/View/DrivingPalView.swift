@@ -113,9 +113,13 @@ struct DrivingPalView: View {
                 VStack {
                     PlaneView(motionStatus: $motionStatus)
                     
-                    VelocityView()
-                        .environmentObject(locationHandler)
-                        .padding(.bottom, 50)
+                    if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
+                        .contains(motionStatus) {
+                        VelocityView()
+                            .environmentObject(locationHandler)
+                            .onAppear(perform: locationHandler.requestAuthorization)
+                            .padding(.bottom, 50)
+                    }
                     
                     if motionStatus == .normal {
                         Button {
