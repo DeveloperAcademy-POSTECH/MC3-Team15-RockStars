@@ -120,6 +120,7 @@ struct DrivingPalView: View {
                         .rotationEffect(.degrees(planeDegree))
                         .shake(movePalX)
                         .onChange(of: motionStatus, perform: moveHorizontallyPal)
+                        .onChange(of: motionStatus, perform: moveVerticallyPal)
                     
                     VelocityView()
                         .environmentObject(locationHandler)
@@ -173,12 +174,10 @@ struct DrivingPalView: View {
             motionStatus = .none
             showResultAnalysisView.toggle()
             model.simulator.end()
-            movePalY = 0
         }
     }
     
     private func actionsOnStartDriving() {
-        moveVerticallyPal()
         model.startLiveActivity()
         startAccelerometers()
     }
@@ -215,23 +214,23 @@ struct DrivingPalView: View {
     }
     
     private func takeoff() {
-        withAnimation(.linear(duration: 1.0)) {
+        withAnimation(.linear(duration: 1.5)) {
             planeHeight = UIScreen.height / 3 * 2
             planeDegree = -10
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             withAnimation {
                 planeDegree = -7
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             withAnimation {
                 planeDegree = -3
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             withAnimation {
                 planeDegree = 0
             }
@@ -285,7 +284,11 @@ struct DrivingPalView: View {
         }
     }
     
-    private func moveVerticallyPal() {
+    private func moveVerticallyPal(_ currentStatus: MotionStatus) {
+        guard currentStatus == .normal else {
+            movePalY = 0
+            return
+        }
         withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
             movePalY = 20
         }
