@@ -79,23 +79,3 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
         }
     }
 }
-
-struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
-    static let attributes = DriveAttributes()
-    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "normal1", trailingImageName: "", expandedImageName: "normal1", timestamp: 0, isWarning: false, motionStatus: "normal"))
-
-    static var previews: some View {
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
-            .previewDisplayName("Island Compact")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
-            .previewDisplayName("Island Expanded")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
-            .previewDisplayName("Minimal")
-        attributes
-            .previewContext(contentState, viewKind: .content)
-            .previewDisplayName("Notification")
-    }
-}

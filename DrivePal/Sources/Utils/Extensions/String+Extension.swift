@@ -7,8 +7,8 @@
 
 import Foundation
 
+// MARK: - Localization Methods
 extension String {
-    
     func localized(comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
     }
@@ -16,5 +16,31 @@ extension String {
     func localized(with argument: CVarArg = [], comment: String = "") -> String {
         return String(format: self.localized(comment: comment), argument)
     }
+}
+
+// MARK: - Image Names
+extension String {
+    /* Driving Pal View */
+    static let backgroundBlueSky = "blueSky"
+    static let palImage = "planeWithShadow"
+    static let exit = "exit"
     
+    /* Result Analysis View */
+    static let palInResult = "goodDriver"
+    
+    /* Live Activity */
+    static let palNormal = "normal"
+    static let palWarning = "warning"
+    
+    static let circularWarning = "warningCircle"
+    
+    static let warnSignThunder = "warnSignThunder"
+    static let warnSignMeteor = "warnSignMeteor"
+    
+    static let locationPinRed = "locationPinRed"
+    static let locationPinBlue = "locationPinBlue"
+    static let locationPinPink = "locationPinPink"
+    static let locationPinYellow = "locationPinYellow"
+    
+    static let backgroundWarnSign =  "warnSignBackground"
 }

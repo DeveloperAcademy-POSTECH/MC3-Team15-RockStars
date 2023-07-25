@@ -45,7 +45,7 @@ final class DriveSimulator {
 
     // End the drive by resetting the vars
     func endDrive() -> DriveState {
-        return DriveState(count: 0, progress: 0.0, leadingImageName: "normal1", trailingImageName: "", expandedImageName: "normal1", timestamp: 0, isWarning: false, motionStatus: "normal")
+        return DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, timestamp: 0, isWarning: false, motionStatus: "normal")
     }
 
     // Reset the drive status to a fresh start
@@ -53,9 +53,9 @@ final class DriveSimulator {
         count = 0
         timestamp = 0
         progress = 0.0
-        leadingImageName = "normal1"
+        leadingImageName = .palNormal
         trailingImageName = ""
-        expandedImageName = "normal1"
+        expandedImageName = .palNormal
         motionStatus = "normal"
         isWarning = false
         accelerationData.removeAll()

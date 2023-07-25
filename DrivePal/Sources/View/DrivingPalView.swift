@@ -34,7 +34,6 @@ struct DrivingPalView: View {
     @StateObject var locationHandler = LocationsHandler()
     @EnvironmentObject var model: LiveActivityModel
     
-    private let palImage = "planeWithShadow"
     @State private var viewOpacity = 0.0
     @State private var movePalX = CGFloat.zero
     @State private var movePalY = CGFloat.zero
@@ -82,7 +81,7 @@ struct DrivingPalView: View {
             SpriteView(scene: normalScene)
             
             ZStack {
-                Image("blueSky")
+                Image(.backgroundBlueSky)
                     .resizable()
                     .scaledToFill()
                     .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
@@ -109,7 +108,7 @@ struct DrivingPalView: View {
             if [MotionStatus.normal, .takingOff, .landing, .suddenAcceleration, .suddenStop].contains(motionStatus) {
                 VStack {
                     Spacer()
-                    Image(palImage)
+                    Image(.palImage)
                         .resizable()
                         .scaledToFit()
                         .frame(width: UIScreen.width - 100)
@@ -129,7 +128,7 @@ struct DrivingPalView: View {
                                 motionStatus = .landing
                             }
                         } label: {
-                            Image("exit")
+                            Image(.exit)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 50)
@@ -250,9 +249,9 @@ struct DrivingPalView: View {
             if zAcceleration > stopThreshold || zAcceleration < startThreshold {
                 model.simulator.count += 1
                 model.simulator.progress += 0.25
-                model.simulator.leadingImageName = "warning"
-                model.simulator.trailingImageName = "warningCircle"
-                model.simulator.expandedImageName = zAcceleration > stopThreshold ? "warnSignThunder" : "warnSignMeteor"
+                model.simulator.leadingImageName = .palWarning
+                model.simulator.trailingImageName = .circularWarning
+                model.simulator.expandedImageName = zAcceleration > stopThreshold ? .warnSignThunder : .warnSignMeteor
                 model.simulator.motionStatus = zAcceleration > stopThreshold ? "suddenStop" : "suddenAcceleration"
                 model.simulator.isWarning = true
                 withAnimation {
@@ -262,11 +261,11 @@ struct DrivingPalView: View {
                 sleepThreadBriefly()
             } else { // 정상 주행시
                 if model.simulator.count < 4 {
-                    model.simulator.leadingImageName = "normal"
-                    model.simulator.expandedImageName = "normal"
+                    model.simulator.leadingImageName = .palNormal
+                    model.simulator.expandedImageName = .palNormal
                 } else {
-                    model.simulator.leadingImageName = "warning"
-                    model.simulator.expandedImageName = "warning"
+                    model.simulator.leadingImageName = .palWarning
+                    model.simulator.expandedImageName = .palWarning
                 }
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false

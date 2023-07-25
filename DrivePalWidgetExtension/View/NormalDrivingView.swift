@@ -24,7 +24,7 @@ struct NormalDrivingView: View {
                     Text(I18N.normalDrivingNow)
                         .font(.system(size: 20, weight: .semibold))
                     HStack {
-                        Image("locationPinBlue")
+                        Image(.locationPinBlue)
                             .resizable()
                             .frame(width: 8, height: 10)
                         Text(I18N.currentLocationLA)

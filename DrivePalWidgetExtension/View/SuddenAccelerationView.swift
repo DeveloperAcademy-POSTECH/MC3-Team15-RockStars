@@ -17,7 +17,7 @@ struct SuddenAccelerationView: View {
         ZStack {
             HStack(alignment: VerticalAlignment.top) {
                 ZStack {
-                    Image("warnSignBackground")
+                    Image(.backgroundWarnSign)
                         .resizable()
                     Image("\(expandedImageName)")
                         .resizable()
@@ -29,7 +29,7 @@ struct SuddenAccelerationView: View {
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.expandedWarningAcceleration)
                     HStack {
-                        Image("locationPinPink")
+                        Image(.locationPinPink)
                             .resizable()
                             .frame(width: 8, height: 10)
                         Text(I18N.currentLocationLA)

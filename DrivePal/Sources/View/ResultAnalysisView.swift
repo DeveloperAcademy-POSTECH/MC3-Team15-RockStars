@@ -16,7 +16,7 @@ struct ResultAnalysisView: View {
             Color.resultBackgroundColor
             
             VStack {
-                Image("goodDriver")
+                Image(.palInResult)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 90)

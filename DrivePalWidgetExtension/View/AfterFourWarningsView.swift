@@ -25,7 +25,7 @@ struct AfterFourWarningsView: View {
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.expandedWarning)
                     HStack {
-                        Image("locationPinRed")
+                        Image(.locationPinRed)
                             .resizable()
                             .frame(width: 8, height: 10)
                         Text(I18N.currentLocationLA)
