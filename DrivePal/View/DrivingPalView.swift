@@ -23,11 +23,10 @@ struct DrivingPalView: View {
     private let accelerationQueue = OperationQueue()
     
     // MARK: - 가속도 역치 기준
-    /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.05
-    /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.55
-    private let startThreshold = -1.05
-    private let stopThreshold = 0.55
-    private let initHeight = UIScreen.height - 50
+    /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.1
+    /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.75
+    private let startThreshold = -1.1
+    private let stopThreshold = 0.75
     
     @State private var motionStatus = MotionStatus.none
     @State private var zAcceleration = Double.zero
@@ -35,12 +34,7 @@ struct DrivingPalView: View {
     // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
     @EnvironmentObject var model: LiveActivityModel
     
-    private let palImage = "planeWithShadow"
     @State private var viewOpacity = 0.0
-    @State private var movePalX = CGFloat.zero
-    @State private var animationBoundY = CGFloat.zero
-    @State private var planeHeight = UIScreen.height - 50
-    @State private var planeDegree = Double.zero
     @State private var showResultAnalysisView = false
     @State private var showOnboardingView = true
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
@@ -109,19 +103,15 @@ struct DrivingPalView: View {
                 .opacity(motionStatus == .landing ? 1 : 0)
             
             // MARK: - PlaneView
-            if [MotionStatus.normal, .takingOff, .landing, .suddenAcceleration, .suddenStop].contains(motionStatus) {
+            if [MotionStatus.normal,
+                .takingOff,
+                .landing,
+                .suddenAcceleration,
+                .suddenStop]
+                .contains(motionStatus) {
+                
                 VStack {
-                    Spacer()
-                    Image(palImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: UIScreen.width - 100)
-                        .padding(.vertical)
-                        .position(x: UIScreen.width / 2,
-                                  y: planeHeight + animationBoundY)
-                        .rotationEffect(.degrees(planeDegree))
-                        .shake(movePalX)
-                        .onChange(of: motionStatus, perform: doongsilAnimation)
+                    PlaneView(motionStatus: $motionStatus)
                     
                     VelocityView()
                         .environmentObject(locationHandler)
@@ -157,74 +147,6 @@ struct DrivingPalView: View {
 struct DrivingPalView_Previews: PreviewProvider {
     static var previews: some View {
         DrivingPalView()
-    }
-}
-
-// MARK: - Animation 로직 -> PlaneView로 가야할 듯?
-private extension DrivingPalView {
-    func moveVerticallyPal() {
-        withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
-            animationBoundY = 20
-        }
-    }
-    
-    private func doongsilAnimation(_ currentStatus: MotionStatus) {
-        guard [MotionStatus.suddenAcceleration, .suddenStop].contains(currentStatus) else {
-            movePalX = 0
-            return
-        }
-        withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
-            movePalX = -10
-            
-        }
-    }
-    
-    private func landingAnimation() {
-        withAnimation(.linear(duration: 1.0)) {
-            planeHeight = initHeight
-            planeDegree = 10
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            withAnimation {
-                planeDegree = 8
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-            withAnimation {
-                planeDegree = 5
-            }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-            withAnimation {
-                planeDegree = 0
-            }
-        }
-    }
-    
-    private func takeoffAnimation() {
-        withAnimation(.linear(duration: 1.0)) {
-            planeHeight = UIScreen.height / 3 * 2
-            planeDegree = -10
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            withAnimation {
-                planeDegree = -7
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            withAnimation {
-                planeDegree = -3
-            }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
-            withAnimation {
-                planeDegree = 0
-            }
-        }
     }
 }
 
