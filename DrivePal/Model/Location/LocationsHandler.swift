@@ -43,17 +43,6 @@ enum AuthorizationStatus {
 
 // MARK: - CLLocationManagerDelegate 시그니처 메서드
 extension LocationsHandler: CLLocationManagerDelegate {
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedAlways, .authorizedWhenInUse:
-            authorizationStatus = .success
-        case .notDetermined:
-            authorizationStatus = .inProgress
-        default:
-            authorizationStatus = .failure
-        }
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
             calculateCurrentSpeed(location)
