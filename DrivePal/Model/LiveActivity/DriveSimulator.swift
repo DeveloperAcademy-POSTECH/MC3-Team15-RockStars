@@ -17,6 +17,7 @@ final class DriveSimulator {
     var leadingImageName = ""
     var trailingImageName = ""
     var expandedImageName = ""
+    var lockScreenImageName = ""
     var isWarning = false
     var motionStatus = ""
     weak var delegate: DriveSimulatorDelegate?
@@ -45,7 +46,7 @@ final class DriveSimulator {
 
     // End the drive by resetting the vars
     func endDrive() -> DriveState {
-        return DriveState(count: 0, progress: 0.0, leadingImageName: "normal1", trailingImageName: "", expandedImageName: "normal1", timestamp: 0, isWarning: false, motionStatus: "normal")
+        return DriveState(count: 0, progress: 0.0, leadingImageName: "normal1", trailingImageName: "", expandedImageName: "normal1", lockScreenImageName: "lockScreen1", timestamp: 0, isWarning: false, motionStatus: "normal")
     }
 
     // Reset the drive status to a fresh start
@@ -56,6 +57,7 @@ final class DriveSimulator {
         leadingImageName = "normal1"
         trailingImageName = ""
         expandedImageName = "normal1"
+        lockScreenImageName = "lockScreen1"
         motionStatus = "normal"
         isWarning = false
         accelerationData.removeAll()
@@ -64,6 +66,6 @@ final class DriveSimulator {
     @objc private func runDriveSimulator() {
         timestamp += 1
         // Tell the delegate to update its state
-        delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)", timestamp: timestamp, isWarning: isWarning, motionStatus: motionStatus))
+        delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)", lockScreenImageName: "\(lockScreenImageName)\(timestamp % 6 + 1)", timestamp: timestamp, isWarning: isWarning, motionStatus: motionStatus))
     }
 }
