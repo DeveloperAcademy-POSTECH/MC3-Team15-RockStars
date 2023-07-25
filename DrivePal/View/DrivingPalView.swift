@@ -11,11 +11,11 @@ import SpriteKit
 
 extension CMMotionActivityManager: ObservableObject { }
 
+enum MotionStatus {
+    case none, normal, suddenAcceleration, suddenStop, takingOff, landing
+}
+
 struct DrivingPalView: View {
-    
-    private enum MotionStatus {
-        case none, normal, suddenAcceleration, suddenStop, takingOff, landing
-    }
     
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
