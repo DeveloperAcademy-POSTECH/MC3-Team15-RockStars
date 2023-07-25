@@ -37,7 +37,7 @@ enum AuthorizationStatus {
     
     override init() {
         super.init()
-        startBackgroundLocationUpdates()
+        self.locationManager = CLLocationManager()
     }
 }
 
