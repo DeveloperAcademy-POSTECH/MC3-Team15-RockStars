@@ -156,7 +156,7 @@ struct DrivingPalView: View {
                 print("abnormal")
             case .takingOff:
                 takeoff()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                     withAnimation {
                         motionStatus = .normal
                     }
@@ -219,18 +219,18 @@ struct DrivingPalView: View {
             planeDegree = -10
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             withAnimation {
                 planeDegree = -7
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             withAnimation {
                 planeDegree = -3
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
             withAnimation {
                 planeDegree = 0
             }
