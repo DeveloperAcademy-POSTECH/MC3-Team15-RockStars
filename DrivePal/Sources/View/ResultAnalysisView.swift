@@ -13,7 +13,7 @@ struct ResultAnalysisView: View {
     @Binding var showResultAnalysisView: Bool
     var body: some View {
         ZStack {
-            Color.backgroundColor
+            Color.resultBackgroundColor
             
             VStack {
                 Image("goodDriver")
@@ -31,12 +31,12 @@ struct ResultAnalysisView: View {
                     
                     VStack {
                         Text("운전 시간  : \(LiveActivityModel.shared.simulator.timestamp / 60)분 \(LiveActivityModel.shared.simulator.timestamp % 60)초")
-                            .resultContentsText()
+                            .resultTextModifier()
                         
                         Spacer()
                         
                         Text("부주의  : \(LiveActivityModel.shared.simulator.count)회")
-                            .resultContentsText()
+                            .resultTextModifier()
                     }
                     .padding(.vertical, 80)
                     

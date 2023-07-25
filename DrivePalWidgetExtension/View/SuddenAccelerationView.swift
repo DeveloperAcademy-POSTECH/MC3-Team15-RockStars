@@ -27,7 +27,7 @@ struct SuddenAccelerationView: View {
                 VStack(alignment: .leading) {
                     Text("급가속 주의 속도 🎢 낮춰~")
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(Color(hex: "FF26A8"))
+                        .foregroundColor(.expandedWarningAcceleration)
                     HStack {
                         Image("locationPinPink")
                             .resizable()
@@ -42,7 +42,7 @@ struct SuddenAccelerationView: View {
                             .opacity(0.4)
                         Text("+ 1번")
                             .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(Color(hex: "FF26A8"))
+                            .foregroundColor(.expandedWarningAcceleration)
                             
                         Spacer()
                         
@@ -59,7 +59,7 @@ struct SuddenAccelerationView: View {
                 Spacer()
             }
             .padding(.leading, 40)
-            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: "#FF26A8")
+            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: .expandedWarningAcceleration)
                 .frame(width: 256)
                 .offset(y: 17)
         }

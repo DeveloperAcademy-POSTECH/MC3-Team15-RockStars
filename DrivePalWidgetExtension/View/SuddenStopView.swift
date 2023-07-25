@@ -27,7 +27,7 @@ struct SuddenStopView: View {
                 VStack(alignment: .leading) {
                     Text("급감속 주의 📉  위험!")
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(Color(hex: "#DFFF1C"))
+                        .foregroundColor(.expandedWarningDeceleration)
                     HStack {
                         Image("locationPinYellow")
                             .resizable()
@@ -43,7 +43,7 @@ struct SuddenStopView: View {
                             .opacity(0.4)
                         Text("+ 1번")
                             .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(Color(hex: "DFFF1C"))
+                            .foregroundColor(.expandedWarningDeceleration)
                         
                         Spacer()
                     
@@ -60,7 +60,7 @@ struct SuddenStopView: View {
                 Spacer()
             }
             .padding(.leading, 40)
-            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: "#DFFF1C")
+            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: .expandedWarningDeceleration)
                 .frame(width: 256)
                 .offset(y: 17)
         }

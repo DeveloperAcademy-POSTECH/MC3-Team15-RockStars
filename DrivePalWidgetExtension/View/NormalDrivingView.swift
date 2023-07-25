@@ -37,7 +37,7 @@ struct NormalDrivingView: View {
                             .opacity(0.8)
                         Text("\(count.description)번")
                             .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(Color(hex: "0EF1FF"))
+                            .foregroundColor(.expandedNormal)
                         
                         Spacer()
                         
@@ -53,7 +53,7 @@ struct NormalDrivingView: View {
                 Spacer()
             }
             .padding(.leading, 40)
-            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: "#01F0FF")
+            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: .expandedNormal)
                 .frame(width: 256)
                 .offset(y: 17)
         }

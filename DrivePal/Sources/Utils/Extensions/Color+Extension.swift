@@ -9,18 +9,25 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    init(hex: String) {
-        let scanner = Scanner(string: hex)
-        _ = scanner.scanString("#")
-
-        var rgb: UInt64 = 0
-        scanner.scanHexInt64(&rgb)
-
-        let red = Double((rgb >> 16) & 0xFF) / 255.0
-        let green = Double((rgb >>  8) & 0xFF) / 255.0
-        let blue = Double((rgb >>  0) & 0xFF) / 255.0
-        self.init(red: red, green: green, blue: blue)
+    init(_ hex: UInt, alpha: Double = 1.0) {
+            let red = Double((hex >> 16) & 0xff) / 255.0
+            let green = Double((hex >> 8) & 0xff) / 255.0
+            let blue = Double(hex & 0xff) / 255.0
+            self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
     
-    static let backgroundColor = Color(hex: "#B2E3FF")
+    // MARK: - Result Analysis View
+    static let resultBackgroundColor = Color(0xB2E3FF)
+    static let resultTextColor = Color(0x0C205A)
+    
+    // MARK: - Dynamic Island
+    /// compact
+    static let compactNormalCircular = Color(0x4DBBDB)
+    static let compactWarningCircular = Color(0xFF5050)
+    
+    /// expanded
+    static let expandedNormal = Color(0x01F0FF)
+    static let expandedWarning = Color(0xFF5050)
+    static let expandedWarningAcceleration = Color(0xFF26A8)
+    static let expandedWarningDeceleration = Color(0xDFFF1C)
 }

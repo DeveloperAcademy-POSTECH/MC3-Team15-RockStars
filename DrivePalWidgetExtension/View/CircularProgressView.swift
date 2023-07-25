@@ -13,7 +13,7 @@ struct CircularProgressView: View {
     var body: some View {
         VStack {
             ProgressView(value: progress)
-                .progressViewStyle(CircularProgressViewStyle(tint: progress < 1 ? Color(hex: "#4DBBDB") : Color(hex: "#FF5050")))
+                .progressViewStyle(CircularProgressViewStyle(tint: progress < 1 ? .compactNormalCircular : .compactWarningCircular))
                 
         }
     }

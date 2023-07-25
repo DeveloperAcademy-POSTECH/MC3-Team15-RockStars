@@ -23,7 +23,7 @@ struct AfterFourWarningsView: View {
                 VStack(alignment: .leading) {
                     Text("나쁜 운전중 🤬 #$% ")
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(Color(hex: "FF5050"))
+                        .foregroundColor(.expandedWarning)
                     HStack {
                         Image("locationPinRed")
                             .resizable()
@@ -38,7 +38,7 @@ struct AfterFourWarningsView: View {
                             .opacity(0.8)
                         Text("\(count.description)번")
                             .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(Color(hex: "FF5050"))
+                            .foregroundColor(.expandedWarning)
                         
                         Spacer()
                         
@@ -54,7 +54,7 @@ struct AfterFourWarningsView: View {
                 Spacer()
             }
             .padding(.leading, 40)
-            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: "#FF5050")
+            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: .expandedWarning)
                 .frame(width: 256)
                 .offset(y: 17)
         }
