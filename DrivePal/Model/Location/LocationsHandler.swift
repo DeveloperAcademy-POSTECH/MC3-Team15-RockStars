@@ -21,7 +21,18 @@ enum AuthorizationStatus {
                                 category: String(describing: LocationsHandler.self))
 
     private var lastLocation: CLLocation?
-    @Published var authorizationStatus: AuthorizationStatus = .inProgress
+    var authorizationStatus: AuthorizationStatus {
+        guard let status = locationManager?.authorizationStatus else { return .failure }
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            return .success
+        case .notDetermined:
+            return .inProgress
+        case .denied, .restricted:
+            return .failure
+        }
+    }
+    
     @Published var kilometerPerHour = 0
     
     override init() {
