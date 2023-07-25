@@ -45,7 +45,7 @@ extension LocationsHandler: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
-            caculateCurrentSpeed(location)
+            calculateCurrentSpeed(location)
         }
     }
     
