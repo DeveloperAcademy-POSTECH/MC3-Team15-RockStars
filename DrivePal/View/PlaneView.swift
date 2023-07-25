@@ -40,17 +40,18 @@ struct PlaneView_Previews: PreviewProvider {
 
 private extension PlaneView {
     private func actOn(_ motion: MotionStatus) {
-        guard [MotionStatus.landing, .takingOff, .normal].contains(motion) else { return }
         if motion == .normal {
             takeoffAnimation()
             doongsilAnimation()
         } else if motion == .landing {
             landingAnimation()
             animationBoundY = 0
+        } else if [MotionStatus.suddenAcceleration, .suddenStop].contains(motion) {
+            shakeAnimation(motion)
         }
     }
     
-    private func enableShaking(_ currentStatus: MotionStatus) {
+    private func shakeAnimation(_ currentStatus: MotionStatus) {
         guard [MotionStatus.suddenAcceleration, .suddenStop].contains(currentStatus) else {
             movePalX = 0
             return
