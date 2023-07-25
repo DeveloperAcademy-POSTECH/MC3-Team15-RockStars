@@ -225,17 +225,13 @@ private extension DrivingPalView {
 
 // MARK: - Etc.. 추후 네이밍
 private extension DrivingPalView {
-    
-    // MARK: - Etc에 배치한 이유: TakeOff, Landing 일 때만 일함
+     // MARK: - Etc에 배치한 이유: TakeOff, Landing 일 때만 일함
     /// 애니메이션 + 정보(LiveActivity, Accelerometer)도 업데이트 하기 때문
     private func actOn(_ motion: MotionStatus) {
         guard [MotionStatus.landing, .takingOff].contains(motion) else { return }
-        
         if motion == .takingOff {
-            takeoffAnimation()
             actionsWhenTakeoff()
         } else if motion == .landing {
-            landingAnimation()
             transitionToInitiation()
         }
     }
@@ -251,7 +247,6 @@ private extension DrivingPalView {
             motionStatus = .none
             stopLiveActivityUpdate()
             showResultAnalysisView.toggle()
-            animationBoundY = 0
         }
     }
     
@@ -262,7 +257,6 @@ private extension DrivingPalView {
             }
             startLiveActivityUpdate()
             startAccelerometerUpdate()
-            moveVerticallyPal()
         }
     }
 }
