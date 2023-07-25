@@ -86,4 +86,13 @@ extension LocationsHandler {
         self.lastLocation = current
         kilometerPerHour = Int(round(speed * 3.6 * 10) / 10)    // 소숫점 한 자리에서 반올림 0.1 까지의 정확도, 1의 자리부터 표현
     }
+    
+    func requestAuthorization() {
+        guard let locationManager else { return }
+        if [CLAuthorizationStatus.authorizedAlways, .authorizedWhenInUse].contains(locationManager.authorizationStatus) {
+            startBackgroundLocationUpdates()
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
 }
