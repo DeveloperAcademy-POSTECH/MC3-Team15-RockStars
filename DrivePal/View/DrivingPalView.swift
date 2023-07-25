@@ -42,6 +42,7 @@ struct DrivingPalView: View {
     @State private var planeHeight = UIScreen.height - 50
     @State private var planeDegree = Double.zero
     @State private var showResultAnalysisView = false
+    @State private var showOnboardingView = true
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
     
     private var timeStamp: Int {
@@ -142,6 +143,9 @@ struct DrivingPalView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $showOnboardingView) {
+            Onboarding()
         }
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $showResultAnalysisView) {
