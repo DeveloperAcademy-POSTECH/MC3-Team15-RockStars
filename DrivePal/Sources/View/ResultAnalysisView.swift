@@ -56,7 +56,7 @@ struct ResultAnalysisView: View {
                 ZStack {
                     ChartView(data: LiveActivityModel.shared.simulator.accelerationData)
                     
-                    Button("메인으로 돌아가기") {
+                    Button(I18N.buttonPopToRoot) {
 //                        NavigationUtil.popToRootView()
                         // TODO: - 일단 이전뷰로 돌아가도록 함. 추후 수정 필요.
                         showResultAnalysisView = false

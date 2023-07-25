@@ -26,7 +26,7 @@ struct DriveState: Codable, Hashable {
     var isWarning: Bool
     var motionStatus: String
     
-    var description: String {
-        return String("count: \(count)\nprogress: \(progress)\nleadingImageName: \(leadingImageName)\ntrailingImageName: \(trailingImageName)\nexpandedImageName: \(expandedImageName)\ntimestamp: \(timestamp)\nisWarning: \(isWarning)\nmotionStatus: \(motionStatus)")
-    }
+//    var description: String {
+//        return String("count: \(count)\nprogress: \(progress)\nleadingImageName: \(leadingImageName)\ntrailingImageName: \(trailingImageName)\nexpandedImageName: \(expandedImageName)\ntimestamp: \(timestamp)\nisWarning: \(isWarning)\nmotionStatus: \(motionStatus)")
+//    }
 }

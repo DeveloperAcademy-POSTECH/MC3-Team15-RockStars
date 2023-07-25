@@ -28,11 +28,11 @@ struct VelocityView: View {
     private func updateMessage(_ current: AuthorizationStatus) {
         switch current {
         case .success:
-            message = "km/h: \(locationHandler.kilometerPerHour)"
+            message = "\(locationHandler.kilometerPerHour)\(I18N.debugUpdateSuccess)"
         case .failure:
-            message = "현재 지역에서 데이터를 읽어오는데 실패했습니다.."
+            message = I18N.debugUpdateFailure
         case .inProgress:
-            message = "데이터를 읽어오고 있습니다.."
+            message = I18N.debugUpdateMessage
         }
     }
 }

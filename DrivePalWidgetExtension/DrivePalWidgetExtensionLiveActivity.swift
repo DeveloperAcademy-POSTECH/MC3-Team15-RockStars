@@ -58,7 +58,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                         HStack {
                             CircularProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0)
                                 .frame(width: 12, height: 12)
-                            Text("경고 \(context.state.driveState.count.description)번")
+                            Text(context.state.driveState.count.description)
                                 .foregroundColor(context.state.driveState.count < 4 ? Color.compactNormalCircular : Color.compactWarningCircular)
                                 .font(.system(size: 12))
                         }

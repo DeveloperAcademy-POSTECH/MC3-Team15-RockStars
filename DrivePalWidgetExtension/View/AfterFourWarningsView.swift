@@ -21,28 +21,28 @@ struct AfterFourWarningsView: View {
                     .frame(width: 54, height: 53)
                     .padding(.trailing, 5)
                 VStack(alignment: .leading) {
-                    Text("나쁜 운전중 🤬 #$% ")
+                    Text(I18N.badDrivingNow)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.expandedWarning)
                     HStack {
                         Image("locationPinRed")
                             .resizable()
                             .frame(width: 8, height: 10)
-                        Text("포항시 효성로 13번길 2")
+                        Text(I18N.currentLocationLA)
                             .font(.system(size: 10))
                     }
                     .padding(.bottom, 17)
                     HStack {
-                        Text("경고")
+                        Text(I18N.warningTextLA)
                             .font(.system(size: 8))
                             .opacity(0.8)
-                        Text("\(count.description)번")
+                        Text(count.description)
                             .font(.system(size: 15, weight: .bold))
                             .foregroundColor(.expandedWarning)
                         
                         Spacer()
                         
-                        Text("운전시간")
+                        Text(I18N.drivingTimeTextLA)
                             .font(.system(size: 8))
                             .opacity(0.8)
                         Text("\(timestamp / 60) min")

@@ -5,3 +5,31 @@
   Created by 제나 on 2023/07/24.
   
 */
+
+/* App */
+"app-name" = "영혼의 운전 단짝: 드팔이";
+"noti-msg" = "운전 단짝과 내 주행 습관도 함께 알아봐요!";
+
+/* Button */
+"pop-to-root" = "메인으로 돌아가기";
+
+/* Velocity View */
+"update-success" = "km/h";
+"update-failure" = "현재 지역에서 데이터를 읽어오는데 실패했습니다..";
+"update-message" = "데이터를 읽어오고 있습니다..";
+
+/* Live Activity */
+"current-location" = "포항시 효성로 13번길 2";
+"warning-text-di" = "경고";
+"driving-time-text-di" = "운전 시간";
+
+// AfterFourWarningsView
+"bad-driving-now" = "나쁜 운전중 🤬 #$%";
+
+// NormalDrivingView
+"normal-driving-now" = "운전중...🛫슈욱~";
+
+// SuddenAccelerationView, SuddenStopView
+"sudden-acceleration-now" = "급가속 주의 속도 🎢 낮춰~";
+"sudden-stop-now" = "급감속 주의 📉  위험!";
+"one-more-time" = "+ 1번";
