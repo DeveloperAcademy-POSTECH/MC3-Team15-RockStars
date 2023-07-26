@@ -92,8 +92,7 @@ private extension DrivingPalView {
 
 // MARK: - Etc.. 추후 네이밍
 private extension DrivingPalView {
-     // MARK: - Etc에 배치한 이유: TakeOff, Landing 일 때만 일함
-    /// 애니메이션 + 정보(LiveActivity, Accelerometer)도 업데이트 하기 때문
+    // MARK: - MotionHandler.motionStatus 변화를 감지할 메서드
     private func actOn(_ motion: MotionStatus) {
         if motionHandler.motionStatus == .takingOff {
             actionsWhenTakeoff()
