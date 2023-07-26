@@ -20,13 +20,12 @@ struct DrivingPalView: View {
     @EnvironmentObject var liveActivityModel: LiveActivityModel
     
     private var timeStamp: Int {
-        model.simulator.timestamp
-    }
+        liveActivityModel.simulator.timestamp
     }
     
     var body: some View {
         ZStack {
-            ConvertibleBackgroundView(motionStatus: $motionStatus)
+            ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
             
             // MARK: - PlaneView
             if [MotionStatus.normal,
@@ -34,23 +33,23 @@ struct DrivingPalView: View {
                 .landing,
                 .suddenAcceleration,
                 .suddenStop]
-                .contains(motionStatus) {
+                .contains(motionHandler.motionStatus) {
                 
                 VStack {
-                    PlaneView(motionStatus: $motionStatus)
+                    PlaneView(motionStatus: $motionHandler.motionStatus)
                     
                     if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
-                        .contains(motionStatus) {
+                        .contains(motionHandler.motionStatus) {
                         VelocityView()
                             .environmentObject(locationHandler)
                             .onAppear(perform: locationHandler.requestAuthorization)
                             .padding(.bottom, 50)
                     }
                     
-                    if motionStatus == .normal {
+                    if motionHandler.motionStatus == .normal {
                         Button {
                             withAnimation {
-                                motionStatus = .landing
+                                motionHandler.motionStatus = .landing
                             }
                         } label: {
                             Image("exit")
@@ -67,7 +66,7 @@ struct DrivingPalView: View {
             Onboarding()
         }
         .ignoresSafeArea()
-        .onChange(of: motionStatus, perform: actOn)
+        .onChange(of: motionHandler.motionStatus, perform: actOn)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
             ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
         }
@@ -145,11 +144,11 @@ private extension DrivingPalView {
 // MARK: - Live Activity 로직
 private extension DrivingPalView {
     func startLiveActivityUpdate() {
-        model.startLiveActivity()
+        liveActivityModel.startLiveActivity()
     }
     
     func stopLiveActivityUpdate() {
-        model.simulator.end()
+        liveActivityModel.simulator.end()
     }
 }
 
@@ -158,12 +157,15 @@ private extension DrivingPalView {
      // MARK: - Etc에 배치한 이유: TakeOff, Landing 일 때만 일함
     /// 애니메이션 + 정보(LiveActivity, Accelerometer)도 업데이트 하기 때문
     private func actOn(_ motion: MotionStatus) {
-        guard [MotionStatus.landing, .takingOff].contains(motion) else { return }
-        if motion == .takingOff {
+        if motionHandler.motionStatus == .takingOff {
             actionsWhenTakeoff()
-        } else if motion == .landing {
+        } else if motionHandler.motionStatus == .landing {
             transitionToInitiation()
-        }
+        } else if motionHandler.motionStatus == .suddenAcceleration {
+            liveActivityModel.updateWhenAbnormal(motionHandler.zAcceleration, false)
+        } else if motionHandler.motionStatus == .suddenStop {
+            liveActivityModel.updateWhenAbnormal(motionHandler.zAcceleration, true)
+        } 
     }
     
     /// - 라이브 액티비티
@@ -174,7 +176,7 @@ private extension DrivingPalView {
     // MARK: - Etc에 배치한 이유: 화면 전환의 초기화 설정을 담당
     private func transitionToInitiation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            motionStatus = .none
+            motionHandler.motionStatus = .none
             stopLiveActivityUpdate()
             showResultAnalysisView.toggle()
         }
@@ -182,11 +184,9 @@ private extension DrivingPalView {
     
     private func actionsWhenTakeoff() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            withAnimation {
-                motionStatus = .normal
-            }
+            motionHandler.motionStatus = .normal
             startLiveActivityUpdate()
-            startAccelerometerUpdate()
+            motionHandler.startAccelerometerUpdate()
         }
     }
 }
