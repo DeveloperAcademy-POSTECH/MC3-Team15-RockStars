@@ -79,68 +79,6 @@ struct DrivingPalView_Previews: PreviewProvider {
     }
 }
 
-// MARK: - CoreMotion 로직
-private extension DrivingPalView {
-    func sleepThreadBriefly() {
-        stopAccelerometerUpdate()
-        Thread.sleep(forTimeInterval: 5)
-        startAccelerometerUpdate()
-    }
-    
-    func stopAccelerometerUpdate() {
-        motionManager.stopAccelerometerUpdates()
-    }
-    
-    // TODO: - 메서드 길이 20줄 넘어감
-    func startAccelerometerUpdate() {
-        guard motionManager.isAccelerometerAvailable else { return }
-        
-        motionManager.accelerometerUpdateInterval = motionUpdateInterval
-        // TODO: - accelerameter data를 block에서 처리하면 오버헤드 발생
-        // https://developer.apple.com/documentation/coremotion/cmmotionmanager/1616171-startaccelerometerupdates
-        motionManager.startAccelerometerUpdates(to: accelerationQueue) { data, _ in
-            guard let data else { return }
-            zAcceleration = data.acceleration.z
-            
-            if motionStatus == .landing {
-                motionManager.stopAccelerometerUpdates()
-                return
-            }
-            
-            // 급감속 또는 급가속 감지시
-            if zAcceleration > stopThreshold || zAcceleration < startThreshold {
-                model.simulator.count += 1
-                model.simulator.progress += 0.25
-                model.simulator.leadingImageName = "warning"
-                model.simulator.trailingImageName = "warningCircle"
-                model.simulator.expandedImageName = zAcceleration > stopThreshold ? "warnSignThunder" : "warnSignMeteor"
-                model.simulator.motionStatus = zAcceleration > stopThreshold ? "suddenStop" : "suddenAcceleration"
-                model.simulator.isWarning = true
-                withAnimation {
-                    motionStatus = zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
-                }
-                model.simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
-                sleepThreadBriefly()
-            } else { // 정상 주행시
-                if model.simulator.count < 4 {
-                    model.simulator.leadingImageName = "normal"
-                    model.simulator.expandedImageName = "normal"
-                } else {
-                    model.simulator.leadingImageName = "warning"
-                    model.simulator.expandedImageName = "warning"
-                }
-                model.simulator.trailingImageName = ""
-                model.simulator.lockScreenImageName = "lockScreen"
-                model.simulator.isWarning = false
-                model.simulator.motionStatus = "normal"
-                withAnimation {
-                    motionStatus = .normal
-                }
-            }
-        }
-    }
-}
-
 // MARK: - Live Activity 로직
 private extension DrivingPalView {
     func startLiveActivityUpdate() {
