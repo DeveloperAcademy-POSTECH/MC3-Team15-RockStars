@@ -24,5 +24,5 @@ struct DriveState: Codable, Hashable {
     var expandedImageName: String
     var timestamp: Int
     var isWarning: Bool
-    var motionStatus: String
+    var motionStatus: MotionStatus
 }

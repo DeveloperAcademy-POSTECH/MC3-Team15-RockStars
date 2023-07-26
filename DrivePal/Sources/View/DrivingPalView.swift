@@ -12,11 +12,6 @@ import SpriteKit
 extension CMMotionActivityManager: ObservableObject { }
 
 struct DrivingPalView: View {
-    
-    private enum MotionStatus {
-        case none, normal, suddenAcceleration, suddenStop, takingOff, landing
-    }
-    
     private let motionManager = CMMotionManager()
     private let operationQueue = OperationQueue()
     private let motionUpdateInterval = 1.0 / 2.0
@@ -252,7 +247,7 @@ struct DrivingPalView: View {
                 model.simulator.leadingImageName = .palWarning
                 model.simulator.trailingImageName = .circularWarning
                 model.simulator.expandedImageName = zAcceleration > stopThreshold ? .warnSignThunder : .warnSignMeteor
-                model.simulator.motionStatus = zAcceleration > stopThreshold ? "suddenStop" : "suddenAcceleration"
+                model.simulator.motionStatus = zAcceleration > stopThreshold ? MotionStatus.suddenStop : MotionStatus.suddenAcceleration
                 model.simulator.isWarning = true
                 withAnimation {
                     motionStatus = zAcceleration > stopThreshold ? .suddenStop : .suddenAcceleration
@@ -269,7 +264,7 @@ struct DrivingPalView: View {
                 }
                 model.simulator.trailingImageName = ""
                 model.simulator.isWarning = false
-                model.simulator.motionStatus = "normal"
+                model.simulator.motionStatus = .normal
                 withAnimation {
                     motionStatus = .normal
                 }

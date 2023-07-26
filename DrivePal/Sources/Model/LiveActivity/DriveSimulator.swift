@@ -18,7 +18,7 @@ final class DriveSimulator {
     var trailingImageName = ""
     var expandedImageName = ""
     var isWarning = false
-    var motionStatus = ""
+    var motionStatus = MotionStatus.normal
     weak var delegate: DriveSimulatorDelegate?
     
     var accelerationData = [ChartData]()
@@ -45,7 +45,7 @@ final class DriveSimulator {
 
     // End the drive by resetting the vars
     func endDrive() -> DriveState {
-        return DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, timestamp: 0, isWarning: false, motionStatus: "normal")
+        return DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, timestamp: 0, isWarning: false, motionStatus: .normal)
     }
 
     // Reset the drive status to a fresh start
@@ -56,7 +56,7 @@ final class DriveSimulator {
         leadingImageName = .palNormal
         trailingImageName = ""
         expandedImageName = .palNormal
-        motionStatus = "normal"
+        motionStatus = .normal
         isWarning = false
         accelerationData.removeAll()
     }

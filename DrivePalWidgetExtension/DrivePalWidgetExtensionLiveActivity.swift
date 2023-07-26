@@ -33,15 +33,15 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.center) {
                 }
                 DynamicIslandExpandedRegion(.bottom, priority: 1.0) {
-                    if context.state.driveState.motionStatus == "normal" {
+                    if context.state.driveState.motionStatus == .normal {
                         if context.state.driveState.count < 4 {
                             NormalDrivingView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                         } else {
                             AfterFourWarningsView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                         }
-                    } else if context.state.driveState.motionStatus == "suddenStop" {
+                    } else if context.state.driveState.motionStatus == .suddenStop {
                         SuddenStopView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
-                    } else if context.state.driveState.motionStatus == "suddenAcceleration" {
+                    } else if context.state.driveState.motionStatus == .suddenAcceleration {
                         SuddenAccelerationView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                     }
                 }
