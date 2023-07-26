@@ -10,13 +10,13 @@ import SwiftUI
 struct PlaneView: View {
     
     @State private var animationBoundY = CGFloat.zero
-    @State private var planeHeight = UIScreen.height - 50
+    @State private var planeHeight = UIScreen.height + 40
     @State private var planeDegree = Double.zero
     @State private var movePalX = CGFloat.zero
     @Binding var motionStatus: MotionStatus
     
     private let palImage = "planeWithShadow"
-    private let initHeight = UIScreen.height - 50
+    private let initHeight = UIScreen.height + 40
     
     var body: some View {
             Image(palImage)
