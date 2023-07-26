@@ -105,11 +105,6 @@ private extension DrivingPalView {
         } 
     }
     
-    /// - 라이브 액티비티
-    /// - 애니메이션
-    /// - Motion Status
-    /// - 결과분석뷰
-    /// 4개의 로직을 리셋
     // MARK: - Etc에 배치한 이유: 화면 전환의 초기화 설정을 담당
     private func transitionToInitiation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
