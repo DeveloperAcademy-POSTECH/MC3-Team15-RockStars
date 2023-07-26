@@ -50,6 +50,8 @@
 		BE125CBC2A662AE900B7C3FB /* VelocityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBB2A662AE900B7C3FB /* VelocityView.swift */; };
 		BE125CBE2A663AD600B7C3FB /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBD2A663AD600B7C3FB /* UIScreen+Extensions.swift */; };
 		BE129AF52A6F52CA006561DD /* PlaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE129AF42A6F52CA006561DD /* PlaneView.swift */; };
+		BE1F43A42A6FFA53008F9CF4 /* DrivingStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F43A32A6FFA53008F9CF4 /* DrivingStartView.swift */; };
+		BEB018552A700BEF00C34A16 /* ConvertibleBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB018542A700BEF00C34A16 /* ConvertibleBackgroundView.swift */; };
 		BEB018582A70B49100C34A16 /* MotionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB018572A70B49100C34A16 /* MotionHandler.swift */; };
 /* End PBXBuildFile section */
 
@@ -118,9 +120,11 @@
 		BE125CBB2A662AE900B7C3FB /* VelocityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelocityView.swift; sourceTree = "<group>"; };
 		BE125CBD2A663AD600B7C3FB /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
 		BE129AF42A6F52CA006561DD /* PlaneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneView.swift; sourceTree = "<group>"; };
+		BE1F43A32A6FFA53008F9CF4 /* DrivingStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingStartView.swift; sourceTree = "<group>"; };
 		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
 		BE9294472A6172A100368B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BE9294482A61731400368B78 /* DrivePalWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrivePalWidgetExtension.entitlements; sourceTree = "<group>"; };
+		BEB018542A700BEF00C34A16 /* ConvertibleBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertibleBackgroundView.swift; sourceTree = "<group>"; };
 		BEB018572A70B49100C34A16 /* MotionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -281,6 +285,8 @@
 				ADF027D32A5D9179005B7B89 /* Scene */,
 				ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */,
 				AD4EC2722A6F6534008A711B /* Onboarding.swift */,
+				BEB018542A700BEF00C34A16 /* ConvertibleBackgroundView.swift */,
+				BE1F43A32A6FFA53008F9CF4 /* DrivingStartView.swift */,
 				BE125CBB2A662AE900B7C3FB /* VelocityView.swift */,
 				BE129AF42A6F52CA006561DD /* PlaneView.swift */,
 				ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */,
@@ -440,6 +446,7 @@
 				AD1D49DB2A67D89000C485FA /* ResultAnalysisView.swift in Sources */,
 				AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */,
 				BE125CBC2A662AE900B7C3FB /* VelocityView.swift in Sources */,
+				BEB018552A700BEF00C34A16 /* ConvertibleBackgroundView.swift in Sources */,
 				AD1D49DE2A67E2D000C485FA /* Text+Extension.swift in Sources */,
 				AD1D49972A66F02500C485FA /* UserDefaults+Extension.swift in Sources */,
 				AD1D49D92A67D22F00C485FA /* ChartView.swift in Sources */,
@@ -447,6 +454,7 @@
 				ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */,
 				7D3435D22A5F15D800D11708 /* LiveActivityModel.swift in Sources */,
 				ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */,
+				BE1F43A42A6FFA53008F9CF4 /* DrivingStartView.swift in Sources */,
 				ADC9912C2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */,
 				BEB018582A70B49100C34A16 /* MotionHandler.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
