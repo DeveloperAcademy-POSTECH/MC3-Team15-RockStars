@@ -6,35 +6,14 @@
 //
 
 import SwiftUI
-import CoreMotion
 import SpriteKit
-
-extension CMMotionActivityManager: ObservableObject { }
 
 enum MotionStatus {
     case none, normal, suddenAcceleration, suddenStop, takingOff, landing
 }
 
 struct DrivingPalView: View {
-    
-    private let motionManager = CMMotionManager()
-    private let operationQueue = OperationQueue()
-    private let motionUpdateInterval = 1.0 / 2.0
-    private let accelerationQueue = OperationQueue()
-    
-    // MARK: - 가속도 역치 기준
-    /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.1
-    /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.75
-    private let startThreshold = -1.1
-    private let stopThreshold = 0.75
-    
-    @State private var motionStatus = MotionStatus.none
-    @State private var zAcceleration = Double.zero
-    @StateObject var locationHandler = LocationsHandler()
-    // TODO: - 주행 모델이라고 해서 들어가보니까 Activity를 다루는 모델이라서 네이밍 변경 필요.
-    @EnvironmentObject var model: LiveActivityModel
-    
-    @State private var viewOpacity = 0.0
+
     @State private var showResultAnalysisView = false
     @State private var showOnboardingView = true
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
