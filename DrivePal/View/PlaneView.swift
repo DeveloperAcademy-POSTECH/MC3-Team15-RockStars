@@ -46,18 +46,17 @@ private extension PlaneView {
         } else if motion == .landing {
             landingAnimation()
             animationBoundY = 0
-        } else if [MotionStatus.suddenAcceleration, .suddenStop].contains(motion) {
-            shakeAnimation(motion)
         }
+        shakeAnimation(motion)
     }
     
     private func shakeAnimation(_ currentStatus: MotionStatus) {
-        guard [MotionStatus.suddenAcceleration, .suddenStop].contains(currentStatus) else {
+        if [MotionStatus.suddenAcceleration, .suddenStop].contains(currentStatus) {
+            withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
+                movePalX = -10
+            }
+        } else if currentStatus == .normal {
             movePalX = 0
-            return
-        }
-        withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
-            movePalX = -10
         }
     }
     
