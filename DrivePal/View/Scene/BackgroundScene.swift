@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class BackgroundScene: SKScene {
+final class BackgroundScene: SKScene {
     enum BackgroundImageNamed: String {
         case blueSky, redSky, startRunway, finishAirport
     }
