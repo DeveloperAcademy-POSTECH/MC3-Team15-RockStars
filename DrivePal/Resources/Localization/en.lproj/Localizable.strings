@@ -5,3 +5,31 @@
   Created by 제나 on 2023/07/24.
   
 */
+
+/* App */
+"app-name" = "My Driving Bestie: Drive Pal";
+"noti-msg" = "Let's explore your driving habits together with Drive Pal!";
+
+/* Button */
+"pop-to-root" = "Go back to start";
+
+/* Velocity View */
+"update-success" = "km/h";
+"update-failure" = "Data retrieval from the current location has failed...";
+"update-message" = "The system is currently reading the data...";
+
+/* Live Activity */
+"current-location" = "2, Hyoseong-ro 64beon-gil, Pohang-si";
+"warning-text-di" = "WARNING";
+"driving-time-text-di" = "TIME";
+
+// AfterFourWarningsView
+"bad-driving-now" = "Bad Driving 🤬 #$%";
+
+// NormalDrivingView
+"normal-driving-now" = "Driving...🛫Vroom~";
+
+// SuddenAccelerationView, SuddenStopView
+"sudden-acceleration-now" = "Sudden Acceleration🎢 Slow down";
+"sudden-stop-now" = "Sudden Deceleration📉";
+"one-more-time" = "+ 1";
