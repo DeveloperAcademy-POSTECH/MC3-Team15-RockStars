@@ -50,6 +50,7 @@
 		BE125CBC2A662AE900B7C3FB /* VelocityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBB2A662AE900B7C3FB /* VelocityView.swift */; };
 		BE125CBE2A663AD600B7C3FB /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBD2A663AD600B7C3FB /* UIScreen+Extensions.swift */; };
 		BE129AF52A6F52CA006561DD /* PlaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE129AF42A6F52CA006561DD /* PlaneView.swift */; };
+		BEB018582A70B49100C34A16 /* MotionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB018572A70B49100C34A16 /* MotionHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
 		BE9294472A6172A100368B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BE9294482A61731400368B78 /* DrivePalWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrivePalWidgetExtension.entitlements; sourceTree = "<group>"; };
+		BEB018572A70B49100C34A16 /* MotionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 		AD718E4B2A651DF500BEF5C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BEB018562A70B48700C34A16 /* Motion */,
 				AD718E4D2A651E3C00BEF5C0 /* Location */,
 				AD718E4C2A651E2300BEF5C0 /* LiveActivity */,
 			);
@@ -293,6 +296,14 @@
 				ADF027D62A5D91A2005B7B89 /* BackgroundScene.swift */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		BEB018562A70B48700C34A16 /* Motion */ = {
+			isa = PBXGroup;
+			children = (
+				BEB018572A70B49100C34A16 /* MotionHandler.swift */,
+			);
+			path = Motion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +448,7 @@
 				7D3435D22A5F15D800D11708 /* LiveActivityModel.swift in Sources */,
 				ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */,
 				ADC9912C2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */,
+				BEB018582A70B49100C34A16 /* MotionHandler.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
 				AD1D49E02A684EF900C485FA /* NavigationUtil.swift in Sources */,
 				ADCBEBAD2A5F266900DDC27D /* DrivingPalView.swift in Sources */,
