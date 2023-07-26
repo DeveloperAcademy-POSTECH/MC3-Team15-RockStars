@@ -14,7 +14,6 @@ final class BackgroundScene: SKScene {
     }
     var backgroundImageNamed: BackgroundImageNamed = .blueSky
     
-    // update()
     private var lastTime: TimeInterval = 0
     private var deltaTime: TimeInterval = 0 /// The time in seconds it took to complete the last frame
     private let movePerSecond: CGFloat = 0.7 /// 배경 움직이는 속도 조절
