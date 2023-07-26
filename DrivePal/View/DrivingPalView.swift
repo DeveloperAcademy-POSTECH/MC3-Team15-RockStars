@@ -21,34 +21,6 @@ struct DrivingPalView: View {
     private var timeStamp: Int {
         model.simulator.timestamp
     }
-    
-    // background scenes
-    private var normalScene: SKScene {
-        let scene = BackgroundScene()
-        scene.scaleMode = .fill
-        scene.backgroundImageNamed = .blueSky
-        return scene
-    }
-    
-    private var abnormalScene: SKScene {
-        let scene = BackgroundScene()
-        scene.scaleMode = .fill
-        scene.backgroundImageNamed = .redSky
-        return scene
-    }
-    
-    private var takeOffScene: SKScene {
-        let scene = BackgroundScene()
-        scene.scaleMode = .fill
-        scene.backgroundImageNamed = .startRunway
-        return scene
-    }
-    
-    private var landingScene: SKScene {
-        let scene = BackgroundScene()
-        scene.scaleMode = .fill
-        scene.backgroundImageNamed = .finishAirport
-        return scene
     }
     
     var body: some View {
