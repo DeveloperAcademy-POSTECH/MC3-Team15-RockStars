@@ -60,7 +60,7 @@ private extension PlaneView {
         }
     }
     
-    func doongsilAnimation() {
+    private func doongsilAnimation() {
         withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
             animationBoundY = 60
         }
