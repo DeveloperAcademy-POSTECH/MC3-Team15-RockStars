@@ -74,33 +74,7 @@ struct DrivingPalView: View {
     
     var body: some View {
         ZStack {
-            // MARK: - BackgroundView
-            SpriteView(scene: normalScene)
-            
-            ZStack {
-                Image("blueSky")
-                    .resizable()
-                    .scaledToFill()
-                    .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
-                    .onTapGesture {
-                        motionStatus = .takingOff
-                    }
-                Image("startImage")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 75)
-                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3)
-            }
-            .opacity(motionStatus == .none ? 1 : 0)
-            
-            SpriteView(scene: takeOffScene)
-                .opacity(motionStatus == .takingOff ? 1 : 0)
-            
-            SpriteView(scene: abnormalScene)
-                .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
-            
-            SpriteView(scene: landingScene)
-                .opacity(motionStatus == .landing ? 1 : 0)
+            ConvertibleBackgroundView(motionStatus: $motionStatus)
             
             // MARK: - PlaneView
             if [MotionStatus.normal,
