@@ -15,8 +15,9 @@ enum MotionStatus {
 struct DrivingPalView: View {
 
     @State private var showResultAnalysisView = false
-    @State private var showOnboardingView = true
-    @EnvironmentObject var automotiveDetector: CMMotionActivityManager
+    @StateObject private var locationHandler = LocationsHandler()
+    @StateObject private var motionHandler = MotionHandler()
+    @EnvironmentObject var liveActivityModel: LiveActivityModel
     
     private var timeStamp: Int {
         model.simulator.timestamp
