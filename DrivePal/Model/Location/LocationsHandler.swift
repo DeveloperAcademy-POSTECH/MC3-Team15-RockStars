@@ -15,6 +15,12 @@ enum AuthorizationStatus {
     case failure
 }
 
+struct SpeedModel {
+    let date: Date
+    let kilometerPerHour: Int
+    let location: CLLocation
+}
+
 @MainActor final class LocationsHandler: NSObject, ObservableObject {
     private lazy var locationManager: CLLocationManager? = nil
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "",
