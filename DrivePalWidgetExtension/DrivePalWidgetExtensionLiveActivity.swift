@@ -14,13 +14,39 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: DriveAttributes.self) { context in
             // Lock screen/banner UI goes here
-            HStack {
-                Image("\(context.state.driveState.leadingImageName)")
+            VStack(alignment: .leading) {
+                HStack(alignment: VerticalAlignment.top) {
+                    Image("\(context.state.driveState.lockScreenImageName)")
+                        .resizable()
+                        .frame(width: 54, height: 53)
+                        .padding(.trailing, 5)
+                    
+                    VStack(alignment: .leading) {
+                        Text("운전중... 🛫")
+                            .font(.system(size: 17, weight: .semibold))
+                            .padding(.bottom, 2)
+                        HStack(alignment: VerticalAlignment.top) {
+                            Image("locationPinBlack")
+                                .resizable()
+                                .frame(width: 8, height: 10)
+                            Text("포항시 효성로 13번길 2")
+                                .font(.system(size: 12))
+                        }
+                    }
+                }
+                LinearProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0, linearColor: "#4D52DB")
+                    .background(Color(hex: "6B6B6B"))
+                    .frame(width: 256)
                 HStack {
-                    Text(context.state.driveState.count.description)
-                    Text(" Times")
+                    Text("경고 \(context.state.driveState.count.description)번")
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(Color(hex: "4D52DB"))
+                        .padding(.trailing, 13)
+                    Text("운전시간 \(context.state.driveState.timestamp / 60) min")
+                        .font(.system(size: 20, weight: .bold))
                 }
             }
+            .padding(20)
 
         } dynamicIsland: { context in
             DynamicIsland {
@@ -77,5 +103,25 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
         }
+    }
+}
+
+struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
+    static let attributes = DriveAttributes()
+    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "normal1", trailingImageName: "", expandedImageName: "normal1", lockScreenImageName: "lockScreen1", timestamp: 0, isWarning: false, motionStatus: "normal"))
+
+    static var previews: some View {
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
+            .previewDisplayName("Island Compact")
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
+            .previewDisplayName("Island Expanded")
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
+            .previewDisplayName("Minimal")
+        attributes
+            .previewContext(contentState, viewKind: .content)
+            .previewDisplayName("Notification")
     }
 }

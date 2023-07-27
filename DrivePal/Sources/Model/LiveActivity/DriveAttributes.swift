@@ -22,6 +22,7 @@ struct DriveState: Codable, Hashable {
     var leadingImageName: String
     var trailingImageName: String
     var expandedImageName: String
+    var lockScreenImageName: String
     var timestamp: Int
     var isWarning: Bool
     var motionStatus: MotionStatus
