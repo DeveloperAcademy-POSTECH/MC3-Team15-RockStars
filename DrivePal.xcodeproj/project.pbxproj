@@ -26,6 +26,7 @@
 		AD1D49E02A684EF900C485FA /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49DF2A684EF900C485FA /* NavigationUtil.swift */; };
 		AD448A8C2A66AB1900585590 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD448A8B2A66AB1900585590 /* Bundle+Extension.swift */; };
 		AD4EC2652A6E6DD3008A711B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4EC2672A6E6DD3008A711B /* Localizable.strings */; };
+		AD4EC2732A6F6534008A711B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4EC2722A6F6534008A711B /* OnboardingView.swift */; };
 		AD4EC2752A6FFC91008A711B /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4EC2742A6FFC91008A711B /* View+Extension.swift */; };
 		AD4EC2772A6FFFF0008A711B /* I18N.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4EC2762A6FFFF0008A711B /* I18N.swift */; };
 		AD4EC2792A700BE2008A711B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4EC2782A700BE2008A711B /* String+Extension.swift */; };
@@ -97,6 +98,7 @@
 		AD448A8B2A66AB1900585590 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		AD4EC2662A6E6DD3008A711B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD4EC2682A6E6DF6008A711B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AD4EC2722A6F6534008A711B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AD4EC2742A6FFC91008A711B /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		AD4EC2762A6FFFF0008A711B /* I18N.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18N.swift; sourceTree = "<group>"; };
 		AD4EC2782A700BE2008A711B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			children = (
 				ADF027D32A5D9179005B7B89 /* Scene */,
 				ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */,
+				AD4EC2722A6F6534008A711B /* OnboardingView.swift */,
 				BE125CBB2A662AE900B7C3FB /* VelocityView.swift */,
 				ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */,
 				AD1D49D82A67D22F00C485FA /* ChartView.swift */,
@@ -447,6 +450,7 @@
 				AD4EC2752A6FFC91008A711B /* View+Extension.swift in Sources */,
 				AD1D49D72A67CC9100C485FA /* DriveAttributes.swift in Sources */,
 				BE125CBE2A663AD600B7C3FB /* UIScreen+Extension.swift in Sources */,
+				AD4EC2732A6F6534008A711B /* OnboardingView.swift in Sources */,
 				AD1D49DB2A67D89000C485FA /* ResultAnalysisView.swift in Sources */,
 				AD742F602A5CF61F00AD6226 /* DrivePalApp.swift in Sources */,
 				BE125CBC2A662AE900B7C3FB /* VelocityView.swift in Sources */,
@@ -640,7 +644,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
@@ -662,7 +666,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -687,7 +691,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
@@ -709,7 +713,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -42,5 +42,7 @@ extension String {
     static let locationPinPink = "locationPinPink"
     static let locationPinYellow = "locationPinYellow"
     
+    static let lockScreen = "lockScreen"
+    
     static let backgroundWarnSign =  "warnSignBackground"
 }

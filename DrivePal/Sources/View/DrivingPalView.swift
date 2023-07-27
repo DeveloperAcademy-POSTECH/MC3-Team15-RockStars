@@ -18,10 +18,10 @@ struct DrivingPalView: View {
     private let accelerationQueue = OperationQueue()
     
     // MARK: - 가속도 역치 기준
-    /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.1
-    /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.75
-    private let startThreshold = -1.1
-    private let stopThreshold = 0.75
+    /// 급출발, 급가속 기준 11km/h -> 3m/s -> z: -1.05
+    /// 급정지, 급감속 기준 7.5km/h -> 2m/s -> z: 0.55
+    private let startThreshold = -1.05
+    private let stopThreshold = 0.55
     private let initHeight = UIScreen.height - 50
     
     @State private var motionStatus = MotionStatus.none
@@ -35,6 +35,7 @@ struct DrivingPalView: View {
     @State private var planeHeight = UIScreen.height - 50
     @State private var planeDegree = Double.zero
     @State private var showResultAnalysisView = false
+    @State private var showOnboardingView = true
     @EnvironmentObject var automotiveDetector: CMMotionActivityManager
     
     private var timeStamp: Int {
@@ -83,10 +84,11 @@ struct DrivingPalView: View {
                     .onTapGesture {
                         motionStatus = .takingOff
                     }
-                Text("PRESS TO START")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
+                Image("startImage")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 75)
+                    .position(x: UIScreen.width / 2, y: UIScreen.height / 3)
             }
             .opacity(motionStatus == .none ? 1 : 0)
             
@@ -108,10 +110,12 @@ struct DrivingPalView: View {
                         .scaledToFit()
                         .frame(width: UIScreen.width - 100)
                         .padding(.vertical)
-                        .position(x: UIScreen.width / 2, y: planeHeight)
+                        .position(x: UIScreen.width / 2,
+                                  y: planeHeight + movePalY)
                         .rotationEffect(.degrees(planeDegree))
                         .shake(movePalX)
                         .onChange(of: motionStatus, perform: moveHorizontallyPal)
+                        .onChange(of: motionStatus, perform: moveVerticallyPal)
                     
                     VelocityView()
                         .environmentObject(locationHandler)
@@ -133,6 +137,9 @@ struct DrivingPalView: View {
                 }
             }
         }
+        .sheet(isPresented: $showOnboardingView) {
+            OnboardingView()
+        }
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $showResultAnalysisView) {
             ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
@@ -147,7 +154,7 @@ struct DrivingPalView: View {
                 print("abnormal")
             case .takingOff:
                 takeoff()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                     withAnimation {
                         motionStatus = .normal
                     }
@@ -155,17 +162,20 @@ struct DrivingPalView: View {
                 }
             case .landing:
                 landing()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    motionStatus = .none
-                    showResultAnalysisView.toggle()
-                    model.simulator.end()
-                }
+                reset()
             }
         }
     }
     
+    private func reset() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            motionStatus = .none
+            showResultAnalysisView.toggle()
+            model.simulator.end()
+        }
+    }
+    
     private func actionsOnStartDriving() {
-        moveVerticallyPal()
         model.startLiveActivity()
         startAccelerometers()
     }
@@ -202,8 +212,8 @@ struct DrivingPalView: View {
     }
     
     private func takeoff() {
-        withAnimation(.linear(duration: 1.0)) {
-            planeHeight = UIScreen.height / 3 * 2 + movePalY
+        withAnimation(.linear(duration: 1.5)) {
+            planeHeight = UIScreen.height / 3 * 2
             planeDegree = -10
         }
         
@@ -213,12 +223,12 @@ struct DrivingPalView: View {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             withAnimation {
                 planeDegree = -3
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
             withAnimation {
                 planeDegree = 0
             }
@@ -263,6 +273,7 @@ struct DrivingPalView: View {
                     model.simulator.expandedImageName = .palWarning
                 }
                 model.simulator.trailingImageName = ""
+                model.simulator.lockScreenImageName = "lockScreen"
                 model.simulator.isWarning = false
                 model.simulator.motionStatus = .normal
                 withAnimation {
@@ -272,7 +283,11 @@ struct DrivingPalView: View {
         }
     }
     
-    private func moveVerticallyPal() {
+    private func moveVerticallyPal(_ currentStatus: MotionStatus) {
+        guard currentStatus == .normal else {
+            movePalY = 0
+            return
+        }
         withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
             movePalY = 20
         }
