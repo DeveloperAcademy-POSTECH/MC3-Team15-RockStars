@@ -39,19 +39,25 @@ final class MotionHandler: ObservableObject {
             // MARK: - 급감속
             if zAcceleration >= stopThreshold {
                 Task.detached { @MainActor [unowned self] in
-                    self.motionStatus = .suddenStop
+                    withAnimation {
+                        self.motionStatus = .suddenStop
+                    }
                 }
                 sleepThreadBriefly()
             // MARK: - 급출발
             } else if zAcceleration <= startThreshold {
                 Task.detached { @MainActor [unowned self] in
-                    self.motionStatus = .suddenAcceleration
+                    withAnimation {
+                        self.motionStatus = .suddenAcceleration
+                    }
                 }
                 sleepThreadBriefly()
             } else {
                 // MARK: - 정상 주행시
                 Task.detached { @MainActor [unowned self] in
-                    self.motionStatus = .normal
+                    withAnimation {
+                        self.motionStatus = .normal
+                    }
                 }
             }
         }
