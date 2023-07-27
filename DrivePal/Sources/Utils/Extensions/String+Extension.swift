@@ -24,6 +24,8 @@ extension String {
     static let backgroundBlueSky = "blueSky"
     static let palImage = "planeWithShadow"
     static let exit = "exit"
+    static let startButtonImage = "startImage"
+    static let setPhoneOnHolder = "setPhoneOnHolder"
     
     /* Result Analysis View */
     static let palInResult = "goodDriver"

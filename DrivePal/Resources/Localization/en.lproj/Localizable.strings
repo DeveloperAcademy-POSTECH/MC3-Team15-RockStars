@@ -18,6 +18,12 @@
 "update-failure" = "Data retrieval from the current location has failed...";
 "update-message" = "The system is currently reading the data...";
 
+/* Onboarding View */
+"precaution-for-use-title" = "Precaution For Use";
+"precaution-for-use-content-0" = "Drive Pal is highly sensitive to the movement of your phone.";
+"precaution-for-use-content-1" = "1. Therefore, please keep in mind that the data can be influenced solely by handling your phone, so use it for reference purposes only.";
+"precaution-for-use-content-2" = "2. Please make sure to install it on the phone holder before starting.";
+
 /* Live Activity */
 "current-location" = "2, Hyoseong-ro 64beon-gil, Pohang-si";
 "warning-text-di" = "WARNING";

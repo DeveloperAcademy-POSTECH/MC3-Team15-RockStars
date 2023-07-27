@@ -9,7 +9,16 @@ import SwiftUI
 
 struct VelocityView: View {
     @EnvironmentObject var locationHandler: LocationsHandler
-    @State private var message = ""
+    private var message: String {
+        switch locationHandler.authorizationStatus {
+        case .success:
+            return "\(locationHandler.kilometerPerHour)\(I18N.debugUpdateSuccess)"
+        case .inProgress:
+            return I18N.debugUpdateMessage
+        case .failure:
+            return I18N.debugUpdateFailure
+        }
+    }
     
     var body: some View {
         VStack {
@@ -22,18 +31,6 @@ struct VelocityView: View {
             }
         }
         .padding(.bottom, 30)
-        .onChange(of: locationHandler.authorizationStatus, perform: updateMessage)
-    }
-    
-    private func updateMessage(_ current: AuthorizationStatus) {
-        switch current {
-        case .success:
-            message = "\(locationHandler.kilometerPerHour)\(I18N.debugUpdateSuccess)"
-        case .failure:
-            message = I18N.debugUpdateFailure
-        case .inProgress:
-            message = I18N.debugUpdateMessage
-        }
     }
 }
 

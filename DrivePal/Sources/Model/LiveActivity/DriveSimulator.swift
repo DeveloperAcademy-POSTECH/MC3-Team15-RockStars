@@ -69,3 +69,30 @@ final class DriveSimulator {
         delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)", lockScreenImageName: "\(lockScreenImageName)\(timestamp % 6 + 1)", timestamp: timestamp, isWarning: isWarning, motionStatus: motionStatus))
     }
 }
+
+extension DriveSimulator {
+    func updateWhenAbnormal(_ zAcceleration: Double, _ isSuddenStop: Bool = true) {
+        count += 1
+        progress += 0.25
+        leadingImageName = .palWarning
+        trailingImageName = .circularWarning
+        expandedImageName = isSuddenStop ? .warnSignThunder : .warnSignMeteor
+        motionStatus = isSuddenStop ? MotionStatus.suddenStop : .suddenAcceleration
+        isWarning = true
+        accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
+    }
+    
+    func updateWhenNormal() {
+        if count < 4 {
+            leadingImageName = .palNormal
+            expandedImageName = .palNormal
+        } else {
+            leadingImageName = .palWarning
+            expandedImageName = .palWarning
+        }
+        trailingImageName = ""
+        lockScreenImageName = .lockScreen
+        isWarning = false
+        motionStatus = .normal
+    }
+}

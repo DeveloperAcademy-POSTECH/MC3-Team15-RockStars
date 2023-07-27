@@ -8,14 +8,13 @@
 import SpriteKit
 import GameplayKit
 
-class BackgroundScene: SKScene {
+final class BackgroundScene: SKScene {
     enum BackgroundImageNamed: String {
         case blueSky, redSky, startRunway, finishAirport
     }
     var backgroundImageNamed: BackgroundImageNamed = .blueSky
     private let backgroundName = "background"
     
-    // update()
     private var lastTime: TimeInterval = 0
     private var deltaTime: TimeInterval = 0 /// The time in seconds it took to complete the last frame
     private let movePerSecond = 0.7 /// 배경 움직이는 속도 조절

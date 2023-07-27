@@ -18,6 +18,12 @@
 "update-failure" = "현재 지역에서 데이터를 읽어오는데 실패했습니다..";
 "update-message" = "데이터를 읽어오고 있습니다..";
 
+/* Onboarding View */
+"precaution-for-use-title" = "사용시 유의사항";
+"precaution-for-use-content-0" = "Drive Pal은 휴대폰의 움직임을 매우 예민하게 감지해요.";
+"precaution-for-use-content-1" = "1. 따라서 데이터는 휴대폰 조작만으로 바뀔 수 있으니 참고용으로 보세요.";
+"precaution-for-use-content-2" = "2. 반드시 거치대에 설치한 후 시작해 주세요.";
+
 /* Live Activity */
 "current-location" = "포항시 효성로 13번길 2";
 "warning-text-di" = "경고";
