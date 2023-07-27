@@ -105,4 +105,35 @@ extension LocationsHandler {
             locationManager.requestWhenInUseAuthorization()
         }
     }
+    
+    private func sleepThreadBriefly() {
+        guard let locationManager else { return }
+        stopUpdateSpeed()
+        Thread.sleep(forTimeInterval: 5)
+        updateSpeed()
+    }
+    
+    private func adjustMotionStatus(by speed: Int) {
+        if speed >= 11 {
+            withAnimation { motionStatus = .suddenAcceleration }
+            sleepThreadBriefly()
+            logger.info("\(#function): Detact Sudden Acceleration")
+            return
+        } else if speed <= -7 {
+            withAnimation { motionStatus = .suddenStop }
+            sleepThreadBriefly()
+            logger.info("\(#function): Detact Sudden Stop")
+            return
+        } else {
+            withAnimation { motionStatus = .normal }
+        }
+    }
+    
+    func updateSpeed() {
+        locationManager?.startUpdatingLocation()
+    }
+    
+    func stopUpdateSpeed() {
+        locationManager?.stopUpdatingLocation()
+    }
 }
