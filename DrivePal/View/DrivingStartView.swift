@@ -19,10 +19,11 @@ struct DrivingStartView: View {
                 .onTapGesture {
                     motionStatus = .takingOff
                 }
-            Text("PRESS TO START")
-                .foregroundColor(.white)
-                .font(.headline)
-                .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
+            Image("startImage")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 75)
+                .position(x: UIScreen.width / 2, y: UIScreen.height / 3)
         }
     }
 }
