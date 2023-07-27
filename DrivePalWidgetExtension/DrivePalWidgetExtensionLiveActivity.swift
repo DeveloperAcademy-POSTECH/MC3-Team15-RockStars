@@ -34,13 +34,13 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                         }
                     }
                 }
-                LinearProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0, linearColor: "#4D52DB")
-                    .background(Color(hex: "6B6B6B"))
+                LinearProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0, linearColor: .lockScreenForegroundColor)
+                    .background(Color.lockScreenBackgroundColor)
                     .frame(width: 256)
                 HStack {
                     Text("경고 \(context.state.driveState.count.description)번")
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(Color(hex: "4D52DB"))
+                        .foregroundColor(.lockScreenForegroundColor)
                         .padding(.trailing, 13)
                     Text("운전시간 \(context.state.driveState.timestamp / 60) min")
                         .font(.system(size: 20, weight: .bold))
@@ -59,15 +59,15 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.center) {
                 }
                 DynamicIslandExpandedRegion(.bottom, priority: 1.0) {
-                    if context.state.driveState.motionStatus == "normal" {
+                    if context.state.driveState.motionStatus == .normal {
                         if context.state.driveState.count < 4 {
                             NormalDrivingView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                         } else {
                             AfterFourWarningsView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                         }
-                    } else if context.state.driveState.motionStatus == "suddenStop" {
+                    } else if context.state.driveState.motionStatus == .suddenStop {
                         SuddenStopView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
-                    } else if context.state.driveState.motionStatus == "suddenAcceleration" {
+                    } else if context.state.driveState.motionStatus == .suddenAcceleration {
                         SuddenAccelerationView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
                     }
                 }
@@ -84,8 +84,8 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                         HStack {
                             CircularProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0)
                                 .frame(width: 12, height: 12)
-                            Text("경고 \(context.state.driveState.count.description)번")
-                                .foregroundColor(context.state.driveState.count < 4 ? Color(hex: "#4DBBDB") : Color(hex: "#FF5050"))
+                            Text(context.state.driveState.count.description)
+                                .foregroundColor(context.state.driveState.count < 4 ? Color.compactNormalCircular : Color.compactWarningCircular)
                                 .font(.system(size: 12))
                         }
                     }
@@ -103,25 +103,5 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
         }
-    }
-}
-
-struct DrivePalWidgetExtensionLiveActivity_Previews: PreviewProvider {
-    static let attributes = DriveAttributes()
-    static let contentState = DriveAttributes.ContentState(driveState: DriveState(count: 0, progress: 0.0, leadingImageName: "normal1", trailingImageName: "", expandedImageName: "normal1", lockScreenImageName: "lockScreen1", timestamp: 0, isWarning: false, motionStatus: "normal"))
-
-    static var previews: some View {
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
-            .previewDisplayName("Island Compact")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
-            .previewDisplayName("Island Expanded")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
-            .previewDisplayName("Minimal")
-        attributes
-            .previewContext(contentState, viewKind: .content)
-            .previewDisplayName("Notification")
     }
 }

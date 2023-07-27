@@ -19,7 +19,7 @@ final class DriveSimulator {
     var expandedImageName = ""
     var lockScreenImageName = ""
     var isWarning = false
-    var motionStatus = ""
+    var motionStatus = MotionStatus.normal
     weak var delegate: DriveSimulatorDelegate?
     
     var accelerationData = [ChartData]()
@@ -46,7 +46,7 @@ final class DriveSimulator {
 
     // End the drive by resetting the vars
     func endDrive() -> DriveState {
-        return DriveState(count: 0, progress: 0.0, leadingImageName: "normal1", trailingImageName: "", expandedImageName: "normal1", lockScreenImageName: "lockScreen1", timestamp: 0, isWarning: false, motionStatus: "normal")
+        return DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, lockScreenImageName: .lockScreen, timestamp: 0, isWarning: false, motionStatus: .normal)
     }
 
     // Reset the drive status to a fresh start
@@ -54,11 +54,11 @@ final class DriveSimulator {
         count = 0
         timestamp = 0
         progress = 0.0
-        leadingImageName = "normal1"
+        leadingImageName = .palNormal
         trailingImageName = ""
-        expandedImageName = "normal1"
-        lockScreenImageName = "lockScreen1"
-        motionStatus = "normal"
+        expandedImageName = .palNormal
+        motionStatus = .normal
+        lockScreenImageName = .lockScreen
         isWarning = false
         accelerationData.removeAll()
     }
@@ -74,25 +74,25 @@ extension DriveSimulator {
     func updateWhenAbnormal(_ zAcceleration: Double, _ isSuddenStop: Bool = true) {
         count += 1
         progress += 0.25
-        leadingImageName = "warning"
-        trailingImageName = "warningCircle"
-        expandedImageName = isSuddenStop ? "warnSignThunder" : "warnSignMeteor"
-        motionStatus = isSuddenStop ? "suddenStop" : "suddenAcceleration"
+        leadingImageName = .palWarning
+        trailingImageName = .circularWarning
+        expandedImageName = isSuddenStop ? .warnSignThunder : .warnSignMeteor
+        motionStatus = isSuddenStop ? MotionStatus.suddenStop : .suddenAcceleration
         isWarning = true
         accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
     }
     
     func updateWhenNormal() {
         if count < 4 {
-            leadingImageName = "normal"
-            expandedImageName = "normal"
+            leadingImageName = .palNormal
+            expandedImageName = .palNormal
         } else {
-            leadingImageName = "warning"
-            expandedImageName = "warning"
+            leadingImageName = .palWarning
+            expandedImageName = .palWarning
         }
         trailingImageName = ""
-        lockScreenImageName = "lockScreen"
+        lockScreenImageName = .lockScreen
         isWarning = false
-        motionStatus = "normal"
+        motionStatus = .normal
     }
 }

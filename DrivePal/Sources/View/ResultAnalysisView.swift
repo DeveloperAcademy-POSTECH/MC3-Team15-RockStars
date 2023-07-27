@@ -13,10 +13,10 @@ struct ResultAnalysisView: View {
     @Binding var showResultAnalysisView: Bool
     var body: some View {
         ZStack {
-            Color.backgroundColor
+            Color.resultBackgroundColor
             
             VStack {
-                Image("goodDriver")
+                Image(.palInResult)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 90)
@@ -31,12 +31,12 @@ struct ResultAnalysisView: View {
                     
                     VStack {
                         Text("운전 시간  : \(LiveActivityModel.shared.simulator.timestamp / 60)분 \(LiveActivityModel.shared.simulator.timestamp % 60)초")
-                            .resultContentsText()
+                            .resultTextModifier()
                         
                         Spacer()
                         
                         Text("부주의  : \(LiveActivityModel.shared.simulator.count)회")
-                            .resultContentsText()
+                            .resultTextModifier()
                     }
                     .padding(.vertical, 80)
                     
@@ -56,7 +56,7 @@ struct ResultAnalysisView: View {
                 ZStack {
                     ChartView(data: LiveActivityModel.shared.simulator.accelerationData)
                     
-                    Button("메인으로 돌아가기") {
+                    Button(I18N.buttonPopToRoot) {
 //                        NavigationUtil.popToRootView()
                         // TODO: - 일단 이전뷰로 돌아가도록 함. 추후 수정 필요.
                         showResultAnalysisView = false

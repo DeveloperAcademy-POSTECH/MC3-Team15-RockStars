@@ -13,10 +13,11 @@ final class BackgroundScene: SKScene {
         case blueSky, redSky, startRunway, finishAirport
     }
     var backgroundImageNamed: BackgroundImageNamed = .blueSky
+    private let backgroundName = "background"
     
     private var lastTime: TimeInterval = 0
     private var deltaTime: TimeInterval = 0 /// The time in seconds it took to complete the last frame
-    private let movePerSecond: CGFloat = 0.7 /// 배경 움직이는 속도 조절
+    private let movePerSecond = 0.7 /// 배경 움직이는 속도 조절
     
     override func didMove(to view: SKView) {
         // game scene
@@ -29,7 +30,7 @@ final class BackgroundScene: SKScene {
             background.anchorPoint = CGPoint(x: 0, y: 0.5)
             background.position = CGPoint(x: self.size.width * CGFloat(index), y: self.size.height / 2)
             background.zPosition = 0
-            background.name = "background"
+            background.name = backgroundName
             self.addChild(background)
         }
     }
@@ -44,7 +45,7 @@ final class BackgroundScene: SKScene {
         lastTime = currentTime
         
         let moveBackground = movePerSecond * CGFloat(deltaTime)
-        self.enumerateChildNodes(withName: "background") { background, _ in
+        self.enumerateChildNodes(withName: backgroundName) { background, _ in
             
             background.position.x -= moveBackground
             // send back to leading

@@ -12,14 +12,14 @@ struct DrivingStartView: View {
     
     var body: some View {
         ZStack {
-            Image("blueSky")
+            Image(.backgroundBlueSky)
                 .resizable()
                 .scaledToFill()
                 .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
                 .onTapGesture {
                     motionStatus = .takingOff
                 }
-            Image("startImage")
+            Image(.startButtonImage)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 75)

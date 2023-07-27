@@ -8,12 +8,7 @@
 import SwiftUI
 import SpriteKit
 
-enum MotionStatus {
-    case none, normal, suddenAcceleration, suddenStop, takingOff, landing
-}
-
 struct DrivingPalView: View {
-
     @State private var showResultAnalysisView = false
     @State private var showOnboardingView = true
     @StateObject private var locationHandler = LocationsHandler()
@@ -46,7 +41,6 @@ struct DrivingPalView: View {
                             .onAppear(perform: locationHandler.requestAuthorization)
                             .padding(.bottom, 50)
                     }
-                    
                     if motionHandler.motionStatus == .normal {
                         ExitButton(motionStatus: $motionHandler.motionStatus)
                         .padding(.bottom, 100)
@@ -55,7 +49,7 @@ struct DrivingPalView: View {
             }
         }
         .sheet(isPresented: $showOnboardingView) {
-            Onboarding()
+            OnboardingView()
         }
         .ignoresSafeArea()
         .onChange(of: motionHandler.motionStatus, perform: actOn)
@@ -82,7 +76,7 @@ private extension DrivingPalView {
     }
 }
 
-// MARK: - Etc.. 추후 네이밍
+// TODO: - Etc.. 추후 네이밍
 private extension DrivingPalView {
     // MARK: - MotionHandler.motionStatus 변화를 감지할 메서드
     private func actOn(_ motion: MotionStatus) {
