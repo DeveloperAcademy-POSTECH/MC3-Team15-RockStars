@@ -21,31 +21,31 @@ enum AuthorizationStatus {
                                 category: String(describing: LocationsHandler.self))
 
     private var lastLocation: CLLocation?
-    @Published var authorizationStatus: AuthorizationStatus = .inProgress
+    var authorizationStatus: AuthorizationStatus {
+        guard let status = locationManager?.authorizationStatus else { return .failure }
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            return .success
+        case .notDetermined:
+            return .inProgress
+        case .denied, .restricted:
+            return .failure
+        }
+    }
+    
     @Published var kilometerPerHour = 0
     
     override init() {
         super.init()
-        startBackgroundLocationUpdates()
+        self.locationManager = CLLocationManager()
     }
 }
 
 // MARK: - CLLocationManagerDelegate 시그니처 메서드
 extension LocationsHandler: CLLocationManagerDelegate {
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedAlways, .authorizedWhenInUse:
-            authorizationStatus = .success
-        case .notDetermined:
-            authorizationStatus = .inProgress
-        default:
-            authorizationStatus = .failure
-        }
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
-            caculateCurrentSpeed(location)
+            calculateCurrentSpeed(location)
         }
     }
     
@@ -55,12 +55,12 @@ extension LocationsHandler: CLLocationManagerDelegate {
 }
 
 // MARK: - 속도 계산을 위한 메서드와 백그라운드 동작 메서드
-private extension LocationsHandler {
-    func startBackgroundLocationUpdates() {
+extension LocationsHandler {
+    private func startBackgroundLocationUpdates() {
         locationManager = CLLocationManager()
         guard let locationManager else { return }
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.activityType = .automotiveNavigation
@@ -68,7 +68,7 @@ private extension LocationsHandler {
         locationManager.startUpdatingLocation()
     }
     
-    func caculateCurrentSpeed(_ current: CLLocation) {
+    private func calculateCurrentSpeed(_ current: CLLocation) {
         guard let lastLocation else {
             lastLocation = current
             return
@@ -85,5 +85,14 @@ private extension LocationsHandler {
         }
         self.lastLocation = current
         kilometerPerHour = Int(round(speed * 3.6 * 10) / 10)    // 소숫점 한 자리에서 반올림 0.1 까지의 정확도, 1의 자리부터 표현
+    }
+    
+    func requestAuthorization() {
+        guard let locationManager else { return }
+        if [CLAuthorizationStatus.authorizedAlways, .authorizedWhenInUse].contains(locationManager.authorizationStatus) {
+            startBackgroundLocationUpdates()
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
 }
