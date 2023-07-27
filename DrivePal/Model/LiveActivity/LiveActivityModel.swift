@@ -72,6 +72,7 @@ extension LiveActivityModel {
             simulator.expandedImageName = "warning"
         }
         simulator.trailingImageName = ""
+        simulator.lockScreenImageName = "lockScreen"
         simulator.isWarning = false
         simulator.motionStatus = "normal"
     }

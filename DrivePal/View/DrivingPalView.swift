@@ -99,6 +99,8 @@ private extension DrivingPalView {
             actionsWhenTakeoff()
         } else if motionHandler.motionStatus == .landing {
             transitionToInitiation()
+        } else if motionHandler.motionStatus == .normal {
+            liveActivityModel.updateWhenNormal()
         } else if motionHandler.motionStatus == .suddenAcceleration {
             liveActivityModel.updateWhenAbnormal(motionHandler.zAcceleration, false)
         } else if motionHandler.motionStatus == .suddenStop {
