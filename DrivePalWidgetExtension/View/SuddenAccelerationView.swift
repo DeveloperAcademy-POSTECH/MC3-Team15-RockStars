@@ -17,7 +17,7 @@ struct SuddenAccelerationView: View {
         ZStack {
             HStack(alignment: VerticalAlignment.top) {
                 ZStack {
-                    Image("warnSignBackground")
+                    Image(.backgroundWarnSign)
                         .resizable()
                     Image("\(expandedImageName)")
                         .resizable()
@@ -25,28 +25,28 @@ struct SuddenAccelerationView: View {
                 .frame(width: 54, height: 53)
                 .padding(.trailing, 5)
                 VStack(alignment: .leading) {
-                    Text("급가속 주의 속도 🎢 낮춰~")
+                    Text(I18N.suddenAcceleratedNow)
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(Color(hex: "FF26A8"))
+                        .foregroundColor(.expandedWarningAcceleration)
                     HStack {
-                        Image("locationPinPink")
+                        Image(.locationPinPink)
                             .resizable()
                             .frame(width: 8, height: 10)
-                        Text("포항시 효성로 13번길 2")
+                        Text(I18N.currentLocationLA)
                             .font(.system(size: 10))
                     }
                     .padding(.bottom, 17)
                     HStack {
-                        Text("경고")
+                        Text(I18N.warningTextLA)
                             .font(.system(size: 8))
                             .opacity(0.4)
-                        Text("+ 1번")
+                        Text(I18N.countOneMoreWarning)
                             .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(Color(hex: "FF26A8"))
+                            .foregroundColor(.expandedWarningAcceleration)
                             
                         Spacer()
                         
-                        Text("운전시간")
+                        Text(I18N.drivingTimeTextLA)
                             .font(.system(size: 8))
                             .opacity(0.4)
                         Text("\(timestamp / 60) min")
@@ -59,7 +59,7 @@ struct SuddenAccelerationView: View {
                 Spacer()
             }
             .padding(.leading, 40)
-            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: "#FF26A8")
+            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: .expandedWarningAcceleration)
                 .frame(width: 256)
                 .offset(y: 17)
         }

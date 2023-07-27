@@ -40,14 +40,16 @@ struct PlaneView_Previews: PreviewProvider {
 
 private extension PlaneView {
     private func actOn(_ motion: MotionStatus) {
-        if motion == .normal {
+        if motion == .takingOff {
             takeoffAnimation()
-            doongsilAnimation()
         } else if motion == .landing {
             landingAnimation()
             animationBoundY = 0
         }
         shakeAnimation(motion)
+        if motion == .normal {
+            doongsilAnimation()
+        }
     }
     
     private func shakeAnimation(_ currentStatus: MotionStatus) {

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct LinearProgressView: View {
     @State var progress = 0.0
-    @State var linearColor: String
+    @State var linearColor: Color
 
     var body: some View {
         VStack {
             ProgressView(value: progress)
-                .progressViewStyle(LinearProgressViewStyle(tint: Color(hex: linearColor)))
+                .progressViewStyle(LinearProgressViewStyle(tint: linearColor))
         }
     }
 }
