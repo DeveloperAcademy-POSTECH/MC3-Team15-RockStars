@@ -12,7 +12,7 @@ struct VelocityView: View {
     private var message: String {
         switch locationHandler.authorizationStatus {
         case .success:
-            return "km/h: \(locationHandler.kilometerPerHour)"
+            return "km/h: \(locationHandler.speedModel.kilometerPerHour)"
         case .inProgress:
             return "데이터를 읽어오고 있습니다.."
         case .failure:

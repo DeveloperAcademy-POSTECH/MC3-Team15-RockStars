@@ -39,9 +39,9 @@ struct SpeedModel {
     }
     
     @Published var motionStatus = MotionStatus.none
-    var location = SpeedModel(date: .now, kilometerPerHour: 0, location: .init()) {
+    var speedModel = SpeedModel(date: .now, kilometerPerHour: 0, location: .init()) {
         willSet {
-            let speed = newValue.kilometerPerHour - location.kilometerPerHour
+            let speed = newValue.kilometerPerHour - speedModel.kilometerPerHour
             adjustMotionStatus(by: speed)
             objectWillChange.send()
         }
@@ -82,7 +82,7 @@ extension LocationsHandler {
     
     private func calculateCurrentSpeed(_ current: CLLocation) {
         guard current.speedAccuracy != -1 else { return }   // 속도 데이터 정확성 검사, -1이면 부정확
-        let lastLocation = location.location
+        let lastLocation = speedModel.location
         var speed = current.speed
         if speed < 0 {
             /// speed가 0보다 작으면 유효하지 않은 데이터
@@ -92,7 +92,7 @@ extension LocationsHandler {
             speed = distance / spendingTime
         }
         let kilometerPerHour = Int(round(speed * 3.6 * 10) / 10)    // 소숫점 한 자리에서 반올림 0.1 까지의 정확도, 1의 자리부터 표현
-        location = SpeedModel(date: current.timestamp,
+        speedModel = SpeedModel(date: current.timestamp,
                             kilometerPerHour: kilometerPerHour,
                             location: current)
     }
