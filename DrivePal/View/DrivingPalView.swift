@@ -48,16 +48,7 @@ struct DrivingPalView: View {
                     }
                     
                     if motionHandler.motionStatus == .normal {
-                        Button {
-                            withAnimation {
-                                motionHandler.motionStatus = .landing
-                            }
-                        } label: {
-                            Image("exit")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50)
-                        }
+                        ExitButton(motionStatus: $motionHandler.motionStatus)
                         .padding(.bottom, 100)
                     }
                 }
@@ -100,11 +91,11 @@ private extension DrivingPalView {
         } else if motionHandler.motionStatus == .landing {
             transitionToInitiation()
         } else if motionHandler.motionStatus == .normal {
-            liveActivityModel.updateWhenNormal()
+            liveActivityModel.simulator.updateWhenNormal()
         } else if motionHandler.motionStatus == .suddenAcceleration {
-            liveActivityModel.updateWhenAbnormal(motionHandler.zAcceleration, false)
+            liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, false)
         } else if motionHandler.motionStatus == .suddenStop {
-            liveActivityModel.updateWhenAbnormal(motionHandler.zAcceleration, true)
+            liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, true)
         } 
     }
     

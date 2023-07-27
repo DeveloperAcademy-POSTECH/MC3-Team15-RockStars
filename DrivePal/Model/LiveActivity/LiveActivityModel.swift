@@ -50,30 +50,3 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
         driveAlreadyStarted = false
     }
 }
-
-extension LiveActivityModel {
-    func updateWhenAbnormal(_ zAcceleration: Double, _ isSuddenStop: Bool = true) {
-        simulator.count += 1
-        simulator.progress += 0.25
-        simulator.leadingImageName = "warning"
-        simulator.trailingImageName = "warningCircle"
-        simulator.expandedImageName = isSuddenStop ? "warnSignThunder" : "warnSignMeteor"
-        simulator.motionStatus = isSuddenStop ? "suddenStop" : "suddenAcceleration"
-        simulator.isWarning = true
-        simulator.accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
-    }
-    
-    func updateWhenNormal() {
-        if simulator.count < 4 {
-            simulator.leadingImageName = "normal"
-            simulator.expandedImageName = "normal"
-        } else {
-            simulator.leadingImageName = "warning"
-            simulator.expandedImageName = "warning"
-        }
-        simulator.trailingImageName = ""
-        simulator.lockScreenImageName = "lockScreen"
-        simulator.isWarning = false
-        simulator.motionStatus = "normal"
-    }
-}
