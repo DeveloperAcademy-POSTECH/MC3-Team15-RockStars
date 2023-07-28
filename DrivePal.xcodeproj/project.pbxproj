@@ -18,6 +18,7 @@
 		7DB9AEB02A6C2B920099F54A /* SuddenStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEAF2A6C2B920099F54A /* SuddenStopView.swift */; };
 		7DB9AEB12A6D13E90099F54A /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBD2A663AD600B7C3FB /* UIScreen+Extension.swift */; };
 		7DFA55E72A73439B00822802 /* ExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA55E62A73439B00822802 /* ExpandedView.swift */; };
+		7DFA55E82A73EDC000822802 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4EC2672A6E6DD3008A711B /* Localizable.strings */; };
 		AD1D49972A66F02500C485FA /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */; };
 		AD1D49D62A67CC1600C485FA /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */; };
 		AD1D49D72A67CC9100C485FA /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
@@ -438,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD742F832A5CFF1A00AD6226 /* Assets.xcassets in Resources */,
+				7DFA55E82A73EDC000822802 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
