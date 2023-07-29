@@ -41,7 +41,7 @@ struct ExpandedView: View {
                 LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: linearColor)
                 
                 HStack {
-                    Text(I18N.warningTextLA + " " + countDescription + "번")
+                    Text(I18N.warningTextLA + " " + countDescription + I18N.warningCountLA)
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(warningColor)
                         
