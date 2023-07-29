@@ -15,13 +15,14 @@ struct ExpandedView: View {
     @State var motionStatus: MotionStatus
     
     var body: some View {
-        ZStack {
+        VStack {
             HStack(alignment: VerticalAlignment.top) {
                 expandedLeadingImage
-                    .border(Color.red)
+                    .frame(width: 54, height: 53)
+                    .padding(.trailing, 5)
                 VStack(alignment: .leading) {
                     Text(motionStatusDescription)
-                        .font(.system(size: 20, weight: .semibold))
+                        .font(.system(size: 16, weight: .semibold))
                     HStack {
                         Image(locationPinImage)
                             .resizable()
@@ -29,34 +30,30 @@ struct ExpandedView: View {
                         Text(I18N.currentLocationLA)
                             .font(.system(size: 10))
                     }
-                    .padding(.bottom, 17)
-                    HStack {
-                        Text(I18N.warningTextLA)
-                            .font(.system(size: 8))
-                            .opacity(textOpacity)
-                        Text(countDescription)
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(warningColor)
-                        
-                        Spacer()
-                        
-                        Text(I18N.drivingTimeTextLA)
-                            .font(.system(size: 8))
-                            .opacity(textOpacity)
-                        Text("\(timestamp / 60) min")
-                            .font(.system(size: 15, weight: .bold))
-                            .opacity(textOpacity)
-                    }
-                    .frame(width: UIScreen.width / 2.7)
                 }
-                .border(Color.blue)
+                
                 Spacer()
             }
-            .padding(.leading, 40)
-            LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: linearColor)
-                .frame(width: 256)
-                .offset(y: 17)
-                .border(Color.yellow)
+            .frame(width: UIScreen.width / 1.52)
+            .padding(.bottom, 5)
+            
+            VStack(alignment: .leading) {
+                LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: linearColor)
+                
+                HStack {
+                    Text(I18N.warningTextLA + " " + countDescription + "번")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(warningColor)
+                        
+                    Spacer()
+                    
+                    Text(I18N.drivingTimeTextLA + " \(timestamp / 60) min")
+                        .font(.system(size: 18, weight: .bold))
+                        .padding(.trailing, 30)
+                }
+                
+            }
+            .frame(width: UIScreen.width / 1.52)
         }
     }
     
@@ -68,13 +65,9 @@ struct ExpandedView: View {
                 Image("\(expandedImageName)")
                     .resizable()
             }
-            .frame(width: 54, height: 53)
-            .padding(.trailing, 5)
         } else {
             Image("\(expandedImageName)")
                 .resizable()
-                .frame(width: 54, height: 53)
-                .padding(.trailing, 5)
         }
     }
     
