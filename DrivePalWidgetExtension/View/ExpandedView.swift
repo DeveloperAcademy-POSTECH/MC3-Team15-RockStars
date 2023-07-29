@@ -57,7 +57,7 @@ struct ExpandedView: View {
         }
     }
     
-    @ViewBuilder var expandedLeadingImage: some View {
+    @ViewBuilder private var expandedLeadingImage: some View {
         if motionStatus == .suddenAcceleration || motionStatus == .suddenStop {
             ZStack {
                 Image(.backgroundWarnSign)
@@ -71,8 +71,16 @@ struct ExpandedView: View {
         }
     }
     
-    var motionStatusDescription: String {
-        if motionStatus == .normal && count < 4 {
+    private var isStatusInNormal: Bool {
+        return motionStatus == .normal && count < 4
+    }
+    
+    private var isStatusInSuddenAction: Bool {
+        return [.suddenAcceleration, .suddenStop].contains(motionStatus)
+    }
+    
+    private var motionStatusDescription: String {
+        if isStatusInNormal {
             return I18N.normalDrivingNow
         } else if motionStatus == .suddenAcceleration {
             return I18N.suddenAcceleratedNow
@@ -83,8 +91,8 @@ struct ExpandedView: View {
         }
     }
     
-    var locationPinImage: String {
-        if motionStatus == .normal && count < 4 {
+    private var locationPinImage: String {
+        if isStatusInNormal {
             return .locationPinBlue
         } else if motionStatus == .suddenAcceleration {
             return .locationPinPink
@@ -95,26 +103,26 @@ struct ExpandedView: View {
         }
     }
     
-    var countDescription: String {
-        if motionStatus == .suddenAcceleration || motionStatus == .suddenStop {
+    private var countDescription: String {
+        if isStatusInSuddenAction {
             return I18N.countOneMoreWarning
         } else {
             return count.description
         }
     }
     
-    var textOpacity: Double {
-        if motionStatus == .normal && count < 4 {
+    private var textOpacity: Double {
+        if isStatusInNormal {
             return 0.4
-        } else if motionStatus == .suddenAcceleration || motionStatus == .suddenStop {
+        } else if isStatusInSuddenAction {
             return 1.0
         } else {
             return 0.8
         }
     }
     
-    var warningColor: Color {
-        if motionStatus == .normal && count < 4 {
+    private var warningColor: Color {
+        if isStatusInNormal {
             return .expandedNormal
         } else if motionStatus == .suddenAcceleration {
             return .expandedWarningAcceleration
@@ -125,8 +133,8 @@ struct ExpandedView: View {
         }
     }
     
-    var linearColor: Color {
-        if motionStatus == .normal && count < 4 {
+    private var linearColor: Color {
+        if isStatusInNormal {
             return .expandedNormal
         } else if motionStatus == .suddenAcceleration {
             return .expandedWarningAcceleration
