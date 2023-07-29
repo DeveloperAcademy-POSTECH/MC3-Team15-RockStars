@@ -63,7 +63,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                 }
             } compactLeading: {
                 HStack {
-                    Image("\(context.state.driveState.leadingImageName)")
+                    Image(context.state.driveState.leadingImageName)
                         .resizable()
                         .scaledToFit()
                 }
@@ -74,19 +74,19 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                         HStack {
                             CircularProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0)
                                 .frame(width: 12, height: 12)
-                            Text("\(I18N.warningTextLA) \( context.state.driveState.count.description)\(I18N.warningCountLA )")
+                            Text("\(I18N.warningTextLA) \( context.state.driveState.count.description)\(I18N.warningCountLA)")
                                 .foregroundColor(context.state.driveState.count < 4 ? Color.compactNormalCircular : Color.compactWarningCircular)
                                 .font(.system(size: 12))
                         }
                     }
                     
-                    Image("\(context.state.driveState.trailingImageName)")
+                    Image(context.state.driveState.trailingImageName)
                         .resizable()
                         .frame(width: 20, height: 20)
                 }
                 .padding(.trailing, 1)
             } minimal: {
-                Image("\(context.state.driveState.leadingImageName)")
+                Image(context.state.driveState.leadingImageName)
                     .resizable()
                     .scaledToFit()
             }
