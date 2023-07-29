@@ -42,14 +42,13 @@ private extension PlaneView {
     private func actOn(_ motion: MotionStatus) {
         if motion == .takingOff {
             takeoffAnimation()
+        } else if motion == .normal {
+            doongsilAnimation()
         } else if motion == .landing {
             landingAnimation()
             animationBoundY = 0
         }
         shakeAnimation(motion)
-        if motion == .normal {
-            doongsilAnimation()
-        }
     }
     
     private func shakeAnimation(_ currentStatus: MotionStatus) {

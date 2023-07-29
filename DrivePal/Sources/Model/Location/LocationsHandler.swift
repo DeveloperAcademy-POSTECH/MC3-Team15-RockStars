@@ -15,12 +15,17 @@ enum AuthorizationStatus {
     case failure
 }
 
+struct SpeedModel {
+    let date: Date
+    let kilometerPerHour: Int
+    let location: CLLocation
+}
+
 @MainActor final class LocationsHandler: NSObject, ObservableObject {
     private lazy var locationManager: CLLocationManager? = nil
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "",
                                 category: String(describing: LocationsHandler.self))
 
-    private var lastLocation: CLLocation?
     var authorizationStatus: AuthorizationStatus {
         guard let status = locationManager?.authorizationStatus else { return .failure }
         switch status {
@@ -33,7 +38,14 @@ enum AuthorizationStatus {
         }
     }
     
-    @Published var kilometerPerHour = 0
+    @Published var motionStatus = MotionStatus.none
+    var speedModel = SpeedModel(date: .now, kilometerPerHour: 0, location: .init()) {
+        willSet {
+            let speed = newValue.kilometerPerHour - speedModel.kilometerPerHour
+            adjustMotionStatus(by: speed)
+            objectWillChange.send()
+        }
+    }
     
     override init() {
         super.init()
@@ -69,12 +81,8 @@ extension LocationsHandler {
     }
     
     private func calculateCurrentSpeed(_ current: CLLocation) {
-        guard let lastLocation else {
-            lastLocation = current
-            return
-        }
         guard current.speedAccuracy != -1 else { return }   // 속도 데이터 정확성 검사, -1이면 부정확
-        
+        let lastLocation = speedModel.location
         var speed = current.speed
         if speed < 0 {
             /// speed가 0보다 작으면 유효하지 않은 데이터
@@ -83,8 +91,10 @@ extension LocationsHandler {
             let spendingTime = current.timestamp.timeIntervalSince(lastLocation.timestamp)
             speed = distance / spendingTime
         }
-        self.lastLocation = current
-        kilometerPerHour = Int(round(speed * 3.6 * 10) / 10)    // 소숫점 한 자리에서 반올림 0.1 까지의 정확도, 1의 자리부터 표현
+        let kilometerPerHour = Int(round(speed * 3.6 * 10) / 10)    // 소숫점 한 자리에서 반올림 0.1 까지의 정확도, 1의 자리부터 표현
+        speedModel = SpeedModel(date: current.timestamp,
+                            kilometerPerHour: kilometerPerHour,
+                            location: current)
     }
     
     func requestAuthorization() {
@@ -94,5 +104,36 @@ extension LocationsHandler {
         } else {
             locationManager.requestWhenInUseAuthorization()
         }
+    }
+    
+    private func sleepThreadBriefly() {
+        guard let locationManager else { return }
+        stopUpdateSpeed()
+        Thread.sleep(forTimeInterval: 5)
+        updateSpeed()
+    }
+    
+    private func adjustMotionStatus(by speed: Int) {
+        if speed >= 11 {
+            withAnimation { motionStatus = .suddenAcceleration }
+            sleepThreadBriefly()
+            logger.info("\(#function): Detact Sudden Acceleration")
+            return
+        } else if speed <= -7 {
+            withAnimation { motionStatus = .suddenStop }
+            sleepThreadBriefly()
+            logger.info("\(#function): Detact Sudden Stop")
+            return
+        } else {
+            withAnimation { motionStatus = .normal }
+        }
+    }
+    
+    func updateSpeed() {
+        locationManager?.startUpdatingLocation()
+    }
+    
+    func stopUpdateSpeed() {
+        locationManager?.stopUpdatingLocation()
     }
 }
