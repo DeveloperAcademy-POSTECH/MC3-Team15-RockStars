@@ -27,6 +27,7 @@
 /* Live Activity */
 "current-location" = "포항시 효성로 13번길 2";
 "warning-text-di" = "경고";
+"warning-count-di" = "번";
 "driving-time-text-di" = "운전 시간";
 
 // AfterFourWarningsView
@@ -38,4 +39,4 @@
 // SuddenAccelerationView, SuddenStopView
 "sudden-acceleration-now" = "급가속 주의 속도 🎢 낮춰~";
 "sudden-stop-now" = "급감속 주의 📉  위험!";
-"one-more-time" = "+ 1번";
+"one-more-time" = "+ 1";

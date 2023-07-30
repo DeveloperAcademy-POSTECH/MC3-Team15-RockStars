@@ -43,6 +43,7 @@ extension String {
     static let locationPinBlue = "locationPinBlue"
     static let locationPinPink = "locationPinPink"
     static let locationPinYellow = "locationPinYellow"
+    static let locationPinBlack = "locationPinBlack"
     
     static let lockScreen = "lockScreen"
     

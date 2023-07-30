@@ -10,13 +10,11 @@
 		7D3435CE2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
 		7D3435D22A5F15D800D11708 /* LiveActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435D12A5F15D800D11708 /* LiveActivityModel.swift */; };
 		7DB9AE8E2A6768260099F54A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE8C2A6768260099F54A /* Color+Extension.swift */; };
-		7DB9AEA62A6C2B150099F54A /* AfterFourWarningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEA52A6C2B150099F54A /* AfterFourWarningsView.swift */; };
 		7DB9AEA82A6C2B320099F54A /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEA72A6C2B320099F54A /* CircularProgressView.swift */; };
 		7DB9AEAA2A6C2B4B0099F54A /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEA92A6C2B4B0099F54A /* LinearProgressView.swift */; };
-		7DB9AEAC2A6C2B620099F54A /* NormalDrivingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEAB2A6C2B620099F54A /* NormalDrivingView.swift */; };
-		7DB9AEAE2A6C2B7D0099F54A /* SuddenAccelerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEAD2A6C2B7D0099F54A /* SuddenAccelerationView.swift */; };
-		7DB9AEB02A6C2B920099F54A /* SuddenStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AEAF2A6C2B920099F54A /* SuddenStopView.swift */; };
 		7DB9AEB12A6D13E90099F54A /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBD2A663AD600B7C3FB /* UIScreen+Extension.swift */; };
+		7DFA55E72A73439B00822802 /* ExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA55E62A73439B00822802 /* ExpandedView.swift */; };
+		7DFA55E82A73EDC000822802 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4EC2672A6E6DD3008A711B /* Localizable.strings */; };
 		AD1D49972A66F02500C485FA /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */; };
 		AD1D49D62A67CC1600C485FA /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */; };
 		AD1D49D72A67CC9100C485FA /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
@@ -89,12 +87,9 @@
 		7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveAttributes.swift; sourceTree = "<group>"; };
 		7D3435D12A5F15D800D11708 /* LiveActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityModel.swift; sourceTree = "<group>"; };
 		7DB9AE8C2A6768260099F54A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		7DB9AEA52A6C2B150099F54A /* AfterFourWarningsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterFourWarningsView.swift; sourceTree = "<group>"; };
 		7DB9AEA72A6C2B320099F54A /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		7DB9AEA92A6C2B4B0099F54A /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
-		7DB9AEAB2A6C2B620099F54A /* NormalDrivingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalDrivingView.swift; sourceTree = "<group>"; };
-		7DB9AEAD2A6C2B7D0099F54A /* SuddenAccelerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuddenAccelerationView.swift; sourceTree = "<group>"; };
-		7DB9AEAF2A6C2B920099F54A /* SuddenStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuddenStopView.swift; sourceTree = "<group>"; };
+		7DFA55E62A73439B00822802 /* ExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedView.swift; sourceTree = "<group>"; };
 		AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsHandler.swift; sourceTree = "<group>"; };
 		AD1D49D82A67D22F00C485FA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -161,12 +156,9 @@
 		7DB9AEA42A6C2A540099F54A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7DB9AEA52A6C2B150099F54A /* AfterFourWarningsView.swift */,
 				7DB9AEA72A6C2B320099F54A /* CircularProgressView.swift */,
 				7DB9AEA92A6C2B4B0099F54A /* LinearProgressView.swift */,
-				7DB9AEAB2A6C2B620099F54A /* NormalDrivingView.swift */,
-				7DB9AEAD2A6C2B7D0099F54A /* SuddenAccelerationView.swift */,
-				7DB9AEAF2A6C2B920099F54A /* SuddenStopView.swift */,
+				7DFA55E62A73439B00822802 /* ExpandedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -435,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD742F832A5CFF1A00AD6226 /* Assets.xcassets in Resources */,
+				7DFA55E82A73EDC000822802 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,20 +497,17 @@
 			files = (
 				AD4EC27B2A7025CB008A711B /* String+Extension.swift in Sources */,
 				7DB9AEAA2A6C2B4B0099F54A /* LinearProgressView.swift in Sources */,
-				7DB9AEA62A6C2B150099F54A /* AfterFourWarningsView.swift in Sources */,
 				7DB9AEA82A6C2B320099F54A /* CircularProgressView.swift in Sources */,
 				7DB9AEB12A6D13E90099F54A /* UIScreen+Extension.swift in Sources */,
+				7DFA55E72A73439B00822802 /* ExpandedView.swift in Sources */,
 				7D3435CE2A5F0C6B00D11708 /* DriveAttributes.swift in Sources */,
 				7DB9AE8E2A6768260099F54A /* Color+Extension.swift in Sources */,
-				7DB9AEB02A6C2B920099F54A /* SuddenStopView.swift in Sources */,
-				7DB9AEAC2A6C2B620099F54A /* NormalDrivingView.swift in Sources */,
 				ADE013982A70C778008E696D /* MotionStatus.swift in Sources */,
 				AD742F802A5CFF1800AD6226 /* DrivePalWidgetExtension.swift in Sources */,
 				AD742F852A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
 				ADC9912D2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */,
 				AD742F7C2A5CFF1800AD6226 /* DrivePalWidgetExtensionBundle.swift in Sources */,
 				AD742F7E2A5CFF1800AD6226 /* DrivePalWidgetExtensionLiveActivity.swift in Sources */,
-				7DB9AEAE2A6C2B7D0099F54A /* SuddenAccelerationView.swift in Sources */,
 				AD4EC27A2A7023EE008A711B /* I18N.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

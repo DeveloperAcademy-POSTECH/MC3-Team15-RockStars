@@ -27,6 +27,7 @@
 /* Live Activity */
 "current-location" = "2, Hyoseong-ro 64beon-gil, Pohang-si";
 "warning-text-di" = "WARNING";
+"warning-count-di" = "";
 "driving-time-text-di" = "TIME";
 
 // AfterFourWarningsView

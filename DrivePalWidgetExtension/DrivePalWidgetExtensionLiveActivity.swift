@@ -16,20 +16,20 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
             // Lock screen/banner UI goes here
             VStack(alignment: .leading) {
                 HStack(alignment: VerticalAlignment.top) {
-                    Image("\(context.state.driveState.lockScreenImageName)")
+                    Image(context.state.driveState.lockScreenImageName)
                         .resizable()
                         .frame(width: 54, height: 53)
                         .padding(.trailing, 5)
                     
                     VStack(alignment: .leading) {
-                        Text("운전중... 🛫")
+                        Text(I18N.normalDrivingNow)
                             .font(.system(size: 17, weight: .semibold))
                             .padding(.bottom, 2)
                         HStack(alignment: VerticalAlignment.top) {
-                            Image("locationPinBlack")
+                            Image(.locationPinBlack)
                                 .resizable()
                                 .frame(width: 8, height: 10)
-                            Text("포항시 효성로 13번길 2")
+                            Text(I18N.currentLocationLA)
                                 .font(.system(size: 12))
                         }
                     }
@@ -38,11 +38,11 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                     .background(Color.lockScreenBackgroundColor)
                     .frame(width: 256)
                 HStack {
-                    Text("경고 \(context.state.driveState.count.description)번")
+                    Text("\(I18N.warningTextLA) \(context.state.driveState.count.description)\(I18N.warningCountLA)")
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.lockScreenForegroundColor)
                         .padding(.trailing, 13)
-                    Text("운전시간 \(context.state.driveState.timestamp / 60) min")
+                    Text("\(I18N.drivingTimeTextLA) \(context.state.driveState.timestamp / 60) min")
                         .font(.system(size: 20, weight: .bold))
                 }
             }
@@ -59,21 +59,11 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.center) {
                 }
                 DynamicIslandExpandedRegion(.bottom, priority: 1.0) {
-                    if context.state.driveState.motionStatus == .normal {
-                        if context.state.driveState.count < 4 {
-                            NormalDrivingView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
-                        } else {
-                            AfterFourWarningsView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
-                        }
-                    } else if context.state.driveState.motionStatus == .suddenStop {
-                        SuddenStopView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
-                    } else if context.state.driveState.motionStatus == .suddenAcceleration {
-                        SuddenAccelerationView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp)
-                    }
+                    ExpandedView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp, motionStatus: context.state.driveState.motionStatus)
                 }
             } compactLeading: {
                 HStack {
-                    Image("\(context.state.driveState.leadingImageName)")
+                    Image(context.state.driveState.leadingImageName)
                         .resizable()
                         .scaledToFit()
                 }
@@ -84,19 +74,19 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                         HStack {
                             CircularProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0)
                                 .frame(width: 12, height: 12)
-                            Text(context.state.driveState.count.description)
+                            Text("\(I18N.warningTextLA) \( context.state.driveState.count.description)\(I18N.warningCountLA)")
                                 .foregroundColor(context.state.driveState.count < 4 ? Color.compactNormalCircular : Color.compactWarningCircular)
                                 .font(.system(size: 12))
                         }
                     }
                     
-                    Image("\(context.state.driveState.trailingImageName)")
+                    Image(context.state.driveState.trailingImageName)
                         .resizable()
                         .frame(width: 20, height: 20)
                 }
                 .padding(.trailing, 1)
             } minimal: {
-                Image("\(context.state.driveState.leadingImageName)")
+                Image(context.state.driveState.leadingImageName)
                     .resizable()
                     .scaledToFit()
             }

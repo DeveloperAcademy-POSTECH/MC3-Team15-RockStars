@@ -14,12 +14,10 @@ struct PlaneView: View {
     @State private var planeDegree = Double.zero
     @State private var movePalX = CGFloat.zero
     @Binding var motionStatus: MotionStatus
-    
-    private let palImage = "planeWithShadow"
     private let initHeight = UIScreen.height + 40
     
     var body: some View {
-            Image(palImage)
+        Image(.palImage)
                 .resizable()
                 .scaledToFit()
                 .frame(width: UIScreen.width - 100)

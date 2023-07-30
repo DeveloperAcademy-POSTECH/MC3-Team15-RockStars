@@ -43,6 +43,7 @@ struct I18N {
     /* Live Activity */
     static let currentLocationLA = "current-location".localized()
     static let warningTextLA = "warning-text-di".localized()
+    static let warningCountLA = "warning-count-di".localized()
     static let drivingTimeTextLA = "driving-time-text-di".localized()
 
     /// AfterFourWarningsView

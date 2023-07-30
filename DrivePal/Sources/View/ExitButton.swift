@@ -16,7 +16,7 @@ struct ExitButton: View {
                 motionStatus = .landing
             }
         } label: {
-            Image("exit")
+            Image(.exit)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 50)

@@ -22,6 +22,7 @@ struct DrivePalApp: App {
                 .environmentObject(model)
                 .onAppear {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+                    UIApplication.shared.isIdleTimerDisabled = true
                 }
         }
         .onChange(of: phase) { currentPhase in
