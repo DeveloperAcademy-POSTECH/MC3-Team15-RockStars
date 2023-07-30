@@ -24,6 +24,10 @@
 "precaution-for-use-content-1" = "1. Therefore, please keep in mind that the data can be influenced solely by handling your phone, so use it for reference purposes only.";
 "precaution-for-use-content-2" = "2. Please make sure to install it on the phone holder before starting.";
 
+/* Result View */
+"words-from-good-result" = "You are the guardian on the road! 👍 👍";
+"words-from-bad-result" = "You need to drive a little more cautiously. 😮‍💨";
+
 /* Live Activity */
 "current-location" = "2, Hyoseong-ro 64beon-gil, Pohang-si";
 "warning-text-di" = "WARNING";

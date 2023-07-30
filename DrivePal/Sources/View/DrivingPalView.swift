@@ -54,7 +54,7 @@ struct DrivingPalView: View {
         .ignoresSafeArea()
         .onChange(of: motionHandler.motionStatus, perform: actOn)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
-            ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
+            ResultTabView(showResultAnalysisView: $showResultAnalysisView)
         }
     }
 }

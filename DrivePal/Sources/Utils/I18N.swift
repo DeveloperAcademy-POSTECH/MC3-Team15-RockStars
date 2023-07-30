@@ -38,7 +38,11 @@ struct I18N {
     static let precautionTitle = "precaution-for-use-title".localized()
     static let precautionContent = ["precaution-for-use-content-0".localized(),
                                     "precaution-for-use-content-1".localized(),
-                                    "precaution-for-use-content-2".localized() ]
+                                    "precaution-for-use-content-2".localized()]
+    
+    /* Result View */
+    static let wordsFromGoodResult = "words-from-good-result".localized()
+    static let wordsFromBadResult = "words-from-bad-result".localized()
 
     /* Live Activity */
     static let currentLocationLA = "current-location".localized()
