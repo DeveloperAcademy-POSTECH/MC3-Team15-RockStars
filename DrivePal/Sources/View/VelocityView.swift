@@ -12,7 +12,7 @@ struct VelocityView: View {
     private var message: String {
         switch locationHandler.authorizationStatus {
         case .success:
-            return "\(locationHandler.kilometerPerHour)\(I18N.debugUpdateSuccess)"
+            return "\(locationHandler.kilometerPerHour)"
         case .inProgress:
             return I18N.debugUpdateMessage
         case .failure:
@@ -21,16 +21,17 @@ struct VelocityView: View {
     }
     
     var body: some View {
-        VStack {
-            Spacer()
-            
+        HStack(spacing: 30) {
+            Image(.gauge)
+                .frame(width: 108)
+            // TODO: - font size가 120이라 데이터 읽어오는 중일 떼, 실패했을 때의 메시지를 짧고 간결하게 바꿔야함
             Text(message)
+                .font(.system(size: 120, weight: .black, design: .rounded))
             
             if locationHandler.authorizationStatus  == .inProgress {
                 ProgressView()
             }
         }
-        .padding(.bottom, 30)
     }
 }
 

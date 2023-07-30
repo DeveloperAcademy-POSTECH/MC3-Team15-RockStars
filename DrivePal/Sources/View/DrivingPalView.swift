@@ -31,19 +31,24 @@ struct DrivingPalView: View {
                 .suddenStop]
                 .contains(motionHandler.motionStatus) {
                 
+                PlaneView(motionStatus: $motionHandler.motionStatus)
+                
                 VStack {
-                    PlaneView(motionStatus: $motionHandler.motionStatus)
-                    
                     if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
                         .contains(motionHandler.motionStatus) {
                         VelocityView()
                             .environmentObject(locationHandler)
                             .onAppear(perform: locationHandler.requestAuthorization)
-                            .padding(.bottom, 50)
+                            .padding(.top, 120)
                     }
+                    
+                    Spacer()
+
                     if motionHandler.motionStatus == .normal {
-                        ExitButton(motionStatus: $motionHandler.motionStatus)
-                        .padding(.bottom, 100)
+                        HStack {
+                            Spacer()
+                            ExitButton(motionStatus: $motionHandler.motionStatus)
+                        }
                     }
                 }
             }
