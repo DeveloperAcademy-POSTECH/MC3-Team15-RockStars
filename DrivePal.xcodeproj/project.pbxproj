@@ -56,7 +56,6 @@
 		BE125CBE2A663AD600B7C3FB /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBD2A663AD600B7C3FB /* UIScreen+Extension.swift */; };
 		BE129AF52A6F52CA006561DD /* PlaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE129AF42A6F52CA006561DD /* PlaneView.swift */; };
 		BE1F43A42A6FFA53008F9CF4 /* DrivingStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F43A32A6FFA53008F9CF4 /* DrivingStartView.swift */; };
-		BE5EF9B52A733F66003B4D14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4EC2672A6E6DD3008A711B /* Localizable.strings */; };
 		BEB018552A700BEF00C34A16 /* ConvertibleBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB018542A700BEF00C34A16 /* ConvertibleBackgroundView.swift */; };
 		BEB018582A70B49100C34A16 /* MotionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB018572A70B49100C34A16 /* MotionHandler.swift */; };
 		BEF7869E2A7212B1006B438C /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF7869D2A7212B1006B438C /* ExitButton.swift */; };
@@ -436,7 +435,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD742F832A5CFF1A00AD6226 /* Assets.xcassets in Resources */,
-				BE5EF9B52A733F66003B4D14 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,7 +672,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
@@ -696,7 +694,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -721,7 +719,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
@@ -743,7 +741,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -777,7 +775,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal.DrivePalWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -809,7 +807,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal.DrivePalWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
