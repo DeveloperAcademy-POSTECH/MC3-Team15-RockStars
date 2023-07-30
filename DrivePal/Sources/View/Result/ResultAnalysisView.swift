@@ -12,15 +12,12 @@ struct ResultAnalysisView: View {
     @EnvironmentObject var model: LiveActivityModel
     
     private var isGoodResult: Bool {
-        //        return model.currentState.count < 4
-        return true
+        return model.currentState.count < 4
     }
     
     var body: some View {
-        
         VStack {
             Spacer()
-            
             Image(isGoodResult ? .palImageInGoodResult : .palImageInBadResult)
                 .resizable()
                 .scaledToFit()
@@ -34,20 +31,16 @@ struct ResultAnalysisView: View {
             
             HStack {
                 ResultDataBoxView(dataBackgroundColor: isGoodResult ? .dataGoodValueBackgroundColor : .dataBadValueBackgroundColor,
-                                  //                                      dataValue: model.currentState.count,
-                                  dataValue: 2,
+                                  dataValue: model.currentState.count,
                                   dataInText: I18N.warningTextLA,
                                   isDrivingTimeData: false)
                 ResultDataBoxView(dataBackgroundColor: .black,
-                                  //                                  dataValue: model.currentState.timestamp / 60,
-                                  dataValue: 79,
+                                  dataValue: model.currentState.timestamp / 60,
                                   dataInText: I18N.drivingTimeTextLA,
                                   isDrivingTimeData: true)
             }
             .padding(.top, 46)
-            
             Spacer()
-            
             HStack {
                 Spacer()
                 Button {
