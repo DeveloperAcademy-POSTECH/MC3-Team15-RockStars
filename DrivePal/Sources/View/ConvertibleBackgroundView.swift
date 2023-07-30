@@ -38,6 +38,7 @@ struct ConvertibleBackgroundView: View {
     }
     
     @Binding var motionStatus: MotionStatus
+    @State private var lightningYAxis = -UIScreen.height
     
     var body: some View {
         ZStack {
@@ -50,8 +51,23 @@ struct ConvertibleBackgroundView: View {
             SpriteView(scene: takeOffScene)
                 .opacity(motionStatus == .takingOff ? 1 : 0)
             
-            SpriteView(scene: abnormalScene)
-                .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
+            ZStack {
+                SpriteView(scene: abnormalScene)
+                Image(.pouringLightning)
+                    .resizable()
+                    .scaledToFill()
+                    .position(x: UIScreen.width / 2, y: lightningYAxis)
+            }
+            .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
+            .onChange(of: motionStatus) { status in
+                if ![MotionStatus.suddenAcceleration, .suddenStop].contains(status) { return }
+                withAnimation(.linear(duration: 5.0)) {
+                    lightningYAxis = UIScreen.height * 2
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.2) {
+                    lightningYAxis = -UIScreen.height
+                }
+            }
             
             SpriteView(scene: landingScene)
                 .opacity(motionStatus == .landing ? 1 : 0)

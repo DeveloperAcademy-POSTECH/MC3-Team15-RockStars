@@ -35,10 +35,6 @@ final class BackgroundScene: SKScene {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.backgroundImageNamed = backgroundImageNamed == .blueSky ? .redSky : .blueSky
-    }
-    
     override func update(_ currentTime: TimeInterval) {
         
         deltaTime = lastTime == 0 ? deltaTime : currentTime - lastTime

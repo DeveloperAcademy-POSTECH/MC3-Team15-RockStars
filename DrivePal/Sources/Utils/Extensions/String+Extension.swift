@@ -22,10 +22,11 @@ extension String {
 extension String {
     /* Driving Pal View */
     static let backgroundBlueSky = "blueSky"
-    static let palImage = "planeWithShadow"
+    static let palImage = "airplane"
     static let exit = "exit"
     static let startButtonImage = "startImage"
     static let setPhoneOnHolder = "setPhoneOnHolder"
+    static let pouringLightning = "pouringLightning"
     
     /* Result Analysis View */
     static let palInResult = "goodDriver"
