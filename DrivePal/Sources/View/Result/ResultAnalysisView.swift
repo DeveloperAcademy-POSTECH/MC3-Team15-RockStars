@@ -51,7 +51,7 @@ struct ResultAnalysisView: View {
             HStack {
                 Spacer()
                 Button {
-                    // TODO: - 공유기능 구현
+                    share()
                 } label: {
                     Image(systemName: .sfShare)
                         .foregroundColor(.white)
@@ -68,19 +68,32 @@ struct ResultAnalysisView: View {
     }
 }
 
+// MARK: - 현재 화면을 캡쳐해 공유하기 위한 익스텐션들
+extension UIView {
+    var screenshot: UIImage {
+        let rect = self.bounds
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        self.layer.render(in: context)
+        let capturedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        return capturedImage
+    }
+}
+
+extension View {
+    func takeScreenshot(origin: CGPoint, size: CGSize) -> UIImage {
+        let window = UIWindow(frame: CGRect(origin: origin, size: size))
+        let hosting = UIHostingController(rootView: self)
+        hosting.view.frame = window.frame
+        window.addSubview(hosting.view)
+        window.makeKeyAndVisible()
+        return hosting.view.screenshot
+    }
+}
 extension ResultAnalysisView {
-    func snapshot() -> UIImage {
-        let controller = UIHostingController(rootView: self)
-        let view = controller.view
-
-        let targetSize = controller.view.intrinsicContentSize
-        view?.bounds = CGRect(origin: .zero, size: targetSize)
-        view?.backgroundColor = .clear
-
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-
-        return renderer.image { _ in
-            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
-        }
+    func share() {
+        let screenshot = body.takeScreenshot(origin: UIScreen.main.bounds.origin, size: UIScreen.main.bounds.size)
+        let activityViewController = UIActivityViewController(activityItems: [screenshot], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.presentedViewController?.present(activityViewController, animated: true)
     }
 }
