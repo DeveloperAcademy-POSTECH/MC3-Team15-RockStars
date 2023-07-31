@@ -37,7 +37,7 @@ struct DrivingPalView: View {
                 VStack {
                     if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
                         .contains(motionHandler.motionStatus) {
-                        VelocityView()
+                        VelocityView(motionStatus: $motionHandler.motionStatus)
                             .environmentObject(locationHandler)
                             .onAppear(perform: locationHandler.requestAuthorization)
                             .padding(.top, 120)
