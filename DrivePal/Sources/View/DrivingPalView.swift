@@ -28,28 +28,19 @@ struct DrivingPalView: View {
             }
             
             // MARK: - PlaneView
-            if [MotionStatus.none,
-                .normal,
-                .takingOff,
-                .landing,
-                .suddenAcceleration,
-                .suddenStop]
-                .contains(motionHandler.motionStatus) {
+            VStack {
+                PlaneView(motionStatus: $motionHandler.motionStatus)
                 
-                VStack {
-                    PlaneView(motionStatus: $motionHandler.motionStatus)
-                    
-                    if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
-                        .contains(motionHandler.motionStatus) {
-                        VelocityView()
-                            .environmentObject(locationHandler)
-                            .onAppear(perform: locationHandler.requestAuthorization)
-                            .padding(.bottom, 50)
-                    }
-                    if motionHandler.motionStatus == .normal {
-                        ExitButton(motionStatus: $motionHandler.motionStatus)
+                if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
+                    .contains(motionHandler.motionStatus) {
+                    VelocityView()
+                        .environmentObject(locationHandler)
+                        .onAppear(perform: locationHandler.requestAuthorization)
+                        .padding(.bottom, 50)
+                }
+                if motionHandler.motionStatus == .normal {
+                    ExitButton(motionStatus: $motionHandler.motionStatus)
                         .padding(.bottom, 100)
-                    }
                 }
             }
         }
@@ -95,7 +86,7 @@ private extension DrivingPalView {
             liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, false)
         } else if motionHandler.motionStatus == .suddenStop {
             liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, true)
-        } 
+        }
     }
     
     // MARK: - Etc에 배치한 이유: 화면 전환의 초기화 설정을 담당
