@@ -26,14 +26,14 @@ struct ConvertibleBackgroundView: View {
     private var takeOffScene: SKScene {
         let scene = BackgroundScene()
         scene.scaleMode = .fill
-        scene.backgroundImageNamed = .startRunway
+        scene.backgroundImageNamed = .airport
         return scene
     }
     
     private var landingScene: SKScene {
         let scene = BackgroundScene()
         scene.scaleMode = .fill
-        scene.backgroundImageNamed = .finishAirport
+        scene.backgroundImageNamed = .airport
         return scene
     }
     

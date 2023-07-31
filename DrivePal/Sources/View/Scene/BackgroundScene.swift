@@ -10,7 +10,7 @@ import GameplayKit
 
 final class BackgroundScene: SKScene {
     enum BackgroundImageNamed: String {
-        case blueSky, redSky, startRunway, finishAirport
+        case blueSky, redSky, airport
     }
     var backgroundImageNamed: BackgroundImageNamed = .blueSky
     private let backgroundName = "background"

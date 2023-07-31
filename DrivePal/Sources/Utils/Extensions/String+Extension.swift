@@ -22,6 +22,7 @@ extension String {
 extension String {
     /* Driving Pal View */
     static let backgroundBlueSky = "blueSky"
+    static let backgroundAirport = "airport"
     static let palImage = "airplane"
     static let exit = "exit"
     static let startButtonImage = "startImage"
