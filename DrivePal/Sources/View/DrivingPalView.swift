@@ -23,6 +23,10 @@ struct DrivingPalView: View {
         ZStack {
             ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
             
+            if motionHandler.motionStatus == .takingOff {
+                DynamicInformView(motionStatus: $motionHandler.motionStatus)
+            }
+            
             // MARK: - PlaneView
             if [MotionStatus.none,
                 .normal,
