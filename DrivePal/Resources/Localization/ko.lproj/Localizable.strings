@@ -24,6 +24,12 @@
 "precaution-for-use-content-1" = "1. 따라서 데이터는 휴대폰 조작만으로 바뀔 수 있으니 참고용으로 보세요.";
 "precaution-for-use-content-2" = "2. 반드시 거치대에 설치한 후 시작해 주세요.";
 
+/* Result View */
+"words-from-good-result" = "당신은 도로 위의
+수호자 👍 👍";
+"words-from-bad-result" = "운전을 조금 조심히
+할 필요가 있어요 😮‍💨";
+
 /* Live Activity */
 "current-location" = "포항시 효성로 13번길 2";
 "warning-text-di" = "경고";

@@ -28,7 +28,12 @@ extension String {
     static let setPhoneOnHolder = "setPhoneOnHolder"
     
     /* Result Analysis View */
-    static let palInResult = "goodDriver"
+    static let palImageInGoodResult = "resultPalImageGood"
+    static let palImageInBadResult = "resultPalImageBad"
+    static let backgroundInGoodResult = "resultBackgroundImageGood"
+    static let backgroundInBadResult = "resultBackgroundImageBad"
+    static let sfXmark = "xmark"
+    static let sfShare = "square.and.arrow.up"
     
     /* Live Activity */
     static let palNormal = "normal"
