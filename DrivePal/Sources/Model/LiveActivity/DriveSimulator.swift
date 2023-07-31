@@ -22,7 +22,7 @@ final class DriveSimulator {
     var motionStatus = MotionStatus.normal
     weak var delegate: DriveSimulatorDelegate?
     
-    var accelerationData = [ChartData]()
+    var chartData = [ChartData]()
 
     // Init test data
     init() {
@@ -60,11 +60,12 @@ final class DriveSimulator {
         motionStatus = .normal
         lockScreenImageName = .lockScreen
         isWarning = false
-        accelerationData.removeAll()
+        chartData.removeAll()
     }
 
     @objc private func runDriveSimulator() {
         timestamp += 1
+        
         // Tell the delegate to update its state
         delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)", lockScreenImageName: "\(lockScreenImageName)\(timestamp % 6 + 1)", timestamp: timestamp, isWarning: isWarning, motionStatus: motionStatus))
     }
@@ -79,7 +80,7 @@ extension DriveSimulator {
         expandedImageName = isSuddenStop ? .warnSignThunder : .warnSignMeteor
         motionStatus = isSuddenStop ? MotionStatus.suddenStop : .suddenAcceleration
         isWarning = true
-        accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
+        chartData.append(ChartData(timestamp: .now, value: zAcceleration, type: isSuddenStop ? .suddenStop : .suddenAcceleration))
     }
     
     func updateWhenNormal() {

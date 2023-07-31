@@ -9,13 +9,20 @@ import SwiftUI
 import Charts
 
 struct ChartData: Identifiable {
+    
+    enum DataType {
+        case normal, suddenAcceleration, suddenStop
+    }
+    
     let id = UUID()
     var timestamp: Date
-    var accelerationValue: Double
+    var value: Double
+    var type: DataType
     
-    init(timestamp: Date, accelerationValue: Double) {
+    init(timestamp: Date, value: Double, type: DataType) {
         self.timestamp = timestamp
-        self.accelerationValue = accelerationValue
+        self.value = value
+        self.type = type
     }
 }
 
@@ -29,14 +36,14 @@ struct ChartView: View {
             Chart(data) {
                 LineMark(
                     x: .value("timestamp", $0.timestamp),
-                    y: .value("value", $0.accelerationValue)
+                    y: .value("value", $0.value)
                 )
                 .lineStyle(StrokeStyle(lineWidth: 5, dash: [15, 20]))
                 .interpolationMethod(.catmullRom)
                 
                 PointMark(
                     x: .value("timestamp", $0.timestamp),
-                    y: .value("value", $0.accelerationValue)
+                    y: .value("value", $0.value)
                 )
                 .symbol {
                     ZStack {
@@ -59,6 +66,14 @@ struct ChartView: View {
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .foregroundColor(.white)
+            
+            Spacer()
+        }
+        .background {
+            Image(.backgroundResultChart)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
         }
     }
 }
