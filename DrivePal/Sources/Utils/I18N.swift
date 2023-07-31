@@ -39,6 +39,7 @@ struct I18N {
     static let precautionContent = ["precaution-for-use-content-0".localized(),
                                     "precaution-for-use-content-1".localized(),
                                     "precaution-for-use-content-2".localized()]
+    static let informDynamicIsland = "inform-dynamic-island".localized()
     
     /* Result View */
     static let wordsFromGoodResult = "words-from-good-result".localized()
