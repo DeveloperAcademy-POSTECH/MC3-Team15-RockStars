@@ -9,60 +9,66 @@ import SwiftUI
 import Charts
 
 struct ChartData: Identifiable {
-    
-    enum DataType {
-        case normal, suddenAcceleration, suddenStop
-    }
-    
     let id = UUID()
-    var timestamp: Date
+    var timestamp: Int
     var value: Double
-    var type: DataType
     
-    init(timestamp: Date, value: Double, type: DataType) {
+    init(timestamp: Int, value: Double) {
         self.timestamp = timestamp
         self.value = value
-        self.type = type
     }
 }
 
 struct ChartView: View {
     
     var data: [ChartData]
+    private var pointThreshold: Double {
+        if data.count < 4 {
+            return 0.0
+        }
+        return data.sorted { $0.value.magnitude > $1.value.magnitude }[3].value.magnitude
+    }
     
     var body: some View {
         VStack {
             Spacer()
-            Chart(data) {
+            Chart(data, id: \.timestamp) { datum in
                 LineMark(
-                    x: .value("timestamp", $0.timestamp),
-                    y: .value("value", $0.value)
+                    x: .value("timestamp", datum.timestamp),
+                    y: .value("value", datum.value)
                 )
-                .lineStyle(StrokeStyle(lineWidth: 5, dash: [15, 20]))
-                .interpolationMethod(.catmullRom)
+                .lineStyle(StrokeStyle(lineWidth: 9, lineCap: .round))
+                .interpolationMethod(.monotone)
                 
-                PointMark(
-                    x: .value("timestamp", $0.timestamp),
-                    y: .value("value", $0.value)
-                )
-                .symbol {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(.black)
-                            .frame(width: 20, height: 20)
-                            .overlay {
-                                Circle()
-                                    .stroke(.white, lineWidth: 5)
-                            }
-                        
-                        Circle()
-                            .frame(width: 15, height: 15)
-                            .foregroundColor(.red)
+                if datum.value.magnitude >= pointThreshold {
+                    PointMark(
+                        x: .value("timestamp", datum.timestamp),
+                        y: .value("value", datum.value)
+                    )
+                    .symbol {
+                        VStack(spacing: 8) {
+                            Text("\(datum.timestamp / 60) min")
+                                .font(.system(size: 12, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                            Text("\(datum.value) km/h")
+                                .font(.system(size: 16, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                            Image(.gaugeOnChart)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 55)
+                        }
+                        .padding(datum.value < 0 ? .top : .bottom, 120)
+                        .onAppear {
+                            print("=== DEBUG: \(datum.value.magnitude >= pointThreshold)")
+                            print("=== DEBUG: \(datum.value.magnitude)")
+                            print("=== DEBUG: \(pointThreshold)")
+                        }
                     }
                 }
-                
             }
             .frame(width: UIScreen.width - 40, height: UIScreen.height / 3)
+            .scaledToFit()
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .foregroundColor(.white)
@@ -74,6 +80,10 @@ struct ChartView: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
+        }
+        .onAppear {
+            print("=== DEBUG: \(data.sorted { $0.value.magnitude > $1.value.magnitude })")
+            print("=== DEBUG: \(pointThreshold)")
         }
     }
 }

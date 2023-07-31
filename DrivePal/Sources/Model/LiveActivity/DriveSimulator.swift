@@ -80,7 +80,7 @@ extension DriveSimulator {
         expandedImageName = isSuddenStop ? .warnSignThunder : .warnSignMeteor
         motionStatus = isSuddenStop ? MotionStatus.suddenStop : .suddenAcceleration
         isWarning = true
-        chartData.append(ChartData(timestamp: .now, value: zAcceleration, type: isSuddenStop ? .suddenStop : .suddenAcceleration))
+        chartData.append(ChartData(timestamp: timestamp, value: zAcceleration))
     }
     
     func updateWhenNormal() {

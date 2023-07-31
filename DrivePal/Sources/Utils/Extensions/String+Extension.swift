@@ -35,6 +35,7 @@ extension String {
     static let backgroundResultChart = "resultBackgroundChart"
     static let sfXmark = "xmark"
     static let sfShare = "square.and.arrow.up"
+    static let gaugeOnChart = "gaugeOnChart"
     
     /* Live Activity */
     static let palNormal = "normal"
