@@ -24,7 +24,8 @@ struct DrivingPalView: View {
             ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
             
             // MARK: - PlaneView
-            if [MotionStatus.normal,
+            if [MotionStatus.none,
+                .normal,
                 .takingOff,
                 .landing,
                 .suddenAcceleration,
@@ -104,7 +105,9 @@ private extension DrivingPalView {
     
     private func actionsWhenTakeoff() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            motionHandler.motionStatus = .normal
+            withAnimation {
+                motionHandler.motionStatus = .normal
+            }
             startLiveActivityUpdate()
             motionHandler.startAccelerometerUpdate()
         }
