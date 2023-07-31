@@ -61,7 +61,7 @@ private extension PlaneView {
         withAnimation(.linear(duration: 1.0).repeatCount(5)) {
             planeOpacity = .zero
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.12) {
             planeOpacity = 1.0
         }
     }
