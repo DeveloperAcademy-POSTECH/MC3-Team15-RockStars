@@ -24,7 +24,8 @@ struct DrivingPalView: View {
             ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
             
             // MARK: - PlaneView
-            if [MotionStatus.normal,
+            if [MotionStatus.none,
+                .normal,
                 .takingOff,
                 .landing,
                 .suddenAcceleration,
