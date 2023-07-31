@@ -96,19 +96,19 @@ private extension DrivingPalView {
     
     // MARK: - Etc에 배치한 이유: 화면 전환의 초기화 설정을 담당
     private func transitionToInitiation() {
+        stopLiveActivityUpdate()
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             motionHandler.motionStatus = .none
-            stopLiveActivityUpdate()
             showResultAnalysisView.toggle()
         }
     }
     
     private func actionsWhenTakeoff() {
+        startLiveActivityUpdate()
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             withAnimation {
                 motionHandler.motionStatus = .normal
             }
-            startLiveActivityUpdate()
             motionHandler.startAccelerometerUpdate()
         }
     }
