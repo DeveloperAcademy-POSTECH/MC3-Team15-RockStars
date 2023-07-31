@@ -24,7 +24,8 @@ struct DrivingPalView: View {
             ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
             
             // MARK: - PlaneView
-            if [MotionStatus.normal,
+            if [MotionStatus.none,
+                .normal,
                 .takingOff,
                 .landing,
                 .suddenAcceleration,
@@ -54,7 +55,7 @@ struct DrivingPalView: View {
         .ignoresSafeArea()
         .onChange(of: motionHandler.motionStatus, perform: actOn)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
-            ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
+            ResultTabView(showResultAnalysisView: $showResultAnalysisView)
         }
     }
 }
@@ -105,7 +106,10 @@ private extension DrivingPalView {
     private func actionsWhenTakeoff() {
         startLiveActivityUpdate()
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            motionHandler.motionStatus = .normal
+            withAnimation {
+                motionHandler.motionStatus = .normal
+            }
+            startLiveActivityUpdate()
             motionHandler.startAccelerometerUpdate()
         }
     }
