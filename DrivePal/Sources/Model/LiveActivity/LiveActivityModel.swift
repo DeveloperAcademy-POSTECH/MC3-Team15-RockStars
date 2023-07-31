@@ -39,7 +39,12 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
         self.currentState = driveState
         let updatedDriveStatus = DriveAttributes.ContentState(driveState: driveState)
         Task {
-            await liveActivity?.update(using: updatedDriveStatus)
+            let alertConfiguration = AlertConfiguration(
+                title: "급감속/급가속주의",
+                body: "경고: \(driveState.count)",
+                sound: .default
+            )
+            await liveActivity?.update(using: updatedDriveStatus, alertConfiguration: driveState.isWarning ? alertConfiguration : nil)
         }
     }
     
