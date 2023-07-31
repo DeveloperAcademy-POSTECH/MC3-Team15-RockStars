@@ -109,7 +109,6 @@ private extension DrivingPalView {
             withAnimation {
                 motionHandler.motionStatus = .normal
             }
-            startLiveActivityUpdate()
             motionHandler.startAccelerometerUpdate()
         }
     }
