@@ -17,8 +17,11 @@ extension Color {
     }
     
     // MARK: - Result Analysis View
-    static let resultBackgroundColor = Color(0xB2E3FF)
-    static let resultTextColor = Color(0x0C205A)
+    static let wordsFromResultColor = Color(0xE8F1FF)
+    static let dataBoxBorderColor = Color(0xF5F5F5)
+    static let dataGoodValueBackgroundColor = Color(0x3594FF)
+    static let dataBadValueBackgroundColor = Color(0xFF7988)
+    static let dataTextColor = Color(0x585858)
     
     // MARK: - Dynamic Island
     /// compact

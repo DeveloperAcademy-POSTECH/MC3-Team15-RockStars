@@ -32,13 +32,13 @@ final class DriveSimulator {
     func start() {
         if simulatorStarted { return }
         reset()
+        delegate?.updateLiveActivity(driveState: endDrive())
         simulatorStarted = true
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runDriveSimulator), userInfo: nil, repeats: true)
     }
 
     // Reports to the delegate (LiveActivityModel)
     func end() {
-        delegate?.updateLiveActivity(driveState: endDrive())
         delegate?.stopLiveActivity()
         simulatorStarted = false
         timer?.invalidate()

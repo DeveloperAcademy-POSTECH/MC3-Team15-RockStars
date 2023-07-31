@@ -24,7 +24,8 @@ struct DrivingPalView: View {
             ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
             
             // MARK: - PlaneView
-            if [MotionStatus.normal,
+            if [MotionStatus.none,
+                .normal,
                 .takingOff,
                 .landing,
                 .suddenAcceleration,
@@ -59,7 +60,7 @@ struct DrivingPalView: View {
         .ignoresSafeArea()
         .onChange(of: motionHandler.motionStatus, perform: actOn)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
-            ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
+            ResultTabView(showResultAnalysisView: $showResultAnalysisView)
         }
     }
 }
@@ -100,17 +101,19 @@ private extension DrivingPalView {
     
     // MARK: - Etc에 배치한 이유: 화면 전환의 초기화 설정을 담당
     private func transitionToInitiation() {
+        stopLiveActivityUpdate()
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             motionHandler.motionStatus = .none
-            stopLiveActivityUpdate()
             showResultAnalysisView.toggle()
         }
     }
     
     private func actionsWhenTakeoff() {
+        startLiveActivityUpdate()
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            motionHandler.motionStatus = .normal
-            startLiveActivityUpdate()
+            withAnimation {
+                motionHandler.motionStatus = .normal
+            }
             motionHandler.startAccelerometerUpdate()
         }
     }
