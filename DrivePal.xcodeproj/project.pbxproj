@@ -44,7 +44,6 @@
 		ADC9912C2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9912B2A65096D00422D32 /* DriveSimulatorDelegate.swift */; };
 		ADC9912D2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9912B2A65096D00422D32 /* DriveSimulatorDelegate.swift */; };
 		ADCBEBAD2A5F266900DDC27D /* DrivingPalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */; };
-		ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */; };
 		ADD010592A757C54002E92CD /* ResultDataBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD010582A757C54002E92CD /* ResultDataBoxView.swift */; };
 		ADD0105C2A7608D2002E92CD /* ResultTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0105B2A7608D2002E92CD /* ResultTabView.swift */; };
 		ADE013972A70BBC3008E696D /* MotionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE013962A70BBC3008E696D /* MotionStatus.swift */; };
@@ -116,7 +115,6 @@
 		ADC991282A65093B00422D32 /* DriveSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveSimulator.swift; sourceTree = "<group>"; };
 		ADC9912B2A65096D00422D32 /* DriveSimulatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveSimulatorDelegate.swift; sourceTree = "<group>"; };
 		ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPalView.swift; sourceTree = "<group>"; };
-		ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 		ADD010582A757C54002E92CD /* ResultDataBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDataBoxView.swift; sourceTree = "<group>"; };
 		ADD0105B2A7608D2002E92CD /* ResultTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTabView.swift; sourceTree = "<group>"; };
 		ADE013962A70BBC3008E696D /* MotionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionStatus.swift; sourceTree = "<group>"; };
@@ -320,7 +318,6 @@
 				BE1F43A32A6FFA53008F9CF4 /* DrivingStartView.swift */,
 				BE125CBB2A662AE900B7C3FB /* VelocityView.swift */,
 				BE129AF42A6F52CA006561DD /* PlaneView.swift */,
-				ADCBEBB22A5F3BBB00DDC27D /* Shake.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,7 +482,6 @@
 				AD448A8C2A66AB1900585590 /* Bundle+Extension.swift in Sources */,
 				ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */,
 				7D3435D22A5F15D800D11708 /* LiveActivityModel.swift in Sources */,
-				ADCBEBB32A5F3BBB00DDC27D /* Shake.swift in Sources */,
 				BE1F43A42A6FFA53008F9CF4 /* DrivingStartView.swift in Sources */,
 				ADC9912C2A65096D00422D32 /* DriveSimulatorDelegate.swift in Sources */,
 				BEF7869E2A7212B1006B438C /* ExitButton.swift in Sources */,

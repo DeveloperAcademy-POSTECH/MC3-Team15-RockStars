@@ -11,7 +11,6 @@ struct PlaneView: View {
     
     @State private var animationBoundY = CGFloat.zero
     @State private var planeDegree = Double.zero
-    @State private var movePalX = CGFloat.zero
     @State private var planeOpacity = 1.0
     @Binding var motionStatus: MotionStatus
     
@@ -32,7 +31,6 @@ struct PlaneView: View {
                 .position(x: UIScreen.width / 3,
                           y: planeHeight + animationBoundY)
                 .rotationEffect(.degrees(planeDegree))
-                .shake(movePalX)
                 .onChange(of: motionStatus, perform: actOn)
                 .opacity(planeOpacity)
     }
@@ -59,10 +57,11 @@ private extension PlaneView {
     }
     
     private func inDangerAnimation() {
+        animationBoundY = 0
         withAnimation(.linear(duration: 1.0).repeatCount(5)) {
             planeOpacity = .zero
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.2) {
             planeOpacity = 1.0
         }
     }
