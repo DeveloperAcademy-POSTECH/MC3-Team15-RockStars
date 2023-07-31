@@ -105,7 +105,9 @@ private extension DrivingPalView {
     
     private func actionsWhenTakeoff() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            motionHandler.motionStatus = .normal
+            withAnimation {
+                motionHandler.motionStatus = .normal
+            }
             startLiveActivityUpdate()
             motionHandler.startAccelerometerUpdate()
         }
