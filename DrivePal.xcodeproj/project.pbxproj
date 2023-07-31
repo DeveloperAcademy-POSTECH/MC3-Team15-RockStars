@@ -54,6 +54,8 @@
 		BE125CBE2A663AD600B7C3FB /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE125CBD2A663AD600B7C3FB /* UIScreen+Extension.swift */; };
 		BE129AF52A6F52CA006561DD /* PlaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE129AF42A6F52CA006561DD /* PlaneView.swift */; };
 		BE1F43A42A6FFA53008F9CF4 /* DrivingStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F43A32A6FFA53008F9CF4 /* DrivingStartView.swift */; };
+		BE5EF9B52A733F66003B4D14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD4EC2672A6E6DD3008A711B /* Localizable.strings */; };
+		BE88BFF12A7764F100D40B58 /* DynamicInformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88BFF02A7764F100D40B58 /* DynamicInformView.swift */; };
 		BEB018552A700BEF00C34A16 /* ConvertibleBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB018542A700BEF00C34A16 /* ConvertibleBackgroundView.swift */; };
 		BEB018582A70B49100C34A16 /* MotionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB018572A70B49100C34A16 /* MotionHandler.swift */; };
 		BEF7869E2A7212B1006B438C /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF7869D2A7212B1006B438C /* ExitButton.swift */; };
@@ -126,6 +128,7 @@
 		BE129AF42A6F52CA006561DD /* PlaneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneView.swift; sourceTree = "<group>"; };
 		BE1F43A32A6FFA53008F9CF4 /* DrivingStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingStartView.swift; sourceTree = "<group>"; };
 		BE3BC2202A5E347D00CF60ED /* DrivePal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DrivePal.entitlements; sourceTree = "<group>"; };
+		BE88BFF02A7764F100D40B58 /* DynamicInformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicInformView.swift; sourceTree = "<group>"; };
 		BE9294472A6172A100368B78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE9294482A61731400368B78 /* DrivePalWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrivePalWidgetExtension.entitlements; sourceTree = "<group>"; };
 		BEB018542A700BEF00C34A16 /* ConvertibleBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertibleBackgroundView.swift; sourceTree = "<group>"; };
@@ -315,6 +318,7 @@
 				ADF027D32A5D9179005B7B89 /* Scene */,
 				ADCBEBAC2A5F266900DDC27D /* DrivingPalView.swift */,
 				AD4EC2722A6F6534008A711B /* OnboardingView.swift */,
+				BE88BFF02A7764F100D40B58 /* DynamicInformView.swift */,
 				BEF7869D2A7212B1006B438C /* ExitButton.swift */,
 				BEB018542A700BEF00C34A16 /* ConvertibleBackgroundView.swift */,
 				BE1F43A32A6FFA53008F9CF4 /* DrivingStartView.swift */,
@@ -491,6 +495,7 @@
 				BEF7869E2A7212B1006B438C /* ExitButton.swift in Sources */,
 				BEB018582A70B49100C34A16 /* MotionHandler.swift in Sources */,
 				AD742F862A5CFF1A00AD6226 /* DrivePalWidgetExtension.intentdefinition in Sources */,
+				BE88BFF12A7764F100D40B58 /* DynamicInformView.swift in Sources */,
 				ADCBEBAD2A5F266900DDC27D /* DrivingPalView.swift in Sources */,
 				BE129AF52A6F52CA006561DD /* PlaneView.swift in Sources */,
 				ADC991292A65093B00422D32 /* DriveSimulator.swift in Sources */,
