@@ -59,18 +59,20 @@ struct ConvertibleBackgroundView: View {
                     .position(x: UIScreen.width / 2, y: lightningYAxis)
             }
             .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
-            .onChange(of: motionStatus) { status in
-                if ![MotionStatus.suddenAcceleration, .suddenStop].contains(status) { return }
-                withAnimation(.linear(duration: 5.0)) {
-                    lightningYAxis = UIScreen.height * 2
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.2) {
-                    lightningYAxis = -UIScreen.height
-                }
-            }
+            .onChange(of: motionStatus, perform: lightningAnimation)
             
             SpriteView(scene: landingScene)
                 .opacity(motionStatus == .landing ? 1 : 0)
+        }
+    }
+    
+    private func lightningAnimation(_ status: MotionStatus) {
+        if ![MotionStatus.suddenAcceleration, .suddenStop].contains(status) { return }
+        withAnimation(.linear(duration: 5.0)) {
+            lightningYAxis = UIScreen.height * 2
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.2) {
+            lightningYAxis = -UIScreen.height
         }
     }
 }
