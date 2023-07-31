@@ -16,6 +16,7 @@ struct DynamicInformView: View {
         VStack {
                 RoundedRectangle(cornerRadius: 40)
                     .padding(.horizontal)
+                    .foregroundColor(.black)
                     .frame(height: UIScreen.height / 6)
                     .overlay {
                         Text(I18N.informDynamicIsland)
@@ -27,15 +28,19 @@ struct DynamicInformView: View {
                     .scaleEffect(x: isShrunk ? 0.3 : 1.0,
                                  y: isShrunk ? 0.2 : 1.0,
                                  anchor: .top)
-                    .offset(y: isShrunk ? -45 : 0)
+                    .offset(y: isShrunk ? 20 : 60)
                     .animation(.easeOut(duration: 0.5), value: isShrunk)
-                    .onTapGesture {
-                        guard !isShrunk else { return }
-                        withAnimation {
-                            isShrunk.toggle()
-                        }
-                    }
+                    .onAppear(perform: shrink)
             Spacer()
+        }
+    }
+    
+    func shrink() {
+        guard !isShrunk else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            withAnimation {
+                isShrunk.toggle()
+            }
         }
     }
 }
