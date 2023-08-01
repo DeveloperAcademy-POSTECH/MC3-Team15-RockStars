@@ -11,7 +11,7 @@ import ActivityKit
 final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
     static let shared = LiveActivityModel()
     
-    @Published var currentState = DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, lockScreenImageName: .lockScreen, timestamp: 0, isWarning: false, motionStatus: .normal)
+    @Published var currentState = DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, lockScreenImageName: .lockScreen, timestamp: 0, isWarning: false, motionStatus: .normal, shouldDisplayAlert: false)
     var liveActivity: Activity<DriveAttributes>?
     var driveAlreadyStarted = false
     let simulator = DriveSimulator()
@@ -39,7 +39,13 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
         self.currentState = driveState
         let updatedDriveStatus = DriveAttributes.ContentState(driveState: driveState)
         Task {
-            await liveActivity?.update(using: updatedDriveStatus)
+            let alertConfiguration = AlertConfiguration(
+                title: "급감속/급가속주의",
+                body: "경고: \(driveState.count)",
+                sound: .default
+            )
+            await liveActivity?.update(using: updatedDriveStatus, alertConfiguration: driveState.shouldDisplayAlert ? alertConfiguration : nil)
+            simulator.shouldDisplayAlert = false
         }
     }
     

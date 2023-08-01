@@ -23,24 +23,34 @@ struct DrivingPalView: View {
         ZStack {
             ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
             
-            if motionHandler.motionStatus == .takingOff {
-                DynamicInformView(motionStatus: $motionHandler.motionStatus)
-            }
-            
             // MARK: - PlaneView
-            VStack {
+            if [MotionStatus.none,
+                .normal,
+                .takingOff,
+                .landing,
+                .suddenAcceleration,
+                .suddenStop]
+                .contains(motionHandler.motionStatus) {
+                
                 PlaneView(motionStatus: $motionHandler.motionStatus)
                 
-                if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
-                    .contains(motionHandler.motionStatus) {
-                    VelocityView()
-                        .environmentObject(locationHandler)
-                        .onAppear(perform: locationHandler.requestAuthorization)
-                        .padding(.bottom, 50)
-                }
-                if motionHandler.motionStatus == .normal {
-                    ExitButton(motionStatus: $motionHandler.motionStatus)
-                        .padding(.bottom, 100)
+                VStack {
+                    if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
+                        .contains(motionHandler.motionStatus) {
+                        VelocityView(motionStatus: $motionHandler.motionStatus)
+                            .environmentObject(locationHandler)
+                            .onAppear(perform: locationHandler.requestAuthorization)
+                            .padding(.top, 120)
+                    }
+                    
+                    Spacer()
+
+                    if motionHandler.motionStatus == .normal {
+                        HStack {
+                            Spacer()
+                            ExitButton(motionStatus: $motionHandler.motionStatus)
+                        }
+                    }
                 }
             }
         }

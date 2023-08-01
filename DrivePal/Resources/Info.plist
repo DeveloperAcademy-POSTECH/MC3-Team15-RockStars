@@ -6,6 +6,11 @@
 	<array>
 		<string>pos.academy.DrivePal.detectAutomotive</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Galmuri9.ttf</string>
+		<string>PressStart2P-Regular.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
