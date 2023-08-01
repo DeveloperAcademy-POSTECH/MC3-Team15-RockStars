@@ -76,7 +76,7 @@ extension DriveSimulator {
         progress += 0.25
         leadingImageName = .palWarning
         trailingImageName = .circularWarning
-        expandedImageName = isSuddenStop ? .warnSignThunder : .warnSignMeteor
+        expandedImageName = isSuddenStop ? .warnSignMeteor : .warnSignThunder
         motionStatus = isSuddenStop ? MotionStatus.suddenStop : .suddenAcceleration
         isWarning = true
         accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))

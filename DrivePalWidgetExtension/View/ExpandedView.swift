@@ -95,9 +95,9 @@ struct ExpandedView: View {
         if isStatusInNormal {
             return .locationPinBlue
         } else if motionStatus == .suddenAcceleration {
-            return .locationPinPink
-        } else if motionStatus == .suddenStop {
             return .locationPinYellow
+        } else if motionStatus == .suddenStop {
+            return .locationPinPink
         } else {
             return .locationPinRed
         }

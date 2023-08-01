@@ -31,8 +31,8 @@ extension Color {
     /// expanded
     static let expandedNormal = Color(0x01F0FF)
     static let expandedWarning = Color(0xFF5050)
-    static let expandedWarningAcceleration = Color(0xFF26A8)
-    static let expandedWarningDeceleration = Color(0xDFFF1C)
+    static let expandedWarningAcceleration = Color(0xDFFF1C)
+    static let expandedWarningDeceleration = Color(0xFF26A8)
     
     /// lockscreen
     static let lockScreenForegroundColor = Color(0x4D52DB)
