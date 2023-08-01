@@ -10,8 +10,6 @@ import Foundation
 final class DriveSimulator {
     // instance properties
     var count = 0
-    var countSuddenAcceleration = 0
-    var countSuddenStop = 0
     var progress = 0.0
     var timer: Timer?
     var timestamp = 0
@@ -75,8 +73,6 @@ final class DriveSimulator {
 extension DriveSimulator {
     func updateWhenAbnormal(_ zAcceleration: Double, _ isSuddenStop: Bool = true) {
         count += 1
-        countSuddenStop += isSuddenStop ? 1 : 0
-        countSuddenAcceleration += isSuddenStop ? 0: 1
         progress += 0.25
         leadingImageName = .palWarning
         trailingImageName = .circularWarning
