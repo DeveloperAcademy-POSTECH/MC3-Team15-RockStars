@@ -13,7 +13,7 @@ struct PlaneView: View {
     @State private var planeHeight = UIScreen.height + 40
     @State private var planeDegree = Double.zero
     @State private var movePalX = CGFloat.zero
-    @Binding var motionStatus: MotionStatus
+    let motionStatus: MotionStatus
     private let initHeight = UIScreen.height + 40
     
     var body: some View {
@@ -32,7 +32,7 @@ struct PlaneView: View {
 
 struct PlaneView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaneView(motionStatus: .constant(.none))
+        PlaneView(motionStatus: .none)
     }
 }
 
