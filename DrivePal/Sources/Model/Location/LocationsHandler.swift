@@ -33,7 +33,25 @@ enum AuthorizationStatus {
         }
     }
     
-    @Published var kilometerPerHour = 0
+    var motionStatus = MotionStatus.none {
+        willSet {
+            if newValue == .landing {
+                stopUpdateSpeed()
+            }
+            if newValue == .normal {
+                updateSpeed()
+            }
+            objectWillChange.send()
+        }
+    }
+    
+    var speedModel = SpeedModel(date: .now, kilometerPerHour: 0, location: .init()) {
+        willSet {
+            let speed = newValue.kilometerPerHour - speedModel.kilometerPerHour
+            adjustMotionStatus(by: speed)
+            objectWillChange.send()
+        }
+    }
     
     override init() {
         super.init()
@@ -65,7 +83,7 @@ extension LocationsHandler {
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.activityType = .automotiveNavigation
         locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.startUpdatingLocation()
+        updateSpeed()
     }
     
     private func calculateCurrentSpeed(_ current: CLLocation) {
