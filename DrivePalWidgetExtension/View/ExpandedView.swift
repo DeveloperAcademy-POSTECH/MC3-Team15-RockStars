@@ -18,21 +18,7 @@ struct ExpandedView: View {
         VStack {
             HStack(alignment: VerticalAlignment.top) {
                 expandedLeadingImage
-                    .frame(width: 54, height: 53)
-                    .padding(.trailing, 5)
-                VStack(alignment: .leading) {
-                    Text(motionStatusDescription)
-                        .font(.system(size: 16, weight: .semibold))
-                    HStack {
-                        Image(locationPinImage)
-                            .resizable()
-                            .frame(width: 8, height: 10)
-                        Text(I18N.currentLocationLA)
-                            .font(.system(size: 10))
-                    }
-                }
                 
-                Spacer()
             }
             .frame(width: UIScreen.width / 1.52)
             .padding(.bottom, 5)
@@ -41,15 +27,7 @@ struct ExpandedView: View {
                 LinearProgressView(progress: progress < 1.0 ? progress : 1.0, linearColor: linearColor)
                 
                 HStack {
-                    Text("\(I18N.warningTextLA) \(countDescription)\(I18N.warningCountLA)")
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(warningColor)
-                        
-                    Spacer()
-                    
-                    Text("\(I18N.drivingTimeTextLA) \(timestamp / 60) min")
-                        .font(.system(size: 18, weight: .bold))
-                        .padding(.trailing, 30)
+                    expandedBottomText
                 }
                 
             }
@@ -65,9 +43,51 @@ struct ExpandedView: View {
                 Image(expandedImageName)
                     .resizable()
             }
+            .frame(width: 54, height: 53)
+            .padding(.trailing, 5)
+            
         } else {
             Image(expandedImageName)
                 .resizable()
+                .frame(width: 54, height: 53)
+                .padding(.trailing, 5)
+            VStack(alignment: .leading) {
+                Text(motionStatusDescription)
+                    .font(.system(size: 16, weight: .semibold))
+                HStack {
+                    Image(locationPinImage)
+                        .resizable()
+                        .frame(width: 8, height: 10)
+                    Text(I18N.currentLocationLA)
+                        .font(.system(size: 10))
+                }
+            }
+            
+            Spacer()
+        }
+    }
+    
+    @ViewBuilder private var expandedBottomText: some View {
+        if motionStatus == .suddenAcceleration || motionStatus == .suddenStop {
+            Text("\(I18N.drivingTimeTextLA) \(timestamp / 60) min")
+                .font(.system(size: 18, weight: .bold))
+                .padding(.trailing, 30)
+            
+            Spacer()
+            
+            Text("\(I18N.warningTextLA) \(countDescription)\(I18N.warningCountLA)")
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(warningColor)
+        } else {
+            Text("\(I18N.warningTextLA) \(countDescription)\(I18N.warningCountLA)")
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(warningColor)
+                
+            Spacer()
+            
+            Text("\(I18N.drivingTimeTextLA) \(timestamp / 60) min")
+                .font(.system(size: 18, weight: .bold))
+                .padding(.trailing, 30)
         }
     }
     
