@@ -96,7 +96,7 @@ private extension DrivingPalView {
             liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, false)
         } else if motionHandler.motionStatus == .suddenStop {
             liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, true)
-        } 
+        }
     }
     
     // MARK: - Etc에 배치한 이유: 화면 전환의 초기화 설정을 담당
