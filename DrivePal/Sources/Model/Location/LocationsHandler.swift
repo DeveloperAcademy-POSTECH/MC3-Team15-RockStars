@@ -26,6 +26,8 @@ struct SpeedModel {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "",
                                 category: String(describing: LocationsHandler.self))
 
+    private var isWriteEnabled = true
+    
     var authorizationStatus: AuthorizationStatus {
         guard let status = locationManager?.authorizationStatus else { return .failure }
         switch status {
@@ -40,6 +42,7 @@ struct SpeedModel {
     
     var motionStatus = MotionStatus.none {
         willSet {
+            guard isWriteEnabled else { return }
             if newValue == .landing {
                 stopUpdateSpeed()
             }
@@ -119,9 +122,10 @@ extension LocationsHandler {
     
     private func sleepThreadBriefly() {
         guard let locationManager else { return }
-        stopUpdateSpeed()
-        Thread.sleep(forTimeInterval: 5)
-        updateSpeed()
+        isWriteEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [unowned self] in
+            self.isWriteEnabled = true
+        }
     }
     
     private func adjustMotionStatus(by speed: Int) {
