@@ -43,7 +43,7 @@ struct DrivingPalView: View {
                 
                 if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
                     .contains(motionStatus) {
-                    VelocityView()
+                    VelocityView(motionStatus: motionStatus)
                         .environmentObject(locationHandler)
                         .onAppear(perform: locationHandler.requestAuthorization)
                         .padding(.bottom, 50)

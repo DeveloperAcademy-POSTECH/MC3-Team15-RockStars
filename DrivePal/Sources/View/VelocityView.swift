@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VelocityView: View {
     @EnvironmentObject var locationHandler: LocationsHandler
-    @Binding var motionStatus: MotionStatus
+    let motionStatus: MotionStatus
     
     private var isPalInDanger: Bool {
         return [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus)
@@ -18,7 +18,7 @@ struct VelocityView: View {
     private var message: String {
         switch locationHandler.authorizationStatus {
         case .success:
-            return "\(locationHandler.kilometerPerHour)"
+            return "\(locationHandler.speedModel.kilometerPerHour)"
         case .inProgress:
             return I18N.debugUpdateMessage
         case .failure:
