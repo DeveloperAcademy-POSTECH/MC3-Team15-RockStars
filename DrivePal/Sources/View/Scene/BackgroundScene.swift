@@ -10,7 +10,7 @@ import GameplayKit
 
 final class BackgroundScene: SKScene {
     enum BackgroundImageNamed: String {
-        case blueSky, redSky, startRunway, finishAirport
+        case blueSky, airport, lightningSky, meteorSky
     }
     var backgroundImageNamed: BackgroundImageNamed = .blueSky
     private let backgroundName = "background"
@@ -33,10 +33,6 @@ final class BackgroundScene: SKScene {
             background.name = backgroundName
             self.addChild(background)
         }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.backgroundImageNamed = backgroundImageNamed == .blueSky ? .redSky : .blueSky
     }
     
     override func update(_ currentTime: TimeInterval) {

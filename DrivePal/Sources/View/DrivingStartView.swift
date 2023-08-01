@@ -12,7 +12,7 @@ struct DrivingStartView: View {
     
     var body: some View {
         ZStack {
-            Image(.backgroundBlueSky)
+            Image(.backgroundAirport)
                 .resizable()
                 .scaledToFill()
                 .position(x: UIScreen.width / 2, y: UIScreen.height / 2)

@@ -19,7 +19,8 @@ struct ExitButton: View {
             Image(.exit)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 50)
+                .frame(width: 70)
+                .padding([.trailing, .bottom], 40)
         }
     }
 }

@@ -15,8 +15,8 @@
 
 /* Velocity View */
 "update-success" = "km/h";
-"update-failure" = "현재 지역에서 데이터를 읽어오는데 실패했습니다..";
-"update-message" = "데이터를 읽어오고 있습니다..";
+"update-failure" = "불러오지 못했어요";
+"update-message" = "읽어오는 중!";
 
 /* Onboarding View */
 "precaution-for-use-title" = "사용시 유의사항";

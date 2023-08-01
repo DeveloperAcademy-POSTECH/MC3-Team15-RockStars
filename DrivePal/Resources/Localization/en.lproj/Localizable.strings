@@ -15,8 +15,8 @@
 
 /* Velocity View */
 "update-success" = "km/h";
-"update-failure" = "Data retrieval from the current location has failed...";
-"update-message" = "The system is currently reading the data...";
+"update-failure" = "FAILED...";
+"update-message" = "reading the data...";
 
 /* Onboarding View */
 "precaution-for-use-title" = "Precaution For Use";

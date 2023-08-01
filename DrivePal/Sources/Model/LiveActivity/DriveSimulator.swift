@@ -20,6 +20,7 @@ final class DriveSimulator {
     var lockScreenImageName = ""
     var isWarning = false
     var motionStatus = MotionStatus.normal
+    var shouldDisplayAlert = false
     weak var delegate: DriveSimulatorDelegate?
     
     var accelerationData = [ChartData]()
@@ -46,7 +47,7 @@ final class DriveSimulator {
 
     // End the drive by resetting the vars
     func endDrive() -> DriveState {
-        return DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, lockScreenImageName: .lockScreen, timestamp: 0, isWarning: false, motionStatus: .normal)
+        return DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, lockScreenImageName: .lockScreen, timestamp: 0, isWarning: false, motionStatus: .normal, shouldDisplayAlert: false)
     }
 
     // Reset the drive status to a fresh start
@@ -60,13 +61,14 @@ final class DriveSimulator {
         motionStatus = .normal
         lockScreenImageName = .lockScreen
         isWarning = false
+        shouldDisplayAlert = false
         accelerationData.removeAll()
     }
 
     @objc private func runDriveSimulator() {
         timestamp += 1
         // Tell the delegate to update its state
-        delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)", lockScreenImageName: "\(lockScreenImageName)\(timestamp % 6 + 1)", timestamp: timestamp, isWarning: isWarning, motionStatus: motionStatus))
+        delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)", lockScreenImageName: "\(lockScreenImageName)\(timestamp % 6 + 1)", timestamp: timestamp, isWarning: isWarning, motionStatus: motionStatus, shouldDisplayAlert: shouldDisplayAlert))
     }
 }
 
@@ -79,6 +81,7 @@ extension DriveSimulator {
         expandedImageName = isSuddenStop ? .warnSignThunder : .warnSignMeteor
         motionStatus = isSuddenStop ? MotionStatus.suddenStop : .suddenAcceleration
         isWarning = true
+        shouldDisplayAlert = true
         accelerationData.append(ChartData(timestamp: .now, accelerationValue: zAcceleration))
     }
     
