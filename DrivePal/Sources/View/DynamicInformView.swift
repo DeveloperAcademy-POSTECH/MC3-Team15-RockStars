@@ -37,7 +37,7 @@ struct DynamicInformView: View {
     
     func shrink() {
         guard !isShrunk else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             withAnimation {
                 isShrunk.toggle()
             }
