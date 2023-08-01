@@ -14,11 +14,7 @@ struct DrivingPalView: View {
     @StateObject private var locationHandler = LocationsHandler()
     @StateObject private var motionHandler = MotionHandler()
     @EnvironmentObject var liveActivityModel: LiveActivityModel
-    
-    private var timeStamp: Int {
-        liveActivityModel.simulator.timestamp
-    }
-    
+
     var body: some View {
         ZStack {
             ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
