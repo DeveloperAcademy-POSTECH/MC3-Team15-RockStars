@@ -59,11 +59,6 @@ struct ChartView: View {
                                 .frame(width: 55)
                         }
                         .padding(datum.value < 0 ? .top : .bottom, 120)
-                        .onAppear {
-                            print("=== DEBUG: \(datum.value.magnitude >= pointThreshold)")
-                            print("=== DEBUG: \(datum.value.magnitude)")
-                            print("=== DEBUG: \(pointThreshold)")
-                        }
                     }
                 }
             }
@@ -80,10 +75,6 @@ struct ChartView: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
-        }
-        .onAppear {
-            print("=== DEBUG: \(data.sorted { $0.value.magnitude > $1.value.magnitude })")
-            print("=== DEBUG: \(pointThreshold)")
         }
     }
 }
