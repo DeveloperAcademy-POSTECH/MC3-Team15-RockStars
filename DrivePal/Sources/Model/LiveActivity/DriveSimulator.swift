@@ -10,6 +10,8 @@ import Foundation
 final class DriveSimulator {
     // instance properties
     var count = 0
+    var suddenAccelerationCount = 0
+    var suddenStopCount = 0
     var progress = 0.0
     var timer: Timer?
     var timestamp = 0
@@ -46,12 +48,24 @@ final class DriveSimulator {
 
     // End the drive by resetting the vars
     func endDrive() -> DriveState {
-        return DriveState(count: 0, progress: 0.0, leadingImageName: .palNormal, trailingImageName: "", expandedImageName: .palNormal, lockScreenImageName: .lockScreen, timestamp: 0, isWarning: false, motionStatus: .normal)
+        return DriveState(count: 0,
+                          suddenAccelerationCount: 0,
+                          suddenStopCount: 0,
+                          progress: 0.0,
+                          leadingImageName: .palNormal,
+                          trailingImageName: "",
+                          expandedImageName: .palNormal,
+                          lockScreenImageName: .lockScreen,
+                          timestamp: 0,
+                          isWarning: false,
+                          motionStatus: .normal)
     }
 
     // Reset the drive status to a fresh start
     private func reset() {
         count = 0
+        suddenStopCount = 0
+        suddenAccelerationCount = 0
         timestamp = 0
         progress = 0.0
         leadingImageName = .palNormal
@@ -67,13 +81,26 @@ final class DriveSimulator {
         timestamp += 1
         
         // Tell the delegate to update its state
-        delegate?.updateLiveActivity(driveState: DriveState(count: count, progress: progress, leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)", trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)", expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)", lockScreenImageName: "\(lockScreenImageName)\(timestamp % 6 + 1)", timestamp: timestamp, isWarning: isWarning, motionStatus: motionStatus))
+        delegate?.updateLiveActivity(driveState:
+                                        DriveState(count: count,
+                                                   suddenAccelerationCount: suddenAccelerationCount,
+                                                   suddenStopCount: suddenStopCount,
+                                                   progress: progress,
+                                                   leadingImageName: "\(leadingImageName)\(timestamp % 6 + 1)",
+                                                   trailingImageName: "\(trailingImageName)\(timestamp % 4 + 1)",
+                                                   expandedImageName: "\(expandedImageName)\(timestamp % 6 + 1)",
+                                                   lockScreenImageName: "\(lockScreenImageName)\(timestamp % 6 + 1)",
+                                                   timestamp: timestamp,
+                                                   isWarning: isWarning,
+                                                   motionStatus: motionStatus))
     }
 }
 
 extension DriveSimulator {
     func updateWhenAbnormal(_ zAcceleration: Double, _ isSuddenStop: Bool = true) {
         count += 1
+        suddenAccelerationCount += isSuddenStop ? 0 : 1
+        suddenStopCount += isSuddenStop ? 1 : 0
         progress += 0.25
         leadingImageName = .palWarning
         trailingImageName = .circularWarning

@@ -29,6 +29,8 @@
 수호자 👍 👍";
 "words-from-bad-result" = "운전을 조금 조심히
 할 필요가 있어요 😮‍💨";
+"word-sudden-acceleration" = "급가속";
+"word-sudden-deceleration" = "급감속";
 
 /* Live Activity */
 "current-location" = "포항시 효성로 13번길 2";

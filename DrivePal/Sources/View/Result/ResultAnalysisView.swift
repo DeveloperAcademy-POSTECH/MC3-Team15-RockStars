@@ -17,7 +17,7 @@ struct ResultAnalysisView: View {
     
     var body: some View {
         VStack {
-            Spacer()
+            Spacer(minLength: 110)
             Image(isGoodResult ? .palImageInGoodResult : .palImageInBadResult)
                 .resizable()
                 .scaledToFit()
@@ -29,11 +29,17 @@ struct ResultAnalysisView: View {
                 .opacity(0.85)
                 .padding(.top, 30)
             
-            HStack {
-                ResultDataBoxView(dataBackgroundColor: isGoodResult ? .dataGoodValueBackgroundColor : .dataBadValueBackgroundColor,
-                                  dataValue: model.currentState.count,
-                                  dataInText: I18N.warningTextLA,
-                                  isDrivingTimeData: false)
+            HStack(alignment: .top, spacing: 10) {
+                VStack(spacing: 10) {
+                    ResultDataBoxView(dataBackgroundColor: isGoodResult ? .dataGoodValueBackgroundColor : .dataBadValueBackgroundColor,
+                                      dataValue: model.currentState.suddenAccelerationCount,
+                                      dataInText: I18N.wordSuddenAcceleration,
+                                      isDrivingTimeData: false)
+                    ResultDataBoxView(dataBackgroundColor: isGoodResult ? .dataGoodValueBackgroundColor : .dataBadValueBackgroundColor,
+                                      dataValue: model.currentState.suddenStopCount,
+                                      dataInText: I18N.wordSuddenDeceleration,
+                                      isDrivingTimeData: false)
+                }
                 ResultDataBoxView(dataBackgroundColor: .black,
                                   dataValue: model.currentState.timestamp / 60,
                                   dataInText: I18N.drivingTimeTextLA,

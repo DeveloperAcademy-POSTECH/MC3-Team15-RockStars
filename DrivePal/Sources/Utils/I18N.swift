@@ -43,6 +43,8 @@ struct I18N {
     /* Result View */
     static let wordsFromGoodResult = "words-from-good-result".localized()
     static let wordsFromBadResult = "words-from-bad-result".localized()
+    static let wordSuddenAcceleration = "word-sudden-acceleration".localized()
+    static let wordSuddenDeceleration = "word-sudden-deceleration".localized()
 
     /* Live Activity */
     static let currentLocationLA = "current-location".localized()

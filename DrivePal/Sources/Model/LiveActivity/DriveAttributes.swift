@@ -18,6 +18,8 @@ struct DriveAttributes: ActivityAttributes {
 
 struct DriveState: Codable, Hashable {
     var count: Int
+    var suddenAccelerationCount: Int
+    var suddenStopCount: Int
     var progress: Double
     var leadingImageName: String
     var trailingImageName: String

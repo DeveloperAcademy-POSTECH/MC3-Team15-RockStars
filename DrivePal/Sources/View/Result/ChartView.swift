@@ -50,7 +50,7 @@ struct ChartView: View {
                             Text("\(datum.timestamp / 60) min")
                                 .font(.system(size: 12, weight: .bold, design: .rounded))
                                 .foregroundColor(.white)
-                            Text("\(datum.value) km/h")
+                            Text("\(round(datum.value * 100) / 100) km/h")
                                 .font(.system(size: 16, weight: .bold, design: .rounded))
                                 .foregroundColor(.white)
                             Image(.gaugeOnChart)
