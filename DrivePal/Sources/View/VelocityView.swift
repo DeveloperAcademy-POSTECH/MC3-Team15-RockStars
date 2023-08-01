@@ -36,7 +36,7 @@ struct VelocityView: View {
                 .statusBarHidden(isPalInDanger)
             // TODO: - font size가 120이라 데이터 읽어오는 중일 떼, 실패했을 때의 메시지를 짧고 간결하게 바꿔야함
             Text(message)
-                .stroke()
+                .stroke(width: motionStatus == .normal ? 0 : 5)
                 .font(.system(size: isPalInDanger ? 100 : 80, weight: .black, design: .rounded))
                 .shadow(radius: 4.0, y: 4.0)
                 .foregroundColor(motionStatus == .normal ? .white : (
