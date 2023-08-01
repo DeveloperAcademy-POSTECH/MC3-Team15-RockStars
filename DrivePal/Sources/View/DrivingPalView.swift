@@ -14,29 +14,48 @@ struct DrivingPalView: View {
     @StateObject private var locationHandler = LocationsHandler()
     @StateObject private var motionHandler = MotionHandler()
     @EnvironmentObject var liveActivityModel: LiveActivityModel
+    
+    private var motionStatus: MotionStatus {
+        get {
+            #if DEBUG
+            return motionHandler.motionStatus
+            #elseif RELEASE
+            return locationHandler.motionStatus
+            #endif
+        }
+    }
 
     var body: some View {
         ZStack {
+            #if DEBUG
             ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
+            #elseif RELEASE
+            ConvertibleBackgroundView(motionStatus: $locationHandler.motionStatus)
+            #endif
             
-            if motionHandler.motionStatus == .takingOff {
-                DynamicInformView(motionStatus: $motionHandler.motionStatus)
+            if motionStatus == .takingOff {
+                DynamicInformView(motionStatus: motionStatus)
             }
             
             // MARK: - PlaneView
             VStack {
-                PlaneView(motionStatus: $motionHandler.motionStatus)
+                PlaneView(motionStatus: motionStatus)
                 
                 if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
-                    .contains(motionHandler.motionStatus) {
+                    .contains(motionStatus) {
                     VelocityView()
                         .environmentObject(locationHandler)
                         .onAppear(perform: locationHandler.requestAuthorization)
                         .padding(.bottom, 50)
                 }
-                if motionHandler.motionStatus == .normal {
+                if motionStatus == .normal {
+                    #if DEBUG
                     ExitButton(motionStatus: $motionHandler.motionStatus)
                         .padding(.bottom, 100)
+                    #elseif RELEASE
+                    ExitButton(motionStatus: $locationHandler.motionStatus)
+                        .padding(.bottom, 100)
+                    #endif
                 }
             }
         }
@@ -44,7 +63,7 @@ struct DrivingPalView: View {
             OnboardingView()
         }
         .ignoresSafeArea()
-        .onChange(of: motionHandler.motionStatus, perform: actOn)
+        .onChange(of: motionStatus, perform: actOn)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
             ResultTabView(showResultAnalysisView: $showResultAnalysisView)
         }
@@ -72,24 +91,32 @@ private extension DrivingPalView {
 private extension DrivingPalView {
     // MARK: - MotionHandler.motionStatus 변화를 감지할 메서드
     private func actOn(_ motion: MotionStatus) {
-        if motionHandler.motionStatus == .takingOff {
+        if motionStatus == .takingOff {
             actionsWhenTakeoff()
-        } else if motionHandler.motionStatus == .landing {
+        } else if motionStatus == .landing {
             transitionToInitiation()
-        } else if motionHandler.motionStatus == .normal {
+        } else if motionStatus == .normal {
             liveActivityModel.simulator.updateWhenNormal()
-        } else if motionHandler.motionStatus == .suddenAcceleration {
+        } else if motionStatus == .suddenAcceleration {
             liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, false)
-        } else if motionHandler.motionStatus == .suddenStop {
+        } else if motionStatus == .suddenStop {
             liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, true)
         }
     }
     
     // MARK: - Etc에 배치한 이유: 화면 전환의 초기화 설정을 담당
     private func transitionToInitiation() {
-        stopLiveActivityUpdate()
+        locationHandler.stopUpdateSpeed()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            motionHandler.motionStatus = .none
+            withAnimation {
+                #if DEBUG
+                motionHandler.motionStatus = .none
+                #elseif RELEASE
+                locationHandler.motionStatus = .none
+                #endif
+            }
+            stopLiveActivityUpdate()
             showResultAnalysisView.toggle()
         }
     }
@@ -97,10 +124,17 @@ private extension DrivingPalView {
     private func actionsWhenTakeoff() {
         startLiveActivityUpdate()
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            #if DEBUG
             withAnimation {
                 motionHandler.motionStatus = .normal
             }
             motionHandler.startAccelerometerUpdate()
+            #elseif RELEASE
+            withAnimation {
+                locationHandler.motionStatus = .normal
+            }
+            locationHandler.updateSpeed()
+            #endif
         }
     }
 }
