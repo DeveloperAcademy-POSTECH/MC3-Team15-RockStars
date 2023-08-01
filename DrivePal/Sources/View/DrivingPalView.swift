@@ -33,34 +33,29 @@ struct DrivingPalView: View {
             ConvertibleBackgroundView(motionStatus: $locationHandler.motionStatus)
             #endif
             
+            if motionStatus == .takingOff {
+                DynamicInformView(motionStatus: motionStatus)
+            }
+            
             // MARK: - PlaneView
-            if [MotionStatus.none,
-                .normal,
-                .takingOff,
-                .landing,
-                .suddenAcceleration,
-                .suddenStop]
-                .contains(motionHandler.motionStatus) {
-                
+            VStack {
                 PlaneView(motionStatus: motionStatus)
                 
-                VStack {
-                    if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
-                        .contains(motionHandler.motionStatus) {
-                        VelocityView(motionStatus: motionStatus)
-                            .environmentObject(locationHandler)
-                            .onAppear(perform: locationHandler.requestAuthorization)
-                            .padding(.top, 120)
-                    }
-                    
-                    Spacer()
-
-                    if motionHandler.motionStatus == .normal {
-                        HStack {
-                            Spacer()
-                            ExitButton(motionStatus: $motionHandler.motionStatus)
-                        }
-                    }
+                if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
+                    .contains(motionStatus) {
+                    VelocityView(motionStatus: motionStatus)
+                        .environmentObject(locationHandler)
+                        .onAppear(perform: locationHandler.requestAuthorization)
+                        .padding(.bottom, 50)
+                }
+                if motionStatus == .normal {
+                    #if DEBUG
+                    ExitButton(motionStatus: $motionHandler.motionStatus)
+                        .padding(.bottom, 100)
+                    #elseif RELEASE
+                    ExitButton(motionStatus: $locationHandler.motionStatus)
+                        .padding(.bottom, 100)
+                    #endif
                 }
             }
         }
