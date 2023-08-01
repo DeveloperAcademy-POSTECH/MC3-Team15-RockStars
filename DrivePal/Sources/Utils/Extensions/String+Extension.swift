@@ -28,6 +28,7 @@ extension String {
     static let startButtonImage = "startImage"
     static let setPhoneOnHolder = "setPhoneOnHolder"
     static let pouringLightning = "pouringLightning"
+    static let pouringMeteor = "pouringMeteor"
     static let gauge = "gauge"
     
     /* Result Analysis View */

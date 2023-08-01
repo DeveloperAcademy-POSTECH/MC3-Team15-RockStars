@@ -17,7 +17,8 @@ extension Color {
     }
     
     // MARK: - Velocity View
-    static let inDangerTextColor = Color(0x4D44DB)
+    static let suddenStopTextColor = Color(0x4036F0)
+    static let suddenAccelerationTextColor = Color(0xFF5050)
     
     // MARK: - Result Analysis View
     static let wordsFromResultColor = Color(0xE8F1FF)

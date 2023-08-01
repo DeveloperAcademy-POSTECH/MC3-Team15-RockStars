@@ -16,21 +16,21 @@ struct ConvertibleBackgroundView: View {
         return scene
     }
     
-    private var abnormalScene: SKScene {
+    private var suddenAccelerationScene: SKScene {
         let scene = BackgroundScene()
         scene.scaleMode = .fill
-        scene.backgroundImageNamed = .redSky
+        scene.backgroundImageNamed = .lightningSky
         return scene
     }
     
-    private var takeOffScene: SKScene {
+    private var suddenStopScene: SKScene {
         let scene = BackgroundScene()
         scene.scaleMode = .fill
-        scene.backgroundImageNamed = .airport
+        scene.backgroundImageNamed = .meteorSky
         return scene
     }
     
-    private var landingScene: SKScene {
+    private var takeOffAndLandingScene: SKScene {
         let scene = BackgroundScene()
         scene.scaleMode = .fill
         scene.backgroundImageNamed = .airport
@@ -39,6 +39,7 @@ struct ConvertibleBackgroundView: View {
     
     @Binding var motionStatus: MotionStatus
     @State private var lightningYAxis = -UIScreen.height
+    @State private var meteorYAxis = -UIScreen.height
     
     var body: some View {
         ZStack {
@@ -48,26 +49,44 @@ struct ConvertibleBackgroundView: View {
             DrivingStartView(motionStatus: $motionStatus)
                 .opacity(motionStatus == .none ? 1 : 0)
             
-            SpriteView(scene: takeOffScene)
+            SpriteView(scene: takeOffAndLandingScene)
                 .opacity(motionStatus == .takingOff ? 1 : 0)
             
             ZStack {
-                SpriteView(scene: abnormalScene)
+                SpriteView(scene: suddenAccelerationScene)
                 Image(.pouringLightning)
                     .resizable()
                     .scaledToFill()
                     .position(x: UIScreen.width / 2, y: lightningYAxis)
             }
-            .opacity([MotionStatus.suddenAcceleration, .suddenStop].contains(motionStatus) ? 1 : 0)
+            .opacity(motionStatus == .suddenAcceleration ? 1 : 0)
             .onChange(of: motionStatus, perform: lightningAnimation)
             
-            SpriteView(scene: landingScene)
-                .opacity(motionStatus == .landing ? 1 : 0)
+            ZStack {
+                SpriteView(scene: suddenStopScene)
+                Image(.pouringMeteor)
+                    .resizable()
+                    .scaledToFill()
+                    .position(x: UIScreen.width / 2, y: meteorYAxis)
+            }
+            .opacity(motionStatus == .suddenStop ? 1 : 0)
+            .onChange(of: motionStatus, perform: meteorAnimation)
         }
     }
     
+    private func meteorAnimation(_ status: MotionStatus) {
+        if status != .suddenStop { return }
+        withAnimation(.linear(duration: 5.0)) {
+            meteorYAxis = UIScreen.height * 2
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.2) {
+            meteorYAxis = -UIScreen.height
+        }
+        
+    }
+    
     private func lightningAnimation(_ status: MotionStatus) {
-        if ![MotionStatus.suddenAcceleration, .suddenStop].contains(status) { return }
+        if status != .suddenAcceleration { return }
         withAnimation(.linear(duration: 5.0)) {
             lightningYAxis = UIScreen.height * 2
         }
