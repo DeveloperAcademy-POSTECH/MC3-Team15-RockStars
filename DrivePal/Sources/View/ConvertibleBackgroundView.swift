@@ -50,7 +50,7 @@ struct ConvertibleBackgroundView: View {
                 .opacity(motionStatus == .none ? 1 : 0)
             
             SpriteView(scene: takeOffAndLandingScene)
-                .opacity(motionStatus == .takingOff ? 1 : 0)
+                .opacity([.takingOff, .landing].contains(motionStatus) ? 1 : 0)
             
             ZStack {
                 SpriteView(scene: suddenAccelerationScene)

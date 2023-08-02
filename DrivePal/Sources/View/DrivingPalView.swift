@@ -37,24 +37,28 @@ struct DrivingPalView: View {
             }
             
             // MARK: - PlaneView
+            PlaneView(motionStatus: motionStatus)
+            
             VStack {
-                PlaneView(motionStatus: motionStatus)
-                
                 if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
                     .contains(motionStatus) {
                     VelocityView(motionStatus: motionStatus)
                         .environmentObject(locationHandler)
                         .onAppear(perform: locationHandler.requestAuthorization)
-                        .padding(.bottom, 50)
+                        .padding(.top, 120)
                 }
+                
+                Spacer()
+
                 if motionStatus == .normal {
-                    #if DEBUG
-                    ExitButton(motionStatus: $motionHandler.motionStatus)
-                        .padding(.bottom, 100)
-                    #elseif RELEASE
-                    ExitButton(motionStatus: $locationHandler.motionStatus)
-                        .padding(.bottom, 100)
-                    #endif
+                    HStack {
+                        Spacer()
+                        #if DEBUG
+                        ExitButton(motionStatus: $motionHandler.motionStatus)
+                        #elseif RELEASE
+                        ExitButton(motionStatus: $locationHandler.motionStatus)
+                        #endif
+                    }
                 }
             }
         }
