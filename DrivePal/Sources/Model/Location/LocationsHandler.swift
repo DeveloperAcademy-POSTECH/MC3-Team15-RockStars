@@ -57,7 +57,7 @@ final class LocationsHandler: NSObject, ObservableObject {
         super.init()
         self.locationManager = CLLocationManager()
         requestAuthorization()
-        _authorizationStatus = .init(wrappedValue: updateAuthorization())
+        updateAuthorization()
     }
 }
 
@@ -65,7 +65,7 @@ final class LocationsHandler: NSObject, ObservableObject {
 extension LocationsHandler: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        authorizationStatus = updateAuthorization()
+        updateAuthorization()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -89,6 +89,7 @@ extension LocationsHandler {
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.activityType = .automotiveNavigation
         locationManager.allowsBackgroundLocationUpdates = true
+        updateSpeed()
     }
     
     private func calculateCurrentSpeed(_ current: CLLocation) {
@@ -112,7 +113,6 @@ extension LocationsHandler {
         guard let locationManager else { return }
         if [CLAuthorizationStatus.authorizedAlways, .authorizedWhenInUse].contains(locationManager.authorizationStatus) {
             startBackgroundLocationUpdates()
-            updateSpeed()
         } else {
             locationManager.requestWhenInUseAuthorization()
             updateSpeed()
@@ -145,16 +145,20 @@ extension LocationsHandler {
         }
     }
     
-    private func updateAuthorization() -> AuthorizationStatus {
-        guard let manager = locationManager else { return .failure }
+    func updateAuthorization() {
+        guard let manager = locationManager else {
+            authorizationStatus = .failure
+            return
+        }
         let status = manager.authorizationStatus
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
-            return .success
+            startBackgroundLocationUpdates()
+            return authorizationStatus = .success
         case .notDetermined:
-            return .inProgress
+            return authorizationStatus = .inProgress
         case .denied, .restricted:
-            return .failure
+            return authorizationStatus = .failure
         }
     }
     
