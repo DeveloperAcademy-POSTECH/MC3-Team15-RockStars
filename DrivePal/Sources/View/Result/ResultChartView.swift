@@ -11,22 +11,21 @@ import Charts
 struct ChartData: Identifiable {
     let id = UUID()
     var timestamp: Int
-    var value: Double
+    var value: Int
     
-    init(timestamp: Int, value: Double) {
+    init(timestamp: Int, value: Int) {
         self.timestamp = timestamp
         self.value = value
     }
 }
 
 struct ResultChartView: View {
-    
     var data: [ChartData]
-    private var pointThreshold: Double {
+    private var pointThreshold: Int {
         if data.count < 4 {
-            return 0.0
+            return 0
         }
-        return data.sorted { $0.value.magnitude > $1.value.magnitude }[3].value.magnitude
+        return data.sorted { $0.value > $1.value }[3].value
     }
     
     var body: some View {
@@ -36,41 +35,43 @@ struct ResultChartView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            Chart(data, id: \.timestamp) { datum in
-                LineMark(
-                    x: .value("timestamp", datum.timestamp),
-                    y: .value("value", datum.value)
-                )
-                .lineStyle(StrokeStyle(lineWidth: 9, lineCap: .round))
-                .interpolationMethod(.monotone)
-                
-                if datum.value.magnitude >= pointThreshold {
-                    PointMark(
+            if data.count > 0 {
+                Chart(data, id: \.timestamp) { datum in
+                    LineMark(
                         x: .value("timestamp", datum.timestamp),
                         y: .value("value", datum.value)
                     )
-                    .symbol {
-                        VStack(spacing: 8) {
-                            Text("\(datum.timestamp / 60) min")
-                                .font(.system(size: 12, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                            Text("\(Int(round(datum.value * 100) / 100)) km/h")
-                                .font(.system(size: 16, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                            Image(.gaugeOnChart)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 55)
+                    .lineStyle(StrokeStyle(lineWidth: 9, lineCap: .round))
+                    .interpolationMethod(.monotone)
+                    
+                    if datum.value >= pointThreshold {
+                        PointMark(
+                            x: .value("timestamp", datum.timestamp),
+                            y: .value("value", datum.value)
+                        )
+                        .symbol {
+                            VStack(spacing: 8) {
+                                Text("\(datum.timestamp / 60) min")
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                                    .foregroundColor(.white)
+                                Text("\(datum.value) km/h")
+                                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                                    .foregroundColor(.white)
+                                Image(.gaugeOnChart)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 55)
+                            }
+                            .padding(datum.value < 0 ? .top : .bottom, 120)
                         }
-                        .padding(datum.value < 0 ? .top : .bottom, 120)
                     }
                 }
+                .frame(width: UIScreen.width - 60, height: UIScreen.height / 3)
+                .scaledToFit()
+                .chartXAxis(.hidden)
+                .chartYAxis(.hidden)
+                .foregroundColor(.white)
             }
-            .frame(width: UIScreen.width - 60, height: UIScreen.height / 3)
-            .scaledToFit()
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .foregroundColor(.white)
             
             VStack(alignment: .center) {
                 Text(I18N.wordRoadDrivingAnalysis)

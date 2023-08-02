@@ -96,9 +96,9 @@ private extension DrivingPalView {
         } else if motionStatus == .normal {
             liveActivityModel.simulator.updateWhenNormal()
         } else if motionStatus == .suddenAcceleration {
-            liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, false)
+            liveActivityModel.simulator.updateWhenAbnormal(locationHandler.speedModel.kilometerPerHour, false)
         } else if motionStatus == .suddenStop {
-            liveActivityModel.simulator.updateWhenAbnormal(motionHandler.zAcceleration, true)
+            liveActivityModel.simulator.updateWhenAbnormal(locationHandler.speedModel.kilometerPerHour, true)
         }
     }
     

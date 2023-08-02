@@ -14,7 +14,7 @@ struct ResultTabView: View {
         NavigationStack {
             ScrollView {
                 TabView(selection: $selectedTabTag) {
-                    ChartView(data: LiveActivityModel.shared.simulator.chartData)
+                    ResultChartView(data: LiveActivityModel.shared.simulator.chartData)
                         .tag(0)
                     ResultAnalysisView(showResultAnalysisView: $showResultAnalysisView)
                         .tag(1)

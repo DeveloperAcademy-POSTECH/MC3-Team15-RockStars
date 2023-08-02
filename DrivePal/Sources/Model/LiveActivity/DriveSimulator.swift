@@ -101,7 +101,7 @@ final class DriveSimulator {
 }
 
 extension DriveSimulator {
-    func updateWhenAbnormal(_ zAcceleration: Double, _ isSuddenStop: Bool = true) {
+    func updateWhenAbnormal(_ velocity: Int, _ isSuddenStop: Bool = true) {
         count += 1
         suddenAccelerationCount += isSuddenStop ? 0 : 1
         suddenStopCount += isSuddenStop ? 1 : 0
@@ -111,7 +111,7 @@ extension DriveSimulator {
         expandedImageName = isSuddenStop ? .warnSignMeteor : .warnSignThunder
         motionStatus = isSuddenStop ? MotionStatus.suddenStop : .suddenAcceleration
         isWarning = true
-        chartData.append(ChartData(timestamp: timestamp, value: zAcceleration))
+        chartData.append(ChartData(timestamp: timestamp, value: velocity))
         shouldDisplayAlert = true
     }
     
