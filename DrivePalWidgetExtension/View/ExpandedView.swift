@@ -14,6 +14,80 @@ struct ExpandedView: View {
     @State var timestamp: Int
     @State var motionStatus: MotionStatus
     
+    private var isStatusInNormal: Bool {
+        return motionStatus == .normal && count < 4
+    }
+    
+    private var isStatusInSuddenAction: Bool {
+        return [.suddenAcceleration, .suddenStop].contains(motionStatus)
+    }
+    
+    private var motionStatusDescription: String {
+        if isStatusInNormal {
+            return I18N.normalDrivingNow
+        } else if motionStatus == .suddenAcceleration {
+            return I18N.suddenAcceleratedNow
+        } else if motionStatus == .suddenStop {
+            return I18N.suddenDeceleratedNow
+        } else {
+            return I18N.badDrivingNow
+        }
+    }
+    
+    private var locationPinImage: String {
+        if isStatusInNormal {
+            return .locationPinBlue
+        } else if motionStatus == .suddenAcceleration {
+            return .locationPinYellow
+        } else if motionStatus == .suddenStop {
+            return .locationPinPink
+        } else {
+            return .locationPinRed
+        }
+    }
+    
+    private var countDescription: String {
+        if isStatusInSuddenAction {
+            return I18N.countOneMoreWarning
+        } else {
+            return count.description
+        }
+    }
+    
+    private var textOpacity: Double {
+        if isStatusInNormal {
+            return 0.4
+        } else if isStatusInSuddenAction {
+            return 1.0
+        } else {
+            return 0.8
+        }
+    }
+    
+    private var warningColor: Color {
+        if isStatusInNormal {
+            return .expandedNormal
+        } else if motionStatus == .suddenAcceleration {
+            return .expandedWarningAcceleration
+        } else if motionStatus == .suddenStop {
+            return .expandedWarningDeceleration
+        } else {
+            return .expandedWarning
+        }
+    }
+    
+    private var linearColor: Color {
+        if isStatusInNormal {
+            return .expandedNormal
+        } else if motionStatus == .suddenAcceleration {
+            return .expandedWarningAcceleration
+        } else if motionStatus == .suddenStop {
+            return .expandedWarningDeceleration
+        } else {
+            return .expandedWarning
+        }
+    }
+    
     var body: some View {
         VStack {
             HStack(alignment: VerticalAlignment.top) {
@@ -88,80 +162,6 @@ struct ExpandedView: View {
             Text("\(I18N.drivingTimeTextLA) \(timestamp / 60) min")
                 .font(.system(size: 18, weight: .bold))
                 .padding(.trailing, 30)
-        }
-    }
-    
-    private var isStatusInNormal: Bool {
-        return motionStatus == .normal && count < 4
-    }
-    
-    private var isStatusInSuddenAction: Bool {
-        return [.suddenAcceleration, .suddenStop].contains(motionStatus)
-    }
-    
-    private var motionStatusDescription: String {
-        if isStatusInNormal {
-            return I18N.normalDrivingNow
-        } else if motionStatus == .suddenAcceleration {
-            return I18N.suddenAcceleratedNow
-        } else if motionStatus == .suddenStop {
-            return I18N.suddenDeceleratedNow
-        } else {
-            return I18N.badDrivingNow
-        }
-    }
-    
-    private var locationPinImage: String {
-        if isStatusInNormal {
-            return .locationPinBlue
-        } else if motionStatus == .suddenAcceleration {
-            return .locationPinYellow
-        } else if motionStatus == .suddenStop {
-            return .locationPinPink
-        } else {
-            return .locationPinRed
-        }
-    }
-    
-    private var countDescription: String {
-        if isStatusInSuddenAction {
-            return I18N.countOneMoreWarning
-        } else {
-            return count.description
-        }
-    }
-    
-    private var textOpacity: Double {
-        if isStatusInNormal {
-            return 0.4
-        } else if isStatusInSuddenAction {
-            return 1.0
-        } else {
-            return 0.8
-        }
-    }
-    
-    private var warningColor: Color {
-        if isStatusInNormal {
-            return .expandedNormal
-        } else if motionStatus == .suddenAcceleration {
-            return .expandedWarningAcceleration
-        } else if motionStatus == .suddenStop {
-            return .expandedWarningDeceleration
-        } else {
-            return .expandedWarning
-        }
-    }
-    
-    private var linearColor: Color {
-        if isStatusInNormal {
-            return .expandedNormal
-        } else if motionStatus == .suddenAcceleration {
-            return .expandedWarningAcceleration
-        } else if motionStatus == .suddenStop {
-            return .expandedWarningDeceleration
-        } else {
-            return .expandedWarning
         }
     }
 }
