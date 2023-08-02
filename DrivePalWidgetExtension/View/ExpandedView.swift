@@ -92,7 +92,6 @@ struct ExpandedView: View {
         VStack {
             HStack(alignment: VerticalAlignment.top) {
                 expandedLeadingImage
-                
             }
             .frame(width: UIScreen.width / 1.52)
             .padding(.bottom, 5)
@@ -103,14 +102,13 @@ struct ExpandedView: View {
                 HStack {
                     expandedBottomText
                 }
-                
             }
             .frame(width: UIScreen.width / 1.52)
         }
     }
     
     @ViewBuilder private var expandedLeadingImage: some View {
-        if motionStatus == .suddenAcceleration || motionStatus == .suddenStop {
+        if isStatusInSuddenAction {
             ZStack {
                 Image(.backgroundWarnSign)
                     .resizable()
@@ -136,13 +134,12 @@ struct ExpandedView: View {
                         .font(.system(size: 10))
                 }
             }
-            
             Spacer()
         }
     }
     
     @ViewBuilder private var expandedBottomText: some View {
-        if motionStatus == .suddenAcceleration || motionStatus == .suddenStop {
+        if isStatusInSuddenAction {
             Text("\(I18N.drivingTimeTextLA) \(timestamp / 60) min")
                 .font(.system(size: 18, weight: .bold))
                 .padding(.trailing, 30)
