@@ -43,6 +43,25 @@ struct I18N {
     /* Result View */
     static let wordsFromGoodResult = "words-from-good-result".localized()
     static let wordsFromBadResult = "words-from-bad-result".localized()
+    
+    static let wordsFromNoWarning = ["words-from-no-warning-result-1".localized(),
+                                     "words-from-no-warning-result-2".localized(),
+                                     "words-from-no-warning-result-3".localized()]
+
+    // only sudden acceleration
+    static let wordsFromOnlySuddenAcceleration = ["words-from-only-sudden-acceleration-1".localized(),
+                                                 "words-from-only-sudden-acceleration-2".localized(),
+                                                 "words-from-only-sudden-acceleration-3".localized()]
+
+    // only sudden deceleration
+    static let wordsFromOnlySuddenDeceleration = ["words-from-only-sudden-deceleration-1".localized(),
+                                                  "words-from-only-sudden-deceleration-2".localized()]
+
+    // both warnings
+    static let wordsFromBothWarnings = ["words-from-both-warnings-1".localized(),
+                                        "words-from-both-warnings-2".localized(),
+                                        "words-from-both-warnings-3".localized()]
+    
     static let wordSuddenAcceleration = "word-sudden-acceleration".localized()
     static let wordSuddenDeceleration = "word-sudden-deceleration".localized()
     static let wordRoadDrivingAnalysis = "word-road-driving-analysis".localized()

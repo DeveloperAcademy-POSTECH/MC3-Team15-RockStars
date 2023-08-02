@@ -25,10 +25,28 @@
 "precaution-for-use-content-2" = "2. 반드시 거치대에 설치한 후 시작해 주세요.";
 
 /* Result View */
-"words-from-good-result" = "당신은 도로 위의
-수호자 👍 👍";
-"words-from-bad-result" = "운전을 조금 조심히
-할 필요가 있어요 😮‍💨";
+"words-from-good-result" = "당신은 도로 위의\n수호자 👍 👍";
+"words-from-bad-result" = "운전을 조금 조심히\n할 필요가 있어요 😮‍💨";
+
+// no warning
+"words-from-no-warning-result-1" = "지금 당신이 운전하는게, \n시몬스 침대?";
+"words-from-no-warning-result-2" = "다 왔나요?\n깜빡 잠이 들었어요";
+"words-from-no-warning-result-3" = "\"역시 코너링이\n훌륭하시네요.\"";
+
+// only sudden acceleration
+"words-from-only-sudden-acceleration-1" = "벼락치기를 운전에서\n하면 어떡해요 🤔";
+"words-from-only-sudden-acceleration-2" = "연비가\n사망하셨습니다..😔";
+"words-from-only-sudden-acceleration-3" = "어딜 그렇게\n급하게 가시나요 🤗";
+
+// only sudden deceleration
+"words-from-only-sudden-deceleration-1" = "무궁화. 꽃이.\n피었습니다. 👧🏻";
+"words-from-only-sudden-deceleration-2" = "누구인가?\n누가 짐의 앞을 막느냔 말이다. 🤨";
+
+// both warnings
+"words-from-both-warnings-1" = "지금 당신이 운전하는게,\n롤러코스터?🫨";
+"words-from-both-warnings-2" = "물리 실험 성공. 우웩 🤮";
+"words-from-both-warnings-3" = "악마 👿 : 나도 이 차는 못탄다";
+
 "word-sudden-acceleration" = "급가속";
 "word-sudden-deceleration" = "급감속";
 "word-road-driving-analysis" = "도로 주행 분석";

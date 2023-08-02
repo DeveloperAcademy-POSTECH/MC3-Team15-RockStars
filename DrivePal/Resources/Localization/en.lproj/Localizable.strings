@@ -25,8 +25,28 @@
 "precaution-for-use-content-2" = "2. Please make sure to install it on the phone holder before starting.";
 
 /* Result View */
-"words-from-good-result" = "You are the guardian on the road! 👍 👍";
-"words-from-bad-result" = "You need to drive a little more cautiously. 😮‍💨";
+"words-from-good-result" = "You are the guardian\non the road! 👍 👍";
+"words-from-bad-result" = "You need to drive\na little more cautiously. 😮‍💨";
+
+// no warning
+"words-from-no-warning-result-1" = "You are the guardian\non the road! 👍 👍";
+"words-from-no-warning-result-2" = "You are the guardian\non the road! 👍 👍";
+"words-from-no-warning-result-3" = "You are the guardian\non the road! 👍 👍";
+
+// only sudden acceleration
+"words-from-only-sudden-acceleration-1" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-only-sudden-acceleration-2" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-only-sudden-acceleration-3" = "You need to drive\na little more cautiously. 😮‍💨";
+
+// only sudden deceleration
+"words-from-only-sudden-deceleration-1" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-only-sudden-deceleration-2" = "You need to drive\na little more cautiously. 😮‍💨";
+
+// both warnings
+"words-from-both-warnings-1" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-both-warnings-2" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-both-warnings-3" = "You need to drive\na little more cautiously. 😮‍💨";
+
 "word-sudden-acceleration" = "ACCELERATION";
 "word-sudden-deceleration" = "DECELERATION";
 "word-road-driving-analysis" = "DRIVING ANALYSIS";

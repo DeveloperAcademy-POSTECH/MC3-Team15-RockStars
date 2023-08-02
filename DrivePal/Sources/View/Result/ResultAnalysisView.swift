@@ -11,6 +11,20 @@ struct ResultAnalysisView: View {
     @Binding var showResultAnalysisView: Bool
     @EnvironmentObject var model: LiveActivityModel
     
+    private var resultText: String {
+        if model.currentState.count > 0 {
+            if model.currentState.suddenStopCount > 0,
+               model.currentState.suddenAccelerationCount > 0 {
+                return I18N.wordsFromBothWarnings.randomElement() ?? I18N.wordsFromBadResult
+            } else if model.currentState.suddenStopCount == 0 {
+                return I18N.wordsFromOnlySuddenDeceleration.randomElement() ?? I18N.wordsFromBadResult
+            } else if model.currentState.suddenAccelerationCount == 0 {
+                return I18N.wordsFromOnlySuddenAcceleration.randomElement() ?? I18N.wordsFromBadResult
+            }
+        }
+        return I18N.wordsFromNoWarning.randomElement() ?? I18N.wordsFromGoodResult
+    }
+    
     private var isGoodResult: Bool {
         return model.currentState.count < 4
     }
@@ -23,7 +37,7 @@ struct ResultAnalysisView: View {
                 .scaledToFit()
                 .frame(width: 330)
             
-            Text(isGoodResult ? I18N.wordsFromGoodResult : I18N.wordsFromBadResult)
+            Text(resultText)
                 .font(.system(size: 26, weight: .semibold))
                 .foregroundColor(.wordsFromResultColor)
                 .opacity(0.85)
