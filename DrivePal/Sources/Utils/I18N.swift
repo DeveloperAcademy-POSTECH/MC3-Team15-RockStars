@@ -45,6 +45,8 @@ struct I18N {
     static let wordsFromBadResult = "words-from-bad-result".localized()
     static let wordSuddenAcceleration = "word-sudden-acceleration".localized()
     static let wordSuddenDeceleration = "word-sudden-deceleration".localized()
+    static let wordRoadDrivingAnalysis = "word-road-driving-analysis".localized()
+    static let wordAnalysisCriteria = "word-analysis-criteria".localized()
 
     /* Live Activity */
     static let currentLocationLA = "current-location".localized()

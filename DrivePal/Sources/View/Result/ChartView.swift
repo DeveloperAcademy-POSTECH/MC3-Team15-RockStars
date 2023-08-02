@@ -30,8 +30,12 @@ struct ChartView: View {
     }
     
     var body: some View {
-        VStack {
-            Spacer()
+        ZStack {
+            Image(.backgroundResultChart)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            
             Chart(data, id: \.timestamp) { datum in
                 LineMark(
                     x: .value("timestamp", datum.timestamp),
@@ -50,7 +54,7 @@ struct ChartView: View {
                             Text("\(datum.timestamp / 60) min")
                                 .font(.system(size: 12, weight: .bold, design: .rounded))
                                 .foregroundColor(.white)
-                            Text("\(round(datum.value * 100) / 100) km/h")
+                            Text("\(Int(round(datum.value * 100) / 100)) km/h")
                                 .font(.system(size: 16, weight: .bold, design: .rounded))
                                 .foregroundColor(.white)
                             Image(.gaugeOnChart)
@@ -62,19 +66,27 @@ struct ChartView: View {
                     }
                 }
             }
-            .frame(width: UIScreen.width - 40, height: UIScreen.height / 3)
+            .frame(width: UIScreen.width - 60, height: UIScreen.height / 3)
             .scaledToFit()
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)
             .foregroundColor(.white)
             
-            Spacer()
-        }
-        .background {
-            Image(.backgroundResultChart)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+            VStack(alignment: .center) {
+                Text(I18N.wordRoadDrivingAnalysis)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(.wordsFromResultColor)
+                    .opacity(0.85)
+                    .padding(.top, 150)
+                
+                Spacer()
+                
+                Text(I18N.wordAnalysisCriteria)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(.wordsFromResultColor)
+                    .opacity(0.85)
+                    .padding(.bottom, 50)
+            }
         }
     }
 }

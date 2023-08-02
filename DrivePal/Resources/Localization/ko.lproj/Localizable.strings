@@ -31,6 +31,8 @@
 할 필요가 있어요 😮‍💨";
 "word-sudden-acceleration" = "급가속";
 "word-sudden-deceleration" = "급감속";
+"word-road-driving-analysis" = "도로 주행 분석";
+"word-analysis-criteria" = "* 급가속 기준 : 1초 동안 11km/s 이상 가속 \n* 급감속 기준: 1초 동안 7km/s 이상 감속";
 
 /* Live Activity */
 "current-location" = "포항시 효성로 13번길 2";
