@@ -19,7 +19,7 @@ struct ChartData: Identifiable {
     }
 }
 
-struct ChartView: View {
+struct ResultChartView: View {
     
     var data: [ChartData]
     private var pointThreshold: Double {
