@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct ChartData: Identifiable {
+struct ChartData: Identifiable, Equatable {
     let id = UUID()
     var timestamp: Int
     var value: Int
@@ -21,11 +21,20 @@ struct ChartData: Identifiable {
 
 struct ResultChartView: View {
     var data: [ChartData]
-    private var pointThreshold: Int {
+    private var pointData: [ChartData] {
         if data.count < 4 {
-            return 0
+            return data
         }
-        return data.sorted { $0.value > $1.value }[3].value
+        let sortedData = data.sorted { $0.value < $1.value }
+        return [sortedData[0],
+                sortedData[1],
+                sortedData[data.count - 2],
+                sortedData[data.count - 1]]
+    }
+    
+    private var middleValue: Int {
+        guard !data.isEmpty else { return 0 }
+        return data.sorted { $0.value < $1.value }[data.count / 2].value
     }
     
     var body: some View {
@@ -42,9 +51,9 @@ struct ResultChartView: View {
                         y: .value("value", datum.value)
                     )
                     .lineStyle(StrokeStyle(lineWidth: 9, lineCap: .round))
-                    .interpolationMethod(.monotone)
+                    .interpolationMethod(.catmullRom)
                     
-                    if datum.value >= pointThreshold {
+                    if pointData.contains(datum) {
                         PointMark(
                             x: .value("timestamp", datum.timestamp),
                             y: .value("value", datum.value)
@@ -62,15 +71,16 @@ struct ResultChartView: View {
                                     .scaledToFit()
                                     .frame(width: 55)
                             }
-                            .padding(datum.value < 0 ? .top : .bottom, 120)
+                            .padding(datum.value < middleValue ? .top : .bottom, 120)
                         }
                     }
                 }
-                .frame(width: UIScreen.width - 60, height: UIScreen.height / 3)
+                .frame(width: UIScreen.width - 100, height: UIScreen.height * 0.4)
                 .scaledToFit()
                 .chartXAxis(.hidden)
                 .chartYAxis(.hidden)
                 .foregroundColor(.white)
+                .padding(.top, 100)
             }
             
             VStack(alignment: .center) {
