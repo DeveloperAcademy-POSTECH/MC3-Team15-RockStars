@@ -74,16 +74,16 @@ struct ChartView: View {
             
             VStack(alignment: .center) {
                 Text(I18N.wordRoadDrivingAnalysis)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.system(size: 25, weight: .semibold))
                     .foregroundColor(.wordsFromResultColor)
                     .opacity(0.85)
-                    .padding(.top, 150)
+                    .padding(.top, 130)
                 
                 Spacer()
                 
                 Text(I18N.wordAnalysisCriteria)
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.wordsFromResultColor)
+                    .foregroundColor(.white)
                     .opacity(0.85)
                     .padding(.bottom, 50)
             }
