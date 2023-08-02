@@ -26,6 +26,10 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
     var driveAlreadyStarted = false
     let simulator = DriveSimulator()
     
+    func getLiveActivityStatus() -> Bool {
+        driveAlreadyStarted
+    }
+    
     init() {
         simulator.delegate = self
     }

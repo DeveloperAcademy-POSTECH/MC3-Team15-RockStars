@@ -37,7 +37,8 @@ struct DrivePalApp: App {
             }
         }
         .backgroundTask(.appRefresh(backgroundTaskIdentifier)) {
-            await activityManager.startActivityUpdates(to: .main) { activity in
+            guard await !model.getLiveActivityStatus() else { return }
+            activityManager.startActivityUpdates(to: .main) { activity in
                 if let activity = activity {
                     if activity.automotive || activity.cycling {
                         let content = UNMutableNotificationContent()
@@ -56,7 +57,7 @@ struct DrivePalApp: App {
     
     func scheduleAppRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: backgroundTaskIdentifier)
-        request.earliestBeginDate = .now.addingTimeInterval(10) // TODO: 인터벌에 대한 상의 필요
+        request.earliestBeginDate = .now.addingTimeInterval(5 * 60)
         do {
             try BGTaskScheduler.shared.submit(request)
             print("=== DEBUG: scheduler submit")
