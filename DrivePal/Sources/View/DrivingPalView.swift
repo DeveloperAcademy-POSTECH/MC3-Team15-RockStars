@@ -10,9 +10,9 @@ import SpriteKit
 
 struct DrivingPalView: View {
     @State private var showResultAnalysisView = false
-    @StateObject private var locationHandler = LocationsHandler()
     @StateObject private var motionHandler = MotionHandler()
     @EnvironmentObject var liveActivityModel: LiveActivityModel
+    @EnvironmentObject var locationHandler: LocationsHandler
     
     private var motionStatus: MotionStatus {
         get {
@@ -43,8 +43,6 @@ struct DrivingPalView: View {
                 if [MotionStatus.normal, .suddenAcceleration, .suddenStop]
                     .contains(motionStatus) {
                     VelocityView(motionStatus: motionStatus)
-                        .environmentObject(locationHandler)
-                        .onAppear(perform: locationHandler.requestAuthorization)
                         .padding(.top, 120)
                 }
                 

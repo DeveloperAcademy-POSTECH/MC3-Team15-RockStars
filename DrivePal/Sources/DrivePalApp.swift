@@ -13,6 +13,7 @@ import CoreMotion
 struct DrivePalApp: App {
     @Environment(\.scenePhase) private var phase
     @StateObject private var model = LiveActivityModel.shared
+    @StateObject private var locationHandler = LocationsHandler.shared
     private let backgroundTaskIdentifier = Bundle.main.backgroundTaskIdentifier
     private let activityManager = CMMotionActivityManager()
     
@@ -20,9 +21,11 @@ struct DrivePalApp: App {
         WindowGroup {
             DrivingPalView()
                 .environmentObject(model)
+                .environmentObject(locationHandler)
                 .onAppear {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
                     UIApplication.shared.isIdleTimerDisabled = true
+                    locationHandler.requestAuthorization()
                 }
         }
         .onChange(of: phase) { currentPhase in
