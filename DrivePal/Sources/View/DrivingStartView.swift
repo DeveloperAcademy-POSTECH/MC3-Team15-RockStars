@@ -22,7 +22,7 @@ struct DrivingStartView: View {
             Image(.startButtonImage)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 75)
+                .padding(.horizontal, 20)
                 .position(x: UIScreen.width / 2, y: UIScreen.height / 3)
         }
     }

@@ -35,6 +35,7 @@ struct VelocityView: View {
                 .frame(width: isPalInDanger ? 0 : 108)
                 .opacity(isPalInDanger ? 0 : 1)
                 .padding(.trailing, isPalInDanger ? 0 : 20)
+                .foregroundColor(.white)
             // TODO: - font size가 120이라 데이터 읽어오는 중일 떼, 실패했을 때의 메시지를 짧고 간결하게 바꿔야함
             Text(message)
                 .stroke(width: motionStatus == .normal ? 0 : 5)

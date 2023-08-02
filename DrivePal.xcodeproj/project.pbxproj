@@ -18,7 +18,7 @@
 		AD1D49972A66F02500C485FA /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */; };
 		AD1D49D62A67CC1600C485FA /* LocationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */; };
 		AD1D49D72A67CC9100C485FA /* DriveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3435CC2A5F0C6B00D11708 /* DriveAttributes.swift */; };
-		AD1D49D92A67D22F00C485FA /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D82A67D22F00C485FA /* ChartView.swift */; };
+		AD1D49D92A67D22F00C485FA /* ResultChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49D82A67D22F00C485FA /* ResultChartView.swift */; };
 		AD1D49DB2A67D89000C485FA /* ResultAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D49DA2A67D89000C485FA /* ResultAnalysisView.swift */; };
 		AD1D49DC2A67D93100C485FA /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB9AE8C2A6768260099F54A /* Color+Extension.swift */; };
 		AD2AB3652A78ABF10025AA62 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2AB3642A78ABF10025AA62 /* Font+Extension.swift */; };
@@ -95,7 +95,7 @@
 		7DFA55E62A73439B00822802 /* ExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedView.swift; sourceTree = "<group>"; };
 		AD1D49962A66F02500C485FA /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		AD1D49D52A67CC1600C485FA /* LocationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsHandler.swift; sourceTree = "<group>"; };
-		AD1D49D82A67D22F00C485FA /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		AD1D49D82A67D22F00C485FA /* ResultChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultChartView.swift; sourceTree = "<group>"; };
 		AD1D49DA2A67D89000C485FA /* ResultAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAnalysisView.swift; sourceTree = "<group>"; };
 		AD2AB3642A78ABF10025AA62 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		AD2AB3672A78AE570025AA62 /* Galmuri9.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Galmuri9.ttf; sourceTree = "<group>"; };
@@ -318,7 +318,7 @@
 		ADD0105A2A7608BC002E92CD /* Result */ = {
 			isa = PBXGroup;
 			children = (
-				AD1D49D82A67D22F00C485FA /* ChartView.swift */,
+				AD1D49D82A67D22F00C485FA /* ResultChartView.swift */,
 				ADD010582A757C54002E92CD /* ResultDataBoxView.swift */,
 				AD1D49DA2A67D89000C485FA /* ResultAnalysisView.swift */,
 				ADD0105B2A7608D2002E92CD /* ResultTabView.swift */,
@@ -501,7 +501,7 @@
 				AD4EC2772A6FFFF0008A711B /* I18N.swift in Sources */,
 				ADD010682A789BC4002E92CD /* View+Extension.swift in Sources */,
 				AD2AB3652A78ABF10025AA62 /* Font+Extension.swift in Sources */,
-				AD1D49D92A67D22F00C485FA /* ChartView.swift in Sources */,
+				AD1D49D92A67D22F00C485FA /* ResultChartView.swift in Sources */,
 				AD448A8C2A66AB1900585590 /* Bundle+Extension.swift in Sources */,
 				ADF027D72A5D91A2005B7B89 /* BackgroundScene.swift in Sources */,
 				7D3435D22A5F15D800D11708 /* LiveActivityModel.swift in Sources */,
@@ -688,7 +688,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
@@ -719,7 +719,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DistributionDrivePalProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DevDrivePalProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -738,7 +738,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
@@ -770,7 +770,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DistributionDrivePalProfile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DevDrivePalProfile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -818,7 +818,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtension/DrivePalWidgetExtension.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -836,7 +836,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal.DrivePalWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Distribution_DrivePal_Extension_Profile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Dev_DrivePal_Extension_Profile;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
