@@ -131,7 +131,7 @@ private extension DrivingPalView {
             withAnimation {
                 locationHandler.motionStatus = .normal
             }
-            locationHandler.updateSpeed()
+            locationHandler.updateAuthorization()
             #endif
         }
     }
