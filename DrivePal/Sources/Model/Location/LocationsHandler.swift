@@ -21,24 +21,15 @@ struct SpeedModel {
     let location: CLLocation
 }
 
-@MainActor final class LocationsHandler: NSObject, ObservableObject {
+final class LocationsHandler: NSObject, ObservableObject {
     private lazy var locationManager: CLLocationManager? = nil
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "",
                                 category: String(describing: LocationsHandler.self))
-
     private var isWriteEnabled = true
     
-    var authorizationStatus: AuthorizationStatus {
-        guard let status = locationManager?.authorizationStatus else { return .failure }
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            return .success
-        case .notDetermined:
-            return .inProgress
-        case .denied, .restricted:
-            return .failure
-        }
-    }
+    static let shared = LocationsHandler()
+    
+    @Published var authorizationStatus = AuthorizationStatus.inProgress
     
     var motionStatus = MotionStatus.none {
         willSet {
@@ -56,6 +47,7 @@ struct SpeedModel {
     var speedModel = SpeedModel(date: .now, kilometerPerHour: 0, location: .init()) {
         willSet {
             let speed = newValue.kilometerPerHour - speedModel.kilometerPerHour
+            print("speed update")
             adjustMotionStatus(by: speed)
             objectWillChange.send()
         }
@@ -64,11 +56,18 @@ struct SpeedModel {
     override init() {
         super.init()
         self.locationManager = CLLocationManager()
+        requestAuthorization()
+        _authorizationStatus = .init(wrappedValue: updateAuthorization())
     }
 }
 
 // MARK: - CLLocationManagerDelegate 시그니처 메서드
 extension LocationsHandler: CLLocationManagerDelegate {
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = updateAuthorization()
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
             calculateCurrentSpeed(location)
@@ -83,7 +82,6 @@ extension LocationsHandler: CLLocationManagerDelegate {
 // MARK: - 속도 계산을 위한 메서드와 백그라운드 동작 메서드
 extension LocationsHandler {
     private func startBackgroundLocationUpdates() {
-        locationManager = CLLocationManager()
         guard let locationManager else { return }
         locationManager.delegate = self
         locationManager.requestLocation()
@@ -91,7 +89,6 @@ extension LocationsHandler {
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.activityType = .automotiveNavigation
         locationManager.allowsBackgroundLocationUpdates = true
-        updateSpeed()
     }
     
     private func calculateCurrentSpeed(_ current: CLLocation) {
@@ -115,8 +112,10 @@ extension LocationsHandler {
         guard let locationManager else { return }
         if [CLAuthorizationStatus.authorizedAlways, .authorizedWhenInUse].contains(locationManager.authorizationStatus) {
             startBackgroundLocationUpdates()
+            updateSpeed()
         } else {
             locationManager.requestWhenInUseAuthorization()
+            updateSpeed()
         }
     }
     
@@ -129,6 +128,8 @@ extension LocationsHandler {
     }
     
     private func adjustMotionStatus(by speed: Int) {
+        guard motionStatus != .none else { return }
+        guard motionStatus != .takingOff else { return }
         if speed >= 11 {
             withAnimation { motionStatus = .suddenAcceleration }
             sleepThreadBriefly()
@@ -144,8 +145,23 @@ extension LocationsHandler {
         }
     }
     
+    private func updateAuthorization() -> AuthorizationStatus {
+        guard let manager = locationManager else { return .failure }
+        let status = manager.authorizationStatus
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            return .success
+        case .notDetermined:
+            return .inProgress
+        case .denied, .restricted:
+            return .failure
+        }
+    }
+    
     func updateSpeed() {
-        locationManager?.startUpdatingLocation()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager?.startUpdatingLocation()
+        }
     }
     
     func stopUpdateSpeed() {
