@@ -10,7 +10,6 @@ import SpriteKit
 
 struct DrivingPalView: View {
     @State private var showResultAnalysisView = false
-    @State private var showOnboardingView = true
     @StateObject private var locationHandler = LocationsHandler()
     @StateObject private var motionHandler = MotionHandler()
     @EnvironmentObject var liveActivityModel: LiveActivityModel
@@ -58,9 +57,6 @@ struct DrivingPalView: View {
                     #endif
                 }
             }
-        }
-        .sheet(isPresented: $showOnboardingView) {
-            OnboardingView()
         }
         .ignoresSafeArea()
         .onChange(of: motionStatus, perform: actOn)
