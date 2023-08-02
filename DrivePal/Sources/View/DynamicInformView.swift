@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DynamicInformView: View {
     
-    @Binding var motionStatus: MotionStatus
+    let motionStatus: MotionStatus
     @State private var isShrunk = false
     
     var body: some View {
@@ -37,7 +37,7 @@ struct DynamicInformView: View {
     
     func shrink() {
         guard !isShrunk else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             withAnimation {
                 isShrunk.toggle()
             }
@@ -47,6 +47,6 @@ struct DynamicInformView: View {
 
 struct DynamicInfromView_Previews: PreviewProvider {
     static var previews: some View {
-        DynamicInformView(motionStatus: .constant(.normal))
+        DynamicInformView(motionStatus: .normal)
     }
 }

@@ -12,7 +12,7 @@ struct PlaneView: View {
     @State private var animationBoundY = CGFloat.zero
     @State private var planeDegree = Double.zero
     @State private var planeOpacity = 1.0
-    @Binding var motionStatus: MotionStatus
+    let motionStatus: MotionStatus
     
     @State private var planeHeight = UIScreen.height - 80
     private let initHeight = UIScreen.height - 80
@@ -38,7 +38,7 @@ struct PlaneView: View {
 
 struct PlaneView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaneView(motionStatus: .constant(.none))
+        PlaneView(motionStatus: .none)
     }
 }
 
