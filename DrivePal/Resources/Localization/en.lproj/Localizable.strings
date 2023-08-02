@@ -1,0 +1,67 @@
+/* 
+  Localizable.strings
+  DrivePal
+
+  Created by 제나 on 2023/07/24.
+  
+*/
+
+/* App */
+"app-name" = "My Driving Bestie: Drive Pal";
+"noti-msg" = "Let's explore your driving habits together with Drive Pal!";
+
+/* Button */
+"pop-to-root" = "Go back to start";
+
+/* Velocity View */
+"update-success" = "km/h";
+"update-failure" = "FAILED...";
+"update-message" = "reading the data...";
+
+/* Main View */
+"inform-dynamic-island" = "We're still checking your driving \nwhen the main screen is off.";
+
+/* Result View */
+"words-from-good-result" = "You are the guardian\non the road! 👍 👍";
+"words-from-bad-result" = "You need to drive\na little more cautiously. 😮‍💨";
+
+// no warning
+"words-from-no-warning-result-1" = "You are the guardian\non the road! 👍 👍";
+"words-from-no-warning-result-2" = "You are the guardian\non the road! 👍 👍";
+"words-from-no-warning-result-3" = "You are the guardian\non the road! 👍 👍";
+
+// only sudden acceleration
+"words-from-only-sudden-acceleration-1" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-only-sudden-acceleration-2" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-only-sudden-acceleration-3" = "You need to drive\na little more cautiously. 😮‍💨";
+
+// only sudden deceleration
+"words-from-only-sudden-deceleration-1" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-only-sudden-deceleration-2" = "You need to drive\na little more cautiously. 😮‍💨";
+
+// both warnings
+"words-from-both-warnings-1" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-both-warnings-2" = "You need to drive\na little more cautiously. 😮‍💨";
+"words-from-both-warnings-3" = "You need to drive\na little more cautiously. 😮‍💨";
+
+"word-sudden-acceleration" = "ACCELERATION";
+"word-sudden-deceleration" = "DECELERATION";
+"word-road-driving-analysis" = "DRIVING ANALYSIS";
+"word-analysis-criteria" = "Acceleration threshold: Acceleration of 11 km/s or more within 1 second. \nDeceleration threshold: Deceleration of 7 km/s or more within 1 second.";
+
+/* Live Activity */
+"current-location" = "2, Hyoseong-ro 64beon-gil, Pohang-si";
+"warning-text-di" = "WARNING";
+"warning-count-di" = "";
+"driving-time-text-di" = "TIME";
+
+// AfterFourWarningsView
+"bad-driving-now" = "Bad Driving 🤬 #$%";
+
+// NormalDrivingView
+"normal-driving-now" = "Driving...🛫Vroom~";
+
+// SuddenAccelerationView, SuddenStopView
+"sudden-acceleration-now" = "Sudden Acceleration🎢 Slow down";
+"sudden-stop-now" = "Sudden Deceleration📉";
+"one-more-time" = "+ 1";
