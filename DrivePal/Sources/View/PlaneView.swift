@@ -57,7 +57,6 @@ private extension PlaneView {
     }
     
     private func inDangerAnimation() {
-        animationBoundY = 0
         withAnimation(.linear(duration: 1.0).repeatCount(5)) {
             planeOpacity = .zero
         }
@@ -67,6 +66,7 @@ private extension PlaneView {
     }
     
     private func doongsilAnimation() {
+        animationBoundY = 0
         withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: true)) {
             animationBoundY = 60
         }
