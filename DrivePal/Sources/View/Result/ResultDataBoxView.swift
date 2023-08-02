@@ -25,10 +25,12 @@ struct ResultDataBoxView: View {
                             .frame(width: 32, height: 32)
                             .foregroundColor(dataBackgroundColor)
                     }
-                Text(isDrivingTimeData ? "min" : "")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.black)
-                    .padding([.leading, .top], isDrivingTimeData ? 5 : 0)
+                if isDrivingTimeData {
+                    Text("min")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.black)
+                        .padding([.leading, .top], 5)
+                }
             }
             .padding(.vertical, 4)
             
@@ -47,5 +49,6 @@ struct ResultDataBoxView: View {
                         .stroke(Color.dataBoxBorderColor, lineWidth: 2)
                 }
         }
+        .shadow(color: .black.opacity(0.25), radius: 4, y: 4)
     }
 }

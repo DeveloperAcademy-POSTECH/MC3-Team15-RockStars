@@ -17,7 +17,7 @@ struct ResultAnalysisView: View {
     
     var body: some View {
         VStack {
-            Spacer(minLength: 110)
+            Spacer(minLength: 150)
             Image(isGoodResult ? .palImageInGoodResult : .palImageInBadResult)
                 .resizable()
                 .scaledToFit()
@@ -28,6 +28,7 @@ struct ResultAnalysisView: View {
                 .foregroundColor(.wordsFromResultColor)
                 .opacity(0.85)
                 .padding(.top, 30)
+                .multilineTextAlignment(.center)
             
             HStack(alignment: .top, spacing: 10) {
                 VStack(spacing: 10) {
