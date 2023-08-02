@@ -121,10 +121,8 @@ extension LocationsHandler {
     
     private func sleepThreadBriefly() {
         guard let locationManager else { return }
-        isWriteEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [unowned self] in
-            self.isWriteEnabled = true
-        }
+        stopUpdateSpeed()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: updateSpeed)
     }
     
     private func adjustMotionStatus(by speed: Int) {

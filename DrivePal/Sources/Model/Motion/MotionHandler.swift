@@ -65,7 +65,6 @@ final class MotionHandler: ObservableObject {
     
     private func sleepThreadBriefly() {
         stopAccelerometerUpdate()
-        Thread.sleep(forTimeInterval: 5)
-        startAccelerometerUpdate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: startAccelerometerUpdate)
     }
 }
