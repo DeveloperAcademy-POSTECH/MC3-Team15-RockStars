@@ -34,11 +34,8 @@ struct I18N {
     static let debugUpdateFailure = "update-failure".localized()
     static let debugUpdateMessage = "update-message".localized()
     
-    /* Onboarding View */
-    static let precautionTitle = "precaution-for-use-title".localized()
-    static let precautionContent = ["precaution-for-use-content-0".localized(),
-                                    "precaution-for-use-content-1".localized(),
-                                    "precaution-for-use-content-2".localized()]
+    /* Main View */
+    static let informDynamicIsland = "inform-dynamic-island".localized()
     
     /* Result View */
     static let wordsFromGoodResult = "words-from-good-result".localized()

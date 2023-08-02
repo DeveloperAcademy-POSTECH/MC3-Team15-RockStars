@@ -28,4 +28,5 @@ struct DriveState: Codable, Hashable {
     var timestamp: Int
     var isWarning: Bool
     var motionStatus: MotionStatus
+    var shouldDisplayAlert: Bool
 }

@@ -10,52 +10,59 @@ import SwiftUI
 struct PlaneView: View {
     
     @State private var animationBoundY = CGFloat.zero
-    @State private var planeHeight = UIScreen.height + 40
     @State private var planeDegree = Double.zero
-    @State private var movePalX = CGFloat.zero
-    @Binding var motionStatus: MotionStatus
-    private let initHeight = UIScreen.height + 40
+    @State private var planeOpacity = 1.0
+    let motionStatus: MotionStatus
+    
+    @State private var planeHeight = UIScreen.height - 80
+    private let initHeight = UIScreen.height - 80
+    // TODO: - lazy하게 수정하려면 코드를 어떻게 변경해야 할까요
+    
+    private var isPlaneInDanger: Bool {
+        return [MotionStatus.suddenStop, .suddenAcceleration].contains(motionStatus)
+    }
     
     var body: some View {
-        Image(.palImage)
+        Image(isPlaneInDanger ? .palImageInBadResult : .palImage)
                 .resizable()
                 .scaledToFit()
-                .frame(width: UIScreen.width - 100)
+                .frame(width: 158)
                 .padding(.vertical)
-                .position(x: UIScreen.width / 2,
+                .position(x: UIScreen.width / 3,
                           y: planeHeight + animationBoundY)
                 .rotationEffect(.degrees(planeDegree))
-                .shake(movePalX)
                 .onChange(of: motionStatus, perform: actOn)
+                .opacity(planeOpacity)
     }
 }
 
 struct PlaneView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaneView(motionStatus: .constant(.none))
+        PlaneView(motionStatus: .none)
     }
 }
 
 private extension PlaneView {
     private func actOn(_ motion: MotionStatus) {
         if motion == .takingOff {
-            takeoffAnimation()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: takeoffAnimation)
         } else if motion == .normal {
             doongsilAnimation()
         } else if motion == .landing {
             landingAnimation()
             animationBoundY = 0
+        } else if isPlaneInDanger {
+            inDangerAnimation()
         }
-        shakeAnimation(motion)
     }
     
-    private func shakeAnimation(_ currentStatus: MotionStatus) {
-        if [MotionStatus.suddenAcceleration, .suddenStop].contains(currentStatus) {
-            withAnimation(Animation.linear(duration: 1.0).delay(0.5).repeatCount(2)) {
-                movePalX = -10
-            }
-        } else if currentStatus == .normal {
-            movePalX = 0
+    private func inDangerAnimation() {
+        animationBoundY = 0
+        withAnimation(.linear(duration: 1.0).repeatCount(5)) {
+            planeOpacity = .zero
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.12) {
+            planeOpacity = 1.0
         }
     }
     
@@ -91,7 +98,7 @@ private extension PlaneView {
     
     private func takeoffAnimation() {
         withAnimation(.linear(duration: 1.0)) {
-            planeHeight = UIScreen.height / 3 * 2
+            planeHeight = UIScreen.height / 3 + 30
             planeDegree = -10
         }
         

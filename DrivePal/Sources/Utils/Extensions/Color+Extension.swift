@@ -16,6 +16,10 @@ extension Color {
             self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
     
+    // MARK: - Velocity View
+    static let suddenStopTextColor = Color(0x4036F0)
+    static let suddenAccelerationTextColor = Color(0xFF5050)
+    
     // MARK: - Result Analysis View
     static let wordsFromResultColor = Color(0xE8F1FF)
     static let dataBoxBorderColor = Color(0xF5F5F5)
@@ -31,8 +35,8 @@ extension Color {
     /// expanded
     static let expandedNormal = Color(0x01F0FF)
     static let expandedWarning = Color(0xFF5050)
-    static let expandedWarningAcceleration = Color(0xFF26A8)
-    static let expandedWarningDeceleration = Color(0xDFFF1C)
+    static let expandedWarningAcceleration = Color(0xDFFF1C)
+    static let expandedWarningDeceleration = Color(0xFF26A8)
     
     /// lockscreen
     static let lockScreenForegroundColor = Color(0x4D52DB)

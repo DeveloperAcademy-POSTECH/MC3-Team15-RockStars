@@ -15,14 +15,11 @@
 
 /* Velocity View */
 "update-success" = "km/h";
-"update-failure" = "현재 지역에서 데이터를 읽어오는데 실패했습니다..";
-"update-message" = "데이터를 읽어오고 있습니다..";
+"update-failure" = "불러오지 못했어요";
+"update-message" = "읽어오는 중!";
 
-/* Onboarding View */
-"precaution-for-use-title" = "사용시 유의사항";
-"precaution-for-use-content-0" = "Drive Pal은 휴대폰의 움직임을 매우 예민하게 감지해요.";
-"precaution-for-use-content-1" = "1. 따라서 데이터는 휴대폰 조작만으로 바뀔 수 있으니 참고용으로 보세요.";
-"precaution-for-use-content-2" = "2. 반드시 거치대에 설치한 후 시작해 주세요.";
+/* Main View */
+"inform-dynamic-island" = "메인 화면이 꺼져도 \n주행을 확인하고 있어요";
 
 /* Result View */
 "words-from-good-result" = "당신은 도로 위의\n수호자 👍 👍";

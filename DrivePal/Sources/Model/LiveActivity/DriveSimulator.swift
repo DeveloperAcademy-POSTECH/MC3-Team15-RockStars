@@ -22,6 +22,7 @@ final class DriveSimulator {
     var lockScreenImageName = ""
     var isWarning = false
     var motionStatus = MotionStatus.normal
+    var shouldDisplayAlert = false
     weak var delegate: DriveSimulatorDelegate?
     
     var chartData = [ChartData]()
@@ -58,7 +59,8 @@ final class DriveSimulator {
                           lockScreenImageName: .lockScreen,
                           timestamp: 0,
                           isWarning: false,
-                          motionStatus: .normal)
+                          motionStatus: .normal,
+                          shouldDisplayAlert: false)
     }
 
     // Reset the drive status to a fresh start
@@ -75,6 +77,7 @@ final class DriveSimulator {
         lockScreenImageName = .lockScreen
         isWarning = false
         chartData.removeAll()
+        shouldDisplayAlert = false
     }
 
     @objc private func runDriveSimulator() {
@@ -92,7 +95,8 @@ final class DriveSimulator {
                                                    lockScreenImageName: "\(lockScreenImageName)\(timestamp % 6 + 1)",
                                                    timestamp: timestamp,
                                                    isWarning: isWarning,
-                                                   motionStatus: motionStatus))
+                                                   motionStatus: motionStatus,
+                                                   shouldDisplayAlert: shouldDisplayAlert))
     }
 }
 
@@ -104,10 +108,11 @@ extension DriveSimulator {
         progress += 0.25
         leadingImageName = .palWarning
         trailingImageName = .circularWarning
-        expandedImageName = isSuddenStop ? .warnSignThunder : .warnSignMeteor
+        expandedImageName = isSuddenStop ? .warnSignMeteor : .warnSignThunder
         motionStatus = isSuddenStop ? MotionStatus.suddenStop : .suddenAcceleration
         isWarning = true
         chartData.append(ChartData(timestamp: timestamp, value: zAcceleration))
+        shouldDisplayAlert = true
     }
     
     func updateWhenNormal() {
