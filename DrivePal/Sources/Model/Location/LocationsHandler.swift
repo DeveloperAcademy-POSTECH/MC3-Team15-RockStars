@@ -31,6 +31,12 @@ final class LocationsHandler: NSObject, ObservableObject {
     
     @Published var authorizationStatus = AuthorizationStatus.inProgress
     
+    private var isAnimated = false {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
     var motionStatus = MotionStatus.none {
         willSet {
             guard isWriteEnabled else { return }
@@ -105,8 +111,8 @@ extension LocationsHandler {
         }
         let kilometerPerHour = Int(round(speed * 3.6 * 10) / 10)    // 소숫점 한 자리에서 반올림 0.1 까지의 정확도, 1의 자리부터 표현
         speedModel = SpeedModel(date: current.timestamp,
-                            kilometerPerHour: kilometerPerHour,
-                            location: current)
+                                kilometerPerHour: kilometerPerHour,
+                                location: current)
     }
     
     func requestAuthorization() {
@@ -120,20 +126,24 @@ extension LocationsHandler {
     }
     
     private func sleepThreadBriefly() {
-        guard let locationManager else { return }
-        stopUpdateSpeed()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: updateSpeed)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.isAnimated = false
+            withAnimation { self.motionStatus = .normal }
+        }
     }
     
     private func adjustMotionStatus(by speed: Int) {
         guard motionStatus != .none else { return }
         guard motionStatus != .takingOff else { return }
+        guard !self.isAnimated else { return }
         if speed >= 11 {
+            isAnimated = true
             withAnimation { motionStatus = .suddenAcceleration }
             sleepThreadBriefly()
             logger.info("\(#function): Detact Sudden Acceleration")
             return
         } else if speed <= -7 {
+            isAnimated = true
             withAnimation { motionStatus = .suddenStop }
             sleepThreadBriefly()
             logger.info("\(#function): Detact Sudden Stop")
