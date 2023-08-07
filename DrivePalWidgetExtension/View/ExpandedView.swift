@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ExpandedView: View {
-    @State var expandedImageName: String
-    @State var progress: Double
-    @State var count: Int
-    @State var timestamp: Int
-    @State var motionStatus: MotionStatus
+    let expandedImageName: String
+    let progress: Double
+    let count: Int
+    let timestamp: Int
+    let motionStatus: MotionStatus
+    let address: String 
     
     private var isStatusInNormal: Bool {
         return motionStatus == .normal && count < 4
