@@ -9,6 +9,7 @@
 /* App */
 "app-name" = "영혼의 운전 단짝: 드팔이";
 "noti-msg" = "운전 단짝과 내 주행 습관도 함께 알아봐요!";
+"app-locale" = "Ko-kr";
 
 /* Button */
 "pop-to-root" = "메인으로 돌아가기";

@@ -21,7 +21,8 @@ final class LiveActivityModel: ObservableObject, DriveSimulatorDelegate {
                                              timestamp: 0,
                                              isWarning: false,
                                              motionStatus: .normal,
-                                             shouldDisplayAlert: false)
+                                             shouldDisplayAlert: false,
+                                             address: "")
     var liveActivity: Activity<DriveAttributes>?
     var driveAlreadyStarted = false
     let simulator = DriveSimulator()

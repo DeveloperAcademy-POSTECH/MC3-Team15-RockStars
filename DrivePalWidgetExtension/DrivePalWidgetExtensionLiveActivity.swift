@@ -29,7 +29,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                             Image(.locationPinBlack)
                                 .resizable()
                                 .frame(width: 8, height: 10)
-                            Text(I18N.currentLocationLA)
+                            Text(context.state.driveState.address)
                                 .font(.system(size: 12))
                         }
                     }
@@ -59,7 +59,7 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.center) {
                 }
                 DynamicIslandExpandedRegion(.bottom, priority: 1.0) {
-                    ExpandedView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp, motionStatus: context.state.driveState.motionStatus)
+                    ExpandedView(expandedImageName: context.state.driveState.expandedImageName, progress: context.state.driveState.progress, count: context.state.driveState.count, timestamp: context.state.driveState.timestamp, motionStatus: context.state.driveState.motionStatus, address: context.state.driveState.address)
                 }
             } compactLeading: {
                 HStack {

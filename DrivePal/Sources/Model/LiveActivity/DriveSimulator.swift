@@ -23,6 +23,7 @@ final class DriveSimulator {
     var isWarning = false
     var motionStatus = MotionStatus.normal
     var shouldDisplayAlert = false
+    var currentAddress = ""
     weak var delegate: DriveSimulatorDelegate?
     
     var chartData = [ChartData]()
@@ -60,7 +61,8 @@ final class DriveSimulator {
                           timestamp: 0,
                           isWarning: false,
                           motionStatus: .normal,
-                          shouldDisplayAlert: false)
+                          shouldDisplayAlert: false,
+                          address: "")
     }
 
     // Reset the drive status to a fresh start
@@ -96,7 +98,8 @@ final class DriveSimulator {
                                                    timestamp: timestamp,
                                                    isWarning: isWarning,
                                                    motionStatus: motionStatus,
-                                                   shouldDisplayAlert: shouldDisplayAlert))
+                                                   shouldDisplayAlert: shouldDisplayAlert,
+                                                   address: currentAddress))
     }
 }
 
@@ -127,5 +130,9 @@ extension DriveSimulator {
         lockScreenImageName = .lockScreen
         isWarning = false
         motionStatus = .normal
+    }
+    
+    func updateAddress(_ address: String) {
+        currentAddress = address
     }
 }

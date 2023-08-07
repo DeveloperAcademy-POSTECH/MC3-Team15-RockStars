@@ -28,9 +28,11 @@ final class LocationsHandler: NSObject, ObservableObject {
     private var isWriteEnabled = true
     
     static let shared = LocationsHandler()
+    private let locale = Locale(identifier: I18N.appLocale)
+    private let geoCoder = CLGeocoder()
     
     @Published var authorizationStatus = AuthorizationStatus.inProgress
-    
+    @Published var address = ""
     private var isAnimated = false {
         willSet {
             objectWillChange.send()
@@ -53,7 +55,6 @@ final class LocationsHandler: NSObject, ObservableObject {
     var speedModel = SpeedModel(date: .now, kilometerPerHour: 0, location: .init()) {
         willSet {
             let speed = newValue.kilometerPerHour - speedModel.kilometerPerHour
-            print("speed update")
             adjustMotionStatus(by: speed)
             objectWillChange.send()
         }
@@ -77,6 +78,12 @@ extension LocationsHandler: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
             calculateCurrentSpeed(location)
+        }
+        
+        Task.detached { @MainActor [weak self] in
+            if let loadedAddress = try? await self?.getCurrentAddress(locations.last?.coordinate) {
+                self?.address = loadedAddress
+            }
         }
     }
     
@@ -178,5 +185,28 @@ extension LocationsHandler {
     
     func stopUpdateSpeed() {
         locationManager?.stopUpdatingLocation()
+    }
+    
+    private func getCurrentAddress(_ location: CLLocationCoordinate2D?) async throws -> String {
+        guard let position = location else { return "" }
+        let location: CLLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
+        
+        var currentAddress = ""
+        guard let marker = try await geoCoder.reverseGeocodeLocation(location, preferredLocale: locale).first
+            else { return "" }
+        
+        if let administrativeArea = marker.administrativeArea {
+            currentAddress += administrativeArea + " "
+        }
+        if let locality = marker.locality {
+            currentAddress += locality + " "
+        }
+        if let subLocality = marker.subLocality {
+            currentAddress += subLocality + " "
+        }
+        if let subThoroughfare = marker.subThoroughfare {
+            currentAddress += subThoroughfare + " "
+        }
+        return currentAddress
     }
 }
