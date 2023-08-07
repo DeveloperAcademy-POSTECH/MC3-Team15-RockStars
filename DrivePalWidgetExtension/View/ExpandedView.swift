@@ -130,7 +130,7 @@ struct ExpandedView: View {
                     Image(locationPinImage)
                         .resizable()
                         .frame(width: 8, height: 10)
-                    Text(I18N.currentLocationLA)
+                    Text(address)
                         .font(.system(size: 10))
                 }
             }

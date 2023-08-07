@@ -62,6 +62,7 @@ struct DrivingPalView: View {
         }
         .ignoresSafeArea()
         .onChange(of: motionStatus, perform: actOn)
+        .onChange(of: locationHandler.address, perform: updateAddressAtDynamicIsland)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
             ResultTabView(showResultAnalysisView: $showResultAnalysisView)
         }
@@ -100,6 +101,10 @@ private extension DrivingPalView {
         } else if motionStatus == .suddenStop {
             liveActivityModel.simulator.updateWhenAbnormal(locationHandler.speedModel.kilometerPerHour, true)
         }
+    }
+    
+    private func updateAddressAtDynamicIsland(_ address: String) {
+        liveActivityModel.simulator.updateAddress(address)
     }
     
     // MARK: - Etc에 배치한 이유: 화면 전환의 초기화 설정을 담당
