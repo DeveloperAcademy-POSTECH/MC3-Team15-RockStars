@@ -25,6 +25,7 @@ struct I18N {
     /* App */
     static let appName = "app-name".localized()
     static let notificationMessage = "noti-msg".localized()
+    static let appLocale = "app-locale".localized()
 
     /* Button */
     static let buttonPopToRoot = "pop-to-root".localized()
@@ -65,7 +66,6 @@ struct I18N {
     static let wordAnalysisCriteria = "word-analysis-criteria".localized()
 
     /* Live Activity */
-    static let currentLocationLA = "current-location".localized()
     static let warningTextLA = "warning-text-di".localized()
     static let warningCountLA = "warning-count-di".localized()
     static let drivingTimeTextLA = "driving-time-text-di".localized()
