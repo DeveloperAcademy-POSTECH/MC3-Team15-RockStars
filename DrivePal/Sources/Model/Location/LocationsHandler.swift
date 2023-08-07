@@ -31,7 +31,7 @@ final class LocationsHandler: NSObject, ObservableObject {
     
     @Published var authorizationStatus = AuthorizationStatus.inProgress
     
-    var isAnimated = false {
+    private var isAnimated = false {
         willSet {
             objectWillChange.send()
         }
