@@ -28,7 +28,7 @@ struct DynamicInformView: View {
                     .scaleEffect(x: isShrunk ? 0.3 : 1.0,
                                  y: isShrunk ? 0.2 : 1.0,
                                  anchor: .top)
-                    .offset(y: isShrunk ? 20 : 60)
+                    .offset(y: isShrunk ? -40 : 60)
                     .animation(.easeOut(duration: 0.5), value: isShrunk)
                     .onAppear(perform: shrink)
             Spacer()
