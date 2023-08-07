@@ -30,9 +30,8 @@ struct ResultAnalysisView: View {
     }
     
     private var resultType: ResultType {
-//        if model.currentState.count == 0 { return .perfect }
-//        return model.currentState.count < 4 ? .good : .bad
-        return .perfect
+        if model.currentState.count == 0 { return .perfect }
+        return model.currentState.count < 4 ? .good : .bad
     }
     
     private var palImageName: String {
