@@ -15,13 +15,11 @@ struct DrivingPalView: View {
     @EnvironmentObject var locationHandler: LocationsHandler
     
     private var motionStatus: MotionStatus {
-        get {
-            #if DEBUG
-            return motionHandler.motionStatus
-            #elseif RELEASE
-            return locationHandler.motionStatus
-            #endif
-        }
+        #if DEBUG
+        return motionHandler.motionStatus
+        #elseif RELEASE
+        return locationHandler.motionStatus
+        #endif
     }
 
     var body: some View {
