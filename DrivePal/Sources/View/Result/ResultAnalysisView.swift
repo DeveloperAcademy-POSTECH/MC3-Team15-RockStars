@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ResultAnalysisView: View {
+    
+    private enum ResultType {
+        case perfect, good, bad
+    }
     @Binding var showResultAnalysisView: Bool
     @EnvironmentObject var model: LiveActivityModel
     
@@ -25,38 +29,64 @@ struct ResultAnalysisView: View {
         return I18N.wordsFromNoWarning.randomElement() ?? I18N.wordsFromGoodResult
     }
     
-    private var isGoodResult: Bool {
-        return model.currentState.count < 4
+    private var resultType: ResultType {
+//        if model.currentState.count == 0 { return .perfect }
+//        return model.currentState.count < 4 ? .good : .bad
+        return .perfect
+    }
+    
+    private var palImageName: String {
+        if resultType == .perfect { return .palImageInPerfectResult }
+        return resultType == .good ? .palImageInGoodResult : .palImageInBadResult
+    }
+    
+    private var dataBackgroundColor: Color {
+        if resultType == .bad { return .dataBadValueBackgroundColor }
+        return .dataGoodValueBackgroundColor
+    }
+    
+    private var backgroundImageName: String {
+        if resultType == .perfect { return .backgroundInPerfectResult }
+        return resultType == .good ? .backgroundInGoodResult : .backgroundInBadResult
     }
     
     var body: some View {
         VStack {
             Spacer(minLength: 150)
-            Image(isGoodResult ? .palImageInGoodResult : .palImageInBadResult)
+            Image(palImageName)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 330)
             
             Text(resultText)
-                .font(.system(size: 26, weight: .semibold))
+                .font(.system(size: resultType == .perfect ? 36 : 26,
+                              weight: resultType == .perfect ? .bold : .semibold))
                 .foregroundColor(.wordsFromResultColor)
-                .opacity(0.85)
+                .opacity(resultType == .perfect ? 1.0 : 0.85)
                 .padding(.top, 30)
                 .multilineTextAlignment(.center)
+                .shadow(radius: resultType == .perfect ? 3.0 : 0.0)
             
             HStack(alignment: .top, spacing: 10) {
                 VStack(spacing: 10) {
-                    ResultDataBoxView(dataBackgroundColor: isGoodResult ? .dataGoodValueBackgroundColor : .dataBadValueBackgroundColor,
-                                      dataValue: model.currentState.suddenAccelerationCount,
-                                      dataInText: I18N.wordSuddenAcceleration,
-                                      isDrivingTimeData: false)
-                    ResultDataBoxView(dataBackgroundColor: isGoodResult ? .dataGoodValueBackgroundColor : .dataBadValueBackgroundColor,
-                                      dataValue: model.currentState.suddenStopCount,
-                                      dataInText: I18N.wordSuddenDeceleration,
-                                      isDrivingTimeData: false)
+                    if resultType == .perfect {
+                        ResultDataBoxView(dataBackgroundColor: dataBackgroundColor,
+                                          dataValue: "👍",
+                                          dataInText: "Perfect",
+                                          isDrivingTimeData: false)
+                    } else {
+                        ResultDataBoxView(dataBackgroundColor: dataBackgroundColor,
+                                          dataValue: model.currentState.suddenAccelerationCount.description,
+                                          dataInText: I18N.wordSuddenAcceleration,
+                                          isDrivingTimeData: false)
+                        ResultDataBoxView(dataBackgroundColor: dataBackgroundColor,
+                                          dataValue: model.currentState.suddenStopCount.description,
+                                          dataInText: I18N.wordSuddenDeceleration,
+                                          isDrivingTimeData: false)
+                    }
                 }
                 ResultDataBoxView(dataBackgroundColor: .black,
-                                  dataValue: model.currentState.timestamp / 60,
+                                  dataValue: (model.currentState.timestamp / 60).description,
                                   dataInText: I18N.drivingTimeTextLA,
                                   isDrivingTimeData: true)
             }
@@ -75,9 +105,9 @@ struct ResultAnalysisView: View {
             }
         }
         .background {
-            Image(isGoodResult ? .backgroundInGoodResult : .backgroundInBadResult)
-                .resizable()
-                .scaledToFill()
+                Image(backgroundImageName)
+                    .resizable()
+                    .scaledToFill()
         }
     }
 }
