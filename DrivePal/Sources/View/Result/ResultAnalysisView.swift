@@ -10,7 +10,9 @@ import SwiftUI
 struct ResultAnalysisView: View {
     
     private enum ResultType {
-        case perfect, good, bad
+        case perfect    // 부주의 횟수 0회
+        case good       // 부주의 횟수 1회 이상 3회 이하
+        case bad        // 부주의 횟수 4회 이상
     }
     @Binding var showResultAnalysisView: Bool
     @EnvironmentObject var model: LiveActivityModel
