@@ -42,8 +42,7 @@ struct ResultAnalysisView: View {
     }
     
     private var dataBackgroundColor: Color {
-        if resultType == .bad { return .dataBadValueBackgroundColor }
-        return .dataGoodValueBackgroundColor
+        return resultType == .bad ? .dataBadValueBackgroundColor : .dataGoodValueBackgroundColor
     }
     
     private var backgroundImageName: String {
