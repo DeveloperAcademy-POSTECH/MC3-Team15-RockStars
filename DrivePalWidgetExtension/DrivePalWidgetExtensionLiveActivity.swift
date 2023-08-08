@@ -34,6 +34,8 @@ struct DrivePalWidgetExtensionLiveActivity: Widget {
                         }
                     }
                 }
+                .frame(width: UIScreen.width / 1.52)
+                
                 LinearProgressView(progress: context.state.driveState.progress < 1.0 ? context.state.driveState.progress : 1.0, linearColor: .lockScreenForegroundColor)
                     .background(Color.lockScreenBackgroundColor)
                     .frame(width: 256)
