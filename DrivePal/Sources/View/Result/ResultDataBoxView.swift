@@ -10,14 +10,14 @@ import SwiftUI
 struct ResultDataBoxView: View {
     
     var dataBackgroundColor: Color
-    var dataValue: Int
+    var dataValue: String
     var dataInText: String
     var isDrivingTimeData: Bool
     
     var body: some View {
         VStack {
             HStack {
-                Text(dataValue.description)
+                Text(dataValue)
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(.white)
                     .background {
