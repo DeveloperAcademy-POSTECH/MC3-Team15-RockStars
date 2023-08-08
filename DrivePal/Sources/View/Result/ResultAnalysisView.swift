@@ -36,8 +36,12 @@ struct ResultAnalysisView: View {
         return model.currentState.count < 4 ? .good : .bad
     }
     
+    private var isResultPerfect: Bool {
+        resultType == .perfect
+    }
+    
     private var palImageName: String {
-        if resultType == .perfect { return .palImageInPerfectResult }
+        if isResultPerfect { return .palImageInPerfectResult }
         return resultType == .good ? .palImageInGoodResult : .palImageInBadResult
     }
     
@@ -46,7 +50,7 @@ struct ResultAnalysisView: View {
     }
     
     private var backgroundImageName: String {
-        if resultType == .perfect { return .backgroundInPerfectResult }
+        if isResultPerfect { return .backgroundInPerfectResult }
         return resultType == .good ? .backgroundInGoodResult : .backgroundInBadResult
     }
     
@@ -59,17 +63,17 @@ struct ResultAnalysisView: View {
                 .frame(width: 330)
             
             Text(resultText)
-                .font(.system(size: resultType == .perfect ? 36 : 26,
-                              weight: resultType == .perfect ? .bold : .semibold))
+                .font(.system(size: isResultPerfect ? 36 : 26,
+                              weight: isResultPerfect ? .bold : .semibold))
                 .foregroundColor(.wordsFromResultColor)
-                .opacity(resultType == .perfect ? 1.0 : 0.85)
+                .opacity(isResultPerfect ? 1.0 : 0.85)
                 .padding(.top, 30)
                 .multilineTextAlignment(.center)
-                .shadow(radius: resultType == .perfect ? 3.0 : 0.0)
+                .shadow(radius: isResultPerfect ? 3.0 : 0.0)
             
             HStack(alignment: .top, spacing: 10) {
                 VStack(spacing: 10) {
-                    if resultType == .perfect {
+                    if isResultPerfect {
                         ResultDataBoxView(dataBackgroundColor: dataBackgroundColor,
                                           dataValue: "👍",
                                           dataInText: "Perfect",
