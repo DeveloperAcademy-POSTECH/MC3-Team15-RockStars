@@ -67,6 +67,7 @@ struct ResultTabView: View {
                     , alignment: .top
                 )
             }
+            .scrollDisabled(true)
             .edgesIgnoringSafeArea(.all)
         }
     }
