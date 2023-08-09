@@ -32,8 +32,10 @@ extension String {
     static let gauge = "gauge"
     
     /* Result Analysis View */
+    static let palImageInPerfectResult = "resultPalImagePerfect"
     static let palImageInGoodResult = "resultPalImageGood"
     static let palImageInBadResult = "resultPalImageBad"
+    static let backgroundInPerfectResult = "resultBackgroundImagePerfect"
     static let backgroundInGoodResult = "resultBackgroundImageGood"
     static let backgroundInBadResult = "resultBackgroundImageBad"
     static let backgroundResultChart = "resultBackgroundChart"

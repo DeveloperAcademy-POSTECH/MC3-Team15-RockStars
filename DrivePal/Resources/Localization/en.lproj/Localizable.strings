@@ -9,6 +9,7 @@
 /* App */
 "app-name" = "My Driving Bestie: Drive Pal";
 "noti-msg" = "Let's explore your driving habits together with Drive Pal!";
+"app-locale" = "En-us";
 
 /* Button */
 "pop-to-root" = "Go back to start";

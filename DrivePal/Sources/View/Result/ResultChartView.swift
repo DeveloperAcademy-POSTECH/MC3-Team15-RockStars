@@ -51,7 +51,7 @@ struct ResultChartView: View {
                         y: .value("value", datum.value)
                     )
                     .lineStyle(StrokeStyle(lineWidth: 9, lineCap: .round))
-                    .interpolationMethod(.catmullRom)
+                    .interpolationMethod(.monotone)
                     
                     if pointData.contains(datum) {
                         PointMark(
@@ -88,7 +88,7 @@ struct ResultChartView: View {
                     .font(.system(size: 25, weight: .semibold))
                     .foregroundColor(.wordsFromResultColor)
                     .opacity(0.85)
-                    .padding(.top, 130)
+                    .padding(.top, 160)
                 
                 Spacer()
                 
@@ -96,7 +96,7 @@ struct ResultChartView: View {
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(.white)
                     .opacity(0.85)
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 100)
             }
         }
     }
