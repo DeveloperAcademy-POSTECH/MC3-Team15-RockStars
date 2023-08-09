@@ -101,7 +101,6 @@
 		AD2AB3672A78AE570025AA62 /* Galmuri9.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Galmuri9.ttf; sourceTree = "<group>"; };
 		AD2AB3682A78AE570025AA62 /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
 		AD448A8B2A66AB1900585590 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
-		AD4EC2662A6E6DD3008A711B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD4EC2682A6E6DF6008A711B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD4EC2762A6FFFF0008A711B /* I18N.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18N.swift; sourceTree = "<group>"; };
 		AD4EC2782A700BE2008A711B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -422,7 +421,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				ko,
 			);
 			mainGroup = AD742F532A5CF61F00AD6226;
@@ -554,7 +552,6 @@
 		AD4EC2672A6E6DD3008A711B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AD4EC2662A6E6DD3008A711B /* en */,
 				AD4EC2682A6E6DF6008A711B /* ko */,
 			);
 			name = Localizable.strings;
