@@ -694,11 +694,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
-				DrivePal_Bundle_Name = DrivePal.Debug;
+				DrivePal_Bundle_Name = DrivePal;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePal/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(DrivePal_Bundle_Name)";
+				INFOPLIST_KEY_CFBundleDisplayName = DrivePal;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please, let me know your location when using this app";
@@ -744,11 +744,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D7F6ZDDCV9;
-				DrivePal_Bundle_Name = DrivePal.Release;
+				DrivePal_Bundle_Name = DrivePal;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePal/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(DrivePal_Bundle_Name)";
+				INFOPLIST_KEY_CFBundleDisplayName = DrivePal;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please, let me know your location when using this app";
