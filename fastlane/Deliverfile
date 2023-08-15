@@ -1,3 +1,22 @@
 # The Deliverfile allows you to store various App Store Connect metadata
 # For more information, check out the docs
 # https://docs.fastlane.tools/actions/deliver/
+
+
+app_identifier ["pos.academy.DrivePal", "pos.academy.DrivePal.DrivePalWidgetExtension"]
+
+submission_information({
+    price_tier: 0,
+    export_compliance_encryption_updated: false,
+    export_compliance_uses_encryption: false,
+    content_rights_contains_third_party_content: false,
+    add_id_info_uses_idfa: false,
+})
+
+app_rating_config_path("./fastlane/metadata/app_store_rating_config.json")
+
+submit_for_review(true)  # 앱스토어 커넥트에 리뷰요청을 할 것인지 (단순히 파일 업로드면 false로 지정할 것)
+
+automatic_release(true)  # 승인되면 자동으로 앱스토어에 제출 여부
+
+force(true) # 터미널에서 물어보는 것 생략: Does the Preview on path './fastlane/Preview.html' look okay for you? (y/n)
