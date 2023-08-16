@@ -6,6 +6,8 @@
 	<array>
 		<string>pos.academy.DrivePal.detectAutomotive</string>
 	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Galmuri9.ttf</string>
