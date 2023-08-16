@@ -23,9 +23,7 @@ struct DrivePalApp: App {
                 .environmentObject(model)
                 .environmentObject(locationHandler)
                 .onAppear {
-                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
-                    UIApplication.shared.isIdleTimerDisabled = true
-                    locationHandler.requestAuthorization()
+                    UIApplication.shared.isIdleTimerDisabled = true // 화면 항상 켜져 있는 기능 
                 }
         }
         .onChange(of: phase) { currentPhase in

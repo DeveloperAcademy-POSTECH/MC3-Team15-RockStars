@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct AuthorizationRequestView: View {
+    @Environment (\.dismiss) var dismiss
+    @EnvironmentObject var locationHandler: LocationsHandler
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("원활한 DrivePal 사용을 위한\n접근 권한 안내")
@@ -47,7 +50,10 @@ struct AuthorizationRequestView: View {
     }
     
     private func requestAuthorizations() {
-        
+        locationHandler.requestAuthorization()
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in
+            dismiss()
+        }
     }
 }
 

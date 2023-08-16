@@ -63,7 +63,6 @@ final class LocationsHandler: NSObject, ObservableObject {
     override init() {
         super.init()
         self.locationManager = CLLocationManager()
-        requestAuthorization()
         updateAuthorization()
     }
 }

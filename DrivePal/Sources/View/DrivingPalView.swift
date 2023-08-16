@@ -10,6 +10,7 @@ import SpriteKit
 
 struct DrivingPalView: View {
     @State private var showResultAnalysisView = false
+    @State private var hasNotLocationAuthorization = false
     @StateObject private var motionHandler = MotionHandler()
     @EnvironmentObject var liveActivityModel: LiveActivityModel
     @EnvironmentObject var locationHandler: LocationsHandler
@@ -63,6 +64,13 @@ struct DrivingPalView: View {
         .onChange(of: locationHandler.address, perform: updateAddressAtDynamicIsland)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
             ResultTabView(showResultAnalysisView: $showResultAnalysisView)
+        }
+        .onAppear {
+            hasNotLocationAuthorization = locationHandler.authorizationStatus != .success
+        }
+        .fullScreenCover(isPresented: $hasNotLocationAuthorization) {
+            AuthorizationRequestView()
+                .environmentObject(locationHandler)
         }
     }
 }
