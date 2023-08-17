@@ -23,12 +23,13 @@
 "essential-auth" = "필수 접근 권한";
 "optional-auth" = "선택적 접근 권한";
 "btn-set-authorization" = "설정하기";
+"btn-complete-set-authorization" = "설정 완료";
 "title-set-location-authorization" = "위치 접근 권한 없음";
 "description-location-authorization" = "원활한 사용을 위해 [설정]에서 [위치] 접근 권한을 허용해 주세요";
 
 /* Velocity View */
 "update-success" = "km/h";
-"update-failure" = "불러오지 못했어요";
+"update-failure" = "위치 접근\n권한 없음";
 "update-message" = "재실행 필요";
 
 /* Main View */

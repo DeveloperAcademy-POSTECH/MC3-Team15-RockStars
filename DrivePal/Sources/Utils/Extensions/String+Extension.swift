@@ -18,11 +18,6 @@ extension String {
     }
 }
 
-// MARK: - UserDefaults.standard Keys
-extension String {
-    static let isAlreadyRequestLocationAuth = "requestedLocationAuthOnce"
-}
-
 // MARK: - Image Names
 extension String {
     

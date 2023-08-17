@@ -19,7 +19,8 @@ struct DrivingStartView: View {
                 .scaledToFill()
                 .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
                 .onTapGesture {
-                    hasNotLocationAuthorization = !locationHandler.isAuthorizedStatus()
+                    locationHandler.updateAuthorization()
+                    hasNotLocationAuthorization = locationHandler.authorizationStatus != .success
                     if !hasNotLocationAuthorization {
                         motionStatus = .takingOff
                     }
