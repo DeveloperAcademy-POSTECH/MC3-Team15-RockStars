@@ -14,6 +14,16 @@
 /* Button */
 "pop-to-root" = "메인으로 돌아가기";
 
+/* Authorization Request View */
+"word-location" = "위치";
+"word-notification" = "알림";
+"location-description" = "실시간 속도 분석, 현재 위치 정보 접근";
+"notification-description" = "주행 감지 푸시 알림";
+"auth-title" = "원활한 DrivePal 사용을 위한\n접근 권한 안내";
+"essential-auth" = "필수 접근 권한";
+"optional-auth" = "선택적 접근 권한";
+"btn-set-authorization" = "설정하기";
+
 /* Velocity View */
 "update-success" = "km/h";
 "update-failure" = "불러오지 못했어요";

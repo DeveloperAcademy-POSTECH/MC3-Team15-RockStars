@@ -13,14 +13,14 @@ struct AuthorizationRequestView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("원활한 DrivePal 사용을 위한\n접근 권한 안내")
+            Text(I18N.authTitle)
                 .font(.title2)
             
             Section {
                 AuthorizationView(.location)
                     .padding(.top, 1)
             } header: {
-                Text("필수 접근 권한")
+                Text(I18N.essestialAuth)
                     .sectionHeaderStyle()
             }
                  
@@ -28,7 +28,7 @@ struct AuthorizationRequestView: View {
                 AuthorizationView(.notification)
                     .padding(.top, 1)
             } header: {
-                Text("선택적 접근 권한")
+                Text(I18N.optionalAuth)
                     .sectionHeaderStyle()
             }
             
@@ -37,7 +37,7 @@ struct AuthorizationRequestView: View {
             Button(role: .destructive) {
                 requestAuthorizations()
             } label: {
-                Text("설정하기")
+                Text(I18N.btnSetAuth)
                     .font(.title3.bold())
                     .frame(width: UIScreen.main.bounds.width-64)
             }
@@ -91,27 +91,27 @@ private enum Authorization {
     var systemImage: String {
         switch self {
         case .location:
-            return "location.fill"
+            return .locationFill
         case .notification:
-            return "bell.fill"
+            return .bellFill
         }
     }
     
     var text: String {
         switch self {
         case .location:
-            return "위치"
+            return I18N.wordLocation
         case .notification:
-            return "알림"
+            return I18N.wordNotification
         }
     }
     
     var description: String {
         switch self {
         case .location:
-            return "실시간 속도 분석, 현재 위치 정보 접근"
+            return I18N.locationDescription
         case .notification:
-            return "주행 감지 푸시 알림"
+            return I18N.notificationDescription
         }
     }
 }

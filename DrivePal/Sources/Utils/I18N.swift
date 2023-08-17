@@ -29,6 +29,16 @@ struct I18N {
 
     /* Button */
     static let buttonPopToRoot = "pop-to-root".localized()
+    
+    /* Authorization Request View */
+    static let wordLocation = "word-location".localized()
+    static let wordNotification = "word-notification".localized()
+    static let locationDescription = "location-description".localized()
+    static let notificationDescription = "notification-description".localized()
+    static let authTitle = "auth-title".localized()
+    static let essestialAuth = "essential-auth".localized()
+    static let optionalAuth = "optional-auth".localized()
+    static let btnSetAuth = "btn-set-authorization".localized()
 
     /* Velocity View */
     static let debugUpdateSuccess = "update-success".localized()
