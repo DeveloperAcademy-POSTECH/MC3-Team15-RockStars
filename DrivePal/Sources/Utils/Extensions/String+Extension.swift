@@ -18,8 +18,18 @@ extension String {
     }
 }
 
+// MARK: - UserDefaults.standard Keys
+extension String {
+    static let isAlreadyRequestLocationAuth = "requestedLocationAuthOnce"
+}
+
 // MARK: - Image Names
 extension String {
+    
+    /* Authorization Request View */
+    static let locationFill = "location.fill"
+    static let bellFill = "bell.fill"
+    
     /* Driving Pal View */
     static let backgroundBlueSky = "blueSky"
     static let backgroundAirport = "airport"

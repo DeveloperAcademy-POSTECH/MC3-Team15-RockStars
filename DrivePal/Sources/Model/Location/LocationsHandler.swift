@@ -63,7 +63,6 @@ final class LocationsHandler: NSObject, ObservableObject {
     override init() {
         super.init()
         self.locationManager = CLLocationManager()
-        requestAuthorization()
         updateAuthorization()
     }
 }
@@ -120,6 +119,11 @@ extension LocationsHandler {
         speedModel = SpeedModel(date: current.timestamp,
                                 kilometerPerHour: kilometerPerHour,
                                 location: current)
+    }
+    
+    func isAuthorizedStatus() -> Bool {
+        guard let locationManager = locationManager else { return false }
+        return [CLAuthorizationStatus.authorizedAlways, .authorizedWhenInUse].contains(locationManager.authorizationStatus)
     }
     
     func requestAuthorization() {
