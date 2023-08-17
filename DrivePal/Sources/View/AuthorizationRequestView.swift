@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreLocation
 
 struct AuthorizationRequestView: View {
     @Environment (\.dismiss) var dismiss
