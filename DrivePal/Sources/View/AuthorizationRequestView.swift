@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct AuthorizationRequestView: View {
     @Environment (\.dismiss) var dismiss
     @EnvironmentObject var locationHandler: LocationsHandler
+    @State private var requestedOnce = false
+    @State private var showAlertToGoSettings = false
+    @State private var authInUse = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -47,21 +51,39 @@ struct AuthorizationRequestView: View {
             
         }
         .padding(.vertical, 16)
+        .alert(isPresented: $showAlertToGoSettings) {
+            Alert(
+                title: Text(I18N.titleSetLocationAuth),
+                message: Text(I18N.descriptionLocationAuth),
+                dismissButton: .default(
+                    Text(I18N.btnSetAuth),
+                    action: moveToSettings
+                )
+            )
+        }
     }
     
     private func requestAuthorizations() {
+        authInUse = locationHandler.isAuthorizedStatus()
+        requestedOnce = UserDefaults.standard.bool(forKey: .isAlreadyRequestLocationAuth)
         locationHandler.requestAuthorization()
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in
-            dismiss()
+        if !requestedOnce {
+            UserDefaults.standard.setValue(true, forKey: .isAlreadyRequestLocationAuth)
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+        } else {
+            if authInUse {
+                dismiss()
+            } else {
+                showAlertToGoSettings = true
+            }
         }
+    }
+    
+    private func moveToSettings() {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
 }
 
-struct AuthorizationRequestView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthorizationRequestView()
-    }
-}
 
 private struct AuthorizationView: View {
     private let authorization: Authorization

@@ -39,6 +39,8 @@ struct I18N {
     static let essestialAuth = "essential-auth".localized()
     static let optionalAuth = "optional-auth".localized()
     static let btnSetAuth = "btn-set-authorization".localized()
+    static let titleSetLocationAuth = "title-set-location-authorization".localized()
+    static let descriptionLocationAuth = "description-location-authorization".localized()
 
     /* Velocity View */
     static let debugUpdateSuccess = "update-success".localized()

@@ -121,6 +121,11 @@ extension LocationsHandler {
                                 location: current)
     }
     
+    func isAuthorizedStatus() -> Bool {
+        guard let locationManager = locationManager else { return false }
+        return [CLAuthorizationStatus.authorizedAlways, .authorizedWhenInUse].contains(locationManager.authorizationStatus)
+    }
+    
     func requestAuthorization() {
         guard let locationManager else { return }
         if [CLAuthorizationStatus.authorizedAlways, .authorizedWhenInUse].contains(locationManager.authorizationStatus) {

@@ -38,6 +38,7 @@ struct ConvertibleBackgroundView: View {
     }
     
     @Binding var motionStatus: MotionStatus
+    @Binding var hasNotLocationAuthorization: Bool
     @State private var lightningYAxis = -UIScreen.height
     @State private var meteorYAxis = -UIScreen.height
     
@@ -46,7 +47,7 @@ struct ConvertibleBackgroundView: View {
             // MARK: - BackgroundView
             SpriteView(scene: normalScene)
             
-            DrivingStartView(motionStatus: $motionStatus)
+            DrivingStartView(motionStatus: $motionStatus, hasNotLocationAuthorization: $hasNotLocationAuthorization)
                 .opacity(motionStatus == .none ? 1 : 0)
             
             SpriteView(scene: takeOffAndLandingScene)
@@ -93,11 +94,5 @@ struct ConvertibleBackgroundView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.2) {
             lightningYAxis = -UIScreen.height
         }
-    }
-}
-
-struct ConvertibleBackgroundView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConvertibleBackgroundView(motionStatus: .constant(.none))
     }
 }

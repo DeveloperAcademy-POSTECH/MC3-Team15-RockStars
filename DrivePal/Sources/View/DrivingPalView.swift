@@ -26,9 +26,9 @@ struct DrivingPalView: View {
     var body: some View {
         ZStack {
             #if DEBUG
-            ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus)
+            ConvertibleBackgroundView(motionStatus: $motionHandler.motionStatus, hasNotLocationAuthorization: $hasNotLocationAuthorization)
             #elseif RELEASE
-            ConvertibleBackgroundView(motionStatus: $locationHandler.motionStatus)
+            ConvertibleBackgroundView(motionStatus: $locationHandler.motionStatus, hasNotLocationAuthorization: $hasNotLocationAuthorization)
             #endif
             
             if motionStatus == .takingOff {
@@ -64,9 +64,6 @@ struct DrivingPalView: View {
         .onChange(of: locationHandler.address, perform: updateAddressAtDynamicIsland)
         .fullScreenCover(isPresented: $showResultAnalysisView) {
             ResultTabView(showResultAnalysisView: $showResultAnalysisView)
-        }
-        .onAppear {
-            hasNotLocationAuthorization = locationHandler.authorizationStatus != .success
         }
         .fullScreenCover(isPresented: $hasNotLocationAuthorization) {
             AuthorizationRequestView()
