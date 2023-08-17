@@ -39,7 +39,7 @@ struct AuthorizationRequestView: View {
             } label: {
                 Text(I18N.btnSetAuth)
                     .font(.title3.bold())
-                    .frame(width: UIScreen.main.bounds.width-64)
+                    .frame(width: UIScreen.width-64)
             }
             .tint(.blue)
             .buttonStyle(.borderedProminent)
