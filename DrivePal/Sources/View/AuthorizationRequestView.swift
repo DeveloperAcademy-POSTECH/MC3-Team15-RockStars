@@ -12,7 +12,6 @@ struct AuthorizationRequestView: View {
     @EnvironmentObject var locationHandler: LocationsHandler
     @State private var requestedOnce = false
     @State private var showAlertToGoSettings = false
-    @State private var authInUse = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -40,7 +39,7 @@ struct AuthorizationRequestView: View {
             Button(role: .destructive) {
                 requestAuthorizations()
             } label: {
-                Text(I18N.btnSetAuth)
+                Text(requestedOnce ? I18N.btnCompleteSetAuth : I18N.btnSetAuth)
                     .font(.title3.bold())
                     .frame(width: UIScreen.width-64)
             }
@@ -63,15 +62,14 @@ struct AuthorizationRequestView: View {
     }
     
     private func requestAuthorizations() {
-        authInUse = locationHandler.isAuthorizedStatus()
-        requestedOnce = UserDefaults.standard.bool(forKey: .isAlreadyRequestLocationAuth)
-        locationHandler.requestAuthorization()
-        if !requestedOnce {
-            UserDefaults.standard.setValue(true, forKey: .isAlreadyRequestLocationAuth)
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+        locationHandler.updateAuthorization()
+        if locationHandler.authorizationStatus == .success {
+            dismiss()
         } else {
-            if authInUse {
-                dismiss()
+            if !requestedOnce {
+                locationHandler.requestAuthorization()
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+                requestedOnce = true
             } else {
                 showAlertToGoSettings = true
             }
@@ -82,7 +80,6 @@ struct AuthorizationRequestView: View {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
 }
-
 
 private struct AuthorizationView: View {
     private let authorization: Authorization

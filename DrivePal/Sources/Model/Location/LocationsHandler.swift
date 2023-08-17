@@ -93,6 +93,7 @@ extension LocationsHandler: CLLocationManagerDelegate {
 
 // MARK: - 속도 계산을 위한 메서드와 백그라운드 동작 메서드
 extension LocationsHandler {
+    
     private func startBackgroundLocationUpdates() {
         guard let locationManager else { return }
         locationManager.delegate = self
@@ -119,11 +120,6 @@ extension LocationsHandler {
         speedModel = SpeedModel(date: current.timestamp,
                                 kilometerPerHour: kilometerPerHour,
                                 location: current)
-    }
-    
-    func isAuthorizedStatus() -> Bool {
-        guard let locationManager = locationManager else { return false }
-        return [CLAuthorizationStatus.authorizedAlways, .authorizedWhenInUse].contains(locationManager.authorizationStatus)
     }
     
     func requestAuthorization() {
@@ -177,6 +173,8 @@ extension LocationsHandler {
         case .notDetermined:
             return authorizationStatus = .inProgress
         case .denied, .restricted:
+            return authorizationStatus = .failure
+        @unknown default:
             return authorizationStatus = .failure
         }
     }
