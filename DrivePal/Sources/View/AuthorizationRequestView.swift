@@ -111,7 +111,7 @@ private enum Authorization {
         case .location:
             return "실시간 속도 분석, 현재 위치 정보 접근"
         case .notification:
-            return "다이나믹 아일랜드에 정보 표시"
+            return "주행 감지 푸시 알림"
         }
     }
 }

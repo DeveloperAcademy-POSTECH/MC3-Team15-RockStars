@@ -689,7 +689,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: YEONGJIN JANG (D7F6ZDDCV9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: YEONGJIN JANG (7PQPRCYK36)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
@@ -699,7 +699,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePal/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DrivePal;
+				INFOPLIST_KEY_CFBundleDisplayName = "Drive Pal";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please, let me know your location when using this app";
@@ -739,7 +739,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: YEONGJIN JANG (D7F6ZDDCV9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: YEONGJIN JANG (7PQPRCYK36)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
@@ -749,7 +749,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrivePal/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DrivePal;
+				INFOPLIST_KEY_CFBundleDisplayName = "Drive Pal";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please, let me know your location when using this app";
@@ -771,7 +771,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore pos.academy.DrivePal";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development pos.academy.DrivePal";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -787,7 +787,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtension/DrivePalWidgetExtension.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: YEONGJIN JANG (D7F6ZDDCV9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: YEONGJIN JANG (7PQPRCYK36)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
@@ -819,7 +819,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtension/DrivePalWidgetExtension.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: YEONGJIN JANG (D7F6ZDDCV9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: YEONGJIN JANG (7PQPRCYK36)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
@@ -837,7 +837,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal.DrivePalWidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore pos.academy.DrivePal.DrivePalWidgetExtension";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development pos.academy.DrivePal.DrivePalWidgetExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
