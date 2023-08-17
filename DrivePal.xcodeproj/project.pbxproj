@@ -689,7 +689,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: YEONGJIN JANG (7PQPRCYK36)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
@@ -701,8 +701,8 @@
 				INFOPLIST_FILE = DrivePal/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Drive Pal";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please, let me know your location when using this app";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "실시간 속도 분석, 현재 위치 정보에 접근하기 위해 위치 권한이 필요합니다";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "실시간 속도 분석, 현재 위치 정보에 접근하기 위해 위치 권한이 필요합니다";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
@@ -719,7 +719,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pos.academy.DrivePal";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore pos.academy.DrivePal";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -739,7 +739,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DrivePal/DrivePal.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: YEONGJIN JANG (7PQPRCYK36)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"DrivePal/Preview Content\"";
@@ -751,8 +751,8 @@
 				INFOPLIST_FILE = DrivePal/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Drive Pal";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please, let me know your location when using this app";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please, let me know your location when using this app";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "실시간 속도 분석, 현재 위치 정보에 접근하기 위해 위치 권한이 필요합니다";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "실시간 속도 분석, 현재 위치 정보에 접근하기 위해 위치 권한이 필요합니다";
 				INFOPLIST_KEY_NSMotionUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
@@ -770,7 +770,7 @@
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = pos.academy.DrivePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pos.academy.DrivePal";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development pos.academy.DrivePal";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -787,7 +787,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtension/DrivePalWidgetExtension.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: YEONGJIN JANG (7PQPRCYK36)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
@@ -819,7 +820,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = DrivePalWidgetExtension/DrivePalWidgetExtension.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: YEONGJIN JANG (7PQPRCYK36)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
