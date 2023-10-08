@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DrivingStartView: View {
     @Binding var motionStatus: MotionStatus
+    @Binding var hasNotLocationAuthorization: Bool
+    @EnvironmentObject var locationHandler: LocationsHandler
     
     var body: some View {
         ZStack {
@@ -17,7 +19,11 @@ struct DrivingStartView: View {
                 .scaledToFill()
                 .position(x: UIScreen.width / 2, y: UIScreen.height / 2)
                 .onTapGesture {
-                    motionStatus = .takingOff
+                    locationHandler.updateAuthorization()
+                    hasNotLocationAuthorization = locationHandler.authorizationStatus != .success
+                    if !hasNotLocationAuthorization {
+                        motionStatus = .takingOff
+                    }
                 }
             Image(.startButtonImage)
                 .resizable()
@@ -25,11 +31,5 @@ struct DrivingStartView: View {
                 .padding(.horizontal, 20)
                 .position(x: UIScreen.width / 2, y: UIScreen.height / 3)
         }
-    }
-}
-
-struct DrivingStartView_Previews: PreviewProvider {
-    static var previews: some View {
-        DrivingStartView(motionStatus: .constant(.none))
     }
 }

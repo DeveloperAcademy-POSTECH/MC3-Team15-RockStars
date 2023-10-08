@@ -20,6 +20,11 @@ extension String {
 
 // MARK: - Image Names
 extension String {
+    
+    /* Authorization Request View */
+    static let locationFill = "location.fill"
+    static let bellFill = "bell.fill"
+    
     /* Driving Pal View */
     static let backgroundBlueSky = "blueSky"
     static let backgroundAirport = "airport"

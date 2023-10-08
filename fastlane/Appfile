@@ -1,0 +1,6 @@
+app_identifier("pos.academy.DrivePal") # The bundle identifier of your app
+apple_id(ENV[APPLE_ID]) # Set your Apple Developer Portal username in fastlane/.env
+
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

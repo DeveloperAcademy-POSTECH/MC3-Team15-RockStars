@@ -63,7 +63,6 @@ final class LocationsHandler: NSObject, ObservableObject {
     override init() {
         super.init()
         self.locationManager = CLLocationManager()
-        requestAuthorization()
         updateAuthorization()
     }
 }
@@ -94,6 +93,7 @@ extension LocationsHandler: CLLocationManagerDelegate {
 
 // MARK: - 속도 계산을 위한 메서드와 백그라운드 동작 메서드
 extension LocationsHandler {
+    
     private func startBackgroundLocationUpdates() {
         guard let locationManager else { return }
         locationManager.delegate = self
@@ -173,6 +173,8 @@ extension LocationsHandler {
         case .notDetermined:
             return authorizationStatus = .inProgress
         case .denied, .restricted:
+            return authorizationStatus = .failure
+        @unknown default:
             return authorizationStatus = .failure
         }
     }
